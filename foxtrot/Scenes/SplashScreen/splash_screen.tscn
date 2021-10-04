@@ -1,9 +1,12 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Textures/SplashScreen/logo.png" type="Texture" id=1]
 [ext_resource path="res://Textures/SplashScreen/solid_off_black.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/SplashScreen/splash_screen.gd" type="Script" id=3]
+[ext_resource path="res://Audio/SoundEffects/SplashScreen/FoxBark.wav" type="AudioStream" id=4]
 
-[node name="Node2D" type="Node2D"]
+[node name="SplashScreen" type="Node2D"]
+script = ExtResource( 3 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -30,17 +33,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
-anchor_left = 0.01
-anchor_top = 1.0
-anchor_right = 0.01
-anchor_bottom = 1.0
-margin_left = 3.03786
-margin_top = -40.8162
-margin_right = 77.0379
-margin_bottom = -25.8162
-rect_scale = Vector2( 2, 2 )
-text = "CSE 4392"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[node name="AudioSource" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -16.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

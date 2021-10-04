@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/FoxBark.wav-17ca8848cf416fab2c338066d1c190db.sample"
+
+[deps]
+
+source_file="res://Audio/SoundEffects/SplashScreen/FoxBark.wav"
+dest_files=[ "res://.import/FoxBark.wav-17ca8848cf416fab2c338066d1c190db.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=true
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
