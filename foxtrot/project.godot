@@ -11,8 +11,15 @@ config_version=4
 [application]
 
 config/name="foxtrot"
-run/main_scene="res://Scenes/main_menu.tscn"
+run/main_scene="res://Scenes/SplashScreen/splash_screen.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=1920
+window/size/height=1080
+window/size/test_width=1024
+window/size/test_height=768
 
 [physics]
 
