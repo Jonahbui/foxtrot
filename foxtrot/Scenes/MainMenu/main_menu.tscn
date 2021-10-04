@@ -10,21 +10,69 @@ script = ExtResource( 2 )
 [node name="MainMenu" type="CanvasLayer" parent="."]
 
 [node name="Background" type="TextureRect" parent="MainMenu"]
-margin_left = 0.529724
-margin_top = 0.529739
-margin_right = 1920.53
-margin_bottom = 1080.53
+anchor_right = 1.0
+anchor_bottom = 1.0
 texture = ExtResource( 3 )
 expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NewGameButton" type="TextureButton" parent="MainMenu/Background"]
+margin_left = 54.3168
+margin_top = 128.365
+margin_right = 182.317
+margin_bottom = 256.365
+texture_normal = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MainMenu/Background/NewGameButton"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 1.0
+margin_top = -9.0
+margin_right = 233.0
+margin_bottom = 26.0
+bbcode_text = "New Game"
+text = "New Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LoadGameButton" type="TextureButton" parent="MainMenu/Background"]
+margin_left = 62.5083
+margin_top = 253.212
+margin_right = 190.508
+margin_bottom = 381.212
+texture_normal = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MainMenu/Background/LoadGameButton"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 1.0
+margin_top = -9.0
+margin_right = 233.0
+margin_bottom = 26.0
+text = "Load Game"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="SettingsButton" type="TextureButton" parent="MainMenu/Background"]
-margin_left = 30.4719
-margin_top = 30.595
-margin_right = 158.472
-margin_bottom = 158.595
+margin_left = 68.6126
+margin_top = 393.991
+margin_right = 196.613
+margin_bottom = 521.991
 texture_normal = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -40,7 +88,55 @@ margin_top = -9.0
 margin_right = 233.0
 margin_bottom = 26.0
 bbcode_enabled = true
-bbcode_text = "[center]Settings[/center]"
 text = "Settings"
 
+[node name="ExitButton" type="TextureButton" parent="MainMenu/Background"]
+margin_left = 63.5677
+margin_top = 531.85
+margin_right = 191.568
+margin_bottom = 659.85
+texture_normal = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MainMenu/Background/ExitButton"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 1.0
+margin_top = -9.0
+margin_right = 233.0
+margin_bottom = 26.0
+text = "Exit"
+
+[node name="CreditsButton" type="TextureButton" parent="MainMenu/Background"]
+margin_left = 63.5677
+margin_top = 888.889
+margin_right = 191.568
+margin_bottom = 1016.89
+texture_normal = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MainMenu/Background/CreditsButton"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 1.0
+margin_top = -9.0
+margin_right = 233.0
+margin_bottom = 26.0
+text = "Credits"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="MainMenu/Background/NewGameButton" to="." method="_on_NewGameButton_pressed"]
+[connection signal="pressed" from="MainMenu/Background/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
 [connection signal="pressed" from="MainMenu/Background/SettingsButton" to="." method="_on_SettingsButton_pressed"]
+[connection signal="pressed" from="MainMenu/Background/ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="pressed" from="MainMenu/Background/CreditsButton" to="." method="_on_CreditsButton_pressed"]

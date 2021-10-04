@@ -11,8 +11,8 @@ script = ExtResource( 3 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Fill" type="TextureRect" parent="CanvasLayer"]
-margin_right = 1917.99
-margin_bottom = 1070.5
+margin_right = 1920.0
+margin_bottom = 1080.0
 texture = ExtResource( 2 )
 expand = true
 __meta__ = {
@@ -33,7 +33,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Timer" type="Timer" parent="."]
+[node name="TransitionTimer" type="Timer" parent="."]
 wait_time = 4.0
 one_shot = true
 autostart = true
@@ -42,4 +42,4 @@ autostart = true
 stream = ExtResource( 4 )
 volume_db = -16.0
 
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="TransitionTimer" to="." method="_on_Timer_timeout"]
