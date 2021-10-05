@@ -17,10 +17,14 @@ func _exit_tree():
   save_config()
 
 func create_config(default=false):
+  # To add new elements to config, add here below. Define constants in globals:
   var new_config = {
       Globals.VOLUME_MASTER : config[Globals.VOLUME_MASTER] if not default else 0.0,
       Globals.VOLUME_MUSIC  : config[Globals.VOLUME_MUSIC] if not default else 0.0,
       Globals.VOLUME_SFX    : config[Globals.VOLUME_SFX] if not default else 0.0,
+      Globals.VOLUME_MASTER_TOGGLE : config[Globals.VOLUME_MASTER_TOGGLE] if not default else false,
+      Globals.VOLUME_MUSIC_TOGGLE  : config[Globals.VOLUME_MUSIC_TOGGLE] if not default else false,
+      Globals.VOLUME_SFX_TOGGLE    : config[Globals.VOLUME_SFX_TOGGLE] if not default else false,
       
       Globals.GRAPHICS_FULLSCREEN : config[Globals.GRAPHICS_FULLSCREEN] if not default else true
    }

@@ -73,6 +73,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="MasterCheckbox" type="CheckBox" parent="Background/AudioVbox/MasterVolume/MasterSlider"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.4523
+margin_top = -3.5994
+margin_right = 28.4523
+margin_bottom = 5.4006
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="MusicVolume" type="Label" parent="Background/AudioVbox"]
 margin_top = 85.0
 margin_right = 153.0
@@ -96,6 +108,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="MusicCheckbox" type="CheckBox" parent="Background/AudioVbox/MusicVolume/MusicSlider"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.4523
+margin_top = -3.5994
+margin_right = 28.4523
+margin_bottom = 5.4006
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="SFXVolume" type="Label" parent="Background/AudioVbox"]
 margin_top = 120.0
 margin_right = 153.0
@@ -115,6 +139,18 @@ margin_top = -0.943695
 margin_right = 220.0
 min_value = -80.0
 max_value = 6.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SFXCheckbox" type="CheckBox" parent="Background/AudioVbox/SFXVolume/SFXSlider"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.4523
+margin_top = -3.5994
+margin_right = 28.4523
+margin_bottom = 5.4006
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -194,11 +230,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CheckBox" type="CheckBox" parent="Background/GraphicsVbox/Fullscreen"]
+[node name="FullscreenCheckBox" type="CheckBox" parent="Background/GraphicsVbox/Fullscreen"]
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 25.0
+margin_left = -4.0
+margin_top = -1.0
+margin_right = 20.0
+margin_bottom = 8.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -246,7 +285,10 @@ __meta__ = {
 }
 
 [connection signal="value_changed" from="Background/AudioVbox/MasterVolume/MasterSlider" to="." method="_on_MasterSlider_value_changed"]
+[connection signal="toggled" from="Background/AudioVbox/MasterVolume/MasterSlider/MasterCheckbox" to="." method="_on_MasterCheckbox_toggled"]
 [connection signal="value_changed" from="Background/AudioVbox/MusicVolume/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
+[connection signal="toggled" from="Background/AudioVbox/MusicVolume/MusicSlider/MusicCheckbox" to="." method="_on_MusicCheckbox_toggled"]
 [connection signal="value_changed" from="Background/AudioVbox/SFXVolume/SFXSlider" to="." method="_on_SFXSlider_value_changed"]
-[connection signal="toggled" from="Background/GraphicsVbox/Fullscreen/CheckBox" to="." method="_on_CheckBox_toggled"]
+[connection signal="toggled" from="Background/AudioVbox/SFXVolume/SFXSlider/SFXCheckbox" to="." method="_on_SFXCheckbox_toggled"]
+[connection signal="toggled" from="Background/GraphicsVbox/Fullscreen/FullscreenCheckBox" to="." method="_on_FullScreenCheckBox_toggled"]
 [connection signal="pressed" from="Background/HBoxContainer/Reset" to="." method="_on_Reset_pressed"]
