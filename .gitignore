@@ -1,3 +1,5 @@
+# https://docs.godotengine.org/en/3.0/getting_started/workflow/assets/import_process.html#files-generated
+# Importing will add an extra <asset>.import file, containing the import configuration. Make sure to commit these to your version control system!
 
 # Godot-specific ignores
 .import/
@@ -7,3 +9,7 @@ export_presets.cfg
 # Mono-specific ignores
 .mono/
 data_*/
+
+# Affinity Suite ignores
+*.afdesign
+*.afphoto

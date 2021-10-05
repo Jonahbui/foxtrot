@@ -23,6 +23,7 @@ When making a change to the project, please do so in a new branch. Easiest way t
 ## Tools
 ### Audio
 - Audacity
+- Garageband
 
 ### Video
 - OBS Studio
