@@ -24,7 +24,14 @@ font_data = ExtResource( 3 )
 [node name="SettingsMenu" type="CanvasLayer"]
 script = ExtResource( 2 )
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="UI" type="Control" parent="."]
+margin_right = 640.0
+margin_bottom = 360.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 1 )
@@ -33,7 +40,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AudioVbox" type="VBoxContainer" parent="Background"]
+[node name="AudioVbox" type="VBoxContainer" parent="UI"]
 margin_left = 20.0
 margin_top = 18.5431
 margin_right = 175.548
@@ -43,7 +50,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AudioLabel" type="Label" parent="Background/AudioVbox"]
+[node name="AudioLabel" type="Label" parent="UI/AudioVbox"]
 margin_right = 155.0
 margin_bottom = 30.0
 custom_fonts/font = SubResource( 1 )
@@ -52,7 +59,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MasterVolume" type="Label" parent="Background/AudioVbox"]
+[node name="MasterVolume" type="Label" parent="UI/AudioVbox"]
 margin_top = 50.0
 margin_right = 155.0
 margin_bottom = 65.0
@@ -62,7 +69,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MasterSlider" type="HSlider" parent="Background/AudioVbox/MasterVolume"]
+[node name="MasterSlider" type="HSlider" parent="UI/AudioVbox/MasterVolume"]
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -75,7 +82,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MasterCheckbox" type="CheckBox" parent="Background/AudioVbox/MasterVolume/MasterSlider"]
+[node name="MasterCheckbox" type="CheckBox" parent="UI/AudioVbox/MasterVolume/MasterSlider"]
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -87,7 +94,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MusicVolume" type="Label" parent="Background/AudioVbox"]
+[node name="MusicVolume" type="Label" parent="UI/AudioVbox"]
 margin_top = 85.0
 margin_right = 155.0
 margin_bottom = 100.0
@@ -97,7 +104,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MusicSlider" type="HSlider" parent="Background/AudioVbox/MusicVolume"]
+[node name="MusicSlider" type="HSlider" parent="UI/AudioVbox/MusicVolume"]
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -110,7 +117,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MusicCheckbox" type="CheckBox" parent="Background/AudioVbox/MusicVolume/MusicSlider"]
+[node name="MusicCheckbox" type="CheckBox" parent="UI/AudioVbox/MusicVolume/MusicSlider"]
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -122,7 +129,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SFXVolume" type="Label" parent="Background/AudioVbox"]
+[node name="SFXVolume" type="Label" parent="UI/AudioVbox"]
 margin_top = 120.0
 margin_right = 155.0
 margin_bottom = 135.0
@@ -132,7 +139,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SFXSlider" type="HSlider" parent="Background/AudioVbox/SFXVolume"]
+[node name="SFXSlider" type="HSlider" parent="UI/AudioVbox/SFXVolume"]
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -145,7 +152,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SFXCheckbox" type="CheckBox" parent="Background/AudioVbox/SFXVolume/SFXSlider"]
+[node name="SFXCheckbox" type="CheckBox" parent="UI/AudioVbox/SFXVolume/SFXSlider"]
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -157,7 +164,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GraphicsVbox" type="VBoxContainer" parent="Background"]
+[node name="GraphicsVbox" type="VBoxContainer" parent="UI"]
 margin_left = 20.0
 margin_top = 193.0
 margin_right = 196.0
@@ -167,7 +174,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GraphicsLabel" type="Label" parent="Background/GraphicsVbox"]
+[node name="GraphicsLabel" type="Label" parent="UI/GraphicsVbox"]
 margin_right = 176.0
 margin_bottom = 30.0
 custom_fonts/font = SubResource( 1 )
@@ -176,7 +183,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Quality" type="Label" parent="Background/GraphicsVbox"]
+[node name="Quality" type="Label" parent="UI/GraphicsVbox"]
 margin_top = 50.0
 margin_right = 176.0
 margin_bottom = 65.0
@@ -186,7 +193,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OptionButton" type="OptionButton" parent="Background/GraphicsVbox/Quality"]
+[node name="OptionButton" type="OptionButton" parent="UI/GraphicsVbox/Quality"]
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -199,7 +206,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Resolution" type="Label" parent="Background/GraphicsVbox"]
+[node name="Resolution" type="Label" parent="UI/GraphicsVbox"]
 margin_top = 85.0
 margin_right = 176.0
 margin_bottom = 100.0
@@ -209,7 +216,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OptionButton" type="OptionButton" parent="Background/GraphicsVbox/Resolution"]
+[node name="OptionButton" type="OptionButton" parent="UI/GraphicsVbox/Resolution"]
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -223,7 +230,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Fullscreen" type="Label" parent="Background/GraphicsVbox"]
+[node name="Fullscreen" type="Label" parent="UI/GraphicsVbox"]
 margin_top = 120.0
 margin_right = 176.0
 margin_bottom = 135.0
@@ -233,7 +240,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FullscreenCheckBox" type="CheckBox" parent="Background/GraphicsVbox/Fullscreen"]
+[node name="FullscreenCheckBox" type="CheckBox" parent="UI/GraphicsVbox/Fullscreen"]
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -245,21 +252,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Background"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI"]
 anchor_left = 0.83
-anchor_top = 0.893
-anchor_right = 0.971
+anchor_top = 0.867
+anchor_right = 0.97
 anchor_bottom = 0.956
 margin_left = -0.200012
-margin_top = 0.519989
-margin_right = -0.440002
-margin_bottom = 13.84
+margin_right = 0.199951
 custom_constants/separation = 150
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Apply" type="Button" parent="Background/HBoxContainer"]
+[node name="Apply" type="Button" parent="UI/HBoxContainer"]
 visible = false
 margin_right = 90.0
 margin_bottom = 36.0
@@ -269,13 +274,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Reset" type="Button" parent="Background/HBoxContainer"]
+[node name="Reset" type="Button" parent="UI/HBoxContainer"]
 margin_right = 90.0
 margin_bottom = 36.0
 custom_fonts/font = SubResource( 4 )
 text = "Reset"
 
-[node name="BackButton" type="TextureButton" parent="Background"]
+[node name="BackButton" type="TextureButton" parent="UI"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -80.0
@@ -288,11 +293,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="value_changed" from="Background/AudioVbox/MasterVolume/MasterSlider" to="." method="_on_MasterSlider_value_changed"]
-[connection signal="toggled" from="Background/AudioVbox/MasterVolume/MasterSlider/MasterCheckbox" to="." method="_on_MasterCheckbox_toggled"]
-[connection signal="value_changed" from="Background/AudioVbox/MusicVolume/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
-[connection signal="toggled" from="Background/AudioVbox/MusicVolume/MusicSlider/MusicCheckbox" to="." method="_on_MusicCheckbox_toggled"]
-[connection signal="value_changed" from="Background/AudioVbox/SFXVolume/SFXSlider" to="." method="_on_SFXSlider_value_changed"]
-[connection signal="toggled" from="Background/AudioVbox/SFXVolume/SFXSlider/SFXCheckbox" to="." method="_on_SFXCheckbox_toggled"]
-[connection signal="toggled" from="Background/GraphicsVbox/Fullscreen/FullscreenCheckBox" to="." method="_on_FullScreenCheckBox_toggled"]
-[connection signal="pressed" from="Background/HBoxContainer/Reset" to="." method="_on_Reset_pressed"]
+[connection signal="value_changed" from="UI/AudioVbox/MasterVolume/MasterSlider" to="." method="_on_MasterSlider_value_changed"]
+[connection signal="toggled" from="UI/AudioVbox/MasterVolume/MasterSlider/MasterCheckbox" to="." method="_on_MasterCheckbox_toggled"]
+[connection signal="value_changed" from="UI/AudioVbox/MusicVolume/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
+[connection signal="toggled" from="UI/AudioVbox/MusicVolume/MusicSlider/MusicCheckbox" to="." method="_on_MusicCheckbox_toggled"]
+[connection signal="value_changed" from="UI/AudioVbox/SFXVolume/SFXSlider" to="." method="_on_SFXSlider_value_changed"]
+[connection signal="toggled" from="UI/AudioVbox/SFXVolume/SFXSlider/SFXCheckbox" to="." method="_on_SFXCheckbox_toggled"]
+[connection signal="toggled" from="UI/GraphicsVbox/Fullscreen/FullscreenCheckBox" to="." method="_on_FullScreenCheckBox_toggled"]
+[connection signal="pressed" from="UI/HBoxContainer/Reset" to="." method="_on_Reset_pressed"]

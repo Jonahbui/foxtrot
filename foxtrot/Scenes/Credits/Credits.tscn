@@ -11,7 +11,14 @@ font_data = ExtResource( 4 )
 [node name="Credits" type="CanvasLayer"]
 script = ExtResource( 3 )
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="UI" type="Control" parent="."]
+margin_right = 640.0
+margin_bottom = 360.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 1 )
@@ -20,7 +27,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CreditLabel" type="Label" parent="Background"]
+[node name="CreditsLabel" type="Label" parent="UI"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -47,7 +54,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BackButton" type="TextureButton" parent="Background"]
+[node name="BackButton" type="TextureButton" parent="UI"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -80.0
