@@ -13,3 +13,7 @@ data_*/
 # Affinity Suite ignores
 *.afdesign
 *.afphoto
+
+# Asesprite ignores
+*.ase
+*.aseprite
