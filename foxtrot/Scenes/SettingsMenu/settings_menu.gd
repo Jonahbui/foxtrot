@@ -8,14 +8,14 @@ func _ready():
 
 func LoadConfigToSettings():
   # Set the volume settings to the ones in the config file
-  $Background/AudioVbox/MasterVolume/MasterSlider.value = Save.config[Globals.VOLUME_MASTER]
-  $Background/AudioVbox/MusicVolume/MusicSlider.value = Save.config[Globals.VOLUME_MUSIC]
-  $Background/AudioVbox/SFXVolume/SFXSlider.value = Save.config[Globals.VOLUME_SFX]
-  $Background/AudioVbox/MasterVolume/MasterSlider/MasterCheckbox.pressed = Save.config[Globals.VOLUME_MASTER_TOGGLE]
-  $Background/AudioVbox/MusicVolume/MusicSlider/MusicCheckbox.pressed = Save.config[Globals.VOLUME_MUSIC_TOGGLE]
-  $Background/AudioVbox/SFXVolume/SFXSlider/SFXCheckbox.pressed = Save.config[Globals.VOLUME_SFX_TOGGLE]
+  $UI/AudioVbox/MasterVolume/MasterSlider.value = Save.config[Globals.VOLUME_MASTER]
+  $UI/AudioVbox/MusicVolume/MusicSlider.value = Save.config[Globals.VOLUME_MUSIC]
+  $UI/AudioVbox/SFXVolume/SFXSlider.value = Save.config[Globals.VOLUME_SFX]
+  $UI/AudioVbox/MasterVolume/MasterSlider/MasterCheckbox.pressed = Save.config[Globals.VOLUME_MASTER_TOGGLE]
+  $UI/AudioVbox/MusicVolume/MusicSlider/MusicCheckbox.pressed = Save.config[Globals.VOLUME_MUSIC_TOGGLE]
+  $UI/AudioVbox/SFXVolume/SFXSlider/SFXCheckbox.pressed = Save.config[Globals.VOLUME_SFX_TOGGLE]
   
-  $Background/GraphicsVbox/Fullscreen/FullscreenCheckBox.pressed = Save.config[Globals.GRAPHICS_FULLSCREEN]
+  $UI/GraphicsVbox/Fullscreen/FullscreenCheckBox.pressed = Save.config[Globals.GRAPHICS_FULLSCREEN]
   #bus_layout.instance()
 
 # Note: the audio bus is arranged like so {0:master, 1:music, 2:sfx}
