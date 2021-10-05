@@ -1,27 +1,242 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Textures/SplashScreen/solid_off_black.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/SettingsMenu/settings_menu.gd" type="Script" id=2]
+[ext_resource path="res://Fonts/ThaleahFat_TTF.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://icon.png" type="Texture" id=4]
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="DynamicFont" id=2]
+size = 64
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 32
+font_data = ExtResource( 3 )
+
+[node name="SettingsMenu" type="CanvasLayer"]
 script = ExtResource( 2 )
 
-[node name="SettingsMenu" type="CanvasLayer" parent="."]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="SettingsMenu"]
-
-[node name="Fill" type="TextureRect" parent="SettingsMenu/CanvasLayer"]
-margin_right = 1920.0
-margin_bottom = 1080.0
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 127.251
+margin_top = 126.586
+margin_right = -128.749
+margin_bottom = -129.414
 texture = ExtResource( 1 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HSlider" type="HSlider" parent="SettingsMenu/CanvasLayer/Fill"]
-margin_right = 268.0
-margin_bottom = 16.0
+[node name="AudioVbox" type="VBoxContainer" parent="Background"]
+margin_left = 128.0
+margin_top = 128.0
+margin_right = 100.0
+margin_bottom = 48.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioLabel" type="Label" parent="Background/AudioVbox"]
+margin_right = 306.0
+margin_bottom = 59.0
+custom_fonts/font = SubResource( 2 )
+text = "Audio"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MasterVolume" type="Label" parent="Background/AudioVbox"]
+margin_top = 79.0
+margin_right = 306.0
+margin_bottom = 109.0
+custom_fonts/font = SubResource( 1 )
+text = "Master Volume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSlider" type="HSlider" parent="Background/AudioVbox/MasterVolume"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = -0.943695
+margin_right = 220.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicVolume" type="Label" parent="Background/AudioVbox"]
+margin_top = 129.0
+margin_right = 306.0
+margin_bottom = 159.0
+custom_fonts/font = SubResource( 1 )
+text = "Music Volume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSlider" type="HSlider" parent="Background/AudioVbox/MusicVolume"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = -0.943695
+margin_right = 220.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SfxVolume" type="Label" parent="Background/AudioVbox"]
+margin_top = 179.0
+margin_right = 306.0
+margin_bottom = 209.0
+custom_fonts/font = SubResource( 1 )
+text = "Sound Effects Volume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSlider" type="HSlider" parent="Background/AudioVbox/SfxVolume"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = -0.943695
+margin_right = 220.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GraphicsVbox" type="VBoxContainer" parent="Background"]
+margin_left = 960.0
+margin_top = 128.0
+margin_right = 1266.0
+margin_bottom = 337.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GraphicsLabel" type="Label" parent="Background/GraphicsVbox"]
+margin_right = 306.0
+margin_bottom = 59.0
+custom_fonts/font = SubResource( 2 )
+text = "Graphics"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quality" type="Label" parent="Background/GraphicsVbox"]
+margin_top = 79.0
+margin_right = 306.0
+margin_bottom = 109.0
+custom_fonts/font = SubResource( 1 )
+text = "Quality"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OptionButton" type="OptionButton" parent="Background/GraphicsVbox/Quality"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 40.0
+custom_fonts/font = SubResource( 3 )
+text = "Graphics"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Resolution" type="Label" parent="Background/GraphicsVbox"]
+margin_top = 129.0
+margin_right = 306.0
+margin_bottom = 159.0
+custom_fonts/font = SubResource( 1 )
+text = "Resolution"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OptionButton" type="OptionButton" parent="Background/GraphicsVbox/Resolution"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 40.0
+custom_fonts/font = SubResource( 3 )
+text = "Resolution"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fullscreen" type="Label" parent="Background/GraphicsVbox"]
+margin_top = 179.0
+margin_right = 306.0
+margin_bottom = 209.0
+custom_fonts/font = SubResource( 1 )
+text = "FullSCreen"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckBox" type="CheckBox" parent="Background/GraphicsVbox/Fullscreen"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 25.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background"]
+anchor_left = 0.077
+anchor_top = 0.893
+anchor_right = 0.971
+anchor_bottom = 0.951
+margin_left = -0.128006
+margin_top = 0.167969
+margin_right = -0.744141
+margin_bottom = 0.375977
+custom_constants/separation = 150
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Apply" type="Button" parent="Background/HBoxContainer"]
+margin_right = 90.0
+margin_bottom = 48.0
+custom_fonts/font = SubResource( 4 )
+text = "Apply"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Reset" type="Button" parent="Background/HBoxContainer"]
+margin_left = 240.0
+margin_right = 330.0
+margin_bottom = 48.0
+custom_fonts/font = SubResource( 4 )
+text = "Reset"
+
+[node name="BackButton" type="TextureButton" parent="Background"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -142.738
+margin_top = 16.0181
+margin_right = -14.7375
+margin_bottom = 144.018
+texture_normal = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

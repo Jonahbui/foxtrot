@@ -17,6 +17,8 @@ When making a change to the project, please do so in a new branch. Easiest way t
 ## Asset References
 - Splash Screen Sound:
 	- https://freesound.org/people/Mrthenoronha/sounds/420447/
+- Thaleah Fat Font:
+	- https://www.dafont.com/thaleahfat.font
 
 ## Contributors
 - Jonah Bui
