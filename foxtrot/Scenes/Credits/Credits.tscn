@@ -6,15 +6,15 @@
 [ext_resource path="res://Fonts/ThaleahFat_TTF.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="DynamicFont" id=1]
-size = 64
+size = 32
 font_data = ExtResource( 4 )
 
 [node name="Credits" type="CanvasLayer"]
 script = ExtResource( 3 )
 
 [node name="Background" type="TextureRect" parent="."]
-margin_right = 1920.0
-margin_bottom = 1080.0
+margin_right = 640.0
+margin_bottom = 480.0
 texture = ExtResource( 1 )
 expand = true
 __meta__ = {
@@ -51,10 +51,10 @@ __meta__ = {
 [node name="BackButton" type="TextureButton" parent="Background"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -142.738
-margin_top = 16.0181
-margin_right = -14.7375
-margin_bottom = 144.018
+margin_left = -143.0
+margin_top = 16.0
+margin_right = -15.0
+margin_bottom = 144.0
 texture_normal = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false

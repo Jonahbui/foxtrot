@@ -32,7 +32,7 @@ When making a change to the project, please do so in a new branch. Easiest way t
 - Godot
 
 ### Textures
-- Aesprite (2D animation)
+- Asesprite (2D animation)
 - Adobe Photoshop
 - Affinity Designer
 - Affinity Photo

@@ -8,15 +8,25 @@
 [ext_resource path="res://Scenes/SettingsMenu/settings_menu.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=1]
-size = 32
 font_data = ExtResource( 5 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 128
+size = 64
 font_data = ExtResource( 5 )
 
 [node name="MainMenu" type="Node2D"]
+position = Vector2( 73.9989, 65.5899 )
 script = ExtResource( 2 )
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="MusicStream" type="AudioStreamPlayer" parent="Audio"]
+volume_db = 24.0
+bus = "Music"
+
+[node name="SFXStream" type="AudioStreamPlayer" parent="Audio"]
+volume_db = 24.0
+bus = "SFX"
 
 [node name="MainMenu" type="CanvasLayer" parent="."]
 
@@ -113,16 +123,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CreditsButton" type="TextureButton" parent="MainMenu/Background/ButtonsVbox"]
-margin_top = 396.0
+[node name="ButtonsVbox2" type="VBoxContainer" parent="MainMenu/Background"]
+margin_left = 339.004
+margin_top = 122.76
+margin_right = 467.004
+margin_bottom = 382.76
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CreditsButton" type="TextureButton" parent="MainMenu/Background/ButtonsVbox2"]
 margin_right = 128.0
-margin_bottom = 524.0
+margin_bottom = 128.0
 texture_normal = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="MainMenu/Background/ButtonsVbox/CreditsButton"]
+[node name="Label" type="Label" parent="MainMenu/Background/ButtonsVbox2/CreditsButton"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -138,16 +156,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ExitButton" type="TextureButton" parent="MainMenu/Background/ButtonsVbox"]
-margin_top = 528.0
+[node name="ExitButton" type="TextureButton" parent="MainMenu/Background/ButtonsVbox2"]
+margin_top = 132.0
 margin_right = 128.0
-margin_bottom = 656.0
+margin_bottom = 260.0
 texture_normal = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="MainMenu/Background/ButtonsVbox/ExitButton"]
+[node name="Label" type="Label" parent="MainMenu/Background/ButtonsVbox2/ExitButton"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -164,11 +182,13 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="MainMenu/Background"]
-anchor_left = 1.0
+anchor_left = 0.95
 anchor_right = 1.0
-margin_left = -900.0
-margin_top = 40.0
-margin_bottom = 160.0
+anchor_bottom = 0.05
+margin_left = -280.0
+margin_top = 20.0
+margin_right = -20.48
+margin_bottom = 60.28
 custom_fonts/font = SubResource( 2 )
 text = "Title Here"
 __meta__ = {
@@ -194,8 +214,8 @@ margin_bottom = 47.0
 [connection signal="pressed" from="MainMenu/Background/ButtonsVbox/NewGameButton" to="." method="_on_NewGameButton_pressed"]
 [connection signal="pressed" from="MainMenu/Background/ButtonsVbox/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
 [connection signal="pressed" from="MainMenu/Background/ButtonsVbox/SettingsButton" to="." method="_on_SettingsButton_pressed"]
-[connection signal="pressed" from="MainMenu/Background/ButtonsVbox/CreditsButton" to="." method="_on_CreditsButton_pressed"]
-[connection signal="pressed" from="MainMenu/Background/ButtonsVbox/ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="pressed" from="MainMenu/Background/ButtonsVbox2/CreditsButton" to="." method="_on_CreditsButton_pressed"]
+[connection signal="pressed" from="MainMenu/Background/ButtonsVbox2/ExitButton" to="." method="_on_ExitButton_pressed"]
 [connection signal="pressed" from="Credits/Background/BackButton" to="." method="_on_CreditsBackButton_pressed"]
 [connection signal="pressed" from="SettingsMenu/Background/BackButton" to="." method="_on_SettingsBackButton_pressed"]
 
