@@ -14,6 +14,7 @@ func _enter_tree():
   # Create a config dictionary so that the data can be filled in.
   config = create_config(true)
   load_config()
+  print(config)
 
 func _exit_tree():
   # Write an autosave on game exit
