@@ -7,6 +7,14 @@ var bus_layout = load("res://default_bus_layout.tres")
 
 func _ready():
   LoadConfigToSettings()
+
+func LoadConfigToSettings():
+  # Set the volume settings to the ones in the config file
+  $Background/AudioVbox/MasterVolume/MasterSlider.value = Save.config[Globals.VOLUME_MASTER]
+  $Background/AudioVbox/MusicVolume/MusicSlider.value = Save.config[Globals.VOLUME_MUSIC]
+  $Background/AudioVbox/SFXVolume/SFXSlider.value = Save.config[Globals.VOLUME_SFX]
+  $Background/GraphicsVbox/Fullscreen/CheckBox.pressed = Save.config[Globals.GRAPHICS_FULLSCREEN]
+  #bus_layout.instance()
   
 func _on_MasterSlider_value_changed(value):
   Save.config[Globals.VOLUME_MASTER] = value
@@ -21,10 +29,6 @@ func _on_Reset_pressed():
   Save.reset_config()
   LoadConfigToSettings()
 
-func LoadConfigToSettings():
-  # Set the volume settings to the ones in the config file
-  $Background/AudioVbox/MasterVolume/MasterSlider.value = Save.config[Globals.VOLUME_MASTER]
-  $Background/AudioVbox/MusicVolume/MusicSlider.value = Save.config[Globals.VOLUME_MUSIC]
-  $Background/AudioVbox/SFXVolume/SFXSlider.value = Save.config[Globals.VOLUME_SFX]
-  
-  #bus_layout.instance()
+func _on_CheckBox_toggled(button_pressed):
+  OS.window_fullscreen = button_pressed
+  Save.config[Globals.GRAPHICS_FULLSCREEN] = button_pressed

@@ -18,9 +18,11 @@ func _exit_tree():
 
 func create_config(default=false):
   var new_config = {
-      "masterVolume" : config[Globals.VOLUME_MASTER] if not default else 0.0,
-      "musicVolume"  : config[Globals.VOLUME_MUSIC] if not default else 0.0,
-      "sfxVolume"    : config[Globals.VOLUME_SFX] if not default else 0.0
+      Globals.VOLUME_MASTER : config[Globals.VOLUME_MASTER] if not default else 0.0,
+      Globals.VOLUME_MUSIC  : config[Globals.VOLUME_MUSIC] if not default else 0.0,
+      Globals.VOLUME_SFX    : config[Globals.VOLUME_SFX] if not default else 0.0,
+      
+      Globals.GRAPHICS_FULLSCREEN : config[Globals.GRAPHICS_FULLSCREEN] if not default else true
    }
   return new_config
   
