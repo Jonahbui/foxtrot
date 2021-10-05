@@ -4,7 +4,10 @@ extends Node
 const FILENAME_DEFAULT_AUTO   = "autosave.save"
 const FILENAME_CONFIG_DEFAULT = "playerConfig.json"
 
+# Holds the player preferences in a dictionary
 var config = null
+
+# Holds the player here
 var save = null
 
 func _enter_tree():
@@ -29,7 +32,7 @@ func create_config(default=false):
       Globals.GRAPHICS_FULLSCREEN : config[Globals.GRAPHICS_FULLSCREEN] if not default else false
    }
   return new_config
-  
+
 func save_config():
   # Create a new file to read using the given filename
   var file = File.new()
@@ -55,6 +58,6 @@ func load_config():
   # insert their own values) dictionary.
   for key in data.keys():
     if config.has(key): config[key] = data[key]
-  
+
 func reset_config():
   config = create_config(true)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Textures/SplashScreen/solid_off_black.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/SettingsMenu/settings_menu.gd" type="Script" id=2]
@@ -14,6 +14,8 @@ font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 3 )
+
+[sub_resource type="ButtonGroup" id=5]
 
 [sub_resource type="DynamicFont" id=4]
 size = 32
@@ -32,7 +34,7 @@ __meta__ = {
 }
 
 [node name="AudioVbox" type="VBoxContainer" parent="Background"]
-margin_left = 22.5477
+margin_left = 20.0
 margin_top = 18.5431
 margin_right = 175.548
 margin_bottom = 153.543
@@ -42,7 +44,7 @@ __meta__ = {
 }
 
 [node name="AudioLabel" type="Label" parent="Background/AudioVbox"]
-margin_right = 153.0
+margin_right = 155.0
 margin_bottom = 30.0
 custom_fonts/font = SubResource( 1 )
 text = "Audio"
@@ -52,7 +54,7 @@ __meta__ = {
 
 [node name="MasterVolume" type="Label" parent="Background/AudioVbox"]
 margin_top = 50.0
-margin_right = 153.0
+margin_right = 155.0
 margin_bottom = 65.0
 custom_fonts/font = SubResource( 2 )
 text = "Master Volume"
@@ -87,7 +89,7 @@ __meta__ = {
 
 [node name="MusicVolume" type="Label" parent="Background/AudioVbox"]
 margin_top = 85.0
-margin_right = 153.0
+margin_right = 155.0
 margin_bottom = 100.0
 custom_fonts/font = SubResource( 2 )
 text = "Music Volume"
@@ -122,7 +124,7 @@ __meta__ = {
 
 [node name="SFXVolume" type="Label" parent="Background/AudioVbox"]
 margin_top = 120.0
-margin_right = 153.0
+margin_right = 155.0
 margin_bottom = 135.0
 custom_fonts/font = SubResource( 2 )
 text = "Sound Effects Volume"
@@ -156,7 +158,7 @@ __meta__ = {
 }
 
 [node name="GraphicsVbox" type="VBoxContainer" parent="Background"]
-margin_left = 23.0
+margin_left = 20.0
 margin_top = 193.0
 margin_right = 196.0
 margin_bottom = 402.0
@@ -166,7 +168,7 @@ __meta__ = {
 }
 
 [node name="GraphicsLabel" type="Label" parent="Background/GraphicsVbox"]
-margin_right = 173.0
+margin_right = 176.0
 margin_bottom = 30.0
 custom_fonts/font = SubResource( 1 )
 text = "Graphics"
@@ -176,7 +178,7 @@ __meta__ = {
 
 [node name="Quality" type="Label" parent="Background/GraphicsVbox"]
 margin_top = 50.0
-margin_right = 173.0
+margin_right = 176.0
 margin_bottom = 65.0
 custom_fonts/font = SubResource( 2 )
 text = "Quality"
@@ -191,6 +193,7 @@ anchor_bottom = 1.0
 margin_right = 88.0
 margin_bottom = 6.0
 custom_fonts/font = SubResource( 3 )
+group = SubResource( 5 )
 text = "Graphics"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -198,7 +201,7 @@ __meta__ = {
 
 [node name="Resolution" type="Label" parent="Background/GraphicsVbox"]
 margin_top = 85.0
-margin_right = 173.0
+margin_right = 176.0
 margin_bottom = 100.0
 custom_fonts/font = SubResource( 2 )
 text = "Resolution"
@@ -222,7 +225,7 @@ __meta__ = {
 
 [node name="Fullscreen" type="Label" parent="Background/GraphicsVbox"]
 margin_top = 120.0
-margin_right = 173.0
+margin_right = 176.0
 margin_bottom = 135.0
 custom_fonts/font = SubResource( 2 )
 text = "FullSCreen"
@@ -243,14 +246,14 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Background"]
-anchor_left = 0.077
+anchor_left = 0.83
 anchor_top = 0.893
 anchor_right = 0.971
-anchor_bottom = 0.951
-margin_left = -0.128006
-margin_top = 0.167969
-margin_right = -0.744141
-margin_bottom = 0.375977
+anchor_bottom = 0.956
+margin_left = -0.200012
+margin_top = 0.519989
+margin_right = -0.440002
+margin_bottom = 13.84
 custom_constants/separation = 150
 __meta__ = {
 "_edit_use_anchors_": false
@@ -275,10 +278,11 @@ text = "Reset"
 [node name="BackButton" type="TextureButton" parent="Background"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -143.0
+margin_left = -80.0
 margin_top = 16.0
-margin_right = -15.0
+margin_right = 48.0
 margin_bottom = 144.0
+rect_scale = Vector2( 0.5, 0.5 )
 texture_normal = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false

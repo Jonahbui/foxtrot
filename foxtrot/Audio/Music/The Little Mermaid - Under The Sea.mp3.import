@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/The Little Mermaid - Under The Sea.mp3-77e64c4be229285ba2bb3ee42de50730.mp3str"
+
+[deps]
+
+source_file="res://Audio/Music/The Little Mermaid - Under The Sea.mp3"
+dest_files=[ "res://.import/The Little Mermaid - Under The Sea.mp3-77e64c4be229285ba2bb3ee42de50730.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
