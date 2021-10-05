@@ -16,8 +16,8 @@ font_data = ExtResource( 2 )
 script = ExtResource( 3 )
 
 [node name="UI" type="Control" parent="."]
+anchor_bottom = 1.0
 margin_right = 640.0
-margin_bottom = 360.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

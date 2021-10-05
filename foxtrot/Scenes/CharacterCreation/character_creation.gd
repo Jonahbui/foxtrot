@@ -8,3 +8,8 @@ func _on_ConfirmButton_pressed():
 
 func _on_CancelButton_pressed():
   $UI/PopupMenu.hide()
+
+
+func _on_BackButton_pressed():
+  Globals.isGamePlaying = false
+  get_tree().change_scene("res://Scenes/MainMenu/main_menu.tscn")
