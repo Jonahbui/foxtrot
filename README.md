@@ -20,6 +20,27 @@ When making a change to the project, please do so in a new branch. Easiest way t
 - Thaleah Fat Font:
 	- https://www.dafont.com/thaleahfat.font
 
+## Tools
+### Audio
+- Audacity
+
+### Video
+- OBS Studio
+
+### Engine
+- Godot
+
+### Textures
+- Aesprite (2D animation)
+- Adobe Photoshop
+- Affinity Designer
+- Affinity Photo
+- Gimp
+- Inkscape
+
+### Diagrams
+- draw.io
+
 ## Contributors
 - Jonah Bui
 - Ian Klobe
