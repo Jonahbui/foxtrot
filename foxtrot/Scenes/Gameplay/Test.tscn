@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Textures/Gameplay/dev_tiles.tres" type="TileSet" id=1]
+[ext_resource path="res://Instances/Player.tscn" type="PackedScene" id=2]
 
 [node name="Level" type="Node2D"]
 
@@ -8,5 +9,10 @@
 position = Vector2( 0, 96 )
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
+collision_layer = 2
+collision_mask = 0
 format = 1
 tile_data = PoolIntArray( 196617, 3, 0, 262144, 0, 0, 262152, 3, 0, 262154, 3, 0, 327680, 0, 0, 327687, 3, 0, 327691, 3, 0, 393216, 1, 0, 393217, 1, 0, 393218, 1, 0, 393219, 1, 0, 393220, 1, 0, 393221, 1, 0, 393222, 1, 0, 393223, 1, 0, 393224, 1, 0, 393225, 1, 0, 393226, 1, 0, 393227, 1, 0, 393228, 1, 0, 393229, 1, 0, 393230, 1, 0, 393231, 1, 0, 393232, 1, 0, 393233, 1, 0, 393234, 1, 0, 393235, 1, 0 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 6.71848, 206.066 )
