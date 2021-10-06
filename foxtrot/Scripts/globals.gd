@@ -16,3 +16,4 @@ var isNewGame     : bool = false
 var isGamePaused  : bool = false
 var isPlayerDead  : bool = false
 var isHardcoreMode: bool = false
+var isDevConsoleOpen: bool = false

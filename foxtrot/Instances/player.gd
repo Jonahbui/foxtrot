@@ -3,8 +3,9 @@
 extends KinematicBody2D
 
 # VARIABLES---------------------------------
-var health  : = 100.0
-var money  : = 0.0
+var health  = 100
+var money  = 0
+var damageMultiplier = 1.0
 # "gravity" is an acceleration:  it's that many units
 #   per second per second.  It's positive because "down" on the
 #   screen is the POSITIVE Y axis direction.
@@ -26,6 +27,9 @@ var velocity : = Vector2.ZERO
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+  # If the dev console is open then do not move.
+  if Globals.isDevConsoleOpen :
+    return
   # If the player is in the middle of a jump (the Y velocity is
   #   less than zero, indicating the player is moving UP on the
   #   screen) and the user lets go of the JUMP key (detected using

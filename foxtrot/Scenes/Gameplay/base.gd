@@ -8,6 +8,7 @@ var history_index = -1
 func _input(event):
   if(event.is_action_pressed("ui_dev")):
     $UI/DevConsole.visible = !$UI/DevConsole.visible
+    Globals.isDevConsoleOpen = $UI/DevConsole.visible
   elif(event.is_action_pressed("ui_up")):
     if($UI/DevConsole/CmdLine.has_focus()):
       GetNextHistoryCmd()
