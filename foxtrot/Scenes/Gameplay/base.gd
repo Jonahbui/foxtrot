@@ -20,18 +20,22 @@ func _ready():
   LoadLevel("res://Scenes/Gameplay/Spawn.tscn")
     
 func LoadLevel(path):
-  # Note: need to setup the player when a scene is loaded...
-  
+  $Player.visible = false
+  # Load the level.
   var level_node = get_node_or_null("/root/Base/Level")
-  if level_node == null:
-    current_level = load(path)
-    add_child(current_level.instance())
-  else:
+  if level_node != null:
     remove_child(level_node)
     level_node.call_deferred("free")
-    current_level = load(path)
-    add_child(current_level.instance())
-
+  current_level = load(path)
+  add_child(current_level.instance())
+  
+  var spawnpoint = current_level.instance().get_node_or_null("root/Level/Spawnpoint")
+  if spawnpoint != null:
+    $Player.set_global_position(spawnpoint.get_global_position())
+  else:
+    print("hello")
+  $Player.visible = true
+  
 func _on_CmdLine_text_entered(new_text):
   # Do some preprocessing to avoid errors when parsing
   new_text = new_text.strip_edges()
