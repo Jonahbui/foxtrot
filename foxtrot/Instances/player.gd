@@ -6,6 +6,7 @@ extends KinematicBody2D
 var health  = 100
 var money  = 0
 var damageMultiplier = 1.0
+var inWater = false
 # "gravity" is an acceleration:  it's that many units
 #   per second per second.  It's positive because "down" on the
 #   screen is the POSITIVE Y axis direction.

@@ -29,6 +29,7 @@ func LoadLevel(path):
   current_level = load(path)
   add_child(current_level.instance())
   
+  # Get spawnpoint path and set player position to spawnpoint.
   var spawnpoint = current_level.instance().get_node_or_null("Spawnpoint")
   if spawnpoint != null:
     $Player.set_global_position(spawnpoint.get_global_position())
