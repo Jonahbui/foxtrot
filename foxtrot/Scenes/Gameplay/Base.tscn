@@ -84,3 +84,4 @@ position = Vector2( 44.0695, -16.2924 )
 
 [editable path="PauseMenu"]
 [editable path="PauseMenu/SettingsMenu"]
+[editable path="Player"]

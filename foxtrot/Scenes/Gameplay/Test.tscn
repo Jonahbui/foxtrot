@@ -4,7 +4,9 @@
 
 [node name="Level" type="Node2D"]
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="World" type="Node2D" parent="."]
+
+[node name="TileMap" type="TileMap" parent="World"]
 position = Vector2( 0, 96 )
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )

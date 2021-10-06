@@ -29,11 +29,11 @@ func LoadLevel(path):
   current_level = load(path)
   add_child(current_level.instance())
   
-  var spawnpoint = current_level.instance().get_node_or_null("root/Level/Spawnpoint")
+  var spawnpoint = current_level.instance().get_node_or_null("Spawnpoint")
   if spawnpoint != null:
     $Player.set_global_position(spawnpoint.get_global_position())
   else:
-    print("hello")
+    printerr("The spawnpoint could not be located in %s" % [spawnpoint.get_name()])
   $Player.visible = true
   
 func _on_CmdLine_text_entered(new_text):
