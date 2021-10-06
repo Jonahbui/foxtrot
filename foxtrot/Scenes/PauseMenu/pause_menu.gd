@@ -25,7 +25,6 @@ func _on_SettingsButton_pressed():
 
 func _on_MainMenuButton_pressed():
   Globals.isGamePaused = false
-  Globals.isGamePlaying = false
   get_tree().change_scene("res://Scenes/MainMenu/main_menu.tscn")
 
 func _on_ExitButton_pressed():

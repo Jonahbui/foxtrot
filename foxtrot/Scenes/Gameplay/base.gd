@@ -58,12 +58,17 @@ func ProcessCmd(cmd):
   var parse = cmd.split(" ")
   
   # Organize commands by the number of parameters
-  if(parse.size() == 0):
+  if parse.size() == 0:
     return
-  elif(parse.size() == 1):
-    if(parse[0] == "clear"):
+  elif parse.size() == 1:
+    
+    if parse[0] == "clear":
       $UI/DevConsole/Log.text = ""
+    elif parse[0] == "exit":
+      get_tree().quit()
+      
   elif(parse.size() == 2):
+    
     if(parse[0] == "setlevel"):
       # Note: if leaving in for player, need to sanitize input just in case
       # they load up a scene they should not be allowed to...

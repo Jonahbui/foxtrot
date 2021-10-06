@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/MainMenu/main_menu.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Scenes/Credits/Credits.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Fonts/ThaleahFat_TTF.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Scenes/SettingsMenu/settings_menu.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Fonts/thaelahfat_pure_16x.tres" type="DynamicFont" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -197,6 +198,64 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ModePopup" type="PopupMenu" parent="MainMenu/UI"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -107.24
+margin_top = -54.1422
+margin_right = 101.76
+margin_bottom = 43.8578
+hide_on_state_item_selection = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ModeText" type="Label" parent="MainMenu/UI/ModePopup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -40.0
+custom_fonts/font = ExtResource( 7 )
+text = "How tough are you?"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/UI/ModePopup"]
+anchor_left = 0.05
+anchor_top = 0.7
+anchor_right = 0.95
+anchor_bottom = 0.9
+custom_constants/separation = -172
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HardcoreButton" type="Button" parent="MainMenu/UI/ModePopup/HBoxContainer"]
+margin_left = 104.0
+margin_right = 180.0
+margin_bottom = 21.0
+custom_fonts/font = ExtResource( 7 )
+text = "Hardcore"
+
+[node name="CasualButton" type="Button" parent="MainMenu/UI/ModePopup/HBoxContainer"]
+margin_left = 8.0
+margin_right = 84.0
+margin_bottom = 21.0
+rect_min_size = Vector2( 76, 0 )
+custom_fonts/font = ExtResource( 7 )
+text = "Casual"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Credits" parent="." instance=ExtResource( 4 )]
 
 [node name="UI" parent="Credits" index="0"]
@@ -215,6 +274,8 @@ group = SubResource( 3 )
 [connection signal="pressed" from="MainMenu/UI/ButtonsVbox/SettingsButton" to="." method="_on_SettingsButton_pressed"]
 [connection signal="pressed" from="MainMenu/UI/ButtonsVbox/CreditsButton" to="." method="_on_CreditsButton_pressed"]
 [connection signal="pressed" from="MainMenu/UI/ButtonsVbox/ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="pressed" from="MainMenu/UI/ModePopup/HBoxContainer/HardcoreButton" to="." method="_on_HardcoreButton_pressed"]
+[connection signal="pressed" from="MainMenu/UI/ModePopup/HBoxContainer/CasualButton" to="." method="_on_CasualButton_pressed"]
 [connection signal="pressed" from="Credits/UI/BackButton" to="." method="_on_CreditsBackButton_pressed"]
 [connection signal="pressed" from="SettingsMenu/UI/BackButton" to="." method="_on_SettingsBackButton_pressed"]
 

@@ -15,3 +15,4 @@ var isGamePlaying : bool = false
 var isNewGame     : bool = false
 var isGamePaused  : bool = false
 var isPlayerDead  : bool = false
+var isHardcoreMode: bool = false
