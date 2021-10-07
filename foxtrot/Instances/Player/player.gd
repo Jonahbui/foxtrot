@@ -25,7 +25,7 @@ var velocity : = Vector2.ZERO
 
 func _input(event):
   if event.is_action_pressed("ui_inventory"):
-    $UI/Inventory.visible = !$UI/Inventory.visible
+    toggle_inventory()
 
 func _physics_process(delta: float) -> void:
   # If the dev console is open then do not move.
@@ -93,3 +93,7 @@ func _physics_process(delta: float) -> void:
   #   our version of velocity so we don't, e.g., keep trying to
   #   move DOWN on the screen after we've hit the floor.
   velocity = move_and_slide( velocity, Vector2.UP )
+
+func toggle_inventory():
+  $UI/Inventory.visible = !$UI/Inventory.visible
+  $UI/Hud.visible = !$UI/Inventory.visible
