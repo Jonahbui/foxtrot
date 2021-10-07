@@ -8,6 +8,7 @@ var history_index = -1
 func _input(event):
   if(event.is_action_pressed("ui_dev")):
     $UI/DevConsole.visible = !$UI/DevConsole.visible
+    Globals.isDevConsoleOpen = $UI/DevConsole.visible
   elif(event.is_action_pressed("ui_up")):
     if($UI/DevConsole/CmdLine.has_focus()):
       GetNextHistoryCmd()
@@ -19,18 +20,23 @@ func _ready():
   LoadLevel("res://Scenes/Gameplay/Spawn.tscn")
     
 func LoadLevel(path):
-  # Note: need to setup the player when a scene is loaded...
-  
+  $Player.visible = false
+  # Load the level.
   var level_node = get_node_or_null("/root/Base/Level")
-  if level_node == null:
-    current_level = load(path)
-    add_child(current_level.instance())
-  else:
+  if level_node != null:
     remove_child(level_node)
     level_node.call_deferred("free")
-    current_level = load(path)
-    add_child(current_level.instance())
-
+  current_level = load(path)
+  add_child(current_level.instance())
+  
+  # Get spawnpoint path and set player position to spawnpoint.
+  var spawnpoint = current_level.instance().get_node_or_null("Spawnpoint")
+  if spawnpoint != null:
+    $Player.set_global_position(spawnpoint.get_global_position())
+  else:
+    printerr("The spawnpoint could not be located in %s" % [spawnpoint.get_name()])
+  $Player.visible = true
+  
 func _on_CmdLine_text_entered(new_text):
   # Do some preprocessing to avoid errors when parsing
   new_text = new_text.strip_edges()
