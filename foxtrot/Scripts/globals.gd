@@ -8,6 +8,11 @@ const VOLUME_MASTER_TOGGLE  = "masterVolumeToggle"
 const VOLUME_MUSIC_TOGGLE  = "musicVolumeToggle"
 const VOLUME_SFX_TOGGLE  = "sfxVolumeToggle"
 
+# Define save constants
+const PLAYER_NAME   = "playerName"
+const PLAYER_HEALTH = "playerHealth"
+const PLAYER_MONEY  = "playerMoney"
+
 const GRAPHICS_FULLSCREEN = 'fullscreen'
 
 # Gameplay vars

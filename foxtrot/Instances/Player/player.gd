@@ -3,10 +3,12 @@
 extends KinematicBody2D
 
 # VARIABLES---------------------------------
-var health  = 100
-var money  = 0
+var charname : String = ""
+var health : int = 100
+var money  : int = 0
 var damageMultiplier = 1.0
 var inWater = false
+
 # "gravity" is an acceleration:  it's that many units
 #   per second per second.  It's positive because "down" on the
 #   screen is the POSITIVE Y axis direction.
@@ -21,12 +23,10 @@ var speed    : = Vector2( 200.0, 800.0 )
 var velocity : = Vector2.ZERO
 # -------------------------------------------
 
-# Called when the node enters the scene tree for the first time.
-#func _ready() -> void:
-#  pass # Replace with function body.
+func _input(event):
+  if event.is_action_pressed("ui_inventory"):
+    $UI/Inventory.visible = !$UI/Inventory.visible
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
   # If the dev console is open then do not move.
   if Globals.isDevConsoleOpen :
