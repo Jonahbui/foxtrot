@@ -1,13 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Textures/Gameplay/bubble.png" type="Texture" id=1]
 [ext_resource path="res://Instances/Player/player.gd" type="Script" id=2]
+[ext_resource path="res://Textures/UI/slot.png" type="Texture" id=3]
+[ext_resource path="res://Fonts/thaelahfat_pure_16x.tres" type="DynamicFont" id=5]
+[ext_resource path="res://Textures/UI/hotbar.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 16 )
-
-[sub_resource type="ViewportTexture" id=2]
-viewport_path = NodePath("ViewportContainer/Viewport")
 
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 2
@@ -52,6 +52,7 @@ __meta__ = {
 }
 
 [node name="PlayerProfilePanel" type="Panel" parent="UI/Inventory/Panels"]
+self_modulate = Color( 1, 1, 1, 0.188235 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 40.0
@@ -64,6 +65,7 @@ __meta__ = {
 }
 
 [node name="InventoryPanel" type="Panel" parent="UI/Inventory/Panels"]
+self_modulate = Color( 1, 1, 1, 0.188235 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 264.0
@@ -72,107 +74,6 @@ margin_right = -40.0
 margin_bottom = -40.0
 __meta__ = {
 "_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="HotBar" type="HBoxContainer" parent="UI/Inventory"]
-anchor_left = 0.425
-anchor_top = 0.133
-anchor_right = 0.925
-anchor_bottom = 0.222
-margin_top = 0.119999
-margin_bottom = 0.0799942
-custom_constants/separation = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HotBarSlot" type="TextureRect" parent="UI/Inventory/HotBar"]
-margin_right = 32.0
-margin_bottom = 32.0
-texture = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HotBarSlot2" type="TextureRect" parent="UI/Inventory/HotBar"]
-margin_left = 32.0
-margin_right = 64.0
-margin_bottom = 32.0
-texture = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HotBarSlot3" type="TextureRect" parent="UI/Inventory/HotBar"]
-margin_left = 64.0
-margin_right = 96.0
-margin_bottom = 32.0
-texture = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HotBarSlot4" type="TextureRect" parent="UI/Inventory/HotBar"]
-margin_left = 96.0
-margin_right = 128.0
-margin_bottom = 32.0
-texture = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HotBarSlot5" type="TextureRect" parent="UI/Inventory/HotBar"]
-margin_left = 128.0
-margin_right = 160.0
-margin_bottom = 32.0
-texture = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HotBarSlot6" type="TextureRect" parent="UI/Inventory/HotBar"]
-margin_left = 160.0
-margin_right = 192.0
-margin_bottom = 32.0
-texture = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HotBarSlot7" type="TextureRect" parent="UI/Inventory/HotBar"]
-margin_left = 192.0
-margin_right = 224.0
-margin_bottom = 32.0
-texture = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HotBarSlot8" type="TextureRect" parent="UI/Inventory/HotBar"]
-margin_left = 224.0
-margin_right = 256.0
-margin_bottom = 32.0
-texture = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HotBarSlot9" type="TextureRect" parent="UI/Inventory/HotBar"]
-margin_left = 256.0
-margin_right = 288.0
-margin_bottom = 32.0
-texture = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HotBarSlot10" type="TextureRect" parent="UI/Inventory/HotBar"]
-margin_left = 288.0
-margin_right = 320.0
-margin_bottom = 32.0
-texture = ExtResource( 1 )
-__meta__ = {
 "_edit_use_anchors_": false
 }
 
@@ -191,393 +92,1394 @@ __meta__ = {
 
 [node name="GridContainer" type="GridContainer" parent="UI/Inventory/ScrollContainer"]
 margin_right = 320.0
-margin_bottom = 140.0
+margin_bottom = 128.0
+custom_constants/vseparation = 0
 custom_constants/hseparation = 0
 columns = 10
 
-[node name="Slot" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Slot" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_right = 32.0
 margin_bottom = 32.0
-texture = ExtResource( 1 )
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot2" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot2" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 32.0
 margin_right = 64.0
 margin_bottom = 32.0
-texture = ExtResource( 1 )
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot3" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot3" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 64.0
 margin_right = 96.0
 margin_bottom = 32.0
-texture = ExtResource( 1 )
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot4" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot3"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot4" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 96.0
 margin_right = 128.0
 margin_bottom = 32.0
-texture = ExtResource( 1 )
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot5" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot4"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot4"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot5" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 128.0
 margin_right = 160.0
 margin_bottom = 32.0
-texture = ExtResource( 1 )
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot6" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot5"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot5"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot6" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 160.0
 margin_right = 192.0
 margin_bottom = 32.0
-texture = ExtResource( 1 )
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot7" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot6"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot6"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot7" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 192.0
 margin_right = 224.0
 margin_bottom = 32.0
-texture = ExtResource( 1 )
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot8" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot7"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot7"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot8" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 224.0
 margin_right = 256.0
 margin_bottom = 32.0
-texture = ExtResource( 1 )
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot9" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot8"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot8"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot9" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 256.0
 margin_right = 288.0
 margin_bottom = 32.0
-texture = ExtResource( 1 )
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot10" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot9"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot9"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot10" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 288.0
 margin_right = 320.0
 margin_bottom = 32.0
-texture = ExtResource( 1 )
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot11" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
-margin_top = 36.0
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot10"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot10"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot11" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
+margin_top = 32.0
 margin_right = 32.0
-margin_bottom = 68.0
-texture = ExtResource( 1 )
+margin_bottom = 64.0
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot12" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot11"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot11"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot12" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 32.0
-margin_top = 36.0
+margin_top = 32.0
 margin_right = 64.0
-margin_bottom = 68.0
-texture = ExtResource( 1 )
+margin_bottom = 64.0
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot13" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot12"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot12"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot13" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 64.0
-margin_top = 36.0
+margin_top = 32.0
 margin_right = 96.0
-margin_bottom = 68.0
-texture = ExtResource( 1 )
+margin_bottom = 64.0
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot14" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot13"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot13"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot14" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 96.0
-margin_top = 36.0
+margin_top = 32.0
 margin_right = 128.0
-margin_bottom = 68.0
-texture = ExtResource( 1 )
+margin_bottom = 64.0
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot15" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot14"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot14"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot15" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 128.0
-margin_top = 36.0
+margin_top = 32.0
 margin_right = 160.0
-margin_bottom = 68.0
-texture = ExtResource( 1 )
+margin_bottom = 64.0
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot16" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot15"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot15"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot16" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 160.0
-margin_top = 36.0
+margin_top = 32.0
 margin_right = 192.0
-margin_bottom = 68.0
-texture = ExtResource( 1 )
+margin_bottom = 64.0
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot17" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot16"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot16"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot17" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 192.0
-margin_top = 36.0
+margin_top = 32.0
 margin_right = 224.0
-margin_bottom = 68.0
-texture = ExtResource( 1 )
+margin_bottom = 64.0
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot18" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot17"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot17"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot18" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 224.0
-margin_top = 36.0
+margin_top = 32.0
 margin_right = 256.0
-margin_bottom = 68.0
-texture = ExtResource( 1 )
+margin_bottom = 64.0
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot19" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot18"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot18"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot19" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 256.0
-margin_top = 36.0
+margin_top = 32.0
 margin_right = 288.0
-margin_bottom = 68.0
-texture = ExtResource( 1 )
+margin_bottom = 64.0
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot20" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot19"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot19"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot20" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 288.0
-margin_top = 36.0
+margin_top = 32.0
 margin_right = 320.0
-margin_bottom = 68.0
-texture = ExtResource( 1 )
+margin_bottom = 64.0
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot21" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
-margin_top = 72.0
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot20"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot20"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot21" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
+margin_top = 64.0
 margin_right = 32.0
-margin_bottom = 104.0
-texture = ExtResource( 1 )
+margin_bottom = 96.0
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot22" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot21"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot21"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot22" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 32.0
-margin_top = 72.0
+margin_top = 64.0
 margin_right = 64.0
-margin_bottom = 104.0
-texture = ExtResource( 1 )
+margin_bottom = 96.0
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot23" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot22"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot22"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot23" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 64.0
-margin_top = 72.0
+margin_top = 64.0
 margin_right = 96.0
-margin_bottom = 104.0
-texture = ExtResource( 1 )
+margin_bottom = 96.0
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot24" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot23"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot23"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot24" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 96.0
-margin_top = 72.0
+margin_top = 64.0
 margin_right = 128.0
-margin_bottom = 104.0
-texture = ExtResource( 1 )
+margin_bottom = 96.0
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot25" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot24"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot24"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot25" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 128.0
-margin_top = 72.0
+margin_top = 64.0
 margin_right = 160.0
-margin_bottom = 104.0
-texture = ExtResource( 1 )
+margin_bottom = 96.0
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot26" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot25"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot25"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot26" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 160.0
-margin_top = 72.0
+margin_top = 64.0
 margin_right = 192.0
-margin_bottom = 104.0
-texture = ExtResource( 1 )
+margin_bottom = 96.0
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot27" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot26"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot26"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot27" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 192.0
-margin_top = 72.0
+margin_top = 64.0
 margin_right = 224.0
-margin_bottom = 104.0
-texture = ExtResource( 1 )
+margin_bottom = 96.0
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot28" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot27"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot27"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot28" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 224.0
-margin_top = 72.0
+margin_top = 64.0
 margin_right = 256.0
-margin_bottom = 104.0
-texture = ExtResource( 1 )
+margin_bottom = 96.0
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot29" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot28"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot28"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot29" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 256.0
-margin_top = 72.0
+margin_top = 64.0
 margin_right = 288.0
-margin_bottom = 104.0
-texture = ExtResource( 1 )
+margin_bottom = 96.0
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot30" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot29"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot29"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot30" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 288.0
-margin_top = 72.0
+margin_top = 64.0
 margin_right = 320.0
-margin_bottom = 104.0
-texture = ExtResource( 1 )
+margin_bottom = 96.0
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot31" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
-margin_top = 108.0
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot30"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot30"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot31" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
+margin_top = 96.0
 margin_right = 32.0
-margin_bottom = 140.0
-texture = ExtResource( 1 )
+margin_bottom = 128.0
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot32" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot31"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot31"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot32" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 32.0
-margin_top = 108.0
+margin_top = 96.0
 margin_right = 64.0
-margin_bottom = 140.0
-texture = ExtResource( 1 )
+margin_bottom = 128.0
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot33" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot32"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot32"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot33" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 64.0
-margin_top = 108.0
+margin_top = 96.0
 margin_right = 96.0
-margin_bottom = 140.0
-texture = ExtResource( 1 )
+margin_bottom = 128.0
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot34" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot33"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot33"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot34" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 96.0
-margin_top = 108.0
+margin_top = 96.0
 margin_right = 128.0
-margin_bottom = 140.0
-texture = ExtResource( 1 )
+margin_bottom = 128.0
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot35" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot34"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot34"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot35" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 128.0
-margin_top = 108.0
+margin_top = 96.0
 margin_right = 160.0
-margin_bottom = 140.0
-texture = ExtResource( 1 )
+margin_bottom = 128.0
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot36" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot35"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot35"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot36" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 160.0
-margin_top = 108.0
+margin_top = 96.0
 margin_right = 192.0
-margin_bottom = 140.0
-texture = ExtResource( 1 )
+margin_bottom = 128.0
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot37" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot36"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot36"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot37" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 192.0
-margin_top = 108.0
+margin_top = 96.0
 margin_right = 224.0
-margin_bottom = 140.0
-texture = ExtResource( 1 )
+margin_bottom = 128.0
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot38" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot37"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot37"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot38" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 224.0
-margin_top = 108.0
+margin_top = 96.0
 margin_right = 256.0
-margin_bottom = 140.0
-texture = ExtResource( 1 )
+margin_bottom = 128.0
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot39" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot38"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot38"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot39" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
 margin_left = 256.0
-margin_top = 108.0
+margin_top = 96.0
 margin_right = 288.0
-margin_bottom = 140.0
-texture = ExtResource( 1 )
+margin_bottom = 128.0
+rect_min_size = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot40" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer"]
-margin_left = 288.0
-margin_top = 108.0
-margin_right = 320.0
-margin_bottom = 140.0
-texture = ExtResource( 1 )
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot39"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
 __meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot39"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot40" type="Control" parent="UI/Inventory/ScrollContainer/GridContainer"]
+margin_left = 288.0
+margin_top = 96.0
+margin_right = 320.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot40"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/ScrollContainer/GridContainer/Slot40"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -590,25 +1492,1095 @@ margin_left = 0.319977
 margin_top = 0.119999
 margin_right = 0.319992
 margin_bottom = 0.119995
-texture = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ViewportContainer" type="ViewportContainer" parent="UI/Inventory"]
-anchor_left = 0.262
+[node name="HotBar" type="HBoxContainer" parent="UI/Inventory"]
+anchor_left = 0.425
 anchor_top = 0.133
-anchor_right = 0.337
-anchor_bottom = 0.333
-margin_left = 0.319977
+anchor_right = 0.925
+anchor_bottom = 0.222
 margin_top = 0.119999
-margin_right = 0.319992
-margin_bottom = 0.119995
+margin_right = -6.10352e-05
+margin_bottom = 0.0799942
+custom_constants/separation = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Viewport" type="Viewport" parent="UI/Inventory/ViewportContainer"]
-size = Vector2( 48, 72 )
-handle_input_locally = false
-render_target_update_mode = 0
+[node name="Slot" type="Control" parent="UI/Inventory/HotBar"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/HotBar/Slot"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/HotBar/Slot"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Inventory/HotBar/Slot/Frame"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.31497
+margin_top = -15.0787
+margin_right = -22.685
+margin_bottom = -0.0787392
+custom_fonts/font = ExtResource( 5 )
+text = "1	"
+align = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot2" type="Control" parent="UI/Inventory/HotBar"]
+margin_left = 32.0
+margin_right = 64.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/HotBar/Slot2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/HotBar/Slot2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Inventory/HotBar/Slot2/Frame"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.97567
+margin_top = -15.3823
+margin_right = -20.0243
+margin_bottom = -0.382282
+custom_fonts/font = ExtResource( 5 )
+text = "2	"
+align = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot3" type="Control" parent="UI/Inventory/HotBar"]
+margin_left = 64.0
+margin_right = 96.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/HotBar/Slot3"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/HotBar/Slot3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Inventory/HotBar/Slot3/Frame"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.6607
+margin_top = -15.2248
+margin_right = -20.3393
+margin_bottom = -0.224796
+custom_fonts/font = ExtResource( 5 )
+text = "3"
+align = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot4" type="Control" parent="UI/Inventory/HotBar"]
+margin_left = 96.0
+margin_right = 128.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/HotBar/Slot4"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/HotBar/Slot4"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Inventory/HotBar/Slot4/Frame"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.73947
+margin_top = -15.146
+margin_right = -20.2605
+margin_bottom = -0.146049
+custom_fonts/font = ExtResource( 5 )
+text = "4"
+align = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot5" type="Control" parent="UI/Inventory/HotBar"]
+margin_left = 128.0
+margin_right = 160.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/HotBar/Slot5"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/HotBar/Slot5"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Inventory/HotBar/Slot5/Frame"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.31436
+margin_top = -15.0673
+margin_right = -18.6856
+margin_bottom = -0.0673065
+custom_fonts/font = ExtResource( 5 )
+text = "5"
+align = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot6" type="Control" parent="UI/Inventory/HotBar"]
+margin_left = 160.0
+margin_right = 192.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/HotBar/Slot6"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/HotBar/Slot6"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Inventory/HotBar/Slot6/Frame"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.99938
+margin_top = -14.9886
+margin_right = -19.0006
+margin_bottom = 0.0114403
+custom_fonts/font = ExtResource( 5 )
+text = "6"
+align = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot7" type="Control" parent="UI/Inventory/HotBar"]
+margin_left = 192.0
+margin_right = 224.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/HotBar/Slot7"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/HotBar/Slot7"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Inventory/HotBar/Slot7/Frame"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.89694
+margin_top = -15.2248
+margin_right = -20.1031
+margin_bottom = -0.224792
+custom_fonts/font = ExtResource( 5 )
+text = "7"
+align = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot8" type="Control" parent="UI/Inventory/HotBar"]
+margin_left = 224.0
+margin_right = 256.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/HotBar/Slot8"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/HotBar/Slot8"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Inventory/HotBar/Slot8/Frame"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.97567
+margin_top = -15.3823
+margin_right = -20.0243
+margin_bottom = -0.382286
+custom_fonts/font = ExtResource( 5 )
+text = "8"
+align = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot9" type="Control" parent="UI/Inventory/HotBar"]
+margin_left = 256.0
+margin_right = 288.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/HotBar/Slot9"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/HotBar/Slot9"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Inventory/HotBar/Slot9/Frame"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.68441
+margin_top = -15.461
+margin_right = -19.3156
+margin_bottom = -0.461033
+custom_fonts/font = ExtResource( 5 )
+text = "9"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot10" type="Control" parent="UI/Inventory/HotBar"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/HotBar/Slot10"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Inventory/HotBar/Slot10"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Inventory/HotBar/Slot10/Frame"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.29061
+margin_top = -15.3035
+margin_right = -19.7094
+margin_bottom = -0.303539
+custom_fonts/font = ExtResource( 5 )
+text = "0	"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hud" type="Control" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="HotBar" type="HBoxContainer" parent="UI/Hud"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -328.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = 40.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot" type="Control" parent="UI/Hud/HotBar"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Hud/HotBar/Slot"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Hud/HotBar/Slot"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Hud/HotBar/Slot/Frame"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.31497
+margin_top = -15.0787
+margin_right = -22.685
+margin_bottom = -0.0787392
+custom_fonts/font = ExtResource( 5 )
+text = "1	"
+align = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot2" type="Control" parent="UI/Hud/HotBar"]
+margin_left = 32.0
+margin_right = 64.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Hud/HotBar/Slot2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Hud/HotBar/Slot2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Hud/HotBar/Slot2/Frame"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.97567
+margin_top = -15.3823
+margin_right = -20.0243
+margin_bottom = -0.382282
+custom_fonts/font = ExtResource( 5 )
+text = "2	"
+align = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot3" type="Control" parent="UI/Hud/HotBar"]
+margin_left = 64.0
+margin_right = 96.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Hud/HotBar/Slot3"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Hud/HotBar/Slot3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Hud/HotBar/Slot3/Frame"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.6607
+margin_top = -15.2248
+margin_right = -20.3393
+margin_bottom = -0.224796
+custom_fonts/font = ExtResource( 5 )
+text = "3"
+align = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot4" type="Control" parent="UI/Hud/HotBar"]
+margin_left = 96.0
+margin_right = 128.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Hud/HotBar/Slot4"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Hud/HotBar/Slot4"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Hud/HotBar/Slot4/Frame"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.73947
+margin_top = -15.146
+margin_right = -20.2605
+margin_bottom = -0.146049
+custom_fonts/font = ExtResource( 5 )
+text = "4"
+align = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot5" type="Control" parent="UI/Hud/HotBar"]
+margin_left = 128.0
+margin_right = 160.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Hud/HotBar/Slot5"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Hud/HotBar/Slot5"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Hud/HotBar/Slot5/Frame"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.31436
+margin_top = -15.0673
+margin_right = -18.6856
+margin_bottom = -0.0673065
+custom_fonts/font = ExtResource( 5 )
+text = "5"
+align = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot6" type="Control" parent="UI/Hud/HotBar"]
+margin_left = 160.0
+margin_right = 192.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Hud/HotBar/Slot6"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Hud/HotBar/Slot6"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Hud/HotBar/Slot6/Frame"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.99938
+margin_top = -14.9886
+margin_right = -19.0006
+margin_bottom = 0.0114403
+custom_fonts/font = ExtResource( 5 )
+text = "6"
+align = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot7" type="Control" parent="UI/Hud/HotBar"]
+margin_left = 192.0
+margin_right = 224.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Hud/HotBar/Slot7"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Hud/HotBar/Slot7"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Hud/HotBar/Slot7/Frame"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.89694
+margin_top = -15.2248
+margin_right = -20.1031
+margin_bottom = -0.224792
+custom_fonts/font = ExtResource( 5 )
+text = "7"
+align = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot8" type="Control" parent="UI/Hud/HotBar"]
+margin_left = 224.0
+margin_right = 256.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Hud/HotBar/Slot8"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Hud/HotBar/Slot8"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Hud/HotBar/Slot8/Frame"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.97567
+margin_top = -15.3823
+margin_right = -20.0243
+margin_bottom = -0.382286
+custom_fonts/font = ExtResource( 5 )
+text = "8"
+align = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot9" type="Control" parent="UI/Hud/HotBar"]
+margin_left = 256.0
+margin_right = 288.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Hud/HotBar/Slot9"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Hud/HotBar/Slot9"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Hud/HotBar/Slot9/Frame"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.68441
+margin_top = -15.461
+margin_right = -19.3156
+margin_bottom = -0.461033
+custom_fonts/font = ExtResource( 5 )
+text = "9"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot10" type="Control" parent="UI/Hud/HotBar"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Hud/HotBar/Slot10"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="TextureRect" parent="UI/Hud/HotBar/Slot10"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Hud/HotBar/Slot10/Frame"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.29061
+margin_top = -15.3035
+margin_right = -19.7094
+margin_bottom = -0.303539
+custom_fonts/font = ExtResource( 5 )
+text = "0	"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatsVbox" type="VBoxContainer" parent="UI/Hud"]
+anchor_top = 0.911
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 0.039978
+custom_constants/separation = 0
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthLabel" type="Label" parent="UI/Hud/StatsVbox"]
+margin_top = 2.0
+margin_right = 635.0
+margin_bottom = 17.0
+custom_fonts/font = ExtResource( 5 )
+text = "100 / 100"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HeathSlider" type="HSlider" parent="UI/Hud/StatsVbox/HealthLabel"]
+anchor_top = 0.571
+anchor_right = 1.0
+anchor_bottom = 0.571
+margin_left = 56.0
+margin_top = -8.994
+margin_bottom = 7.006
+value = 100.0
+editable = false
+scrollable = false
+tick_count = 10
+ticks_on_borders = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ManaLabel" type="Label" parent="UI/Hud/StatsVbox"]
+margin_top = 17.0
+margin_right = 635.0
+margin_bottom = 32.0
+custom_fonts/font = ExtResource( 5 )
+text = "100 / 100"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ManaSlider" type="HSlider" parent="UI/Hud/StatsVbox/ManaLabel"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 56.0
+margin_top = -9.0
+margin_bottom = 7.0
+value = 100.0
+editable = false
+scrollable = false
+tick_count = 10
+ticks_on_borders = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

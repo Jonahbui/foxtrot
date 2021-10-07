@@ -32,7 +32,7 @@ func LoadLevel(path):
   # Get spawnpoint path and set player position to spawnpoint.
   var spawnpoint = current_level.instance().get_node_or_null("Spawnpoint")
   if spawnpoint != null:
-    $Player.set_global_position(spawnpoint.get_global_position())
+    $Player.position = spawnpoint.position
   else:
     printerr("The spawnpoint could not be located in %s" % [spawnpoint.get_name()])
   $Player.visible = true
