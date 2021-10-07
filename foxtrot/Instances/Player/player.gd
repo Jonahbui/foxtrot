@@ -3,6 +3,7 @@
 extends KinematicBody2D
 
 # VARIABLES---------------------------------
+var charname : String = ""
 var health : int = 100
 var money  : int = 0
 var damageMultiplier = 1.0

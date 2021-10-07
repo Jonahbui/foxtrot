@@ -14,7 +14,8 @@ func _enter_tree():
   # Create a config dictionary so that the data can be filled in.
   config = create_config(true)
   load_config()
-  print(config)
+  
+  save = create_save_file(null)
 
 func _exit_tree():
   # Write an autosave on game exit
@@ -62,3 +63,26 @@ func load_config():
 
 func reset_config():
   config = create_config(true)
+
+# Use player null to create default player save dictionary
+func create_save_file(player=null):
+  var file = {
+    Globals.PLAYER_NAME   : player.charname if player != null else "",
+    Globals.PLAYER_HEALTH : player.health if player != null else 0,
+    Globals.PLAYER_MONEY  : player.money if player != null else 0
+   }
+  return file
+
+func save_file(player=null):
+  var file = File.new()
+  file.open("user://%s.save" % [player.charname], File.WRITE)
+  
+  # Write the data to the file
+  var data = create_save_file(player)
+    
+  # Create an empty save file with just 
+  if(data != null): file.store_line(to_json(data))
+  file.close()
+  
+func load_file():
+  pass

@@ -107,6 +107,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="NameInput" type="LineEdit" parent="UI"]
+anchor_left = 0.5
+anchor_top = 0.023
+anchor_right = 0.5
+anchor_bottom = 0.023
+margin_left = -93.0
+margin_top = 0.249723
+margin_right = 93.0
+margin_bottom = 25.2497
+custom_fonts/font = ExtResource( 4 )
+text = "Professor Dalio"
+align = 1
+max_length = 24
+context_menu_enabled = false
+clear_button_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="UI/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="UI/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="pressed" from="UI/PopupMenu/HBoxContainer/ConfirmButton" to="." method="_on_ConfirmButton_pressed"]
