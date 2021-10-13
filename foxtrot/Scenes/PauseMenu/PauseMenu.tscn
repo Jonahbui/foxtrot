@@ -1,13 +1,19 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Textures/SplashScreen/solid_off_black.png" type="Texture" id=1]
+[ext_resource path="res://Textures/UI/panel.tres" type="StyleBox" id=1]
 [ext_resource path="res://Fonts/ThaleahFat_TTF.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Scenes/PauseMenu/pause_menu.gd" type="Script" id=3]
 [ext_resource path="res://Fonts/thaelahfat_pure_16x.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Scenes/SettingsMenu/settings_menu.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Textures/UI/button_normal.tres" type="StyleBox" id=6]
+[ext_resource path="res://Textures/UI/button_disabled.tres" type="StyleBox" id=7]
+[ext_resource path="res://Textures/UI/button_hover.tres" type="StyleBox" id=8]
+[ext_resource path="res://Textures/UI/button_pressed.tres" type="StyleBox" id=9]
 
 [sub_resource type="DynamicFont" id=1]
-size = 28
+size = 32
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
 
 [sub_resource type="ButtonGroup" id=2]
@@ -16,44 +22,49 @@ font_data = ExtResource( 2 )
 script = ExtResource( 3 )
 
 [node name="UI" type="Control" parent="."]
+visible = false
 anchor_bottom = 1.0
-margin_right = 640.0
+margin_left = 1.64984
+margin_top = 0.31498
+margin_right = 641.65
+margin_bottom = 0.314972
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Background" type="TextureRect" parent="UI"]
+[node name="Title" type="Label" parent="UI"]
+anchor_left = 0.131
+anchor_top = 1.0
+anchor_right = 0.131
+anchor_bottom = 1.0
+margin_left = -72.5013
+margin_top = -86.4003
+margin_right = 81.4987
+margin_bottom = -56.4003
+custom_fonts/font = SubResource( 1 )
+text = "Below zero"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="Panel" parent="UI"]
 anchor_right = 0.25
 anchor_bottom = 1.0
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 10.0
-margin_bottom = -20.0
-texture = ExtResource( 1 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": "	"
-}
-
-[node name="Title" type="Label" parent="UI/Background"]
-anchor_right = 1.0
-anchor_bottom = 0.15
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 132.0
-margin_bottom = 36.0
-custom_fonts/font = SubResource( 1 )
-text = "TITLE HERE"
+margin_right = -10.0
+margin_bottom = -109.0
+custom_styles/panel = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ButtonVbox" type="VBoxContainer" parent="UI/Background"]
-anchor_top = 0.2
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 20.0
+margin_top = 21.0
 margin_right = -20.0
 margin_bottom = -20.0
 custom_constants/separation = 27
@@ -62,29 +73,45 @@ __meta__ = {
 }
 
 [node name="ResumeButton" type="Button" parent="UI/Background/ButtonVbox"]
-margin_right = 110.0
-margin_bottom = 21.0
+margin_right = 90.0
+margin_bottom = 27.0
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 9 )
+custom_styles/disabled = ExtResource( 7 )
+custom_styles/normal = ExtResource( 6 )
 custom_fonts/font = ExtResource( 4 )
 text = "Resume"
 
 [node name="SettingsButton" type="Button" parent="UI/Background/ButtonVbox"]
-margin_top = 48.0
-margin_right = 110.0
-margin_bottom = 69.0
+margin_top = 54.0
+margin_right = 90.0
+margin_bottom = 81.0
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 9 )
+custom_styles/disabled = ExtResource( 7 )
+custom_styles/normal = ExtResource( 6 )
 custom_fonts/font = ExtResource( 4 )
 text = "Settings"
 
 [node name="MainMenuButton" type="Button" parent="UI/Background/ButtonVbox"]
-margin_top = 96.0
-margin_right = 110.0
-margin_bottom = 117.0
+margin_top = 108.0
+margin_right = 90.0
+margin_bottom = 135.0
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 9 )
+custom_styles/disabled = ExtResource( 7 )
+custom_styles/normal = ExtResource( 6 )
 custom_fonts/font = ExtResource( 4 )
 text = "Main Menu"
 
 [node name="ExitButton" type="Button" parent="UI/Background/ButtonVbox"]
-margin_top = 144.0
-margin_right = 110.0
-margin_bottom = 165.0
+margin_top = 162.0
+margin_right = 90.0
+margin_bottom = 189.0
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 9 )
+custom_styles/disabled = ExtResource( 7 )
+custom_styles/normal = ExtResource( 6 )
 custom_fonts/font = ExtResource( 4 )
 text = "Exit"
 

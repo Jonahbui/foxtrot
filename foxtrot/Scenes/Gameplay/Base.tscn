@@ -75,9 +75,6 @@ __meta__ = {
 [node name="PauseMenu" parent="." instance=ExtResource( 1 )]
 layer = 3
 
-[node name="UI" parent="PauseMenu" index="0"]
-visible = false
-
 [node name="OptionButton" parent="PauseMenu/SettingsMenu/UI/GraphicsVbox/Quality" index="0"]
 group = SubResource( 1 )
 

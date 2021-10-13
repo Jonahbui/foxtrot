@@ -1,12 +1,23 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Fonts/ThaleahFat_TTF.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://Textures/SplashScreen/solid_off_black.png" type="Texture" id=2]
+[ext_resource path="res://Textures/UI/panel.tres" type="StyleBox" id=1]
+[ext_resource path="res://Textures/SplashScreen/solid_white.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/CharacterCreation/character_creation.gd" type="Script" id=3]
 [ext_resource path="res://Fonts/thaelahfat_pure_16x.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Textures/UI/button_normal.tres" type="StyleBox" id=5]
+[ext_resource path="res://Textures/UI/button_disabled.tres" type="StyleBox" id=6]
+[ext_resource path="res://Textures/UI/button_hover.tres" type="StyleBox" id=7]
+[ext_resource path="res://Textures/UI/button_pressed.tres" type="StyleBox" id=8]
+[ext_resource path="res://Textures/UI/input_normal.png" type="Texture" id=9]
+[ext_resource path="res://Textures/UI/input_icon_reset.png" type="Texture" id=10]
 
-[sub_resource type="DynamicFont" id=1]
-font_data = ExtResource( 1 )
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 9 )
+region_rect = Rect2( 0, 0, 32, 32 )
+margin_left = 24.0
+margin_right = 24.0
+margin_top = 8.0
+margin_bottom = 8.0
 
 [node name="CharacterCreation" type="Node2D"]
 script = ExtResource( 3 )
@@ -14,6 +25,7 @@ script = ExtResource( 3 )
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Background" type="TextureRect" parent="UI"]
+self_modulate = Color( 0.0941176, 0.47451, 0.623529, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 2 )
@@ -27,11 +39,15 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -107.0
-margin_top = -28.0
-margin_right = -8.0
-margin_bottom = -8.0
-custom_fonts/font = SubResource( 1 )
+margin_left = -112.0
+margin_top = -40.0
+margin_right = -13.0
+margin_bottom = -13.0
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 5 )
+custom_fonts/font = ExtResource( 4 )
 text = "Start"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -40,11 +56,15 @@ __meta__ = {
 [node name="BackButton" type="Button" parent="UI"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -112.556
-margin_top = 9.75732
-margin_right = -13.5559
-margin_bottom = 30.7573
-custom_fonts/font = SubResource( 1 )
+margin_left = -112.0
+margin_top = 16.0
+margin_right = -12.9999
+margin_bottom = 43.0
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 5 )
+custom_fonts/font = ExtResource( 4 )
 text = "Back"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -59,6 +79,7 @@ margin_left = -107.24
 margin_top = -54.1422
 margin_right = 101.76
 margin_bottom = 43.8578
+custom_styles/panel = ExtResource( 1 )
 hide_on_state_item_selection = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -68,9 +89,9 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 20.0
-margin_top = 20.0
+margin_top = 15.1305
 margin_right = -20.0
-margin_bottom = -40.0
+margin_bottom = -44.8695
 custom_fonts/font = ExtResource( 4 )
 text = "Are you sure?"
 align = 1
@@ -81,9 +102,13 @@ __meta__ = {
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/PopupMenu"]
 anchor_left = 0.1
-anchor_top = 0.7
+anchor_top = 0.551
 anchor_right = 0.9
-anchor_bottom = 0.9
+anchor_bottom = 0.827
+margin_left = 1.90735e-06
+margin_top = 0.0233536
+margin_right = 1.52588e-05
+margin_bottom = -0.0246506
 custom_constants/separation = -172
 alignment = 1
 __meta__ = {
@@ -93,14 +118,22 @@ __meta__ = {
 [node name="ConfirmButton" type="Button" parent="UI/PopupMenu/HBoxContainer"]
 margin_left = 108.0
 margin_right = 171.0
-margin_bottom = 21.0
+margin_bottom = 27.0
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 5 )
 custom_fonts/font = ExtResource( 4 )
 text = "Confirm"
 
 [node name="CancelButton" type="Button" parent="UI/PopupMenu/HBoxContainer"]
 margin_left = -1.0
 margin_right = 59.0
-margin_bottom = 21.0
+margin_bottom = 27.0
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 5 )
 custom_fonts/font = ExtResource( 4 )
 text = "Cancel"
 __meta__ = {
@@ -112,16 +145,19 @@ anchor_left = 0.5
 anchor_top = 0.023
 anchor_right = 0.5
 anchor_bottom = 0.023
-margin_left = -93.0
-margin_top = 0.249723
-margin_right = 93.0
-margin_bottom = 25.2497
+margin_left = -88.0
+margin_top = 7.72
+margin_right = 98.0
+margin_bottom = 38.72
+custom_icons/clear = ExtResource( 10 )
+custom_styles/normal = SubResource( 1 )
 custom_fonts/font = ExtResource( 4 )
-text = "Professor Dalio"
 align = 1
-max_length = 24
+max_length = 16
+expand_to_text_length = true
 context_menu_enabled = false
 clear_button_enabled = true
+placeholder_text = "Name here"
 __meta__ = {
 "_edit_use_anchors_": false
 }

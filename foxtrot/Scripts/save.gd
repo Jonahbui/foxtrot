@@ -60,6 +60,9 @@ func load_config():
   # insert their own values) dictionary.
   for key in data.keys():
     if config.has(key): config[key] = data[key]
+  
+  print("\n[Save] Loading user configurations...")
+  print(config)
 
 func reset_config():
   config = create_config(true)
