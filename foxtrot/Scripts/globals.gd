@@ -22,3 +22,12 @@ var isGamePaused  : bool = false
 var isPlayerDead  : bool = false
 var isHardcoreMode: bool = false
 var isDevConsoleOpen: bool = false
+
+enum source{
+  music,
+  sfx
+ }
+
+enum clips{
+  pop
+ }

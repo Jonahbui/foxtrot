@@ -22,6 +22,7 @@ margin_left = 7.0
 margin_right = 6.0
 margin_top = 5.0
 margin_bottom = 4.0
+expand_margin_right = 1.0
 
 [sub_resource type="StyleBoxTexture" id=3]
 texture = ExtResource( 8 )
@@ -30,6 +31,7 @@ margin_left = 8.0
 margin_right = 8.0
 margin_top = 8.0
 margin_bottom = 8.0
+expand_margin_right = 1.0
 
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 2
@@ -62,6 +64,7 @@ __meta__ = {
 }
 
 [node name="Control" type="Control" parent="UI/Inventory"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -6.10352e-05

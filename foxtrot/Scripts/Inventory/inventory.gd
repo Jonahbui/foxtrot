@@ -1,5 +1,7 @@
 extends Node
 
+signal play_audio(clip, source)
+
 const MAX_HOTBAR = 10
 
 var currentSlot : int = 0
@@ -19,6 +21,7 @@ func _input(event):
     GetNextSlot(false)
 
 func _ready():
+  self.connect("play_audio", self.get_tree().get_root().get_node_or_null("/root/Base"), "PlayAudio")
   InitalizeInventoryUI()
   InitializeInventory()
 
@@ -55,6 +58,8 @@ func InitalizeInventoryUI():
   SetActiveSlot(0)
 
 func GetNextSlot(forward=true):
+  emit_signal("play_audio", 1, Globals.source.sfx)
+  
   if forward:
     currentSlot += 1
     if currentSlot >= MAX_HOTBAR:

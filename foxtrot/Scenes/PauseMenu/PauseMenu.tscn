@@ -19,6 +19,8 @@ font_data = ExtResource( 2 )
 [sub_resource type="ButtonGroup" id=2]
 
 [node name="PauseMenu" type="CanvasLayer"]
+process_priority = 3
+layer = 3
 script = ExtResource( 3 )
 
 [node name="UI" type="Control" parent="."]
@@ -116,6 +118,7 @@ custom_fonts/font = ExtResource( 4 )
 text = "Exit"
 
 [node name="SettingsMenu" parent="." instance=ExtResource( 5 )]
+layer = 4
 
 [node name="UI" parent="SettingsMenu" index="0"]
 visible = false

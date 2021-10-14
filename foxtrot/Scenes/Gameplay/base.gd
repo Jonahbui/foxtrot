@@ -18,7 +18,16 @@ func _input(event):
   
 func _ready():
   LoadLevel("res://Scenes/Gameplay/Spawn.tscn")
-    
+  
+func PlayAudio(clip, source):
+  var audioclip = load("res://Audio/SoundEffects/plop16.mp3")
+  
+  if Globals.source.music == source:
+    $Audio/MusicStream.stream = audioclip
+  else:
+    $Audio/SFXStream.stream = audioclip
+    $Audio/SFXStream.play()
+  
 func LoadLevel(path):
   $Player.visible = false
   # Load the level.

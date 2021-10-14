@@ -96,4 +96,4 @@ func _physics_process(delta: float) -> void:
 
 func toggle_inventory():
   $UI/Inventory/Control.visible = !$UI/Inventory/Control.visible
-  $UI/Hud.visible = !$UI/Inventory.visible
+  $UI/Hud.visible = !$UI/Inventory/Control.visible

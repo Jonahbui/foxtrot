@@ -13,8 +13,10 @@ script = ExtResource( 2 )
 
 [node name="MusicStream" type="AudioStreamPlayer" parent="Audio"]
 autoplay = true
+bus = "Music"
 
 [node name="SFXStream" type="AudioStreamPlayer" parent="Audio"]
+bus = "SFX"
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 
@@ -73,7 +75,6 @@ __meta__ = {
 }
 
 [node name="PauseMenu" parent="." instance=ExtResource( 1 )]
-layer = 3
 
 [node name="OptionButton" parent="PauseMenu/SettingsMenu/UI/GraphicsVbox/Quality" index="0"]
 group = SubResource( 1 )
