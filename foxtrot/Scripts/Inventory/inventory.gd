@@ -9,9 +9,13 @@ var currentSlot : int = 0
 onready var slot_normal = preload("res://Textures/UI/hotbar_slot_normal.tres")
 onready var slot_select = preload("res://Textures/UI/hotbar_slot_selected.tres")
 
-var slots = [] 
+var slots = []
 
 var playerInventory = null
+
+
+var slotSelect1 : int = -1
+var slotSelect2 : int = -1
 
 # A dictionary establishing a relationship with a slot and an equip
 var inventory = {}
@@ -44,6 +48,7 @@ func _input(event):
 
 func _ready():
   playerInventory = self.get_tree().get_root().get_node_or_null("/root/Base/Player/Inventory")
+  if playerInventory == null: playerInventory = self.get_tree().get_root().get_node_or_null("Player/Inventory")
   self.connect("play_audio", self.get_tree().get_root().get_node_or_null("/root/Base"), "PlayAudio")
   InitalizeInventoryUI()
   InitializeInventory()
@@ -153,3 +158,52 @@ func AddItem(item_id):
 
 func IsSelectedHotbar(slot_num):
   return slot_num == currentSlot
+  
+func RefreshInventorySlots(slot_num=-1):
+  # If -1 then refresh everything
+  if slot_num == -1:
+    # Loop through all the slots and update their textures
+    for i in range(0, slots.size()):
+      var itemframe = slots[i].get_node_or_null("CenterContainer/Item")
+      # If the inventory is not null, update its texture
+      if inventory[i] != null:
+        var texture = load(Equips.equips[str(inventory[i].id)]["resource"])
+        itemframe.texture = texture
+        itemframe.set_size(Vector2(24, 24))
+      # If the inventory is null, set texture to null
+      else:
+        itemframe.texture = null  
+
+func _on_slot_pressed(slot_num):
+  print("[Inventory] Slot #%d selected." % [slot_num])
+  
+  if slotSelect1 == -1:
+    # Ignore first selections if the slot is null. Cannot select anything that 
+    # is null first. It is okay to select a second slot that is null, as long as
+    # the first is not null.
+    if inventory[slot_num] == null: return
+    
+    # Set the first index of slot to swap contents
+    slotSelect1 = slot_num
+  else:
+    # Set the second index of slot to swap contents with
+    slotSelect2 = slot_num
+
+    # If the slot indices are equal, ignore the swap request. Redundant.
+    if slotSelect1 == slotSelect2: return
+    
+    # Swap places in inventory
+    if inventory[slotSelect1] != null && inventory[slotSelect2] != null:
+      var temp = inventory[slotSelect1]
+      inventory[slotSelect1] = inventory[slotSelect2]
+      inventory[slotSelect2] = temp
+    # Move slot 1 item to slot 2
+    elif inventory[slotSelect1] != null && inventory[slotSelect2] == null:
+      inventory[slotSelect2] = inventory[slotSelect1]
+      inventory[slotSelect1] = null
+    
+    # Reset the sentinel values used to determine which slots are selecte
+    # -1 means no slot selected
+    slotSelect1 = -1
+    slotSelect2 = -1
+    RefreshInventorySlots()
