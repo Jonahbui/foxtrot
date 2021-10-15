@@ -57,87 +57,6 @@ smoothing_enabled = true
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource( 10 )
 
-[node name="Hud" type="Control" parent="UI"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="StatsVbox" type="VBoxContainer" parent="UI/Hud"]
-anchor_left = 0.008
-anchor_top = 0.022
-anchor_right = 1.0
-anchor_bottom = 0.022
-margin_left = -0.12
-margin_top = 0.0799994
-margin_right = -336.0
-margin_bottom = 32.08
-custom_constants/separation = 0
-alignment = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HealthLabel" type="Label" parent="UI/Hud/StatsVbox"]
-margin_top = 2.0
-margin_right = 299.0
-margin_bottom = 17.0
-custom_fonts/font = ExtResource( 5 )
-text = "100 / 100"
-valign = 1
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="HealthBar" type="ProgressBar" parent="UI/Hud/StatsVbox/HealthLabel"]
-anchor_left = 0.01
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = 56.01
-margin_top = -9.5
-margin_right = -8.0
-margin_bottom = 6.5
-custom_styles/fg = SubResource( 2 )
-custom_styles/bg = ExtResource( 4 )
-value = 100.0
-percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": true
-}
-
-[node name="ManaLabel" type="Label" parent="UI/Hud/StatsVbox"]
-margin_top = 17.0
-margin_right = 299.0
-margin_bottom = 32.0
-custom_fonts/font = ExtResource( 5 )
-text = "100 / 100"
-valign = 1
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="ManaBar" type="ProgressBar" parent="UI/Hud/StatsVbox/ManaLabel"]
-anchor_left = 0.01
-anchor_top = 0.467
-anchor_right = 1.0
-anchor_bottom = 0.467
-margin_left = 56.01
-margin_top = -8.005
-margin_right = -8.0
-margin_bottom = 7.995
-custom_styles/fg = SubResource( 3 )
-custom_styles/bg = ExtResource( 4 )
-value = 100.0
-percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": true
-}
-
 [node name="Inventory" type="Control" parent="UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -241,7 +160,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -278,7 +199,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -315,7 +238,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -352,7 +277,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -389,7 +316,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -426,7 +355,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -463,7 +394,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -500,7 +433,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -537,7 +472,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -574,7 +511,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -611,7 +550,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -649,7 +590,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -687,7 +630,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -725,7 +670,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -763,7 +710,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -801,7 +750,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -839,7 +790,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -877,7 +830,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -915,7 +870,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -953,7 +910,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -990,7 +949,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -1028,7 +989,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -1066,7 +1029,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -1104,7 +1069,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -1142,7 +1109,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -1180,7 +1149,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -1218,7 +1189,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -1256,7 +1229,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -1294,7 +1269,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -1332,7 +1309,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -1369,7 +1348,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -1407,7 +1388,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -1445,7 +1428,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -1483,7 +1468,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -1521,7 +1508,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -1559,7 +1548,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -1597,7 +1588,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -1635,7 +1628,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -1673,7 +1668,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -1711,7 +1708,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -2332,6 +2331,127 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
+[node name="Hud" type="Control" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="StatsVbox" type="VBoxContainer" parent="UI/Hud"]
+anchor_left = 0.008
+anchor_top = 0.022
+anchor_right = 1.0
+anchor_bottom = 0.022
+margin_left = -0.12
+margin_top = 0.0799994
+margin_right = -336.0
+margin_bottom = 32.08
+custom_constants/separation = 0
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthLabel" type="Label" parent="UI/Hud/StatsVbox"]
+margin_top = 2.0
+margin_right = 299.0
+margin_bottom = 17.0
+custom_fonts/font = ExtResource( 5 )
+text = "100 / 100"
+valign = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="HealthBar" type="ProgressBar" parent="UI/Hud/StatsVbox/HealthLabel"]
+anchor_left = 0.01
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 56.01
+margin_top = -9.5
+margin_right = -8.0
+margin_bottom = 6.5
+custom_styles/fg = SubResource( 2 )
+custom_styles/bg = ExtResource( 4 )
+value = 100.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="ManaLabel" type="Label" parent="UI/Hud/StatsVbox"]
+margin_top = 17.0
+margin_right = 299.0
+margin_bottom = 32.0
+custom_fonts/font = ExtResource( 5 )
+text = "100 / 100"
+valign = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ManaBar" type="ProgressBar" parent="UI/Hud/StatsVbox/ManaLabel"]
+anchor_left = 0.01
+anchor_top = 0.467
+anchor_right = 1.0
+anchor_bottom = 0.467
+margin_left = 56.01
+margin_top = -8.005
+margin_right = -8.0
+margin_bottom = 7.995
+custom_styles/fg = SubResource( 3 )
+custom_styles/bg = ExtResource( 4 )
+value = 100.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot1" to="UI/Inventory" method="_on_slot_pressed" binds= [ 10 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot2" to="UI/Inventory" method="_on_slot_pressed" binds= [ 11 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot3" to="UI/Inventory" method="_on_slot_pressed" binds= [ 12 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot4" to="UI/Inventory" method="_on_slot_pressed" binds= [ 13 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot5" to="UI/Inventory" method="_on_slot_pressed" binds= [ 14 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot6" to="UI/Inventory" method="_on_slot_pressed" binds= [ 15 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot7" to="UI/Inventory" method="_on_slot_pressed" binds= [ 16 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot8" to="UI/Inventory" method="_on_slot_pressed" binds= [ 17 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot9" to="UI/Inventory" method="_on_slot_pressed" binds= [ 18 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot10" to="UI/Inventory" method="_on_slot_pressed" binds= [ 19 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot11" to="UI/Inventory" method="_on_slot_pressed" binds= [ 20 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot12" to="UI/Inventory" method="_on_slot_pressed" binds= [ 21 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot13" to="UI/Inventory" method="_on_slot_pressed" binds= [ 22 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot14" to="UI/Inventory" method="_on_slot_pressed" binds= [ 23 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot15" to="UI/Inventory" method="_on_slot_pressed" binds= [ 24 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot16" to="UI/Inventory" method="_on_slot_pressed" binds= [ 25 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot17" to="UI/Inventory" method="_on_slot_pressed" binds= [ 26 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot18" to="UI/Inventory" method="_on_slot_pressed" binds= [ 27 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot19" to="UI/Inventory" method="_on_slot_pressed" binds= [ 28 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot20" to="UI/Inventory" method="_on_slot_pressed" binds= [ 29 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot21" to="UI/Inventory" method="_on_slot_pressed" binds= [ 30 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot22" to="UI/Inventory" method="_on_slot_pressed" binds= [ 31 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot23" to="UI/Inventory" method="_on_slot_pressed" binds= [ 32 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot24" to="UI/Inventory" method="_on_slot_pressed" binds= [ 33 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot25" to="UI/Inventory" method="_on_slot_pressed" binds= [ 34 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot26" to="UI/Inventory" method="_on_slot_pressed" binds= [ 35 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot27" to="UI/Inventory" method="_on_slot_pressed" binds= [ 36 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot28" to="UI/Inventory" method="_on_slot_pressed" binds= [ 37 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot29" to="UI/Inventory" method="_on_slot_pressed" binds= [ 38 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot30" to="UI/Inventory" method="_on_slot_pressed" binds= [ 39 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot31" to="UI/Inventory" method="_on_slot_pressed" binds= [ 40 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot32" to="UI/Inventory" method="_on_slot_pressed" binds= [ 41 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot33" to="UI/Inventory" method="_on_slot_pressed" binds= [ 42 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot34" to="UI/Inventory" method="_on_slot_pressed" binds= [ 43 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot35" to="UI/Inventory" method="_on_slot_pressed" binds= [ 44 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot36" to="UI/Inventory" method="_on_slot_pressed" binds= [ 45 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot37" to="UI/Inventory" method="_on_slot_pressed" binds= [ 46 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot38" to="UI/Inventory" method="_on_slot_pressed" binds= [ 47 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot39" to="UI/Inventory" method="_on_slot_pressed" binds= [ 48 ]]
+[connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot40" to="UI/Inventory" method="_on_slot_pressed" binds= [ 49 ]]
 [connection signal="pressed" from="UI/Inventory/HotBarMain/Slot1" to="UI/Inventory" method="_on_slot_pressed" binds= [ 0 ]]
 [connection signal="pressed" from="UI/Inventory/HotBarMain/Slot2" to="UI/Inventory" method="_on_slot_pressed" binds= [ 1 ]]
 [connection signal="pressed" from="UI/Inventory/HotBarMain/Slot3" to="UI/Inventory" method="_on_slot_pressed" binds= [ 2 ]]

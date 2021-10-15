@@ -97,3 +97,7 @@ func _physics_process(delta: float) -> void:
 func toggle_inventory():
   $UI/Inventory/Control.visible = !$UI/Inventory/Control.visible
   $UI/Hud.visible = !$UI/Inventory/Control.visible
+
+
+func _on_slot_pressed(extra_arg_0):
+  pass # Replace with function body.
