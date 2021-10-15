@@ -6,12 +6,13 @@ func _on_StartButton_pressed():
 func _on_ConfirmButton_pressed():
   if $UI/NameInput.text.length() > 0:
     Save.save[Globals.PLAYER_NAME] = $UI/NameInput.text
-    get_tree().change_scene("res://Scenes/Gameplay/Base.tscn")
+    if get_tree().change_scene("res://Scenes/Gameplay/Base.tscn") != OK:
+      print("[Main Menu] Error. Could not load into base from main menu.")
 
 func _on_CancelButton_pressed():
   $UI/PopupMenu.hide()
 
-
 func _on_BackButton_pressed():
   Globals.isGamePlaying = false
-  get_tree().change_scene("res://Scenes/MainMenu/main_menu.tscn")
+  if get_tree().change_scene("res://Scenes/MainMenu/main_menu.tscn") != OK:
+    print("[Main Menu] Error. Could not load into main menu from character creation.")

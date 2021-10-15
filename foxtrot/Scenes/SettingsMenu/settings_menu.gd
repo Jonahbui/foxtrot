@@ -1,9 +1,6 @@
 extends CanvasLayer
 
-var bus_layout = load("res://default_bus_layout.tres")
-
 func _ready():
-  AudioServer.set_bus_layout(bus_layout)
   LoadConfigToSettings()
 
 func LoadConfigToSettings():

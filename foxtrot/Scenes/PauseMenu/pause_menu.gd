@@ -25,7 +25,8 @@ func _on_SettingsButton_pressed():
 
 func _on_MainMenuButton_pressed():
   Globals.isGamePaused = false
-  get_tree().change_scene("res://Scenes/MainMenu/main_menu.tscn")
+  if get_tree().change_scene("res://Scenes/MainMenu/main_menu.tscn") != OK:
+    print("[Scene] Failed to change scenes...")
 
 func _on_ExitButton_pressed():
   get_tree().quit()

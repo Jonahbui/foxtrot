@@ -52,7 +52,8 @@ func _input(event):
 func _ready():
   playerInventory = self.get_tree().get_root().get_node_or_null("/root/Base/Player/Inventory")
   if playerInventory == null: playerInventory = self.get_tree().get_root().get_node_or_null("Player/Inventory")
-  self.connect("play_audio", self.get_tree().get_root().get_node_or_null("/root/Base"), "PlayAudio")
+  if self.connect("play_audio", self.get_tree().get_root().get_node_or_null("/root/Base"), "PlayAudio") != OK:
+    print("[Base] Failed to connect audio...")
   InitalizeInventoryUI()
   InitializeInventory()
   
