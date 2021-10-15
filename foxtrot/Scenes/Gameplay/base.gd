@@ -5,7 +5,6 @@ var current_level = null
 var history = []
 var history_index = -1
 
-export var audioBusLayout : AudioBusLayout
 
 func _input(event):
   if(event.is_action_pressed("ui_dev")):
@@ -19,7 +18,6 @@ func _input(event):
       GetNextHistoryCmd(false)
   
 func _ready():
-  AudioServer.set_bus_layout(audioBusLayout)
   LoadLevel("res://Scenes/Gameplay/Spawn.tscn")
   
 func PlayAudio(clip, source):

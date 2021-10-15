@@ -7,7 +7,7 @@ func _ready():
   LoadConfigToSettings()
 
 func LoadConfigToSettings():
-  # Set the volume settings to the ones in the config file
+  # Set the volume settings to the ones in the config file.
   $UI/AudioVbox/MasterVolume/MasterSlider.value = Save.config[Globals.VOLUME_MASTER]
   $UI/AudioVbox/MusicVolume/MusicSlider.value = Save.config[Globals.VOLUME_MUSIC]
   $UI/AudioVbox/SFXVolume/SFXSlider.value = Save.config[Globals.VOLUME_SFX]
@@ -16,9 +16,13 @@ func LoadConfigToSettings():
   $UI/AudioVbox/SFXVolume/SFXSlider/SFXCheckbox.pressed = Save.config[Globals.VOLUME_SFX_TOGGLE]
   
   $UI/GraphicsVbox/Fullscreen/FullscreenCheckBox.pressed = Save.config[Globals.GRAPHICS_FULLSCREEN]
-  #bus_layout.instance()
 
-# Note: the audio bus is arranged like so {0:master, 1:music, 2:sfx}
+  # Note: updating the value of the sliders & checkboxes respectively with the 
+  #   properties value and pressed will issue out signals indicating that their
+  #   value has changed. So when we change the value of the slider, the
+  #   according functions below will be called and those functions will update
+  #   the AudioServer and the config file.
+  # Note: the audio bus is arranged like so {0:master, 1:music, 2:sfx}
 
 func _on_MasterSlider_value_changed(value):
   Save.config[Globals.VOLUME_MASTER] = value
