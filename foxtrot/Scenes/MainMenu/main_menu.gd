@@ -8,14 +8,13 @@ func _ready():
   $SettingsMenu/UI.hide()
 
 func _on_NewGameButton_pressed():
-  $MainMenu/UI/ModePopup.popup()
+  $MainMenu/UI/ModePopup.visible = true
 func _on_LoadGameButton_pressed():
   pass # Replace with function body.
 
 # Used to open up the settings. Note: the Settings.tscn is expected to be imported
 # into the main menu scene.
 func _on_SettingsButton_pressed():
-  $MainMenu/UI.hide()
   $SettingsMenu/UI.show()
   $Credits/UI.hide()
 
@@ -51,3 +50,4 @@ func StartNewGame():
   Globals.isGamePlaying = true
   Globals.isNewGame = true
   get_tree().change_scene("res://Scenes/CharacterCreation/CharacterCreation.tscn") 
+

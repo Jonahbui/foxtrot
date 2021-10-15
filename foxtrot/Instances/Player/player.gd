@@ -95,5 +95,9 @@ func _physics_process(delta: float) -> void:
   velocity = move_and_slide( velocity, Vector2.UP )
 
 func toggle_inventory():
-  $UI/Inventory.visible = !$UI/Inventory.visible
-  $UI/Hud.visible = !$UI/Inventory.visible
+  $UI/Inventory/Control.visible = !$UI/Inventory/Control.visible
+  $UI/Hud.visible = !$UI/Inventory/Control.visible
+
+
+func _on_slot_pressed(extra_arg_0):
+  pass # Replace with function body.

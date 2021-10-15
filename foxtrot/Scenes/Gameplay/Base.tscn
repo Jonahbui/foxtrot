@@ -13,8 +13,10 @@ script = ExtResource( 2 )
 
 [node name="MusicStream" type="AudioStreamPlayer" parent="Audio"]
 autoplay = true
+bus = "Music"
 
 [node name="SFXStream" type="AudioStreamPlayer" parent="Audio"]
+bus = "SFX"
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 
@@ -46,6 +48,7 @@ margin_left = 1.73511
 margin_top = 2.26488
 margin_right = -2.26489
 margin_bottom = -2.0
+mouse_filter = 2
 readonly = true
 context_menu_enabled = false
 wrap_enabled = true
@@ -73,13 +76,24 @@ __meta__ = {
 }
 
 [node name="PauseMenu" parent="." instance=ExtResource( 1 )]
-layer = 3
-
-[node name="UI" parent="PauseMenu" index="0"]
-visible = false
 
 [node name="OptionButton" parent="PauseMenu/SettingsMenu/UI/GraphicsVbox/Quality" index="0"]
 group = SubResource( 1 )
+
+[node name="LoadingScreen" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="LoadingScreen" type="Control" parent="LoadingScreen"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="LoadingScreen/LoadingScreen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [connection signal="text_entered" from="UI/DevConsole/CmdLine" to="." method="_on_CmdLine_text_entered"]
 
