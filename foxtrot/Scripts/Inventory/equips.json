@@ -1,7 +1,10 @@
 ﻿{
-    "bubble_nade" : {
-        "id"       : 0,
-        "resource" : "res://Textures/Gameplay/Weapons/bubble_nade.png",
-        "instance" : ""
+    "0" : {
+		"name"	   	: "Bubblenade",
+		"type"     	: "weapon",
+		"price"	   	: 0,
+        "resource" 	: "res://Textures/Gameplay/Weapons/bubble_nade.png",
+        "instance" 	: "res://Instances/Item/Weapons/BubbleNade.tscn",
+		"desc"		: "Explode your enemies with the power of bubbles!"
     }
 }

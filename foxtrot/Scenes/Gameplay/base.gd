@@ -5,6 +5,8 @@ var current_level = null
 var history = []
 var history_index = -1
 
+export var audioBusLayout : AudioBusLayout
+
 func _input(event):
   if(event.is_action_pressed("ui_dev")):
     $UI/DevConsole.visible = !$UI/DevConsole.visible
@@ -17,9 +19,11 @@ func _input(event):
       GetNextHistoryCmd(false)
   
 func _ready():
+  AudioServer.set_bus_layout(audioBusLayout)
   LoadLevel("res://Scenes/Gameplay/Spawn.tscn")
   
 func PlayAudio(clip, source):
+  # TO FIX
   var audioclip = load("res://Audio/SoundEffects/plop16.mp3")
   
   if Globals.source.music == source:
@@ -29,7 +33,14 @@ func PlayAudio(clip, source):
     $Audio/SFXStream.play()
   
 func LoadLevel(path):
+  ToggleLoadingScreen(true)
+  
+  # Give transition period
+  var time_in_seconds = 0.25
+  yield(get_tree().create_timer(time_in_seconds), "timeout")
+  
   $Player.visible = false
+  
   # Load the level.
   var level_node = get_node_or_null("/root/Base/Level")
   if level_node != null:
@@ -44,7 +55,13 @@ func LoadLevel(path):
     $Player.position = spawnpoint.position
   else:
     printerr("The spawnpoint could not be located in %s" % [spawnpoint.get_name()])
+  
   $Player.visible = true
+  
+  # Give transition period
+  yield(get_tree().create_timer(time_in_seconds), "timeout")
+  
+  ToggleLoadingScreen(false)  
   
 func _on_CmdLine_text_entered(new_text):
   # Do some preprocessing to avoid errors when parsing
@@ -95,6 +112,7 @@ func UpdateHistory(cmd):
     history.pop_back()
   history.push_front(cmd)
     
+
 func GetNextHistoryCmd(forward=true):
   if history.size() > 0:
     history_index = (history_index + 1) if(forward) else (history_index  - 1)
@@ -106,3 +124,6 @@ func GetNextHistoryCmd(forward=true):
       history_index = history.size() - 1
     else:
       $UI/DevConsole/CmdLine.text = history[history_index]
+
+func ToggleLoadingScreen(state):
+  $LoadingScreen/LoadingScreen.visible = state

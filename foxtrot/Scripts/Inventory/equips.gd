@@ -2,8 +2,7 @@ extends Node
 
 const FILENAME_EQUIPS = "equips.json"
 
-var equip_resources = {}
-var equip_instances = {}
+var equips = {}
 
 func _ready():
   ReadInEquips()
@@ -21,13 +20,7 @@ func ReadInEquips():
   
   # Insert the data into the config (Do not set config equal to data. People may
   # insert their own values) dictionary.
-  for key in data.keys():
-    equip_resources[int(data[key]["id"])] = data[key]["resource"]
-    equip_instances[int(data[key]["id"])] = data[key]["instance"]
+  equips = data
     
   print("\n[Equips] Loading resources...")
-  print("[Equips] Resources:")
-  print(equip_resources)
-  print("[Equips] Instances:")
-  
-  print(equip_instances)
+  print("[Equips] Resources: %s" % [equips])

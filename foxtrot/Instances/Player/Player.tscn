@@ -1,11 +1,10 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Textures/Gameplay/player.png" type="Texture" id=1]
 [ext_resource path="res://Instances/Player/player.gd" type="Script" id=2]
-[ext_resource path="res://Textures/UI/slot.png" type="Texture" id=3]
+[ext_resource path="res://Textures/UI/slot.tres" type="StyleBox" id=3]
 [ext_resource path="res://Textures/UI/slider.tres" type="StyleBox" id=4]
 [ext_resource path="res://Fonts/thaelahfat_pure_16x.tres" type="DynamicFont" id=5]
-[ext_resource path="res://icon.png" type="Texture" id=6]
 [ext_resource path="res://Textures/UI/slider_health_area.png" type="Texture" id=7]
 [ext_resource path="res://Textures/UI/slider_mana_area.png" type="Texture" id=8]
 [ext_resource path="res://Scripts/Inventory/inventory.gd" type="Script" id=9]
@@ -137,1386 +136,1506 @@ custom_constants/vseparation = 0
 custom_constants/hseparation = 0
 columns = 10
 
-[node name="Slot" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot1" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot1"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot1/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot2" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot2" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 32.0
 margin_right = 64.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot2"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot2"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot2"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot2/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot3" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot3" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 64.0
 margin_right = 96.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot3"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot3"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot3"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot3/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot4" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot4" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 96.0
 margin_right = 128.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot4"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot4"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot4"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot4/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot5" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot5" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 128.0
 margin_right = 160.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot5"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot5"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot5"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot5/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot6" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot6" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 160.0
 margin_right = 192.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot6"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot6"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot6"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot6/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot7" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot7" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 192.0
 margin_right = 224.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot7"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot7"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot7"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot7/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot8" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot8" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 224.0
 margin_right = 256.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot8"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot8"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot8"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot8/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot9" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot9" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 256.0
 margin_right = 288.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot9"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot9"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot9"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot9/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot10" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot10" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 288.0
 margin_right = 320.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot10"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot10"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot10"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot10/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot11" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot11" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_top = 32.0
 margin_right = 32.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot11"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot11"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot11"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot11/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot12" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot12" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 32.0
 margin_top = 32.0
 margin_right = 64.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot12"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot12"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot12"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot12/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot13" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot13" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 64.0
 margin_top = 32.0
 margin_right = 96.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot13"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot13"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot13"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot13/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot14" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot14" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 96.0
 margin_top = 32.0
 margin_right = 128.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot14"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot14"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot14"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot14/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot15" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot15" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 128.0
 margin_top = 32.0
 margin_right = 160.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot15"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot15"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot15"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot15/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot16" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot16" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 160.0
 margin_top = 32.0
 margin_right = 192.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot16"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot16"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot16"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot16/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot17" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot17" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 192.0
 margin_top = 32.0
 margin_right = 224.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot17"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot17"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot17"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot17/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot18" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot18" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 224.0
 margin_top = 32.0
 margin_right = 256.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot18"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot18"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot18"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot18/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot19" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot19" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 256.0
 margin_top = 32.0
 margin_right = 288.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot19"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot19"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot19"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot19/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot20" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot20" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 288.0
 margin_top = 32.0
 margin_right = 320.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot20"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot20"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot20"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot20/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot21" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot21" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_top = 64.0
 margin_right = 32.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot21"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot21"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot21"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot21/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot22" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot22" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 32.0
 margin_top = 64.0
 margin_right = 64.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot22"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot22"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot22"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot22/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot23" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot23" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 64.0
 margin_top = 64.0
 margin_right = 96.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot23"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot23"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot23"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot23/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot24" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot24" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 96.0
 margin_top = 64.0
 margin_right = 128.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot24"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot24"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot24"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot24/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot25" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot25" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 128.0
 margin_top = 64.0
 margin_right = 160.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot25"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot25"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot25"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot25/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot26" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot26" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 160.0
 margin_top = 64.0
 margin_right = 192.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot26"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot26"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot26"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot26/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot27" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot27" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 192.0
 margin_top = 64.0
 margin_right = 224.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot27"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot27"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot27"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot27/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot28" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot28" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 224.0
 margin_top = 64.0
 margin_right = 256.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot28"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot28"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot28"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot28/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot29" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot29" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 256.0
 margin_top = 64.0
 margin_right = 288.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot29"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot29"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot29"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot29/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot30" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot30" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 288.0
 margin_top = 64.0
 margin_right = 320.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot30"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot30"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot30"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot30/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot31" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot31" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_top = 96.0
 margin_right = 32.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot31"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot31"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot31"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot31/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot32" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot32" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 32.0
 margin_top = 96.0
 margin_right = 64.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot32"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot32"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot32"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot32/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot33" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot33" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 64.0
 margin_top = 96.0
 margin_right = 96.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot33"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot33"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot33"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot33/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot34" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot34" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 96.0
 margin_top = 96.0
 margin_right = 128.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot34"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot34"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot34"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot34/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot35" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot35" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 128.0
 margin_top = 96.0
 margin_right = 160.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot35"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot35"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot35"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot35/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot36" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot36" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 160.0
 margin_top = 96.0
 margin_right = 192.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot36"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot36"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot36"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot36/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot37" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot37" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 192.0
 margin_top = 96.0
 margin_right = 224.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot37"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot37"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot37"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot37/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot38" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot38" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 224.0
 margin_top = 96.0
 margin_right = 256.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot38"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot38"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot38"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot38/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot39" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot39" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 256.0
 margin_top = 96.0
 margin_right = 288.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot39"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot39"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot39"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot39/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Slot40" type="Control" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot40" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
 margin_left = 288.0
 margin_top = 96.0
 margin_right = 320.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/normal = ExtResource( 3 )
+expand_icon = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot40"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -13.0
-margin_right = 13.0
-margin_bottom = 13.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Frame" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot40"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot40"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot40/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
@@ -1583,6 +1702,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -1630,13 +1750,11 @@ __meta__ = {
 }
 
 [node name="Item" type="TextureRect" parent="UI/Inventory/HotBarMain/Slot2/CenterContainer"]
-margin_left = 12.0
-margin_top = 12.0
-margin_right = 12.0
-margin_bottom = 12.0
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 6 )
 expand = true
 stretch_mode = 5
 flip_h = true
@@ -1689,10 +1807,9 @@ __meta__ = {
 }
 
 [node name="Item" type="TextureRect" parent="UI/Inventory/HotBarMain/Slot3/CenterContainer"]
-margin_left = 12.0
-margin_top = 12.0
-margin_right = 12.0
-margin_bottom = 12.0
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -1746,10 +1863,9 @@ __meta__ = {
 }
 
 [node name="Item" type="TextureRect" parent="UI/Inventory/HotBarMain/Slot4/CenterContainer"]
-margin_left = 12.0
-margin_top = 12.0
-margin_right = 12.0
-margin_bottom = 12.0
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -1803,10 +1919,9 @@ __meta__ = {
 }
 
 [node name="Item" type="TextureRect" parent="UI/Inventory/HotBarMain/Slot5/CenterContainer"]
-margin_left = 12.0
-margin_top = 12.0
-margin_right = 12.0
-margin_bottom = 12.0
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -1860,10 +1975,9 @@ __meta__ = {
 }
 
 [node name="Item" type="TextureRect" parent="UI/Inventory/HotBarMain/Slot6/CenterContainer"]
-margin_left = 12.0
-margin_top = 12.0
-margin_right = 12.0
-margin_bottom = 12.0
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -1917,10 +2031,9 @@ __meta__ = {
 }
 
 [node name="Item" type="TextureRect" parent="UI/Inventory/HotBarMain/Slot7/CenterContainer"]
-margin_left = 12.0
-margin_top = 12.0
-margin_right = 12.0
-margin_bottom = 12.0
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -1974,10 +2087,9 @@ __meta__ = {
 }
 
 [node name="Item" type="TextureRect" parent="UI/Inventory/HotBarMain/Slot8/CenterContainer"]
-margin_left = 12.0
-margin_top = 12.0
-margin_right = 12.0
-margin_bottom = 12.0
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -2031,10 +2143,9 @@ __meta__ = {
 }
 
 [node name="Item" type="TextureRect" parent="UI/Inventory/HotBarMain/Slot9/CenterContainer"]
-margin_left = 12.0
-margin_top = 12.0
-margin_right = 12.0
-margin_bottom = 12.0
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -2088,10 +2199,9 @@ __meta__ = {
 }
 
 [node name="Item" type="TextureRect" parent="UI/Inventory/HotBarMain/Slot0/CenterContainer"]
-margin_left = 12.0
-margin_top = 12.0
-margin_right = 12.0
-margin_bottom = 12.0
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -2194,3 +2304,5 @@ percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Inventory" type="Node2D" parent="."]
