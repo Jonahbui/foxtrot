@@ -148,15 +148,15 @@ anchor_bottom = 0.023
 margin_left = -88.0
 margin_top = 7.72
 margin_right = 98.0
-margin_bottom = 38.72
+margin_bottom = 47.72
 custom_icons/clear = ExtResource( 10 )
 custom_styles/normal = SubResource( 1 )
 custom_fonts/font = ExtResource( 4 )
-align = 1
 max_length = 16
 expand_to_text_length = true
 context_menu_enabled = false
 clear_button_enabled = true
+right_icon = ExtResource( 10 )
 placeholder_text = "Name here"
 __meta__ = {
 "_edit_use_anchors_": false

@@ -55,7 +55,6 @@ smoothing_enabled = true
 [node name="Inventory" type="Node2D" parent="."]
 
 [node name="UI" type="CanvasLayer" parent="."]
-layer = 2
 script = ExtResource( 10 )
 
 [node name="Hud" type="Control" parent="UI"]
