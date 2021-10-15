@@ -48,6 +48,7 @@ margin_left = 1.73511
 margin_top = 2.26488
 margin_right = -2.26489
 margin_bottom = -2.0
+mouse_filter = 2
 readonly = true
 context_menu_enabled = false
 wrap_enabled = true

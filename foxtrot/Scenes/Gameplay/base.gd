@@ -7,14 +7,18 @@ var history_index = -1
 
 
 func _input(event):
-  if(event.is_action_pressed("ui_dev")):
+  if event.is_action_pressed("ui_dev"):
     $UI/DevConsole.visible = !$UI/DevConsole.visible
     Globals.isDevConsoleOpen = $UI/DevConsole.visible
-  elif(event.is_action_pressed("ui_up")):
-    if($UI/DevConsole/CmdLine.has_focus()):
+    if $UI/DevConsole.visible:
+      $UI/DevConsole/CmdLine.grab_focus()
+      yield(get_tree().create_timer(0.1), "timeout")
+      $UI/DevConsole/CmdLine.text = ""
+  elif event.is_action_pressed("ui_up"):
+    if $UI/DevConsole/CmdLine.has_focus():
       GetNextHistoryCmd()
-  elif(event.is_action_pressed("ui_down")):
-    if($UI/DevConsole/CmdLine.has_focus()):
+  elif event.is_action_pressed("ui_down"):
+    if $UI/DevConsole/CmdLine.has_focus():
       GetNextHistoryCmd(false)
   
 func _ready():

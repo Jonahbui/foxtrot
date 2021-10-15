@@ -72,7 +72,10 @@ func _on_PurchaseButton_pressed():
     print("[Store] Insufficent money to purchase (%s) %s" % [currentItemToPurchase, Equips.equips[str(currentItemToPurchase)]["name"]])  
     return
   
-  # If player has sufficent money, add it to the player inventory
+  # Subtract the money from the player if sufficient
+  player.money -= int(Equips.equips[str(currentItemToPurchase)]["price"])
+  
+  # Add item to the player inventory
   var inventory = self.get_tree().get_root().get_node_or_null("/root/Base/Player/UI/Inventory")
   inventory.AddItem(currentItemToPurchase)
   print("[Store] Purchasing (%s) %s" % [currentItemToPurchase, Equips.equips[str(currentItemToPurchase)]["name"]])
