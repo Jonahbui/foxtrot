@@ -1,3 +1,6 @@
+# Note: in scene hierarchy the Hud must be behind Invetory or else the hotbar
+# cannot be clicked...
+
 extends Node
 
 signal play_audio(clip, source)
@@ -159,20 +162,39 @@ func AddItem(item_id):
 func IsSelectedHotbar(slot_num):
   return slot_num == currentSlot
   
-func RefreshInventorySlots(slot_num=-1):
-  # If -1 then refresh everything
-  if slot_num == -1:
-    # Loop through all the slots and update their textures
+func RefreshInventorySlots(refreshSlots : Array):
+  # Loop through all the slots and update their textures
+  if refreshSlots == null:
     for i in range(0, slots.size()):
-      var itemframe = slots[i].get_node_or_null("CenterContainer/Item")
-      # If the inventory is not null, update its texture
-      if inventory[i] != null:
-        var texture = load(Equips.equips[str(inventory[i].id)]["resource"])
-        itemframe.texture = texture
-        itemframe.set_size(Vector2(24, 24))
-      # If the inventory is null, set texture to null
-      else:
-        itemframe.texture = null  
+      RefreshInventorySlot(i)
+  else:
+    for slot in refreshSlots:
+      RefreshInventorySlot(slot)
+    
+func RefreshInventorySlot(slot_num : int):
+  var itemframe = slots[slot_num].get_node_or_null("CenterContainer/Item")
+  # If the inventory is not null, update its texture
+  if inventory[slot_num] != null:
+    var texture = load(Equips.equips[str(inventory[slot_num].id)]["resource"])
+    itemframe.texture = texture
+    itemframe.set_size(Vector2(24, 24))
+    
+    # If the current slot is one of the ones being refreshed, make sure to
+    # disable/enable the item in that slot
+    if slot_num == currentSlot:
+      inventory[slot_num].visible = true
+      inventory[slot_num].set_process(true)
+      inventory[slot_num].set_physics_process(true)
+      inventory[slot_num].set_process_input(true)
+    else:
+      inventory[slot_num].visible = false
+      inventory[slot_num].set_process(false)
+      inventory[slot_num].set_physics_process(false)
+      inventory[slot_num].set_process_input(false)
+
+  # If the inventory is null, set texture to null
+  else:
+    itemframe.texture = null
 
 func _on_slot_pressed(slot_num):
   print("[Inventory] Slot #%d selected." % [slot_num])
@@ -202,8 +224,10 @@ func _on_slot_pressed(slot_num):
       inventory[slotSelect2] = inventory[slotSelect1]
       inventory[slotSelect1] = null
     
+    RefreshInventorySlots([slotSelect1, slotSelect2])
+    
     # Reset the sentinel values used to determine which slots are selecte
     # -1 means no slot selected
     slotSelect1 = -1
     slotSelect2 = -1
-    RefreshInventorySlots()
+    

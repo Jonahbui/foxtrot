@@ -57,6 +57,87 @@ smoothing_enabled = true
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource( 10 )
 
+[node name="Hud" type="Control" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="StatsVbox" type="VBoxContainer" parent="UI/Hud"]
+anchor_left = 0.008
+anchor_top = 0.022
+anchor_right = 1.0
+anchor_bottom = 0.022
+margin_left = -0.12
+margin_top = 0.0799994
+margin_right = -336.0
+margin_bottom = 32.08
+custom_constants/separation = 0
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthLabel" type="Label" parent="UI/Hud/StatsVbox"]
+margin_top = 2.0
+margin_right = 299.0
+margin_bottom = 17.0
+custom_fonts/font = ExtResource( 5 )
+text = "100 / 100"
+valign = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="HealthBar" type="ProgressBar" parent="UI/Hud/StatsVbox/HealthLabel"]
+anchor_left = 0.01
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 56.01
+margin_top = -9.5
+margin_right = -8.0
+margin_bottom = 6.5
+custom_styles/fg = SubResource( 2 )
+custom_styles/bg = ExtResource( 4 )
+value = 100.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="ManaLabel" type="Label" parent="UI/Hud/StatsVbox"]
+margin_top = 17.0
+margin_right = 299.0
+margin_bottom = 32.0
+custom_fonts/font = ExtResource( 5 )
+text = "100 / 100"
+valign = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ManaBar" type="ProgressBar" parent="UI/Hud/StatsVbox/ManaLabel"]
+anchor_left = 0.01
+anchor_top = 0.467
+anchor_right = 1.0
+anchor_bottom = 0.467
+margin_left = 56.01
+margin_top = -8.005
+margin_right = -8.0
+margin_bottom = 7.995
+custom_styles/fg = SubResource( 3 )
+custom_styles/bg = ExtResource( 4 )
+value = 100.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
 [node name="Inventory" type="Control" parent="UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -2328,87 +2409,6 @@ text = "0	"
 align = 1
 __meta__ = {
 "_edit_lock_": true,
-"_edit_use_anchors_": true
-}
-
-[node name="Hud" type="Control" parent="UI"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="StatsVbox" type="VBoxContainer" parent="UI/Hud"]
-anchor_left = 0.008
-anchor_top = 0.022
-anchor_right = 1.0
-anchor_bottom = 0.022
-margin_left = -0.12
-margin_top = 0.0799994
-margin_right = -336.0
-margin_bottom = 32.08
-custom_constants/separation = 0
-alignment = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HealthLabel" type="Label" parent="UI/Hud/StatsVbox"]
-margin_top = 2.0
-margin_right = 299.0
-margin_bottom = 17.0
-custom_fonts/font = ExtResource( 5 )
-text = "100 / 100"
-valign = 1
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="HealthBar" type="ProgressBar" parent="UI/Hud/StatsVbox/HealthLabel"]
-anchor_left = 0.01
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = 56.01
-margin_top = -9.5
-margin_right = -8.0
-margin_bottom = 6.5
-custom_styles/fg = SubResource( 2 )
-custom_styles/bg = ExtResource( 4 )
-value = 100.0
-percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": true
-}
-
-[node name="ManaLabel" type="Label" parent="UI/Hud/StatsVbox"]
-margin_top = 17.0
-margin_right = 299.0
-margin_bottom = 32.0
-custom_fonts/font = ExtResource( 5 )
-text = "100 / 100"
-valign = 1
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="ManaBar" type="ProgressBar" parent="UI/Hud/StatsVbox/ManaLabel"]
-anchor_left = 0.01
-anchor_top = 0.467
-anchor_right = 1.0
-anchor_bottom = 0.467
-margin_left = 56.01
-margin_top = -8.005
-margin_right = -8.0
-margin_bottom = 7.995
-custom_styles/fg = SubResource( 3 )
-custom_styles/bg = ExtResource( 4 )
-value = 100.0
-percent_visible = false
-__meta__ = {
 "_edit_use_anchors_": true
 }
 
