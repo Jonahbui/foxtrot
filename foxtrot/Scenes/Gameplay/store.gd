@@ -50,6 +50,9 @@ func ToggleStore(forceState=false, state=false):
     $UI/Store.visible = state
   else:
     $UI/Store.visible = !$UI/Store.visible
+  
+  # Set playser as interacting or not
+  Globals.SetFlag(Globals.FLAG_INTERACTING, $UI/Store.visible)
 
 func UpdateSelectedItem(equip_id):
   currentItemToPurchase = equip_id
