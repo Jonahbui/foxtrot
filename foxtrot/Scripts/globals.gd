@@ -39,7 +39,7 @@ func SetFlag(flag, state):
   if state:
     pause_flags |= flag
   else:
-    pause_flags ^= (flag)
+    pause_flags &= (~flag)
 
 func IsFlagSet(flag):
   return flag == (flag&pause_flags)

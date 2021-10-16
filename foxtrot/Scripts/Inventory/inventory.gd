@@ -142,7 +142,7 @@ func AddItem(item_to_add):
     itemframe.texture = texture
     itemframe.set_size(Vector2(24, 24))
     
-    # Check if item is in the hotbar and equip if so
+    # Check if item is in the   hotbar and equip if so
     if IsSelectedHotbar(slot_id):
       SetActiveSlot(slot_id, true)
     # Disable item from running until it is selected
