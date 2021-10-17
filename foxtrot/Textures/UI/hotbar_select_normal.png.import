@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hotbar_selected.png-2d469bd0721f6f7ec3f31f6940d3c71a.stex"
+path="res://.import/hotbar_select_normal.png-b71929b34316f306e3391dff79c83509.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/UI/hotbar_selected.png"
-dest_files=[ "res://.import/hotbar_selected.png-2d469bd0721f6f7ec3f31f6940d3c71a.stex" ]
+source_file="res://Textures/UI/hotbar_select_normal.png"
+dest_files=[ "res://.import/hotbar_select_normal.png-b71929b34316f306e3391dff79c83509.stex" ]
 
 [params]
 

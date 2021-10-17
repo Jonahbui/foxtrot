@@ -1,3 +1,3 @@
 extends Node
 
-signal _on_drop_item(item, position)
+signal on_item_drop(item, position)

@@ -1,4 +1,4 @@
-extends Node2D
+extends "res://Scenes/level.gd"
 
 var isTouching = false
 var currentItemToPurchase : int
@@ -71,6 +71,8 @@ func UpdateSelectedItem(equip_id):
 func _on_PurchaseButton_pressed():
   # Check if player is able to purchase
   var player = self.get_tree().get_root().get_node_or_null("/root/Base/Player")
+  
+  ## Player does not have sufficent money, reject purchase
   if player.money - Equips.equips[str(currentItemToPurchase)]["price"] < 0: 
     print("[Store] Insufficent money to purchase (%s) %s" % [currentItemToPurchase, Equips.equips[str(currentItemToPurchase)]["name"]])  
     return
