@@ -11,7 +11,6 @@ export(NodePath) var logs
 
 func _input(event):
   if event.is_action_released("ui_dev"):
-    dev_console.grab_focus()
     ToggleDevConsole()
   
   if dev_console.visible && cmdline.has_focus():
@@ -27,6 +26,9 @@ func _ready():
   dev_console = self.get_node(dev_console)
   cmdline = self.get_node(cmdline)
   logs = self.get_node(logs)
+  
+  if Signals.connect("on_player_death", self, "OnDeath") != OK:
+    print("[Base] Error. Failed to connect to signal on_player_death...")
   
 func ToggleDevConsole():
   # Set the current visibility to the opposite of the current visibility
@@ -113,19 +115,22 @@ func ProcessCmd(cmd):
   if parse.size() == 0:
     return
   elif parse.size() == 1:
-    
-    if parse[0] == "clear":
-      logs.text = ""
-    elif parse[0] == "exit":
-      get_tree().quit()
+    match parse[0]:
+      "clear":
+        logs.text = ""
+      "exit":
+        get_tree().quit()
+      "kill":
+        $Player.TakeDamage($Player.health)
       
   elif(parse.size() == 2):
-    
-    if(parse[0] == "setlevel"):
-      # Note: if leaving in for player, need to sanitize input just in case
-      # they load up a scene they should not be allowed to...
-      var file_exists = File.new().file_exists(parse[1])
-      if file_exists : LoadLevel(parse[1])
+    match parse[0]:
+      "setlevel":
+        # Note: if leaving in for player, need to sanitize input just in case
+        # they load up a scene they should not be allowed to...
+        var valid : bool = File.new().file_exists(parse[1])
+        valid = parse[1] in Globals.LEVEL_PATH && valid
+        if valid : LoadLevel(parse[1])
       
 func UpdateHistory(cmd):
   if(history.size() > 10):
@@ -147,8 +152,20 @@ func GetNextHistoryCmd(forward=true):
 func ToggleLoadingScreen(state):
   $LoadingScreen/LoadingScreen.visible = state
 
-
 func _on_CmdLine_text_changed(new_text):
+  var old_pos = cmdline.caret_position
   # Do not allow '`' to be used as input
   new_text = new_text.replace('`', '')
   cmdline.text = new_text
+  cmdline.caret_position = old_pos
+
+func OnDeath():
+  if Globals.isHardcoreMode:
+    # Go back to main menu
+    Helper.ChangeLevel(Globals.SPATH_MAIN_MENU)
+    # Restart game
+  else:
+    # Go back to spawn 
+    LoadLevel(Globals.LPATH_SPAWN)
+    $Player.ResetPlayer()
+  print("Triggered")
