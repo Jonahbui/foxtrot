@@ -5,10 +5,15 @@ extends KinematicBody2D
 # --------------------------------------------------------------------------------------------------
 # Player Information
 # --------------------------------------------------------------------------------------------------
-var charname : String = ""
-var health : int = 100
-var money  : int = 0
+export var charname : String = ""
+export var maxHealth : int = 100
+export var health : int = 100
+export var money  : int = 0
 var damageMultiplier = 1.0
+
+# --------------------------------------------------------------------------------------------------
+# Player Management
+# --------------------------------------------------------------------------------------------------
 var inWater = false
 var direction : = Vector2(1,0)
 
@@ -108,3 +113,22 @@ func _physics_process(delta: float) -> void:
 func toggle_inventory():
   $UI/Inventory/Control.visible = !$UI/Inventory/Control.visible
   Globals.SetFlag(Globals.FLAG_INVENTORY, $UI/Inventory/Control.visible)
+
+func TakeDamage(damage : int):
+  health -= damage
+  
+  $UI/Hud/StatsVbox/HealthLabel/HealthBar.value = health
+  $UI/Hud/StatsVbox/HealthLabel.text = "%d / %d" % [$UI/Hud/StatsVbox/HealthLabel/HealthBar.value, maxHealth]
+  if health <= 0:
+    # Play death animation
+    
+    # Disable player
+    
+    Signals.emit_signal("on_player_death")
+
+func ResetPlayer():
+  health = maxHealth
+  $UI/Hud/StatsVbox/HealthLabel/HealthBar.value = health
+  $UI/Hud/StatsVbox/HealthLabel.text = "%d / %d" % [health, maxHealth]
+  
+  # Reset stamina/magic as well

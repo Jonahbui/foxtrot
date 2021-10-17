@@ -73,7 +73,6 @@ focus_neighbour_right = NodePath(".")
 focus_neighbour_bottom = NodePath(".")
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
-text = "setlevel res://Scenes/Gameplay/Test.tscn"
 context_menu_enabled = false
 __meta__ = {
 "_edit_use_anchors_": false

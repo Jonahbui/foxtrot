@@ -4,6 +4,7 @@ extends Node2D
 func _ready():
   # If the main menu is ever loaded, the game is not being played anymore
   Globals.isGamePlaying = false
+  Globals.pause_flags = 0
   $Credits/UI.hide()
   $SettingsMenu/UI.hide()
 

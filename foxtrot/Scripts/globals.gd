@@ -50,7 +50,6 @@ const LEVEL_PATH = [
 # TA: to remove since we added pause_flags
 var isGamePlaying : bool = false
 var isNewGame     : bool = false
-var isPlayerDead  : bool = false
 var isHardcoreMode: bool = false
 
 # Possible pause 'like' events that can occur
