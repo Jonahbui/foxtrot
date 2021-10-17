@@ -62,9 +62,8 @@ func _ready():
   SetActiveSlot(0, true)
 
 func InitializeInventory():
-  # Add all the slots to put equips into
-  
-  # Establish the inventory array to be the size of the number of slots available
+  # Add all the slots to put equips into 
+  ## Establish the inventory array to be the size of the number of slots available
   for i in range(0, slots.size()):
     inventory[i] = null
 
@@ -99,14 +98,14 @@ func SetActiveSlot(active_slot_id : int, prev_slot_id : int, ignoreSound=false):
   prev_slot.set("custom_styles/pressed", slot_normal)
   prev_slot.set("custom_styles/hover", slot_normal)
   if inventory[prev_slot_id] != null:
-    SetActive(inventory[prev_slot_id], false)
+    Helper.SetActive(inventory[prev_slot_id], false)
   
   var curr_slot = slots[active_slot_id]
   curr_slot.set("custom_styles/normal", slot_select)
   curr_slot.set("custom_styles/pressed", slot_select)
   curr_slot.set("custom_styles/hover", slot_select)
   if inventory[active_slot_id] != null:
-    SetActive(inventory[active_slot_id], true)
+    Helper.SetActive(inventory[active_slot_id], true)
 
 func FindOpenSlot():
   for i in range(0, slots.size()):
@@ -129,7 +128,6 @@ func AddItem(item_to_add):
   var slot_id = FindOpenSlot()
   if slot_id != null:
     
-
     # Add item to inventory
     item.SetProcess(Globals.ItemProcess.Player) # TA: consider adding initalize method
     item.player_inv = self
@@ -147,7 +145,7 @@ func AddItem(item_to_add):
       SetActiveSlot(slot_id, true)
     # Disable item from running until it is selected
     else:
-      SetActive(item, false)
+      Helper.SetActive(item, false)
   else:
     # TA: Should drop item/ not pick it up
     item.SetProcess(Globals.ItemProcess.World)
@@ -177,8 +175,10 @@ func RefreshInventorySlots(refreshSlots : Array):
       RefreshInventorySlot(slot)
     
 func RefreshInventorySlot(slot_num : int):
+  # Get the Texture2D that displays the item
   var itemframe = slots[slot_num].get_node_or_null("CenterContainer/Item")
-  # If the inventory is not null, update its texture
+  
+  # If the inventory is not null, update its texture to the one in the current inventory slot
   if inventory[slot_num] != null:
     var texture = load(Equips.equips[str(inventory[slot_num].id)]["resource"])
     itemframe.texture = texture
@@ -187,7 +187,8 @@ func RefreshInventorySlot(slot_num : int):
     # If the current slot is one of the ones being refreshed, make sure to
     # disable/enable the item in that slot
     var itemState = true if (slot_num == curr_slot_id) else false
-    SetActive(inventory[slot_num], itemState)
+    Helper.SetActive(inventory[slot_num], itemState)
+    
   # If the inventory is null, set texture to null
   else:
     itemframe.texture = null
@@ -226,9 +227,4 @@ func _on_slot_pressed(slot_num):
     # -1 means no slot selected
     selectedSlot1 = -1
     selectedSlot2 = -1
-
-func SetActive(item, state):
-  item.visible = state
-  item.set_process(state)
-  item.set_physics_process(state)
-  item.set_process_input(state)
+  

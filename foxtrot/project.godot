@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="foxtrot"
-run/main_scene="res://Scenes/SplashScreen/splash_screen.tscn"
+run/main_scene="res://Scenes/SplashScreen/SplashScreen.tscn"
 config/icon="res://icon.png"
 
 [audio]
@@ -23,6 +23,9 @@ default_bus_layout="res://Audio/default_bus_layout.tres"
 Save="*res://Scripts/save.gd"
 Globals="*res://Scripts/globals.gd"
 Equips="*res://Scripts/Inventory/equips.gd"
+Helper="*res://Scripts/helper.gd"
+Audio="*res://Scripts/audio.gd"
+Signals="*res://Scripts/signals.gd"
 
 [display]
 

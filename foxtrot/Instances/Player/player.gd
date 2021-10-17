@@ -29,7 +29,7 @@ func _input(event):
 
 func _physics_process(delta: float) -> void:
   # If the dev console is open then do not move.
-  if Globals.isDevConsoleOpen :
+  if Globals.pause_flags != 0 :
     return
   # If the player is in the middle of a jump (the Y velocity is
   #   less than zero, indicating the player is moving UP on the
