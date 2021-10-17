@@ -1,22 +1,35 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Textures/Gameplay/Weapons/bubble_nade.png" type="Texture" id=1]
-[ext_resource path="res://Instances/Item/Weapons/bubble_nade.gd" type="Script" id=2]
+[ext_resource path="res://Instances/Item/Weapons/projectile_stack.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 11.3137
 
-[node name="BubbleNade" type="Node2D"]
+[sub_resource type="CircleShape2D" id=2]
+radius = 14.3362
+
+[node name="BubbleNade" type="KinematicBody2D"]
+collision_layer = 0
 script = ExtResource( 2 )
+max_stack_amt = 8
+damage = 10
+projectile = "res://Instances/Item/Projectiles/BubblenadeProjectile.tscn"
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
-collision_layer = 0
-collision_mask = 0
-mode = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+[node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2( -0.771694, 1.68369 )
 shape = SubResource( 1 )
+
+[node name="PickupDetector" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="PickupCollider" type="CollisionShape2D" parent="PickupDetector"]
+position = Vector2( -0.708706, 1.73239 )
+shape = SubResource( 2 )
+
+[connection signal="body_entered" from="PickupDetector" to="." method="_on_PickupDetector_body_entered"]
+[connection signal="body_exited" from="PickupDetector" to="." method="_on_PickupDetector_body_exited"]

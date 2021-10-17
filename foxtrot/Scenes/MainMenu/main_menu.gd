@@ -49,6 +49,6 @@ func _on_CasualButton_pressed():
 func StartNewGame():
   Globals.isGamePlaying = true
   Globals.isNewGame = true
-  if get_tree().change_scene("res://Scenes/CharacterCreation/CharacterCreation.tscn") != OK:
+  if get_tree().change_scene(Globals.SPATH_CHARACTER_CREATION) != OK:
     print("[Main Menu] Error. Could not change scene from main menu to character creation...")
 

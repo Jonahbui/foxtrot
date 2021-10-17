@@ -1,16 +1,19 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Textures/Gameplay/player.png" type="Texture" id=1]
 [ext_resource path="res://Instances/Player/player.gd" type="Script" id=2]
 [ext_resource path="res://Textures/UI/slot.tres" type="StyleBox" id=3]
 [ext_resource path="res://Textures/UI/slider.tres" type="StyleBox" id=4]
 [ext_resource path="res://Fonts/thaelahfat_pure_16x.tres" type="DynamicFont" id=5]
-[ext_resource path="res://Textures/UI/hotbar_slot_selected.tres" type="StyleBox" id=6]
+[ext_resource path="res://Textures/UI/hotbar_hover.tres" type="StyleBox" id=6]
 [ext_resource path="res://Textures/UI/slider_health_area.png" type="Texture" id=7]
 [ext_resource path="res://Textures/UI/slider_mana_area.png" type="Texture" id=8]
 [ext_resource path="res://Scripts/Inventory/inventory.gd" type="Script" id=9]
 [ext_resource path="res://Instances/Player/player_ui.gd" type="Script" id=10]
-[ext_resource path="res://Textures/UI/hotbar_slot_normal.tres" type="StyleBox" id=12]
+[ext_resource path="res://Textures/UI/slot_hover.tres" type="StyleBox" id=11]
+[ext_resource path="res://Textures/UI/hotbar_normal.tres" type="StyleBox" id=12]
+[ext_resource path="res://Textures/UI/slot_pressed.tres" type="StyleBox" id=13]
+[ext_resource path="res://Textures/UI/hotbar_pressed.tres" type="StyleBox" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 24 )
@@ -34,7 +37,8 @@ margin_bottom = 8.0
 expand_margin_right = 1.0
 
 [node name="Player" type="KinematicBody2D"]
-collision_mask = 2
+collision_layer = 2
+collision_mask = 21
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -146,6 +150,12 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+hotbar_hover = "res://Textures/UI/hotbar_hover.tres"
+hotbar_pressed = "res://Textures/UI/hotbar_pressed.tres"
+hotbar_normal = "res://Textures/UI/hotbar_normal.tres"
+hotbar_select_hover = "res://Textures/UI/hotbar_select_hover.tres"
+hotbar_select_pressed = "res://Textures/UI/hotbar_select_pressed.tres"
+hotbar_select_normal = "res://Textures/UI/hotbar_select_normal.tres"
 
 [node name="Control" type="Control" parent="UI/Inventory"]
 visible = false
@@ -153,6 +163,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -6.10352e-05
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -188,29 +199,33 @@ __meta__ = {
 
 [node name="InventoryPanel" type="Panel" parent="UI/Inventory/Control/Panels"]
 self_modulate = Color( 1, 1, 1, 0.188235 )
-anchor_left = 0.375
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 56.0
-margin_top = 48.0
-margin_right = -7.99994
-margin_bottom = -168.0
+anchor_left = 0.988
+anchor_top = 0.133
+anchor_right = 0.988
+anchor_bottom = 0.133
+margin_left = -336.32
+margin_top = 0.119999
+margin_right = -0.319946
+margin_bottom = 144.12
+rect_min_size = Vector2( 336, 144 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/Inventory/Control"]
-anchor_left = 0.425
-anchor_top = 0.267
-anchor_right = 0.925
-anchor_bottom = 0.867
-margin_left = 32.0001
-margin_top = -40.12
-margin_right = 32.0001
-margin_bottom = -40.12
+anchor_left = 0.988
+anchor_top = 0.133
+anchor_right = 0.988
+anchor_bottom = 0.133
+margin_left = -328.32
+margin_top = 8.12
+margin_right = -8.31995
+margin_bottom = 152.12
+rect_min_size = Vector2( 320, 144 )
 scroll_horizontal_enabled = false
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -220,12 +235,19 @@ margin_bottom = 128.0
 custom_constants/vseparation = 0
 custom_constants/hseparation = 0
 columns = 10
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="Slot1" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="Slot1" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -251,6 +273,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -259,12 +282,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot2" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot1"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot2" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 32.0
 margin_right = 64.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -290,6 +330,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -298,12 +339,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot3" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot2"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot3" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 64.0
 margin_right = 96.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -329,6 +387,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -337,12 +396,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot4" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot3"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot4" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 96.0
 margin_right = 128.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -368,6 +444,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -376,12 +453,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot5" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot4"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot5" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 128.0
 margin_right = 160.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -407,6 +501,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -415,12 +510,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot6" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot5"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot6" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 160.0
 margin_right = 192.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -446,6 +558,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -454,12 +567,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot7" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot6"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot7" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 192.0
 margin_right = 224.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -485,6 +615,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -493,12 +624,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot8" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot7"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot8" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 224.0
 margin_right = 256.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -524,6 +672,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -532,12 +681,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot9" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot8"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot9" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 256.0
 margin_right = 288.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -563,6 +729,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -571,12 +738,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot10" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot9"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot10" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 288.0
 margin_right = 320.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -602,6 +786,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -610,12 +795,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot11" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot10"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot11" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_top = 32.0
 margin_right = 32.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -641,6 +843,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -649,13 +852,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot12" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot11"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot12" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 32.0
 margin_top = 32.0
 margin_right = 64.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -681,6 +901,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -689,13 +910,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot13" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot12"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot13" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 64.0
 margin_top = 32.0
 margin_right = 96.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -721,6 +959,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -729,13 +968,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot14" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot13"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot14" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 96.0
 margin_top = 32.0
 margin_right = 128.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -761,6 +1017,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -769,13 +1026,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot15" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot14"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot15" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 128.0
 margin_top = 32.0
 margin_right = 160.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -801,6 +1075,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -809,13 +1084,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot16" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot15"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot16" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 160.0
 margin_top = 32.0
 margin_right = 192.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -841,6 +1133,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -849,13 +1142,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot17" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot16"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot17" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 192.0
 margin_top = 32.0
 margin_right = 224.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -881,6 +1191,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -889,13 +1200,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot18" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot17"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot18" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 224.0
 margin_top = 32.0
 margin_right = 256.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -921,6 +1249,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -929,13 +1258,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot19" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot18"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot19" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 256.0
 margin_top = 32.0
 margin_right = 288.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -961,6 +1307,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -969,13 +1316,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot20" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot19"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot20" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 288.0
 margin_top = 32.0
 margin_right = 320.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -1001,6 +1365,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -1009,12 +1374,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot21" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot20"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot21" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_top = 64.0
 margin_right = 32.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -1040,6 +1422,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -1048,13 +1431,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot22" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot21"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot22" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 32.0
 margin_top = 64.0
 margin_right = 64.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -1080,6 +1480,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -1088,13 +1489,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot23" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot22"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot23" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 64.0
 margin_top = 64.0
 margin_right = 96.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -1120,6 +1538,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -1128,13 +1547,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot24" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot23"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot24" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 96.0
 margin_top = 64.0
 margin_right = 128.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -1160,6 +1596,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -1168,13 +1605,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot25" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot24"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot25" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 128.0
 margin_top = 64.0
 margin_right = 160.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -1200,6 +1654,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -1208,13 +1663,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot26" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot25"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot26" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 160.0
 margin_top = 64.0
 margin_right = 192.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -1240,6 +1712,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -1248,13 +1721,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot27" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot26"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot27" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 192.0
 margin_top = 64.0
 margin_right = 224.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -1280,6 +1770,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -1288,13 +1779,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot28" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot27"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot28" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 224.0
 margin_top = 64.0
 margin_right = 256.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -1320,6 +1828,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -1328,13 +1837,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot29" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot28"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot29" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 256.0
 margin_top = 64.0
 margin_right = 288.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -1360,6 +1886,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -1368,13 +1895,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot30" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot29"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot30" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 288.0
 margin_top = 64.0
 margin_right = 320.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -1400,6 +1944,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -1408,12 +1953,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot31" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot30"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot31" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_top = 96.0
 margin_right = 32.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -1439,6 +2001,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -1447,13 +2010,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot32" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot31"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot32" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 32.0
 margin_top = 96.0
 margin_right = 64.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -1479,6 +2059,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -1487,13 +2068,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot33" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot32"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot33" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 64.0
 margin_top = 96.0
 margin_right = 96.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -1519,6 +2117,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -1527,13 +2126,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot34" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot33"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot34" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 96.0
 margin_top = 96.0
 margin_right = 128.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -1559,6 +2175,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -1567,13 +2184,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot35" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot34"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot35" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 128.0
 margin_top = 96.0
 margin_right = 160.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -1599,6 +2233,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -1607,13 +2242,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot36" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot35"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot36" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 160.0
 margin_top = 96.0
 margin_right = 192.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -1639,6 +2291,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -1647,13 +2300,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot37" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot36"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot37" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 192.0
 margin_top = 96.0
 margin_right = 224.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -1679,6 +2349,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -1687,13 +2358,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot38" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot37"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot38" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 224.0
 margin_top = 96.0
 margin_right = 256.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -1719,6 +2407,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -1727,13 +2416,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot39" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot38"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot39" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 256.0
 margin_top = 96.0
 margin_right = 288.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -1759,6 +2465,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
@@ -1767,13 +2474,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot40" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot39"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot40" type="Button" parent="UI/Inventory/Control/ScrollContainer/GridContainer" groups=[
+"InventorySlots",
+]]
 margin_left = 288.0
 margin_top = 96.0
 margin_right = 320.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -1799,9 +2523,23 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ScrollContainer/GridContainer/Slot40"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -1816,16 +2554,202 @@ margin_left = 0.319977
 margin_top = 0.119999
 margin_right = 0.319992
 margin_bottom = 0.119995
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HotBarMain" type="HBoxContainer" parent="UI/Inventory"]
-anchor_left = 1.0
+[node name="ArmorContainer" type="VBoxContainer" parent="UI/Inventory/Control"]
+margin_left = 40.0
+margin_top = 56.0
+margin_right = 72.0
+margin_bottom = 296.0
+rect_min_size = Vector2( 32, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot1" type="Button" parent="UI/Inventory/Control/ArmorContainer" groups=[
+"InventorySlots",
+]]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 12 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ArmorContainer/Slot1"]
 anchor_right = 1.0
-margin_left = -336.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ArmorContainer/Slot1/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot2" type="Button" parent="UI/Inventory/Control/ArmorContainer" groups=[
+"InventorySlots",
+]]
+margin_top = 36.0
+margin_right = 32.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 12 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ArmorContainer/Slot2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ArmorContainer/Slot2/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot3" type="Button" parent="UI/Inventory/Control/ArmorContainer" groups=[
+"InventorySlots",
+]]
+margin_top = 72.0
+margin_right = 32.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 12 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ArmorContainer/Slot3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ArmorContainer/Slot3/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot4" type="Button" parent="UI/Inventory/Control/ArmorContainer" groups=[
+"InventorySlots",
+]]
+margin_top = 108.0
+margin_right = 32.0
+margin_bottom = 140.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 12 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/Control/ArmorContainer/Slot4"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/Control/ArmorContainer/Slot4/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="HotBarMain" type="HBoxContainer" parent="UI/Inventory"]
+anchor_left = 0.987
+anchor_right = 0.987
+margin_left = -327.68
 margin_top = 8.0
-margin_right = -16.0
+margin_right = -7.68005
 margin_bottom = 40.0
 custom_constants/separation = 0
 __meta__ = {
@@ -1833,13 +2757,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot1" type="Button" parent="UI/Inventory/HotBarMain"]
+[node name="Slot1" type="Button" parent="UI/Inventory/HotBarMain" groups=[
+"InventorySlots",
+]]
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
 custom_styles/hover = ExtResource( 6 )
-custom_styles/pressed = ExtResource( 12 )
+custom_styles/pressed = ExtResource( 14 )
 custom_styles/normal = ExtResource( 12 )
 expand_icon = true
 __meta__ = {
@@ -1889,14 +2815,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot2" type="Button" parent="UI/Inventory/HotBarMain"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/HotBarMain/Slot1"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot2" type="Button" parent="UI/Inventory/HotBarMain" groups=[
+"InventorySlots",
+]]
 margin_left = 32.0
 margin_right = 64.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 12 )
-custom_styles/pressed = ExtResource( 12 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 14 )
 custom_styles/normal = ExtResource( 12 )
 expand_icon = true
 __meta__ = {
@@ -1948,14 +2889,29 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Slot3" type="Button" parent="UI/Inventory/HotBarMain"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/HotBarMain/Slot2"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot3" type="Button" parent="UI/Inventory/HotBarMain" groups=[
+"InventorySlots",
+]]
 margin_left = 64.0
 margin_right = 96.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 12 )
-custom_styles/pressed = ExtResource( 12 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 14 )
 custom_styles/normal = ExtResource( 12 )
 expand_icon = true
 __meta__ = {
@@ -2006,14 +2962,29 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Slot4" type="Button" parent="UI/Inventory/HotBarMain"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/HotBarMain/Slot3"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot4" type="Button" parent="UI/Inventory/HotBarMain" groups=[
+"InventorySlots",
+]]
 margin_left = 96.0
 margin_right = 128.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 12 )
-custom_styles/pressed = ExtResource( 12 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 14 )
 custom_styles/normal = ExtResource( 12 )
 expand_icon = true
 __meta__ = {
@@ -2064,14 +3035,29 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Slot5" type="Button" parent="UI/Inventory/HotBarMain"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/HotBarMain/Slot4"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot5" type="Button" parent="UI/Inventory/HotBarMain" groups=[
+"InventorySlots",
+]]
 margin_left = 128.0
 margin_right = 160.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 12 )
-custom_styles/pressed = ExtResource( 12 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 14 )
 custom_styles/normal = ExtResource( 12 )
 expand_icon = true
 __meta__ = {
@@ -2122,14 +3108,29 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Slot6" type="Button" parent="UI/Inventory/HotBarMain"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/HotBarMain/Slot5"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot6" type="Button" parent="UI/Inventory/HotBarMain" groups=[
+"InventorySlots",
+]]
 margin_left = 160.0
 margin_right = 192.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 12 )
-custom_styles/pressed = ExtResource( 12 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 14 )
 custom_styles/normal = ExtResource( 12 )
 expand_icon = true
 __meta__ = {
@@ -2180,14 +3181,29 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Slot7" type="Button" parent="UI/Inventory/HotBarMain"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/HotBarMain/Slot6"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot7" type="Button" parent="UI/Inventory/HotBarMain" groups=[
+"InventorySlots",
+]]
 margin_left = 192.0
 margin_right = 224.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 12 )
-custom_styles/pressed = ExtResource( 12 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 14 )
 custom_styles/normal = ExtResource( 12 )
 expand_icon = true
 __meta__ = {
@@ -2238,14 +3254,29 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Slot8" type="Button" parent="UI/Inventory/HotBarMain"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/HotBarMain/Slot7"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot8" type="Button" parent="UI/Inventory/HotBarMain" groups=[
+"InventorySlots",
+]]
 margin_left = 224.0
 margin_right = 256.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 12 )
-custom_styles/pressed = ExtResource( 12 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 14 )
 custom_styles/normal = ExtResource( 12 )
 expand_icon = true
 __meta__ = {
@@ -2296,14 +3327,29 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Slot9" type="Button" parent="UI/Inventory/HotBarMain"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/HotBarMain/Slot8"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot9" type="Button" parent="UI/Inventory/HotBarMain" groups=[
+"InventorySlots",
+]]
 margin_left = 256.0
 margin_right = 288.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 12 )
-custom_styles/pressed = ExtResource( 12 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 14 )
 custom_styles/normal = ExtResource( 12 )
 expand_icon = true
 __meta__ = {
@@ -2354,14 +3400,29 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Slot0" type="Button" parent="UI/Inventory/HotBarMain"]
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/HotBarMain/Slot9"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot0" type="Button" parent="UI/Inventory/HotBarMain" groups=[
+"InventorySlots",
+]]
 margin_left = 288.0
 margin_right = 320.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 12 )
-custom_styles/pressed = ExtResource( 12 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 14 )
 custom_styles/normal = ExtResource( 12 )
 expand_icon = true
 __meta__ = {
@@ -2412,53 +3473,188 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/HotBarMain/Slot0"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[connection signal="mouse_entered" from="UI/Inventory/Control/Panels" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/Panels" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
+[connection signal="mouse_entered" from="UI/Inventory/Control/Panels/PlayerProfilePanel" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/Panels/PlayerProfilePanel" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
+[connection signal="mouse_entered" from="UI/Inventory/Control/Panels/InventoryPanel" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/Panels/InventoryPanel" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot1" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot1" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot1" to="UI/Inventory" method="_on_slot_pressed" binds= [ 10 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot2" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot2" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot2" to="UI/Inventory" method="_on_slot_pressed" binds= [ 11 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot3" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot3" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot3" to="UI/Inventory" method="_on_slot_pressed" binds= [ 12 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot4" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot4" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot4" to="UI/Inventory" method="_on_slot_pressed" binds= [ 13 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot5" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot5" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot5" to="UI/Inventory" method="_on_slot_pressed" binds= [ 14 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot6" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot6" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot6" to="UI/Inventory" method="_on_slot_pressed" binds= [ 15 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot7" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot7" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot7" to="UI/Inventory" method="_on_slot_pressed" binds= [ 16 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot8" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot8" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot8" to="UI/Inventory" method="_on_slot_pressed" binds= [ 17 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot9" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot9" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot9" to="UI/Inventory" method="_on_slot_pressed" binds= [ 18 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot10" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot10" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot10" to="UI/Inventory" method="_on_slot_pressed" binds= [ 19 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot11" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot11" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot11" to="UI/Inventory" method="_on_slot_pressed" binds= [ 20 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot12" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot12" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot12" to="UI/Inventory" method="_on_slot_pressed" binds= [ 21 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot13" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot13" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot13" to="UI/Inventory" method="_on_slot_pressed" binds= [ 22 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot14" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot14" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot14" to="UI/Inventory" method="_on_slot_pressed" binds= [ 23 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot15" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot15" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot15" to="UI/Inventory" method="_on_slot_pressed" binds= [ 24 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot16" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot16" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot16" to="UI/Inventory" method="_on_slot_pressed" binds= [ 25 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot17" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot17" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot17" to="UI/Inventory" method="_on_slot_pressed" binds= [ 26 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot18" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot18" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot18" to="UI/Inventory" method="_on_slot_pressed" binds= [ 27 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot19" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot19" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot19" to="UI/Inventory" method="_on_slot_pressed" binds= [ 28 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot20" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot20" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot20" to="UI/Inventory" method="_on_slot_pressed" binds= [ 29 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot21" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot21" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot21" to="UI/Inventory" method="_on_slot_pressed" binds= [ 30 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot22" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot22" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot22" to="UI/Inventory" method="_on_slot_pressed" binds= [ 31 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot23" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot23" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot23" to="UI/Inventory" method="_on_slot_pressed" binds= [ 32 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot24" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot24" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot24" to="UI/Inventory" method="_on_slot_pressed" binds= [ 33 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot25" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot25" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot25" to="UI/Inventory" method="_on_slot_pressed" binds= [ 34 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot26" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot26" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot26" to="UI/Inventory" method="_on_slot_pressed" binds= [ 35 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot27" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot27" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot27" to="UI/Inventory" method="_on_slot_pressed" binds= [ 36 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot28" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot28" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot28" to="UI/Inventory" method="_on_slot_pressed" binds= [ 37 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot29" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot29" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot29" to="UI/Inventory" method="_on_slot_pressed" binds= [ 38 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot30" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot30" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot30" to="UI/Inventory" method="_on_slot_pressed" binds= [ 39 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot31" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot31" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot31" to="UI/Inventory" method="_on_slot_pressed" binds= [ 40 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot32" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot32" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot32" to="UI/Inventory" method="_on_slot_pressed" binds= [ 41 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot33" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot33" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot33" to="UI/Inventory" method="_on_slot_pressed" binds= [ 42 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot34" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot34" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot34" to="UI/Inventory" method="_on_slot_pressed" binds= [ 43 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot35" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot35" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot35" to="UI/Inventory" method="_on_slot_pressed" binds= [ 44 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot36" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot36" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot36" to="UI/Inventory" method="_on_slot_pressed" binds= [ 45 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot37" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot37" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot37" to="UI/Inventory" method="_on_slot_pressed" binds= [ 46 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot38" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot38" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot38" to="UI/Inventory" method="_on_slot_pressed" binds= [ 47 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot39" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot39" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot39" to="UI/Inventory" method="_on_slot_pressed" binds= [ 48 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot40" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot40" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/Control/ScrollContainer/GridContainer/Slot40" to="UI/Inventory" method="_on_slot_pressed" binds= [ 49 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ArmorContainer/Slot1" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ArmorContainer/Slot1" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
+[connection signal="pressed" from="UI/Inventory/Control/ArmorContainer/Slot1" to="UI/Inventory" method="_on_slot_pressed" binds= [ 50 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ArmorContainer/Slot2" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ArmorContainer/Slot2" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
+[connection signal="pressed" from="UI/Inventory/Control/ArmorContainer/Slot2" to="UI/Inventory" method="_on_slot_pressed" binds= [ 51 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ArmorContainer/Slot3" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ArmorContainer/Slot3" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
+[connection signal="pressed" from="UI/Inventory/Control/ArmorContainer/Slot3" to="UI/Inventory" method="_on_slot_pressed" binds= [ 52 ]]
+[connection signal="mouse_entered" from="UI/Inventory/Control/ArmorContainer/Slot4" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Control/ArmorContainer/Slot4" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
+[connection signal="pressed" from="UI/Inventory/Control/ArmorContainer/Slot4" to="UI/Inventory" method="_on_slot_pressed" binds= [ 53 ]]
+[connection signal="mouse_entered" from="UI/Inventory/HotBarMain" to="." method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/HotBarMain" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
+[connection signal="mouse_entered" from="UI/Inventory/HotBarMain/Slot1" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/HotBarMain/Slot1" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/HotBarMain/Slot1" to="UI/Inventory" method="_on_slot_pressed" binds= [ 0 ]]
+[connection signal="mouse_entered" from="UI/Inventory/HotBarMain/Slot2" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/HotBarMain/Slot2" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/HotBarMain/Slot2" to="UI/Inventory" method="_on_slot_pressed" binds= [ 1 ]]
+[connection signal="mouse_entered" from="UI/Inventory/HotBarMain/Slot3" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/HotBarMain/Slot3" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/HotBarMain/Slot3" to="UI/Inventory" method="_on_slot_pressed" binds= [ 2 ]]
+[connection signal="mouse_entered" from="UI/Inventory/HotBarMain/Slot4" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/HotBarMain/Slot4" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/HotBarMain/Slot4" to="UI/Inventory" method="_on_slot_pressed" binds= [ 3 ]]
+[connection signal="mouse_entered" from="UI/Inventory/HotBarMain/Slot5" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/HotBarMain/Slot5" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/HotBarMain/Slot5" to="UI/Inventory" method="_on_slot_pressed" binds= [ 4 ]]
+[connection signal="mouse_entered" from="UI/Inventory/HotBarMain/Slot6" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/HotBarMain/Slot6" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/HotBarMain/Slot6" to="UI/Inventory" method="_on_slot_pressed" binds= [ 5 ]]
+[connection signal="mouse_entered" from="UI/Inventory/HotBarMain/Slot7" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/HotBarMain/Slot7" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/HotBarMain/Slot7" to="UI/Inventory" method="_on_slot_pressed" binds= [ 6 ]]
+[connection signal="mouse_entered" from="UI/Inventory/HotBarMain/Slot8" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/HotBarMain/Slot8" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/HotBarMain/Slot8" to="UI/Inventory" method="_on_slot_pressed" binds= [ 7 ]]
+[connection signal="mouse_entered" from="UI/Inventory/HotBarMain/Slot9" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/HotBarMain/Slot9" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/HotBarMain/Slot9" to="UI/Inventory" method="_on_slot_pressed" binds= [ 8 ]]
+[connection signal="mouse_entered" from="UI/Inventory/HotBarMain/Slot0" to="UI/Inventory" method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/HotBarMain/Slot0" to="UI/Inventory" method="_on_Inventory_mouse_exited"]
 [connection signal="pressed" from="UI/Inventory/HotBarMain/Slot0" to="UI/Inventory" method="_on_slot_pressed" binds= [ 9 ]]

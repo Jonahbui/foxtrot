@@ -1,12 +1,12 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Textures/SplashScreen/logo.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/SplashScreen/splash_screen.gd" type="Script" id=1]
 [ext_resource path="res://Textures/SplashScreen/solid_off_black.png" type="Texture" id=2]
-[ext_resource path="res://Scenes/SplashScreen/splash_screen.gd" type="Script" id=3]
-[ext_resource path="res://Audio/SoundEffects/SplashScreen/FoxBark.wav" type="AudioStream" id=4]
+[ext_resource path="res://Audio/SoundEffects/SplashScreen/FoxBark.wav" type="AudioStream" id=3]
+[ext_resource path="res://Textures/SplashScreen/logo.png" type="Texture" id=4]
 
 [node name="SplashScreen" type="Node2D"]
-script = ExtResource( 3 )
+script = ExtResource( 1 )
 
 [node name="Canvas" type="CanvasLayer" parent="."]
 
@@ -29,7 +29,7 @@ margin_top = -110.0
 margin_right = 412.0
 margin_bottom = 402.0
 rect_scale = Vector2( 0.4, 0.4 )
-texture = ExtResource( 1 )
+texture = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -39,7 +39,7 @@ wait_time = 4.0
 autostart = true
 
 [node name="AudioSource" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 4 )
+stream = ExtResource( 3 )
 volume_db = -16.0
 
 [connection signal="timeout" from="TransitionTimer" to="." method="_on_Timer_timeout"]

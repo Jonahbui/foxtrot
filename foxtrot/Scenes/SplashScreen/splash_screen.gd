@@ -9,5 +9,5 @@ func _ready():
 
 # Loads the main menu
 func _on_Timer_timeout():
-  if get_tree().change_scene("res://Scenes/MainMenu/main_menu.tscn") != OK:
+  if get_tree().change_scene(Globals.SPATH_MAIN_MENU) != OK:
     print("[Base] Error in loading main menu from splash screen.")

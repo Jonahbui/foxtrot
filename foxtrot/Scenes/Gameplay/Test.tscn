@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Textures/Gameplay/dev_tiles.tres" type="TileSet" id=1]
 
-[node name="Level2" type="Node2D"]
+[node name="Level" type="Node2D"]
 
 [node name="World" type="Node2D" parent="."]
 
@@ -17,3 +17,5 @@ tile_data = PoolIntArray( 196617, 3, 0, 262144, 0, 0, 262152, 3, 0, 262154, 3, 0
 
 [node name="Spawnpoint" type="Node2D" parent="."]
 position = Vector2( 92.3431, 222.968 )
+
+[node name="Items" type="Node2D" parent="."]

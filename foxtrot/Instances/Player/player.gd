@@ -2,12 +2,23 @@
 #   collisions.  We move it manually with move_and_slide().
 extends KinematicBody2D
 
-# VARIABLES---------------------------------
+# --------------------------------------------------------------------------------------------------
+# Player Information
+# --------------------------------------------------------------------------------------------------
 var charname : String = ""
 var health : int = 100
 var money  : int = 0
 var damageMultiplier = 1.0
 var inWater = false
+var direction : = Vector2(1,0)
+
+# Forward is defined to be right
+var forward : bool = true
+
+# --------------------------------------------------------------------------------------------------
+# References
+# --------------------------------------------------------------------------------------------------
+onready var inventory = $UI/Inventory
 
 # "gravity" is an acceleration:  it's that many units
 #   per second per second.  It's positive because "down" on the
@@ -29,7 +40,7 @@ func _input(event):
 
 func _physics_process(delta: float) -> void:
   # If the dev console is open then do not move.
-  if Globals.isDevConsoleOpen :
+  if Globals.pause_flags != 0 :
     return
   # If the player is in the middle of a jump (the Y velocity is
   #   less than zero, indicating the player is moving UP on the
@@ -47,7 +58,7 @@ func _physics_process(delta: float) -> void:
 
   # "direction.y" is 1 when the player is falling.
   # direction.y is -1 when the player has just started a JUMP.
-  var direction : = Vector2(
+  direction = Vector2(
     Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
     -1 if Input.is_action_just_pressed("jump") and is_on_floor() else 1
    )
@@ -96,4 +107,4 @@ func _physics_process(delta: float) -> void:
 
 func toggle_inventory():
   $UI/Inventory/Control.visible = !$UI/Inventory/Control.visible
-  $UI/Hud.visible = !$UI/Inventory/Control.visible
+  Globals.SetFlag(Globals.FLAG_INVENTORY, $UI/Inventory/Control.visible)
