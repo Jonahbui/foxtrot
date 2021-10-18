@@ -27,9 +27,16 @@ func _ready():
   cmdline = self.get_node(cmdline)
   logs = self.get_node(logs)
   
+  print()
   if Signals.connect("on_player_death", self, "OnDeath") != OK:
     print("[Base] Error. Failed to connect to signal on_player_death...")
   
+  if Signals.connect("on_play_sfx", self, "PlaySfx") != OK:
+    print("[Base] Error. Failed to connect to signal on_play_sfx...")
+    
+  if Signals.connect("on_play_music", self, "PlayMusic") != OK:
+    print("[Base] Error. Failed to connect to signal on_play_music...")
+    
 func ToggleDevConsole():
   # Set the current visibility to the opposite of the current visibility
   dev_console.visible = !dev_console.visible
@@ -39,16 +46,21 @@ func ToggleDevConsole():
   if dev_console.visible:
     cmdline.grab_focus()
  
-func PlayAudio(clip, source):
-  # TO FIX
-  var audioclip = load("res://Audio/SoundEffects/plop16.mp3")
   
-  if Globals.source.music == source:
-    $Audio/MusicStream.stream = audioclip
-  else:
-    $Audio/SFXStream.stream = audioclip
+func PlayMusic(clip):
+  var audio = load(clip)
+  
+  if clip:
+    $Audio/MusicStream.stream = audio    
+    $Audio/MusicStream.play()
+  
+func PlaySfx(clip):
+  var audio = load(clip)
+    
+  if clip:
+    $Audio/SFXStream.stream = audio
     $Audio/SFXStream.play()
-  
+     
 func LoadLevel(path):
   ToggleLoadingScreen(true)
   

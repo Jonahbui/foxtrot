@@ -50,6 +50,9 @@ func ToggleStore(forceState=false, state=false):
     $UI/Store.visible = state
   else:
     $UI/Store.visible = !$UI/Store.visible
+    
+  if $UI/Store.visible:
+    Signals.emit_signal("on_play_sfx", "res://Audio/SoundEffects/cash_register.mp3")
   
   # Set playser as interacting or not
   Globals.SetFlag(Globals.FLAG_INTERACTING, $UI/Store.visible)

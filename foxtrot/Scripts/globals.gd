@@ -85,16 +85,6 @@ func ToggleFlag(flag):
   SetFlag(flag, result)
   return result
 
-enum source{
-  music,
-  sfx
- }
-
-enum clips{
-  pop
- }
-
-
 enum ItemProcess{
   World,
   Player
