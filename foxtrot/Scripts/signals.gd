@@ -11,3 +11,5 @@ signal on_play_music(clip)
 
 # Inform the game to play the clip in the sfx source
 signal on_play_sfx(clip)
+
+signal on_change_base_level(level)

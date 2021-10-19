@@ -69,8 +69,7 @@ func _ready():
   player = self.get_tree().get_root().get_node_or_null("/root/Base/Player")  
   playerInventory = self.get_tree().get_root().get_node_or_null("/root/Base/Player/Inventory")
   if playerInventory == null: playerInventory = self.get_tree().get_root().get_node_or_null("Player/Inventory")
-  if self.connect("play_audio", self.get_tree().get_root().get_node_or_null("/root/Base"), "PlayAudio") != OK:
-    print("[Base] Failed to connect audio...")
+
   InitalizeInventoryUI()
   InitializeInventory()
 
@@ -244,7 +243,7 @@ func RefreshInventoryForItemInUse():
   
 func _on_slot_pressed(slot_num):
   print("[Inventory] Slot #%d selected." % [slot_num])
-  
+  Signals.emit_signal("on_play_sfx", "res://Audio/SoundEffects/wet_click.wav")
   if selectedSlot1 == -1:
     # Ignore first selections if the slot is null. Cannot select anything that 
     # is null first. It is okay to select a second slot that is null, as long as
@@ -296,6 +295,8 @@ func DropSelectedItem():
 
 func _on_Inventory_mouse_entered():
   isInventoryHover = true
+  Globals.isManagingInv = true
 
 func _on_Inventory_mouse_exited():
   isInventoryHover = false
+  Globals.isManagingInv = false  

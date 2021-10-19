@@ -11,5 +11,5 @@ dest_files=[ "res://.import/cash_register.mp3-c1928fc94e352953a7f2516f851d768c.m
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
