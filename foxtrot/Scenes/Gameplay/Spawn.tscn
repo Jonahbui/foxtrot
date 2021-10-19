@@ -100,6 +100,9 @@ collision_mask = 2
 position = Vector2( 9.81845, 220.633 )
 shape = SubResource( 5 )
 
+[node name="KinematicBody2D" parent="World" instance=ExtResource( 3 )]
+position = Vector2( 559, 300 )
+
 [node name="Spawnpoint" type="Node2D" parent="."]
 position = Vector2( 210.547, 248.599 )
 
