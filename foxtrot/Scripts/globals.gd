@@ -51,6 +51,7 @@ const LEVEL_PATH = [
 var isGamePlaying : bool = false
 var isNewGame     : bool = false
 var isHardcoreMode: bool = false
+var isManagingInv : bool = false
 
 # Possible pause 'like' events that can occur
 const FLAG_DEV_OPEN = 1
@@ -84,16 +85,6 @@ func ToggleFlag(flag):
   var result = !IsFlagSet(flag)
   SetFlag(flag, result)
   return result
-
-enum source{
-  music,
-  sfx
- }
-
-enum clips{
-  pop
- }
-
 
 enum ItemProcess{
   World,

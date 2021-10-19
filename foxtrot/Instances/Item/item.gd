@@ -21,7 +21,7 @@ func _physics_process(delta: float) -> void:
   velocity = move_and_slide( velocity, Vector2.UP )
 
 func _input(event):
-  if Globals.pause_flags != 0:
+  if Globals.pause_flags != 0 || Globals.isManagingInv:
     return
   
   if event.is_action_pressed("fire"):

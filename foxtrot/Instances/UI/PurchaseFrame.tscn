@@ -2,19 +2,19 @@
 
 [ext_resource path="res://Textures/UI/purchase_item_frame.png" type="Texture" id=1]
 [ext_resource path="res://Fonts/thaelahfat_pure_16x.tres" type="DynamicFont" id=2]
-[ext_resource path="res://Textures/UI/purchase_frame.png" type="Texture" id=3]
+[ext_resource path="res://Textures/UI/purchase_frame_normal.png" type="Texture" id=3]
 [ext_resource path="res://Fonts/thaelahfat_pure_16x_minspace.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Instances/UI/purchase_frame.gd" type="Script" id=5]
-[ext_resource path="res://Textures/UI/button_hover.png" type="Texture" id=6]
-[ext_resource path="res://Textures/UI/button_pressed.png" type="Texture" id=7]
+[ext_resource path="res://Textures/UI/purchase_frame_pressed.png" type="Texture" id=6]
+[ext_resource path="res://Textures/UI/purchase_frame_hover.png" type="Texture" id=7]
 
 [node name="PurchaseFrame" type="TextureButton"]
 margin_right = 152.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 152, 56 )
 texture_normal = ExtResource( 3 )
-texture_pressed = ExtResource( 7 )
-texture_hover = ExtResource( 6 )
+texture_pressed = ExtResource( 6 )
+texture_hover = ExtResource( 7 )
 expand = true
 script = ExtResource( 5 )
 __meta__ = {
