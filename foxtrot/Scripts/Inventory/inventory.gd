@@ -5,8 +5,6 @@ extends Node
 
 const MAX_HOTBAR = 10
 
-signal play_audio(clip, source)
-
 export(String, FILE) var hotbar_hover
 export(String, FILE) var hotbar_pressed
 export(String, FILE) var hotbar_normal
@@ -71,8 +69,7 @@ func _ready():
   player = self.get_tree().get_root().get_node_or_null("/root/Base/Player")  
   playerInventory = self.get_tree().get_root().get_node_or_null("/root/Base/Player/Inventory")
   if playerInventory == null: playerInventory = self.get_tree().get_root().get_node_or_null("Player/Inventory")
-  if self.connect("play_audio", self.get_tree().get_root().get_node_or_null("/root/Base"), "PlayAudio") != OK:
-    print("[Base] Failed to connect audio...")
+
   InitalizeInventoryUI()
   InitializeInventory()
 
@@ -106,7 +103,7 @@ func GetNextSlot(moveForward=true):
   SetActiveSlot(new_slot_id, prev_slot_id)
 
 func SetActiveSlot(active_slot_id : int, prev_slot_id : int, ignoreSound=false):
-  if not ignoreSound: emit_signal("play_audio", 1, Globals.source.sfx)
+  if not ignoreSound: Signals.emit_signal("on_play_sfx", "res://Audio/SoundEffects/plop16.mp3")
   if active_slot_id == prev_slot_id: return
   
   curr_slot_id = active_slot_id
@@ -246,7 +243,7 @@ func RefreshInventoryForItemInUse():
   
 func _on_slot_pressed(slot_num):
   print("[Inventory] Slot #%d selected." % [slot_num])
-  
+  Signals.emit_signal("on_play_sfx", "res://Audio/SoundEffects/wet_click.wav")
   if selectedSlot1 == -1:
     # Ignore first selections if the slot is null. Cannot select anything that 
     # is null first. It is okay to select a second slot that is null, as long as
@@ -298,6 +295,8 @@ func DropSelectedItem():
 
 func _on_Inventory_mouse_entered():
   isInventoryHover = true
+  Globals.isManagingInv = true
 
 func _on_Inventory_mouse_exited():
   isInventoryHover = false
+  Globals.isManagingInv = false  

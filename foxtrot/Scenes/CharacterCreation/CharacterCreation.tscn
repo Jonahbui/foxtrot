@@ -9,7 +9,7 @@
 [ext_resource path="res://Textures/UI/button_hover.tres" type="StyleBox" id=7]
 [ext_resource path="res://Textures/UI/button_pressed.tres" type="StyleBox" id=8]
 [ext_resource path="res://Textures/UI/input_normal.png" type="Texture" id=9]
-[ext_resource path="res://Textures/UI/input_icon_reset.png" type="Texture" id=10]
+[ext_resource path="res://Textures/UI/input_icon_reset_normal.png" type="Texture" id=10]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 9 )
