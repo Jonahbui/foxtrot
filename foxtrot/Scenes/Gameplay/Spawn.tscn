@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Textures/Gameplay/dev_tiles.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Gameplay/spawn.gd" type="Script" id=2]
+[ext_resource path="res://Instances/Enemy/Enemy.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 21.8409, 33.8456 )
@@ -23,6 +24,9 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/PortalShop"]
 position = Vector2( 26.6729, 285.393 )
 shape = SubResource( 1 )
+
+[node name="KinematicBody2D" parent="World" instance=ExtResource( 3 )]
+position = Vector2( 559, 300 )
 
 [node name="Spawnpoint" type="Node2D" parent="."]
 position = Vector2( 172.492, 269.41 )
