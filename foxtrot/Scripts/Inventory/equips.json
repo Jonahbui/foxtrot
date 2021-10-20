@@ -1,11 +1,31 @@
 ﻿{
-    "0" : {
+    "0"    :	{
       "name"	   	: "Bubblenade",
       "type"     	: "weapon",
-      "subtype"   : "stackable",
+      "subtype"   	: "stackable",
       "price"	   	: 0,
       "resource" 	: "res://Textures/Gameplay/Weapons/bubble_nade.png",
       "instance" 	: "res://Instances/Item/Weapons/BubbleNade.tscn",
       "desc"		: "Explode your enemies with the power of bubbles!"
-    }
+    },
+	"512"  :  	{
+      "name"	   	: "Diver Suit",
+      "type"     	: "armor",
+      "subtype"   	: "armor",
+      "price"	   	: 0,
+      "resource" 	: "res://Textures/Gameplay/Armor/diver_suit.png",
+      "instance" 	: "res://Instances/Item/Armor/DiverSuit.tscn",
+      "desc"		: "Start your journey here!"
+	},
+	
+	"1024" : 	{
+      "name"	   	: "Blood Bag",
+      "type"     	: "item",
+      "subtype"   	: "stackable",
+      "price"	   	: 0,
+      "resource" 	: "res://Textures/Gameplay/Items/blood_bag.png",
+      "instance" 	: "",
+      "desc"		: "If you're bleeding, just put more blood back in ya. It's that simple! IANAD"
+	}
+	
 }

@@ -3,7 +3,16 @@ extends Node
 # Note: in scene hierarchy the Hud must be behind Invetory or else the hotbar
 # cannot be clicked...
 
+# --------------------------------------------------------------------------------------------------
+# Slots Information
+# --------------------------------------------------------------------------------------------------
+# 54 slots are expected in total:
+#   - Slots 0-9 are for the hotbar slots
+#   - Slots 10-49 are for the inventory slots
+#   - Slot 50 is for armor
+#   - Slots 51-53 are for accessories
 const MAX_HOTBAR = 10
+const ARMOR_SLOTS = 4
 
 export(String, FILE) var hotbar_hover
 export(String, FILE) var hotbar_pressed
@@ -90,6 +99,10 @@ func InitalizeInventoryUI():
   # Append inventory slots
   var inv_slots = $Control/ScrollContainer/GridContainer
   slots.append_array(inv_slots.get_children())
+  
+  # Append armor/accessories slots
+  var armor_slots = $Control/ArmorContainer
+  slots.append_array(armor_slots.get_children())
 
 func GetNextSlot(moveForward=true):
   var prev_slot_id = curr_slot_id
@@ -123,7 +136,8 @@ func SetActiveSlot(active_slot_id : int, prev_slot_id : int, ignoreSound=false):
     Helper.SetActive(inventory[active_slot_id], true)
 
 func FindOpenSlot():
-  for i in range(0, slots.size()):
+  # The last ARMOR_SLOTS slots are dedicated for armors/accessories and should not be searched
+  for i in range(0, slots.size() - ARMOR_SLOTS):
     if inventory[i] == null:
       return i
   return null
@@ -160,7 +174,9 @@ func AddItem(item_to_add):
         if overflow == 0:
           return
       
-  # Create the item if necessary
+  # Create the item if necessary:
+  #   - When only an ID is presented, we create the item and add it
+  #   - If there is an overflow from stacking, create an item
   var item = null
   if typeof(item_to_add) == TYPE_INT:
     item = load(Equips.equips[str(item_to_add)]["instance"]).instance()
@@ -256,16 +272,37 @@ func _on_slot_pressed(slot_num):
     # Set the second index of slot to swap contents with
     selectedSlot2 = slot_num
 
+    # TF: The player can swap armor to inventory slot, which permits items into armor slot when swapped 
+    # TF: The player can probalby swap armor and accessories around each other
+    
+    # If the player tried to equip invalid items into the armor/accessories slot, reject it.
+    if selectedSlot2 >= slots.size() - ARMOR_SLOTS:
+      if Equips.equips[str(inventory[selectedSlot1].id)]["type"] == "armor":
+        match Equips.equips[str(inventory[selectedSlot1].id)]["subtype"]:
+          "armor":
+            if selectedSlot2 != slots.size() - ARMOR_SLOTS:
+              print("[Inventory] %s cannot be equipped here..." % [inventory[selectedSlot1].get_name()])
+              return
+          "accessory":
+            if selectedSlot2 <= slots.size() - ARMOR_SLOTS:
+              print("[Inventory] %s cannot be equipped here..." % [inventory[selectedSlot1].get_name()])
+              return
+      else:
+        print("[Inventory] %s is not an equippable armor/accesory..." % [inventory[selectedSlot1].get_name()])        
+        return
+
     # If the slot indices are equal, ignore the swap request. Redundant.
     if selectedSlot1 == selectedSlot2: return
     
     # Swap places in inventory
     if inventory[selectedSlot1] != null && inventory[selectedSlot2] != null:
+      print("Swapping from slot #%d (%s) to slot #%d(%s)..." % [selectedSlot1, inventory[selectedSlot1].get_name(), selectedSlot2, inventory[selectedSlot2].get_name()])      
       var temp = inventory[selectedSlot1]
       inventory[selectedSlot1] = inventory[selectedSlot2]
       inventory[selectedSlot2] = temp
     # Move slot 1 item to slot 2
     elif inventory[selectedSlot1] != null && inventory[selectedSlot2] == null:
+      print("Swapping from slot #%d (%s) to slot #%d..." % [selectedSlot1, inventory[selectedSlot1].get_name(), selectedSlot2])      
       inventory[selectedSlot2] = inventory[selectedSlot1]
       inventory[selectedSlot1] = null
     
