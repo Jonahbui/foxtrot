@@ -272,47 +272,64 @@ func _on_slot_pressed(slot_num):
     # Set the second index of slot to swap contents with
     selectedSlot2 = slot_num
 
-    # TF: The player can swap armor to inventory slot, which permits items into armor slot when swapped 
-    # TF: The player can probalby swap armor and accessories around each other
-    
-    # If the player tried to equip invalid items into the armor/accessories slot, reject it.
-    if selectedSlot2 >= slots.size() - ARMOR_SLOTS:
-      if Equips.equips[str(inventory[selectedSlot1].id)]["type"] == "armor":
-        match Equips.equips[str(inventory[selectedSlot1].id)]["subtype"]:
-          "armor":
-            if selectedSlot2 != slots.size() - ARMOR_SLOTS:
-              print("[Inventory] %s cannot be equipped here..." % [inventory[selectedSlot1].get_name()])
-              return
-          "accessory":
-            if selectedSlot2 <= slots.size() - ARMOR_SLOTS:
-              print("[Inventory] %s cannot be equipped here..." % [inventory[selectedSlot1].get_name()])
-              return
-      else:
-        print("[Inventory] %s is not an equippable armor/accesory..." % [inventory[selectedSlot1].get_name()])        
-        return
+
 
     # If the slot indices are equal, ignore the swap request. Redundant.
-    if selectedSlot1 == selectedSlot2: return
+    if selectedSlot1 != selectedSlot2: 
     
-    # Swap places in inventory
-    if inventory[selectedSlot1] != null && inventory[selectedSlot2] != null:
-      print("Swapping from slot #%d (%s) to slot #%d(%s)..." % [selectedSlot1, inventory[selectedSlot1].get_name(), selectedSlot2, inventory[selectedSlot2].get_name()])      
-      var temp = inventory[selectedSlot1]
-      inventory[selectedSlot1] = inventory[selectedSlot2]
-      inventory[selectedSlot2] = temp
-    # Move slot 1 item to slot 2
-    elif inventory[selectedSlot1] != null && inventory[selectedSlot2] == null:
-      print("Swapping from slot #%d (%s) to slot #%d..." % [selectedSlot1, inventory[selectedSlot1].get_name(), selectedSlot2])      
-      inventory[selectedSlot2] = inventory[selectedSlot1]
-      inventory[selectedSlot1] = null
-    
-    RefreshInventorySlots([selectedSlot1, selectedSlot2])
-    
-    # Reset the sentinel values used to determine which slots are selecte
-    # -1 means no slot selected
-    selectedSlot1 = -1
-    selectedSlot2 = -1
-  
+      # Swap places in inventory for item in slot 1 with item in slot2
+      if inventory[selectedSlot1] != null && inventory[selectedSlot2] != null:
+        
+        var item_slot1 = GetEquip(inventory[selectedSlot1])
+        var item_slot2 = GetEquip(inventory[selectedSlot2])
+        
+        # If swapping armor with non-armor piece or swapping non-armor into non armor slot, reject.
+        if ( (item_slot1["type"] == "armor" && item_slot2["type"] != "armor") || (item_slot1["type"] != "armor" && item_slot2["type"] == "armor") ) && (selectedSlot1 == slots.size() - ARMOR_SLOTS || selectedSlot2 == slots.size() - ARMOR_SLOTS):
+          print("Cannot swap from slot #%d (%s) to slot #%d(%s). Invalid slots for items..." % [selectedSlot1, inventory[selectedSlot1].get_name(), selectedSlot2, inventory[selectedSlot2].get_name()])            
+          ResetSelection()
+          return
+        
+        # If swapping an armor piece with accessory piece in equip slots, reject.
+        if ( (item_slot1["subtype"] == "accessory" && item_slot2["subtype"] != "accessory") || (item_slot1["subtype"] != "accessory" && item_slot2["subtype"] == "accessory") ) && (selectedSlot1 > slots.size() - ARMOR_SLOTS || selectedSlot2 > slots.size() - ARMOR_SLOTS):
+          print("Cannot swap from slot #%d (%s) to slot #%d(%s). Invalid slots for items..." % [selectedSlot1, inventory[selectedSlot1].get_name(), selectedSlot2, inventory[selectedSlot2].get_name()])            
+          ResetSelection()
+          return
+
+        print("Swapping from slot #%d (%s) to slot #%d(%s)..." % [selectedSlot1, inventory[selectedSlot1].get_name(), selectedSlot2, inventory[selectedSlot2].get_name()])      
+        var temp = inventory[selectedSlot1]
+        inventory[selectedSlot1] = inventory[selectedSlot2]
+        inventory[selectedSlot2] = temp
+      # Move slot 1 item to slot 2
+      elif inventory[selectedSlot1] != null && inventory[selectedSlot2] == null:
+        
+        # If moving non-armor piece to equip, reject.
+        if GetEquip(inventory[selectedSlot1])["type"] != "armor" && selectedSlot2 == slots.size() - ARMOR_SLOTS:
+          print("Cannot swap from slot #%d (%s) to slot #%d. Invalid slots for items..." % [selectedSlot1, inventory[selectedSlot1].get_name(), selectedSlot2])      
+          ResetSelection()
+          return
+          
+        # If moving non-accessory piece to equip, reject.
+        if GetEquip(inventory[selectedSlot1])["subtype"] != "accessory" && selectedSlot2 > slots.size() - ARMOR_SLOTS:
+          print("Cannot swap from slot #%d (%s) to slot #%d. Invalid slots for items..." % [selectedSlot1, inventory[selectedSlot1].get_name(), selectedSlot2])      
+          ResetSelection()
+          return
+        
+        # Need to check for swapping of armor/accessory
+        
+        print("Swapping from slot #%d (%s) to slot #%d..." % [selectedSlot1, inventory[selectedSlot1].get_name(), selectedSlot2])      
+        inventory[selectedSlot2] = inventory[selectedSlot1]
+        inventory[selectedSlot1] = null
+      
+      RefreshInventorySlots([selectedSlot1, selectedSlot2])
+      ResetSelection()
+
+
+func ResetSelection():
+  # Reset the sentinel values used to determine which slots are selected
+  # -1 means no slot selected
+  selectedSlot1 = -1
+  selectedSlot2 = -1
+
 func DropCurrentItem():
   DropItem(curr_slot_id)
 
@@ -337,3 +354,6 @@ func _on_Inventory_mouse_entered():
 func _on_Inventory_mouse_exited():
   isInventoryHover = false
   Globals.isManagingInv = false  
+
+func GetEquip(item):
+  return Equips.equips[str(item.id)]
