@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bubble_nade.png-4eb86f039b53a9b6e15ba4581fc086b6.stex"
+path="res://.import/diver_suit.png-e0a8747adbbfddf36f1c8c7fb550c687.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Gameplay/Weapons/bubble_nade.png"
-dest_files=[ "res://.import/bubble_nade.png-4eb86f039b53a9b6e15ba4581fc086b6.stex" ]
+source_file="res://Textures/Gameplay/Armor/diver_suit.png"
+dest_files=[ "res://.import/diver_suit.png-e0a8747adbbfddf36f1c8c7fb550c687.stex" ]
 
 [params]
 

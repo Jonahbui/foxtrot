@@ -3,7 +3,17 @@ extends Node
 # Note: in scene hierarchy the Hud must be behind Invetory or else the hotbar
 # cannot be clicked...
 
+# --------------------------------------------------------------------------------------------------
+# Slots Information
+# --------------------------------------------------------------------------------------------------
+# 54 slots are expected in total:
+#   - Slots 0-9 are for the hotbar slots
+#   - Slots 10-49 are for the inventory slots
+#   - Slot 50 is for armor
+#   - Slots 51-53 are for accessories
 const MAX_HOTBAR = 10
+const ARMOR_SLOTS = 4
+var armor_slot_id : int
 
 export(String, FILE) var hotbar_hover
 export(String, FILE) var hotbar_pressed
@@ -81,6 +91,8 @@ func InitializeInventory():
   ## Establish the inventory array to be the size of the number of slots available
   for i in range(0, slots.size()):
     inventory[i] = null
+  
+  armor_slot_id = slots.size() - ARMOR_SLOTS
 
 func InitalizeInventoryUI():
   # Append hotbar slots
@@ -90,6 +102,10 @@ func InitalizeInventoryUI():
   # Append inventory slots
   var inv_slots = $Control/ScrollContainer/GridContainer
   slots.append_array(inv_slots.get_children())
+  
+  # Append armor/accessories slots
+  var armor_slots = $Control/ArmorContainer
+  slots.append_array(armor_slots.get_children())
 
 func GetNextSlot(moveForward=true):
   var prev_slot_id = curr_slot_id
@@ -123,7 +139,8 @@ func SetActiveSlot(active_slot_id : int, prev_slot_id : int, ignoreSound=false):
     Helper.SetActive(inventory[active_slot_id], true)
 
 func FindOpenSlot():
-  for i in range(0, slots.size()):
+  # The last ARMOR_SLOTS slots are dedicated for armors/accessories and should not be searched
+  for i in range(0, armor_slot_id):
     if inventory[i] == null:
       return i
   return null
@@ -160,7 +177,9 @@ func AddItem(item_to_add):
         if overflow == 0:
           return
       
-  # Create the item if necessary
+  # Create the item if necessary:
+  #   - When only an ID is presented, we create the item and add it
+  #   - If there is an overflow from stacking, create an item
   var item = null
   if typeof(item_to_add) == TYPE_INT:
     item = load(Equips.equips[str(item_to_add)]["instance"]).instance()
@@ -257,25 +276,61 @@ func _on_slot_pressed(slot_num):
     selectedSlot2 = slot_num
 
     # If the slot indices are equal, ignore the swap request. Redundant.
-    if selectedSlot1 == selectedSlot2: return
+    if selectedSlot1 != selectedSlot2: 
     
-    # Swap places in inventory
-    if inventory[selectedSlot1] != null && inventory[selectedSlot2] != null:
-      var temp = inventory[selectedSlot1]
-      inventory[selectedSlot1] = inventory[selectedSlot2]
-      inventory[selectedSlot2] = temp
-    # Move slot 1 item to slot 2
-    elif inventory[selectedSlot1] != null && inventory[selectedSlot2] == null:
-      inventory[selectedSlot2] = inventory[selectedSlot1]
-      inventory[selectedSlot1] = null
-    
-    RefreshInventorySlots([selectedSlot1, selectedSlot2])
-    
-    # Reset the sentinel values used to determine which slots are selecte
-    # -1 means no slot selected
-    selectedSlot1 = -1
-    selectedSlot2 = -1
-  
+      # Swap places in inventory for item in slot 1 with item in slot2
+      if inventory[selectedSlot1] != null && inventory[selectedSlot2] != null:
+        
+        var item_slot1 = GetEquip(inventory[selectedSlot1])
+        var item_slot2 = GetEquip(inventory[selectedSlot2])
+        
+        # If swapping armor with non-armor piece or swapping non-armor into non armor slot, reject.
+        if ( (item_slot1["type"] == "armor" && item_slot2["type"] != "armor") || (item_slot1["type"] != "armor" && item_slot2["type"] == "armor") ) && (selectedSlot1 == armor_slot_id || selectedSlot2 == armor_slot_id):
+          print("Cannot swap from slot #%d (%s) to slot #%d(%s). Invalid slots for items..." % [selectedSlot1, inventory[selectedSlot1].get_name(), selectedSlot2, inventory[selectedSlot2].get_name()])            
+          ResetSelection()
+          return
+        
+        # If swapping an armor piece with accessory piece in equip slots, reject.
+        if ( (item_slot1["subtype"] == "accessory" && item_slot2["subtype"] != "accessory") || (item_slot1["subtype"] != "accessory" && item_slot2["subtype"] == "accessory") ) && (selectedSlot1 > armor_slot_id || selectedSlot2 > armor_slot_id):
+          print("Cannot swap from slot #%d (%s) to slot #%d(%s). Invalid slots for items..." % [selectedSlot1, inventory[selectedSlot1].get_name(), selectedSlot2, inventory[selectedSlot2].get_name()])            
+          ResetSelection()
+          return
+
+        print("Swapping from slot #%d (%s) to slot #%d(%s)..." % [selectedSlot1, inventory[selectedSlot1].get_name(), selectedSlot2, inventory[selectedSlot2].get_name()])      
+        var temp = inventory[selectedSlot1]
+        inventory[selectedSlot1] = inventory[selectedSlot2]
+        inventory[selectedSlot2] = temp
+      
+      # Move slot 1 item to slot 2
+      elif inventory[selectedSlot1] != null && inventory[selectedSlot2] == null:
+        
+        var item_slot1 = GetEquip(inventory[selectedSlot1])
+        
+        # If moving non-armor piece to equip, reject.
+        if item_slot1["subtype"] != "armor" && selectedSlot2 == armor_slot_id:
+          print("Cannot swap from slot #%d (%s) to slot #%d. Invalid slots for items..." % [selectedSlot1, inventory[selectedSlot1].get_name(), selectedSlot2])      
+          ResetSelection()
+          return
+          
+        # If moving non-accessory piece to equip, reject.
+        elif item_slot1["subtype"] != "accessory" && selectedSlot2 > armor_slot_id:
+          print("Cannot swap from slot #%d (%s) to slot #%d. Invalid slots for items..." % [selectedSlot1, inventory[selectedSlot1].get_name(), selectedSlot2])      
+          ResetSelection()
+          return
+        
+        print("Swapping from slot #%d (%s) to slot #%d..." % [selectedSlot1, inventory[selectedSlot1].get_name(), selectedSlot2])      
+        inventory[selectedSlot2] = inventory[selectedSlot1]
+        inventory[selectedSlot1] = null
+      
+      RefreshInventorySlots([selectedSlot1, selectedSlot2])
+      ResetSelection()
+
+func ResetSelection():
+  # Reset the sentinel values used to determine which slots are selected
+  # -1 means no slot selected
+  selectedSlot1 = -1
+  selectedSlot2 = -1
+
 func DropCurrentItem():
   DropItem(curr_slot_id)
 
@@ -300,3 +355,6 @@ func _on_Inventory_mouse_entered():
 func _on_Inventory_mouse_exited():
   isInventoryHover = false
   Globals.isManagingInv = false  
+
+func GetEquip(item):
+  return Equips.equips[str(item.id)]

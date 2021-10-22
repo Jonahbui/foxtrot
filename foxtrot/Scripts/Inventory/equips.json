@@ -1,11 +1,44 @@
 ﻿{
-    "0" : {
-      "name"	   	: "Bubblenade",
-      "type"     	: "weapon",
-      "subtype"   : "stackable",
-      "price"	   	: 0,
-      "resource" 	: "res://Textures/Gameplay/Weapons/bubble_nade.png",
-      "instance" 	: "res://Instances/Item/Weapons/BubbleNade.tscn",
-      "desc"		: "Explode your enemies with the power of bubbles!"
-    }
+  "0"     :	{
+    "name"	   	: "Bubblenade",
+    "type"     	: "weapon",
+    "subtype"   : "stackable",
+    "price"	   	: 0,
+    "resource" 	: "res://Textures/Gameplay/Weapon/bubble_nade.png",
+    "instance" 	: "res://Instances/Equips/Weapon/BubbleNade.tscn",
+    "desc"		  : "Explode your enemies with the power of bubbles!"
+  },
+
+
+  "512"   : {
+    "name"	   	: "Diver Suit",
+    "type"     	: "armor",
+    "subtype"   : "armor",
+    "price"	   	: 0,
+    "resource" 	: "res://Textures/Gameplay/Armor/diver_suit.png",
+    "instance" 	: "res://Instances/Equips/Armor/DiverSuit.tscn",
+    "desc"		  : "Dive to the low depths of the ocean!"
+	},
+	
+
+  "1024"   : {
+    "name"	   	: "White Shell",
+    "type"     	: "armor",
+    "subtype"   : "accessory",
+    "price"	   	: 0,
+    "resource" 	: "res://Textures/Gameplay/Accessory/white_shell.png",
+    "instance" 	: "res://Instances/Equips/Accessory/WhiteShell.tscn",
+    "desc"		  : "Harness the power of the ocean!"
+	},
+
+
+  "1536" : 	{
+    "name"	   	: "Blood Bag",
+    "type"     	: "item",
+    "subtype"   : "stackable",
+    "price"	   	: 0,
+    "resource" 	: "res://Textures/Gameplay/Item/blood_bag.png",
+    "instance" 	: "res://Instances/Equips/Item/BloodBag.tscn",
+    "desc"		  : "If you're bleeding, just put more blood back in ya. It's that simple! IANAD"
+	}
 }

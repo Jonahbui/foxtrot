@@ -2618,6 +2618,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ArmorContainer/Slot1"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
 [node name="Slot2" type="Button" parent="UI/Inventory/Control/ArmorContainer" groups=[
 "InventorySlots",
 ]]
@@ -2657,6 +2670,19 @@ mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ArmorContainer/Slot2"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -2706,6 +2732,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ArmorContainer/Slot3"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
 [node name="Slot4" type="Button" parent="UI/Inventory/Control/ArmorContainer" groups=[
 "InventorySlots",
 ]]
@@ -2745,6 +2784,19 @@ mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/Control/ArmorContainer/Slot4"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "#"
+align = 1
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
