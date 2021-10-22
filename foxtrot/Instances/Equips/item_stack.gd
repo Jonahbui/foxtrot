@@ -1,4 +1,4 @@
-extends "res://Instances/Item/item.gd"
+extends "res://Instances/Equips/item.gd"
 
 export var max_stack_amt  : int = 64
 export var curr_stack_amt : int = 1

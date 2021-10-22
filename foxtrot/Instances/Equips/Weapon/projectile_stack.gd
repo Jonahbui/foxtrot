@@ -1,4 +1,4 @@
-extends "res://Instances/Item/Weapons/weapon_stack.gd"
+extends "res://Instances/Equips/Weapon/weapon_stack.gd"
 
 export(String, FILE) var projectile
 
