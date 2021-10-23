@@ -1,0 +1,27 @@
+{
+  "spawn_diver1" : {
+    "text"    : "First time here huh?",
+    "next"    : "",
+    "options" : {
+      "0" : ["Yep.", "spawn_diver_response1"],
+      "1" : ["Nope.", "spawn_diver_response2"]
+    }
+  },
+
+  "spawn_diver_response1"  : {
+    "text"    : "Oh.",
+    "next"    : "",
+    "options" : {}
+  },
+
+  "spawn_diver_response2"  : {
+    "text"    : "Okay! Explanation of controls here...",
+    "next"    : "spawn_diver_response3",
+    "options" : {}
+  },
+  "spawn_diver_response3"  : {
+    "text"    : "Come back to me if you forget!",
+    "next"    : "",
+    "options" : {}
+  }
+}

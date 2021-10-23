@@ -5,9 +5,9 @@ const FILENAME_EQUIPS = "equips.json"
 var equips = {}
 
 func _ready():
-  ReadInEquips()
+  ReadEquips()
   
-func ReadInEquips():
+func ReadEquips():
   # Check for file existance before reading
   var file = File.new()
   if not file.file_exists("res://Scripts/Inventory/%s" % [FILENAME_EQUIPS]): return null
