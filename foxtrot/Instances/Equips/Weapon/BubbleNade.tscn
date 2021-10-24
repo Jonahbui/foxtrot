@@ -14,7 +14,7 @@ collision_layer = 0
 script = ExtResource( 2 )
 max_stack_amt = 8
 damage = 10
-projectile = "res://Instances/Item/Projectiles/BubblenadeProjectile.tscn"
+projectile = "res://Instances/Equips/Projectile/BubblenadeProjectile.tscn"
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

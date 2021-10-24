@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Textures/Gameplay/Store/store_tiles.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Gameplay/store.gd" type="Script" id=2]
@@ -25,9 +25,43 @@
 [ext_resource path="res://Textures/Gameplay/Store/aquatic_background.png" type="Texture" id=23]
 [ext_resource path="res://Textures/Gameplay/player.png" type="Texture" id=24]
 [ext_resource path="res://Instances/dialogue_interaction.gd" type="Script" id=25]
+[ext_resource path="res://Textures/Gameplay/Store/spotlight512.png" type="Texture" id=26]
+[ext_resource path="res://Shaders/godrays.gdshader" type="Shader" id=27]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( 115.564, 351.147, 1171.81, 345.62, 1174.73, 480.022, 98.7122, 450.762 )
+
+[sub_resource type="ShaderMaterial" id=12]
+shader = ExtResource( 27 )
+shader_param/angle = 0.836
+shader_param/position = 0.188
+shader_param/spread = 0.277
+shader_param/cutoff = -0.239
+shader_param/falloff = 1.0
+shader_param/edge_fade = 0.197
+shader_param/speed = 0.5
+shader_param/ray1_density = 100.0
+shader_param/ray2_density = 25.0
+shader_param/ray2_intensity = 1.0
+shader_param/color = Color( 0.698039, 0.698039, 0.698039, 0.203922 )
+shader_param/hdr = true
+shader_param/seed = 5.0
+
+[sub_resource type="ShaderMaterial" id=13]
+shader = ExtResource( 27 )
+shader_param/angle = 0.12
+shader_param/position = 0.111
+shader_param/spread = 0.741
+shader_param/cutoff = 0.091
+shader_param/falloff = 1.0
+shader_param/edge_fade = 0.071
+shader_param/speed = 1.0
+shader_param/ray1_density = 8.0
+shader_param/ray2_density = 30.0
+shader_param/ray2_intensity = 0.3
+shader_param/color = Color( 0.215686, 0.254902, 0.298039, 0.8 )
+shader_param/hdr = false
+shader_param/seed = 5.0
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 56, 32 )
@@ -88,8 +122,8 @@ color = Color( 0.882353, 0.929412, 1, 1 )
 energy = 1.08
 
 [node name="Tank Light 1" type="Light2D" parent="Lighting"]
-position = Vector2( 427.39, 283.167 )
-scale = Vector2( 2.57609, 2.2872 )
+position = Vector2( 427.39, 255.062 )
+scale = Vector2( 2.57609, 1.78219 )
 texture = ExtResource( 21 )
 offset = Vector2( -54.4, 8.34782 )
 color = Color( 0.603922, 0.803922, 0.870588, 1 )
@@ -98,8 +132,8 @@ range_height = 2048.0
 shadow_enabled = true
 
 [node name="Tank Light 2" type="Light2D" parent="Lighting"]
-position = Vector2( 780.888, 277.191 )
-scale = Vector2( 2.57609, 2.17633 )
+position = Vector2( 780.888, 255.172 )
+scale = Vector2( 2.57609, 1.78068 )
 texture = ExtResource( 21 )
 offset = Vector2( -54.4, 8.34782 )
 color = Color( 0.603922, 0.803922, 0.870588, 1 )
@@ -108,8 +142,8 @@ range_height = 2048.0
 shadow_enabled = true
 
 [node name="Tank Light 3" type="Light2D" parent="Lighting"]
-position = Vector2( 1131.85, 282.011 )
-scale = Vector2( 2.56731, 2.26508 )
+position = Vector2( 1131.85, 255.105 )
+scale = Vector2( 2.56731, 1.78161 )
 texture = ExtResource( 21 )
 offset = Vector2( -54.4, 8.34782 )
 color = Color( 0.603922, 0.803922, 0.870588, 1 )
@@ -127,6 +161,22 @@ range_height = 906.0
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Lighting"]
 occluder = SubResource( 1 )
+
+[node name="Godrays" type="Sprite" parent="Lighting"]
+material = SubResource( 12 )
+position = Vector2( 776, 264 )
+scale = Vector2( 3.60938, 1.85937 )
+z_index = -1
+texture = ExtResource( 26 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Godrays2" type="Sprite" parent="Lighting"]
+material = SubResource( 13 )
+position = Vector2( 746, 244 )
+scale = Vector2( 3.25781, 0.453125 )
+texture = ExtResource( 26 )
 
 [node name="Sprites" type="Node2D" parent="."]
 
@@ -224,7 +274,7 @@ motion_scale = Vector2( 0.9, 0.9 )
 motion_mirroring = Vector2( 1280, 0 )
 
 [node name="Sprite" type="Sprite" parent="World/AquaticLife (Sand)/ParallaxLayer"]
-position = Vector2( 624.955, 188.804 )
+position = Vector2( 624, 184 )
 texture = ExtResource( 23 )
 
 [node name="TextureRect" type="TextureRect" parent="World/AquaticLife (Sand)"]

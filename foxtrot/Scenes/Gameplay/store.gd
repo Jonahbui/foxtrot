@@ -14,10 +14,12 @@ func _input(event):
 
 func _on_ShopCollider_body_entered(_body):
   isTouching = true
+  Signals.emit_signal("on_interaction_changed", true)
 
 func _on_ShopCollider_body_exited(_body):
   isTouching = false
   ToggleStore(true, false)
+  Signals.emit_signal("on_interaction_changed", false)
 
 func InitializeStore():
   var purchaseFrame = load("res://Instances/UI/PurchaseFrame.tscn")

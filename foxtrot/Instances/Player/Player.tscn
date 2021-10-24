@@ -3547,6 +3547,7 @@ __meta__ = {
 }
 
 [node name="Inform" type="Sprite" parent="."]
+visible = false
 position = Vector2( 0, -64 )
 texture = ExtResource( 15 )
 
