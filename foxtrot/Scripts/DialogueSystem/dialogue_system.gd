@@ -2,18 +2,27 @@ extends CanvasLayer
 
 const FILENAME_DIALOGUE_EN = "dialogue_en.json"
 
+# Used to determine if the player is currently given a choice in the current dialogue
 var isSelecting : bool = false
+
+# The dialogue JSON
 var dialogue = null
+
+# The current dialogue being processed
 var current_dialogue_id : String
 
 func _input(event):
-  if event.is_action_pressed("fire") && !isSelecting:
+  if $DialogueBox.visible && event.is_action_pressed("fire") && !isSelecting:
     OnNextDialogue()
 
 func _init():
   ReadDialogue()
   Signals.connect("on_dialogue_trigger", self, "SetDialogueBox")
 
+
+# --------------------------------------------------------------------------------------------------
+# Dialogue Functions
+# --------------------------------------------------------------------------------------------------
 func ReadDialogue():
   print("\n[Dialogue System] Loading dialogue...")
   # Check for file existance before reading
@@ -33,7 +42,6 @@ func ReadDialogue():
   dialogue = data
     
   print("[Dialogue System] Dialogue: %s" % [dialogue])
-  
 
 func ToggleDialogueBox(force_set=false, value=false):
   if force_set:
@@ -55,6 +63,10 @@ func SetDialogueBox(id):
   var curr_dialogue = dialogue[current_dialogue_id]
   $DialogueBox/Log.text = curr_dialogue["text"]
   ToggleDialogueBox(true, true)
+  
+  # Set the photo for the entity speaking/displaying a message
+  $DialogueBox/ActorFrame/ActorPhoto.texture = load(dialogue[current_dialogue_id]["actor"]["sprite"])
+  $DialogueBox/ActorFrame/ActorName.text = dialogue[current_dialogue_id]["actor"]["name"]
   
   # If the dialogue features options, then list out those options
   if curr_dialogue["options"].size() > 0:

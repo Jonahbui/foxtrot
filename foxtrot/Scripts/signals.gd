@@ -17,3 +17,7 @@ signal on_change_base_level(level)
 
 # Inform the dialogue system that a dialogue has started
 signal on_dialogue_trigger(dialogue_id)
+
+# Informs the player that they can or cannot interact with the object they have entered
+signal on_interaction_changed(state)
+

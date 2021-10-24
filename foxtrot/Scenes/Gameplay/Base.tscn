@@ -30,9 +30,22 @@ layer = 2
 script = ExtResource( 4 )
 
 [node name="DialogueBox" type="Control" parent="DialogueSystem"]
+visible = false
 anchor_top = 0.7
 anchor_right = 1.0
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="DialogueSystem/DialogueBox"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+anchor_left = 0.325
+anchor_top = 0.037
+anchor_right = 0.8
+anchor_bottom = 1.0
+margin_left = -1.52588e-05
+margin_top = 0.00399995
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -42,8 +55,10 @@ anchor_left = 0.2
 anchor_top = 0.037
 anchor_right = 0.8
 anchor_bottom = 1.0
-margin_left = 80.0
-margin_top = 0.00399995
+margin_left = 88.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -8.0
 mouse_filter = 2
 text = "Default
 "
@@ -54,7 +69,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="EntityFrame" type="Panel" parent="DialogueSystem/DialogueBox"]
+[node name="ActorFrame" type="Panel" parent="DialogueSystem/DialogueBox"]
 anchor_left = 0.2
 anchor_top = 0.037
 anchor_right = 0.325
@@ -65,15 +80,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="EntityPhoto" type="TextureRect" parent="DialogueSystem/DialogueBox/EntityFrame"]
+[node name="ActorPhoto" type="TextureRect" parent="DialogueSystem/DialogueBox/ActorFrame"]
 anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 0.0039978
-margin_right = 1.0
-margin_bottom = 1.004
+anchor_bottom = 0.846
+margin_bottom = 0.0159988
+expand = true
+stretch_mode = 6
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ActorName" type="Label" parent="DialogueSystem/DialogueBox/ActorFrame"]
+anchor_top = 0.846
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 0.0159988
+align = 1
+valign = 1
 
 [node name="Options" type="Control" parent="DialogueSystem/DialogueBox"]
 anchor_right = 1.0

@@ -43,6 +43,9 @@ func _input(event):
   if event.is_action_pressed("ui_inventory"):
     toggle_inventory()
 
+func _init():
+  Signals.connect("on_interaction_changed", self, "ToggleInform")
+
 func _physics_process(delta: float) -> void:
   # If the dev console is open then do not move.
   if Globals.pause_flags != 0 :
@@ -132,3 +135,9 @@ func ResetPlayer():
   $UI/Hud/StatsVbox/HealthLabel.text = "%d / %d" % [health, maxHealth]
   
   # Reset stamina/magic as well
+
+# --------------------------------------------------------------------------------------------------
+# Dialogue Functions
+# --------------------------------------------------------------------------------------------------
+func ToggleInform(state):
+  $Inform.visible = state

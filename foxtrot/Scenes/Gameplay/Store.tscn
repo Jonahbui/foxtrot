@@ -141,7 +141,7 @@ script = ExtResource( 12 )
 position = Vector2( -616, -144 )
 scale = Vector2( 0.5, 0.5 )
 collision_layer = 16
-collision_mask = 3
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprites/Store Door/DoorDetector"]
 position = Vector2( 1232, 288 )
@@ -191,11 +191,11 @@ scale = Vector2( 0.5, 0.5 )
 shape = SubResource( 5 )
 one_way_collision = true
 
-[node name="Sprite4" type="Sprite" parent="Sprites"]
+[node name="ExitSign" type="Sprite" parent="Sprites"]
 position = Vector2( 1224, 208 )
 texture = ExtResource( 22 )
 
-[node name="Light2D" type="Light2D" parent="Sprites/Sprite4"]
+[node name="Light2D" type="Light2D" parent="Sprites/ExitSign"]
 position = Vector2( 0.00012207, 0 )
 scale = Vector2( 0.8125, 0.5625 )
 texture = ExtResource( 19 )
@@ -600,6 +600,7 @@ dialogue = "sir_diver1"
 
 [node name="Area2D" type="Area2D" parent="Entities/Sir Diver"]
 collision_layer = 32
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Sir Diver/Area2D"]
 shape = SubResource( 11 )
