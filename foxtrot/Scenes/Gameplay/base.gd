@@ -16,6 +16,7 @@ func _input(event):
   if dev_console.visible && cmdline.has_focus():
     if event.is_action_pressed("ui_up"):
       GetNextHistoryCmd()
+      cmdline.caret_position = cmdline.text.length()
     elif event.is_action_pressed("ui_down"):
       GetNextHistoryCmd(false) 
   
@@ -48,7 +49,6 @@ func ToggleDevConsole():
   Globals.SetFlag(Globals.FLAG_DEV_OPEN, dev_console.visible)
   if dev_console.visible:
     cmdline.grab_focus()
- 
   
 func PlayMusic(clip):
   var audio = load(clip)
@@ -167,6 +167,8 @@ func GetNextHistoryCmd(forward=true):
       history_index = history.size() - 1
     else:
       cmdline.text = history[history_index]
+    
+  cmdline.caret_position = cmdline.text.length()
 
 func ToggleLoadingScreen(state):
   $LoadingScreen/LoadingScreen.visible = state
@@ -187,4 +189,3 @@ func OnDeath():
     # Go back to spawn 
     LoadLevel(Globals.LPATH_SPAWN)
     $Player.ResetPlayer()
-  print("Triggered")
