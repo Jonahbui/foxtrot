@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Textures/Gameplay/Store/store_tiles.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Gameplay/store.gd" type="Script" id=2]
@@ -23,6 +23,8 @@
 [ext_resource path="res://Textures/Gameplay/Store/parallel_light.png" type="Texture" id=21]
 [ext_resource path="res://Textures/Gameplay/Store/exit_sign.png" type="Texture" id=22]
 [ext_resource path="res://Textures/Gameplay/Store/aquatic_background.png" type="Texture" id=23]
+[ext_resource path="res://Textures/Gameplay/player.png" type="Texture" id=24]
+[ext_resource path="res://Instances/dialogue_interaction.gd" type="Script" id=25]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( 115.564, 351.147, 1171.81, 345.62, 1174.73, 480.022, 98.7122, 450.762 )
@@ -61,6 +63,9 @@ region_rect = Rect2( 0, 0, 16, 16 )
 [sub_resource type="StyleBoxTexture" id=10]
 texture = ExtResource( 14 )
 region_rect = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 40, 40 )
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 2 )
@@ -136,7 +141,7 @@ script = ExtResource( 12 )
 position = Vector2( -616, -144 )
 scale = Vector2( 0.5, 0.5 )
 collision_layer = 16
-collision_mask = 3
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprites/Store Door/DoorDetector"]
 position = Vector2( 1232, 288 )
@@ -186,11 +191,11 @@ scale = Vector2( 0.5, 0.5 )
 shape = SubResource( 5 )
 one_way_collision = true
 
-[node name="Sprite4" type="Sprite" parent="Sprites"]
+[node name="ExitSign" type="Sprite" parent="Sprites"]
 position = Vector2( 1224, 208 )
 texture = ExtResource( 22 )
 
-[node name="Light2D" type="Light2D" parent="Sprites/Sprite4"]
+[node name="Light2D" type="Light2D" parent="Sprites/ExitSign"]
 position = Vector2( 0.00012207, 0 )
 scale = Vector2( 0.8125, 0.5625 )
 texture = ExtResource( 19 )
@@ -585,13 +590,30 @@ __meta__ = {
 
 [node name="Items" type="Node2D" parent="."]
 
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="Sir Diver" type="Sprite" parent="Entities"]
+position = Vector2( 1720, 288 )
+texture = ExtResource( 24 )
+script = ExtResource( 25 )
+dialogue = "sir_diver1"
+
+[node name="Area2D" type="Area2D" parent="Entities/Sir Diver"]
+collision_layer = 32
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Sir Diver/Area2D"]
+shape = SubResource( 11 )
+
 [connection signal="body_entered" from="Sprites/Store Door/DoorDetector" to="Sprites/Store Door" method="_on_DoorDetector_body_entered"]
 [connection signal="body_exited" from="Sprites/Store Door/DoorDetector" to="Sprites/Store Door" method="_on_DoorDetector_body_exited"]
-[connection signal="body_entered" from="Sprites/Store Door/PortalSpawn" to="Sprites/Store Door" method="_on_PortalSpawn_body_entered"]
-[connection signal="body_exited" from="Sprites/Store Door/PortalSpawn" to="Sprites/Store Door" method="_on_PortalSpawn_body_exited"]
+[connection signal="body_entered" from="Sprites/Store Door/PortalSpawn" to="Sprites/Store Door" method="_on_Player_body_entered"]
+[connection signal="body_exited" from="Sprites/Store Door/PortalSpawn" to="Sprites/Store Door" method="_on_Player_body_exited"]
 [connection signal="body_entered" from="Sprites/Cash Register/ShopCollider" to="." method="_on_ShopCollider_body_entered"]
 [connection signal="body_exited" from="Sprites/Cash Register/ShopCollider" to="." method="_on_ShopCollider_body_exited"]
 [connection signal="pressed" from="UI/Store/TabContainer/Weapons/PurchaseButton" to="." method="_on_PurchaseButton_pressed"]
 [connection signal="pressed" from="UI/Store/TabContainer/Armor/PurchaseButton" to="." method="_on_PurchaseButton_pressed"]
 [connection signal="pressed" from="UI/Store/TabContainer/Items/PurchaseButton" to="." method="_on_PurchaseButton_pressed"]
 [connection signal="pressed" from="UI/Store/CloseStoreButton" to="." method="_on_CloseStoreButton_pressed"]
+[connection signal="body_entered" from="Entities/Sir Diver/Area2D" to="Entities/Sir Diver" method="_on_Player_body_entered"]
+[connection signal="body_exited" from="Entities/Sir Diver/Area2D" to="Entities/Sir Diver" method="_on_Player_body_exited"]
