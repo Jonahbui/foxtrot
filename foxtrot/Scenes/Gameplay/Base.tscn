@@ -23,7 +23,7 @@ bus = "Music"
 bus = "SFX"
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 4.23785, 0 )
+position = Vector2( 8, 0 )
 
 [node name="DialogueSystem" type="CanvasLayer" parent="."]
 layer = 2
@@ -37,22 +37,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel" type="Panel" parent="DialogueSystem/DialogueBox"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Log" type="TextEdit" parent="DialogueSystem/DialogueBox"]
-anchor_left = 0.15
-anchor_right = 1.0
+anchor_left = 0.2
+anchor_top = 0.037
+anchor_right = 0.8
 anchor_bottom = 1.0
-margin_left = -0.25
-margin_top = 4.0
-margin_right = -4.25
-margin_bottom = -4.0
+margin_left = 80.0
+margin_top = 0.00399995
 mouse_filter = 2
+text = "Default
+"
 readonly = true
 context_menu_enabled = false
 wrap_enabled = true
@@ -61,18 +55,71 @@ __meta__ = {
 }
 
 [node name="EntityFrame" type="Panel" parent="DialogueSystem/DialogueBox"]
-anchor_right = 0.15
+anchor_left = 0.2
+anchor_top = 0.037
+anchor_right = 0.325
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 4.0
-margin_right = -4.0
-margin_bottom = -4.0
+margin_top = 0.00399995
+margin_right = -1.52588e-05
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="EntityPhoto" type="TextureRect" parent="DialogueSystem/DialogueBox/EntityFrame"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = 0.0039978
 margin_right = 1.0
-margin_bottom = 1.0
+margin_bottom = 1.004
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options" type="Control" parent="DialogueSystem/DialogueBox"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -252.0
+margin_bottom = -252.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button0" type="Button" parent="DialogueSystem/DialogueBox/Options"]
+margin_left = 40.0
+margin_top = 200.0
+margin_right = 191.0
+margin_bottom = 220.0
+text = "No, I dont think i will"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button1" type="Button" parent="DialogueSystem/DialogueBox/Options"]
+margin_left = 128.0
+margin_top = 128.0
+margin_right = 279.0
+margin_bottom = 148.0
+text = "No, I dont think i will"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button2" type="Button" parent="DialogueSystem/DialogueBox/Options"]
+margin_left = 360.0
+margin_top = 128.0
+margin_right = 511.0
+margin_bottom = 148.0
+text = "No, I dont think i will"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button3" type="Button" parent="DialogueSystem/DialogueBox/Options"]
+margin_left = 448.0
+margin_top = 192.0
+margin_right = 599.0
+margin_bottom = 212.0
+text = "No, I dont think i will"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -88,6 +135,7 @@ margin_left = 5.0
 margin_top = 5.0
 margin_right = -5.0
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -95,6 +143,7 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -110,6 +159,7 @@ readonly = true
 context_menu_enabled = false
 wrap_enabled = true
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -128,6 +178,7 @@ focus_next = NodePath(".")
 focus_previous = NodePath(".")
 context_menu_enabled = false
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -151,6 +202,10 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 
+[connection signal="pressed" from="DialogueSystem/DialogueBox/Options/Button0" to="DialogueSystem" method="OnOptionSelect" binds= [ 0 ]]
+[connection signal="pressed" from="DialogueSystem/DialogueBox/Options/Button1" to="DialogueSystem" method="OnOptionSelect" binds= [ 1 ]]
+[connection signal="pressed" from="DialogueSystem/DialogueBox/Options/Button2" to="DialogueSystem" method="OnOptionSelect" binds= [ 2 ]]
+[connection signal="pressed" from="DialogueSystem/DialogueBox/Options/Button3" to="DialogueSystem" method="OnOptionSelect" binds= [ 3 ]]
 [connection signal="text_changed" from="UI/DevConsole/CmdLine" to="." method="_on_CmdLine_text_changed"]
 [connection signal="text_entered" from="UI/DevConsole/CmdLine" to="." method="_on_CmdLine_text_entered"]
 

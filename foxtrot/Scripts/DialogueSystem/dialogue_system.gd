@@ -1,18 +1,26 @@
 extends CanvasLayer
 
-const FILENAME_DIALOGUE_EN = "dialogue_system_en"
+const FILENAME_DIALOGUE_EN = "dialogue_en.json"
 
+var isSelecting : bool = false
 var dialogue = null
 var current_dialogue_id : String
 
+func _input(event):
+  if event.is_action_pressed("fire") && !isSelecting:
+    OnNextDialogue()
+
 func _init():
-  
-  pass
+  ReadDialogue()
+  Signals.connect("on_dialogue_trigger", self, "SetDialogueBox")
 
 func ReadDialogue():
+  print("\n[Dialogue System] Loading dialogue...")
   # Check for file existance before reading
   var file = File.new()
-  if not file.file_exists("res://Scripts/DialogueSystem/%s" % [FILENAME_DIALOGUE_EN]): return null
+  if not file.file_exists("res://Scripts/DialogueSystem/%s" % [FILENAME_DIALOGUE_EN]): 
+    print("[Dialogue System] Dialogue file does not exist. Aborting...")
+    return null
   
   # Read in the config file
   file.open("res://Scripts/DialogueSystem/%s" % [FILENAME_DIALOGUE_EN], File.READ)
@@ -24,7 +32,6 @@ func ReadDialogue():
   # insert their own values) dictionary.
   dialogue = data
     
-  print("\n[Dialogue System] Loading dialogue...")
   print("[Dialogue System] Dialogue: %s" % [dialogue])
   
 
@@ -33,8 +40,14 @@ func ToggleDialogueBox(force_set=false, value=false):
     $DialogueBox.visible = value
   else :
     $DialogueBox.visible = !$DialogueBox.visible
+    
+  Globals.SetFlag(Globals.FLAG_INTERACTING, $DialogueBox.visible)
 
 func SetDialogueBox(id):
+  if id == "":
+    ToggleDialogueBox(true, false)
+    return
+  
   # Update which dialogue the game is on
   current_dialogue_id = id
   
@@ -44,8 +57,56 @@ func SetDialogueBox(id):
   ToggleDialogueBox(true, true)
   
   # If the dialogue features options, then list out those options
-  if curr_dialogue["next"] == "":
-    pass
+  if curr_dialogue["options"].size() > 0:
+    isSelecting = true
+    if curr_dialogue["options"].has("3"):
+      $DialogueBox/Options/Button0.visible  = true
+      $DialogueBox/Options/Button1.visible  = true
+      $DialogueBox/Options/Button2.visible  = true
+      $DialogueBox/Options/Button3.visible  = true  
+      
+      $DialogueBox/Options/Button0.text  = curr_dialogue["options"]["0"][0]
+      $DialogueBox/Options/Button1.text  = curr_dialogue["options"]["1"][0]
+      $DialogueBox/Options/Button2.text  = curr_dialogue["options"]["2"][0]
+      $DialogueBox/Options/Button3.text  = curr_dialogue["options"]["3"][0]
+    elif curr_dialogue["options"].has("2"):
+      $DialogueBox/Options/Button0.visible  = true
+      $DialogueBox/Options/Button1.visible  = true
+      $DialogueBox/Options/Button2.visible  = true
+      $DialogueBox/Options/Button3.visible  = false  
+
+      $DialogueBox/Options/Button0.text  = curr_dialogue["options"]["0"][0]
+      $DialogueBox/Options/Button1.text  = curr_dialogue["options"]["1"][0]
+      $DialogueBox/Options/Button2.text  = curr_dialogue["options"]["2"][0]
+    elif curr_dialogue["options"].has("1"):
+      $DialogueBox/Options/Button0.visible  = true
+      $DialogueBox/Options/Button1.visible  = true
+      $DialogueBox/Options/Button2.visible  = false
+      $DialogueBox/Options/Button3.visible  = false  
+
+      $DialogueBox/Options/Button0.text  = curr_dialogue["options"]["0"][0]
+      $DialogueBox/Options/Button1.text  = curr_dialogue["options"]["1"][0]
+    else:
+      $DialogueBox/Options/Button0.visible  = true
+      $DialogueBox/Options/Button1.visible  = false
+      $DialogueBox/Options/Button2.visible  = false
+      $DialogueBox/Options/Button3.visible  = false  
+  
+      $DialogueBox/Options/Button0.text  = curr_dialogue["options"]["0"][0]
+
   # Else do not show any options
   else:
-    pass
+    isSelecting = false
+    $DialogueBox/Options/Button0.visible  = false
+    $DialogueBox/Options/Button1.visible  = false
+    $DialogueBox/Options/Button2.visible  = false
+    $DialogueBox/Options/Button3.visible  = false
+    
+func OnOptionSelect(choice_id:int):
+  var next_dialogue = dialogue[current_dialogue_id]["options"][str(choice_id)][1]
+  SetDialogueBox(next_dialogue)
+
+func OnNextDialogue():
+  var next_dialogue = dialogue[current_dialogue_id]["next"]
+  SetDialogueBox(next_dialogue)
+

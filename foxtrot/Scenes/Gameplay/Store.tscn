@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Textures/Gameplay/Store/store_tiles.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Gameplay/store.gd" type="Script" id=2]
@@ -23,8 +23,10 @@
 [ext_resource path="res://Textures/Gameplay/Store/parallel_light.png" type="Texture" id=21]
 [ext_resource path="res://Textures/Gameplay/Store/exit_sign.png" type="Texture" id=22]
 [ext_resource path="res://Textures/Gameplay/Store/aquatic_background.png" type="Texture" id=23]
+[ext_resource path="res://Textures/Gameplay/player.png" type="Texture" id=24]
+[ext_resource path="res://Instances/dialogue_interaction.gd" type="Script" id=25]
 
-[sub_resource type="OccluderPolygon2D" id=10]
+[sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( 115.564, 351.147, 1171.81, 345.62, 1174.73, 480.022, 98.7122, 450.762 )
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -33,13 +35,13 @@ extents = Vector2( 56, 32 )
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 21.8409, 33.8456 )
 
-[sub_resource type="RectangleShape2D" id=12]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 56.1088, 26.2995 )
 
-[sub_resource type="RectangleShape2D" id=13]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 96, 8 )
 
-[sub_resource type="StyleBoxTexture" id=5]
+[sub_resource type="StyleBoxTexture" id=6]
 texture = ExtResource( 13 )
 region_rect = Rect2( 0, 0, 32, 32 )
 margin_left = 2.0
@@ -47,20 +49,23 @@ margin_right = 2.0
 margin_top = 2.0
 margin_bottom = 2.0
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=7]
 font_data = ExtResource( 3 )
 
-[sub_resource type="StyleBoxTexture" id=7]
+[sub_resource type="StyleBoxTexture" id=8]
 texture = ExtResource( 15 )
 region_rect = Rect2( 0, 0, 16, 16 )
 
-[sub_resource type="StyleBoxTexture" id=8]
+[sub_resource type="StyleBoxTexture" id=9]
 texture = ExtResource( 16 )
 region_rect = Rect2( 0, 0, 16, 16 )
 
-[sub_resource type="StyleBoxTexture" id=9]
+[sub_resource type="StyleBoxTexture" id=10]
 texture = ExtResource( 14 )
 region_rect = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 40, 40 )
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 2 )
@@ -121,7 +126,7 @@ energy = 1.74
 range_height = 906.0
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Lighting"]
-occluder = SubResource( 10 )
+occluder = SubResource( 1 )
 
 [node name="Sprites" type="Node2D" parent="."]
 
@@ -176,14 +181,14 @@ collision_mask = 2
 [node name="InteractCollider" type="CollisionShape2D" parent="Sprites/Cash Register/ShopCollider"]
 position = Vector2( 211.359, 271.37 )
 scale = Vector2( 2, 2 )
-shape = SubResource( 12 )
+shape = SubResource( 4 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Sprites/Cash Register"]
 
 [node name="CounterCollider" type="CollisionShape2D" parent="Sprites/Cash Register/StaticBody2D"]
 position = Vector2( 0.108765, -6.2995 )
 scale = Vector2( 0.5, 0.5 )
-shape = SubResource( 13 )
+shape = SubResource( 5 )
 one_way_collision = true
 
 [node name="Sprite4" type="Sprite" parent="Sprites"]
@@ -262,7 +267,7 @@ margin_bottom = 328.0
 custom_styles/tab_fg = ExtResource( 4 )
 custom_styles/tab_disabled = ExtResource( 10 )
 custom_styles/tab_bg = ExtResource( 10 )
-custom_styles/panel = SubResource( 5 )
+custom_styles/panel = SubResource( 6 )
 custom_fonts/font = ExtResource( 5 )
 custom_constants/side_margin = 0
 tab_align = 0
@@ -315,7 +320,7 @@ margin_left = 0.0319824
 margin_top = -0.012001
 margin_right = 0.135986
 margin_bottom = -0.139999
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 text = "Description here"
 autowrap = true
 __meta__ = {
@@ -416,7 +421,7 @@ margin_left = 0.0319824
 margin_top = -0.012001
 margin_right = 0.135986
 margin_bottom = -0.139999
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 text = "Description here"
 autowrap = true
 __meta__ = {
@@ -517,7 +522,7 @@ margin_left = 0.0319824
 margin_top = -0.012001
 margin_right = 0.135986
 margin_bottom = -0.139999
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 text = "Description here"
 autowrap = true
 __meta__ = {
@@ -576,22 +581,38 @@ __meta__ = {
 margin_left = 277.0
 margin_right = 304.0
 margin_bottom = 27.0
-custom_styles/hover = SubResource( 7 )
-custom_styles/pressed = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 8 )
+custom_styles/pressed = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Items" type="Node2D" parent="."]
 
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="Sir Diver" type="Sprite" parent="Entities"]
+position = Vector2( 1720, 288 )
+texture = ExtResource( 24 )
+script = ExtResource( 25 )
+dialogue = "sir_diver1"
+
+[node name="Area2D" type="Area2D" parent="Entities/Sir Diver"]
+collision_layer = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Sir Diver/Area2D"]
+shape = SubResource( 11 )
+
 [connection signal="body_entered" from="Sprites/Store Door/DoorDetector" to="Sprites/Store Door" method="_on_DoorDetector_body_entered"]
 [connection signal="body_exited" from="Sprites/Store Door/DoorDetector" to="Sprites/Store Door" method="_on_DoorDetector_body_exited"]
-[connection signal="body_entered" from="Sprites/Store Door/PortalSpawn" to="Sprites/Store Door" method="_on_PortalSpawn_body_entered"]
-[connection signal="body_exited" from="Sprites/Store Door/PortalSpawn" to="Sprites/Store Door" method="_on_PortalSpawn_body_exited"]
+[connection signal="body_entered" from="Sprites/Store Door/PortalSpawn" to="Sprites/Store Door" method="_on_Player_body_entered"]
+[connection signal="body_exited" from="Sprites/Store Door/PortalSpawn" to="Sprites/Store Door" method="_on_Player_body_exited"]
 [connection signal="body_entered" from="Sprites/Cash Register/ShopCollider" to="." method="_on_ShopCollider_body_entered"]
 [connection signal="body_exited" from="Sprites/Cash Register/ShopCollider" to="." method="_on_ShopCollider_body_exited"]
 [connection signal="pressed" from="UI/Store/TabContainer/Weapons/PurchaseButton" to="." method="_on_PurchaseButton_pressed"]
 [connection signal="pressed" from="UI/Store/TabContainer/Armor/PurchaseButton" to="." method="_on_PurchaseButton_pressed"]
 [connection signal="pressed" from="UI/Store/TabContainer/Items/PurchaseButton" to="." method="_on_PurchaseButton_pressed"]
 [connection signal="pressed" from="UI/Store/CloseStoreButton" to="." method="_on_CloseStoreButton_pressed"]
+[connection signal="body_entered" from="Entities/Sir Diver/Area2D" to="Entities/Sir Diver" method="_on_Player_body_entered"]
+[connection signal="body_exited" from="Entities/Sir Diver/Area2D" to="Entities/Sir Diver" method="_on_Player_body_exited"]
