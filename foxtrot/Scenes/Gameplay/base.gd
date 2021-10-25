@@ -88,10 +88,11 @@ func LoadLevel(path):
   
   # Load and add the new level
   current_level = load(path)
-  self.add_child(current_level.instance())
+  var instance = current_level.instance()
+  self.add_child(instance)
   
   # Get spawnpoint path and set player position to spawnpoint.
-  var spawnpoint = current_level.instance().get_node_or_null("Spawnpoint")
+  var spawnpoint = instance.get_node_or_null("Spawnpoint")
   if spawnpoint != null:
     $Player.position = spawnpoint.position
   else:
