@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Textures/Gameplay/Spawn/spawn_tiles.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Gameplay/spawn.gd" type="Script" id=2]
@@ -6,11 +6,16 @@
 [ext_resource path="res://Textures/Gameplay/Spawn/background_sand_parallax.png" type="Texture" id=4]
 [ext_resource path="res://Textures/Gameplay/Store/spotlight512.png" type="Texture" id=5]
 [ext_resource path="res://Textures/Gameplay/Spawn/background_sky_parallax.png" type="Texture" id=6]
+[ext_resource path="res://Textures/Gameplay/Spawn/beachball.png" type="Texture" id=7]
+[ext_resource path="res://Textures/Gameplay/Spawn/beach_umbrella.png" type="Texture" id=8]
+[ext_resource path="res://Textures/Gameplay/Spawn/yellow_submarine.png" type="Texture" id=9]
+[ext_resource path="res://Textures/Gameplay/Spawn/sandcastle.png" type="Texture" id=10]
+[ext_resource path="res://Instances/Gameplay/scene_switch_interaction.gd" type="Script" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 21.8409, 33.8456 )
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 3 )
 shader_param/angle = 0.836
 shader_param/position = 0.188
@@ -26,8 +31,11 @@ shader_param/color = Color( 0.839844, 0.520776, 0.147629, 0.8 )
 shader_param/hdr = false
 shader_param/seed = 5.0
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 10, 368 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 24, 16 )
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 2 )
@@ -71,7 +79,7 @@ position = Vector2( 316.061, 290.847 )
 [node name="Lighting" type="Node2D" parent="."]
 
 [node name="Godrays" type="Sprite" parent="Lighting"]
-material = SubResource( 3 )
+material = SubResource( 2 )
 position = Vector2( 756, 76 )
 scale = Vector2( 3.60938, 1.85937 )
 texture = ExtResource( 5 )
@@ -103,6 +111,9 @@ light_mask = 2
 position = Vector2( 872, 176 )
 scale = Vector2( 32, 32 )
 texture = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="SandParallax" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2( 0.9, 0.9 )
@@ -116,6 +127,13 @@ light_mask = 2
 position = Vector2( 872, 176 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="sandcastle" type="Sprite" parent="ParallaxBackground/SandParallax/Sprite"]
+position = Vector2( -404, 8 )
+texture = ExtResource( 10 )
 
 [node name="Control Boundaries" type="Node" parent="."]
 
@@ -124,6 +142,35 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Control Boundaries/StaticBody2D"]
 position = Vector2( 672, 232 )
+shape = SubResource( 3 )
+
+[node name="Background Objects" type="Node2D" parent="."]
+
+[node name="beachball" type="Sprite" parent="Background Objects"]
+position = Vector2( 424, 312 )
+texture = ExtResource( 7 )
+
+[node name="beach_umbrella" type="Sprite" parent="Background Objects"]
+position = Vector2( 406.278, 289.235 )
+rotation = 0.495241
+scale = Vector2( 1.58973, 1.97554 )
+texture = ExtResource( 8 )
+
+[node name="yellow_submarine" type="Sprite" parent="Background Objects"]
+position = Vector2( 664, 288 )
+scale = Vector2( 6, 6 )
+z_index = -1
+texture = ExtResource( 9 )
+script = ExtResource( 11 )
+level = "res://Scenes/Gameplay/Seafloor.tscn"
+
+[node name="Area2D" type="Area2D" parent="Background Objects/yellow_submarine"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background Objects/yellow_submarine/Area2D"]
 shape = SubResource( 4 )
 
 [connection signal="body_entered" from="World/PortalShop" to="." method="_on_PortalShop_body_entered"]
+[connection signal="body_entered" from="Background Objects/yellow_submarine/Area2D" to="Background Objects/yellow_submarine" method="_on_Player_body_entered"]
+[connection signal="body_exited" from="Background Objects/yellow_submarine/Area2D" to="Background Objects/yellow_submarine" method="_on_Player_body_exited"]
