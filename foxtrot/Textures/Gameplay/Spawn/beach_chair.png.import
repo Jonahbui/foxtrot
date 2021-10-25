@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/background_parallax.png-6643661bfc01869ad85db2e659334e63.stex"
+path="res://.import/beach_chair.png-5f3c3d6c738cb5f8fb15fb2c08b691cf.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Gameplay/Spawn/background_parallax.png"
-dest_files=[ "res://.import/background_parallax.png-6643661bfc01869ad85db2e659334e63.stex" ]
+source_file="res://Textures/Gameplay/Spawn/beach_chair.png"
+dest_files=[ "res://.import/beach_chair.png-5f3c3d6c738cb5f8fb15fb2c08b691cf.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

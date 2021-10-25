@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Textures/Gameplay/Spawn/spawn_tiles.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Gameplay/spawn.gd" type="Script" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://Textures/Gameplay/Spawn/yellow_submarine.png" type="Texture" id=9]
 [ext_resource path="res://Textures/Gameplay/Spawn/sandcastle.png" type="Texture" id=10]
 [ext_resource path="res://Instances/Gameplay/scene_switch_interaction.gd" type="Script" id=11]
+[ext_resource path="res://Textures/Gameplay/Spawn/beach_chair.png" type="Texture" id=12]
+[ext_resource path="res://Textures/Gameplay/Spawn/beach_towel.png" type="Texture" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 21.8409, 33.8456 )
@@ -135,6 +137,22 @@ __meta__ = {
 position = Vector2( -404, 8 )
 texture = ExtResource( 10 )
 
+[node name="beach_towel" type="Sprite" parent="ParallaxBackground/SandParallax/Sprite"]
+self_modulate = Color( 0.427451, 0.729412, 1, 1 )
+position = Vector2( -344, 44 )
+rotation = -0.52961
+scale = Vector2( 0.999677, 1.15226 )
+texture = ExtResource( 13 )
+offset = Vector2( -2.90451, -2.31821 )
+
+[node name="beach_towel2" type="Sprite" parent="ParallaxBackground/SandParallax/Sprite"]
+self_modulate = Color( 0.462745, 0.898039, 0.654902, 1 )
+position = Vector2( -336, 36 )
+rotation = -0.601348
+scale = Vector2( 0.804047, 1.06098 )
+texture = ExtResource( 13 )
+offset = Vector2( -2.90451, -2.31821 )
+
 [node name="Control Boundaries" type="Node" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Control Boundaries"]
@@ -146,17 +164,23 @@ shape = SubResource( 3 )
 
 [node name="Background Objects" type="Node2D" parent="."]
 
+[node name="beach_chair" type="Sprite" parent="Background Objects"]
+position = Vector2( 416, 296 )
+scale = Vector2( 5.1875, 4.54492 )
+texture = ExtResource( 12 )
+
 [node name="beachball" type="Sprite" parent="Background Objects"]
 position = Vector2( 424, 312 )
 texture = ExtResource( 7 )
 
 [node name="beach_umbrella" type="Sprite" parent="Background Objects"]
-position = Vector2( 406.278, 289.235 )
+position = Vector2( 400, 272 )
 rotation = 0.495241
 scale = Vector2( 1.58973, 1.97554 )
 texture = ExtResource( 8 )
 
 [node name="yellow_submarine" type="Sprite" parent="Background Objects"]
+self_modulate = Color( 1.1, 1.1, 1.1, 1 )
 position = Vector2( 664, 288 )
 scale = Vector2( 6, 6 )
 z_index = -1
