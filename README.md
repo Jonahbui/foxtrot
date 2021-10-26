@@ -20,8 +20,13 @@ Sounds:
 		- https://freesound.org/people/Mrthenoronha/sounds/420447/
 	- Cash Reigster:
 		- https://freesound.org/people/kiddpark/sounds/201159/
-- Thaleah Fat Font:
-	- https://www.dafont.com/thaleahfat.font
+Fonts:
+	- Thaleah Fat Font:
+		- https://www.dafont.com/thaleahfat.font
+	
+Shaders:
+	- Godrays:
+		- https://godotshaders.com/shader/god-rays/
 
 ## Tools
 ### Audio
