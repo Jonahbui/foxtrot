@@ -18,9 +18,8 @@ func ReadEquips():
   var data = parse_json(text)
   if data == null: return null
   
-  # Insert the data into the config (Do not set config equal to data. People may
-  # insert their own values) dictionary.
-  equips = data
+  for key in data:
+    equips[int(key)] = data[key]
     
   print("\n[Equips] Loading resources...")
   print("[Equips] Resources: %s" % [equips])

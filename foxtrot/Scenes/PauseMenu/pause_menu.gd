@@ -1,5 +1,8 @@
 extends CanvasLayer
 
+func _init():
+  Signals.connect("on_game_saved", self, "TriggerSaveMessage")
+
 func _ready():
   # If the pause menu is visible, then inform the game that it's paused
   # Else it's not paused DUE TO the pause menu (may be paused for other reasons)
@@ -10,6 +13,12 @@ func _input(event):
     # Toggle the pause menu depending on the pause state of the game
     var result_state = Globals.ToggleFlag(Globals.FLAG_PAUSED)
     $UI.visible = result_state
+    
+    # Only show the save button if the player is in the spawn. Update when pause UI updates.
+    if Globals.isInSpawn:
+      $UI/Background/ButtonVbox/SaveButton.visible = true
+    else:
+      $UI/Background/ButtonVbox/SaveButton.visible = false
 
 func _on_ResumeButton_pressed():
   # If resuming the game, unpause the game
@@ -19,6 +28,9 @@ func _on_ResumeButton_pressed():
   # Need to hide settings menu because it can still be open even if the pause menu is not
   $UI.hide()
   $SettingsMenu/UI.hide()
+
+func _on_SaveButton_pressed():
+  Save.save_file()
 
 func _on_SettingsButton_pressed():
   # Hide the pause menu and show the settings menu
@@ -39,3 +51,12 @@ func _on_ExitButton_pressed():
 func _on_SettingsBackButton_pressed():
   $UI.show()
   $SettingsMenu/UI.hide()
+
+func TriggerSaveMessage(state):
+  $UI/SaveStateLabel.visible = true
+  if state == OK:
+    $UI/SaveStateLabel.text = "Saved..."
+  else:
+    $UI/SaveStateLabel.text = "Error. Could not save :("    
+  yield(get_tree().create_timer(2.0), "timeout")
+  $UI/SaveStateLabel.visible = false  

@@ -41,3 +41,13 @@ func AddToStack(amount):
   
   # If this is reached, then all of the amount was used
   return 0
+
+func ToJSON():
+  return {
+    "id" : id,
+    "curr_stack_amt" : curr_stack_amt
+   }
+
+func FromJSON(item):
+  self.id = item["id"]
+  self.curr_stack_amt = item["curr_stack_amt"]

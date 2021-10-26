@@ -15,21 +15,33 @@ const MAX_HOTBAR = 10
 const ARMOR_SLOTS = 4
 var armor_slot_id : int
 
+# Textures to change to if a hotbar is not selected
 export(String, FILE) var hotbar_hover
 export(String, FILE) var hotbar_pressed
 export(String, FILE) var hotbar_normal
 
+# Textures to change to if a hotbar is selected
 export(String, FILE) var hotbar_select_hover
 export(String, FILE) var hotbar_select_pressed
 export(String, FILE) var hotbar_select_normal
 
+# The current slot the player has selected in the hotbar
 var curr_slot_id : int = 0
+
+# An array of all the slots in the player inventory
 var slots = []
+
+# The slots the player clicked on while trying to perform an inventory swap operation
 var selectedSlot1 : int = -1
 var selectedSlot2 : int = -1
+
+# Determines whether or not the player's cursor is on the inventory UI
 var isInventoryHover : bool = false
 
+# The actual player. Used to reference the players script
 var player = null
+
+# A node in the scene storing all the item instances that should belong in the player inventory
 var playerInventory = null
 
 # A dictionary establishing a relationship with a slot and an equip
@@ -82,6 +94,7 @@ func _ready():
 
   InitalizeInventoryUI()
   InitializeInventory()
+  Signals.emit_signal("on_inventory_loaded", self)
 
   # Set the active slot to default to the first hotbar slot
   SetActiveSlot(0, true)
@@ -108,9 +121,14 @@ func InitalizeInventoryUI():
   slots.append_array(armor_slots.get_children())
 
 func GetNextSlot(moveForward=true):
+  # Keep track of the old slot, so that we know which slot to change textures for since it will not
+  # be selected any longer.
   var prev_slot_id = curr_slot_id
+  
+  # Calculate the new slot id based off whether we are incrementing up or down the hotbar
   var new_slot_id = curr_slot_id+1 if moveForward else curr_slot_id-1
   
+  # Make sure the hotbar wraps over if the index goes out of bounds
   if new_slot_id >= MAX_HOTBAR:
     new_slot_id = 0
   elif new_slot_id < 0:
@@ -156,7 +174,7 @@ func AddItem(item_to_add):
   
   # TA: changes strings to CONST later
   # If the item is stackable, attempt to stack it with item in inventory
-  if Equips.equips[str(item_id)]["subtype"] == "stackable":
+  if Equips.equips[item_id]["subtype"] == "stackable":
     
     # Find a free stack
     for item_key in inventory:
@@ -182,7 +200,7 @@ func AddItem(item_to_add):
   #   - If there is an overflow from stacking, create an item
   var item = null
   if typeof(item_to_add) == TYPE_INT:
-    item = load(Equips.equips[str(item_to_add)]["instance"]).instance()
+    item = load(Equips.equips[item_to_add]["instance"]).instance()
     item.id = item_to_add
   else:
     item = item_to_add
@@ -217,7 +235,8 @@ func RemoveItem(item):
 func IsSelectedHotbar(slot_num):
   return slot_num == curr_slot_id
   
-func RefreshInventorySlots(refreshSlots : Array):
+func RefreshInventorySlots(refreshSlots):
+  # Expects an array
   # Loop through all the slots and update their textures
   if refreshSlots == null:
     for i in range(0, slots.size()):
@@ -232,12 +251,14 @@ func RefreshInventorySlot(slot_num : int):
   var count_label = slots[slot_num].get_node_or_null("ItemCountLabel")
   # If the inventory is not null, update its texture to the one in the current inventory slot
   if inventory[slot_num] != null:
-    var texture = load(Equips.equips[str(inventory[slot_num].id)]["resource"])
+    print("[Inventory] Slot at %d is being refreshed..." % [slot_num])
+    
+    var texture = load(Equips.equips[inventory[slot_num].id]["resource"])
     itemframe.texture = texture
     itemframe.set_size(Vector2(24, 24))
     
     # If the item is stackable show it's stack count
-    if Equips.equips[str(inventory[slot_num].id)]["subtype"] == "stackable":
+    if Equips.equips[inventory[slot_num].id]["subtype"] == "stackable":
       var stack_amt = inventory[slot_num].curr_stack_amt
       if stack_amt > 0:
         count_label.visible = true
@@ -246,7 +267,7 @@ func RefreshInventorySlot(slot_num : int):
         count_label.visible = false
     else:
       count_label.visible = false
-    
+
     # If the current slot is one of the ones being refreshed, make sure to
     # disable/enable the item in that slot
     var itemState = true if IsSelectedHotbar(slot_num) else false
@@ -254,6 +275,7 @@ func RefreshInventorySlot(slot_num : int):
     
   # If the inventory is null, set texture to null
   else:
+    print("[Inventory] Slot at %d is null..." % [slot_num])
     itemframe.texture = null
     count_label.visible = false
 
@@ -357,4 +379,36 @@ func _on_Inventory_mouse_exited():
   Globals.isManagingInv = false  
 
 func GetEquip(item):
-  return Equips.equips[str(item.id)]
+  return Equips.equips[item.id]
+
+func RestoreInventoryData(items):
+  print("\n[Inventory] Restoring player inventory...")
+  print(inventory)
+  
+  # Recreate every item in the player's inventory and place them in their original slots
+  for key in items.keys():
+    inventory[int(key)] = RestoreItem(items[key])
+  
+  # Refresh inventory to reflect restoration
+  RefreshInventorySlots(null)
+
+func InventoryToJSON():
+  var dict = {}
+  
+  # Convert each item into a JSON to store in a dictionary with their associated slot
+  # {slot id : item in JSON format}
+  for i in range(slots.size()):
+    if inventory[i] != null:
+      dict[i] = inventory[i].ToJSON()
+  return dict
+    
+func RestoreItem(item):
+  var id = int(item["id"])
+  
+  # Load up an instance of the item and place it in the player inventory node in the base scene
+  var item_instance = load(Equips.equips[id]["instance"]).instance()
+  playerInventory.add_child(item_instance)
+  
+  # Restore the item's data
+  item_instance.FromJSON(item)
+  return item_instance

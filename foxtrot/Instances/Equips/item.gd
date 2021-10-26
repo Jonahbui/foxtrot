@@ -55,3 +55,16 @@ func _on_PickupDetector_body_entered(body):
 func _on_PickupDetector_body_exited(_body):
   isPlayerTouching = false
   player_body = null
+
+func ToJSON():
+  # Purpose   : returns the important information needed to restore this item in a dictionary format. 
+  # Param(s)  : N/A
+  # Return(s) : A dictionary
+  return {
+    # Need to know what item to restore, signified by its ID
+    "id" : id,
+   }
+  
+func FromJson(item):
+  # Restore the id of the item
+  self.id = item["id"]
