@@ -17,6 +17,9 @@ func _enter_tree():
   
   save = create_save_file(null)
 
+func _init():
+  create_save_dir()  
+
 func _exit_tree():
   # Write an autosave on game exit
   save_config()
@@ -77,6 +80,9 @@ func create_save_file(player=null):
   return file
 
 func save_file(player=null):
+
+
+  # Create a file to write the daa to
   var file = File.new()
   file.open("user://%s.save" % [player.charname], File.WRITE)
   
@@ -89,3 +95,27 @@ func save_file(player=null):
   
 func load_file():
   pass
+  
+func list_saves():
+  # Used to return the filenames of all player saves
+  var saves = []
+
+  # Search for a valid save directory
+  var dir = Directory.new()
+  if dir.open("user://saves") == OK:
+    dir.list_dir_begin(true, true)
+    
+    # Append each name in the save directory to the saves array
+    var save_file = dir.get_next()
+    while save_file != "":
+      saves.append(save_file)
+    dir.list_dir_end()
+  
+  return saves
+      
+func create_save_dir():
+  # Create a directory for save files if one is not present
+  var dir = Directory.new()
+  if dir.open("user://") == OK:
+    if not dir.dir_exists("/saves"):
+      dir.make_dir("saves")  
