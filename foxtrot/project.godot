@@ -23,12 +23,12 @@ default_bus_layout="res://Audio/default_bus_layout.tres"
 
 [autoload]
 
+Signals="*res://Scripts/signals.gd"
 Save="*res://Scripts/save.gd"
 Globals="*res://Scripts/globals.gd"
 Equips="*res://Scripts/Inventory/equips.gd"
 Helper="*res://Scripts/helper.gd"
 Audio="*res://Scripts/audio.gd"
-Signals="*res://Scripts/signals.gd"
 
 [display]
 

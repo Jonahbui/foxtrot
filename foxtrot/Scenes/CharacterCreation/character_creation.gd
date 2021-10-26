@@ -5,9 +5,11 @@ func _on_StartButton_pressed():
 
 func _on_ConfirmButton_pressed():
   if $UI/NameInput.text.length() > 0:
-    Save.save[Globals.PLAYER_NAME] = $UI/NameInput.text
+    Save.save[Globals.PLAYER_NAME] = $UI/NameInput.text.to_lower()
     if get_tree().change_scene(Globals.SPATH_BASE) != OK:
       print("[Main Menu] Error. Could not load into base from main menu.")
+  else:
+    print("[Main Menu] Error. Name needed...")
 
 func _on_CancelButton_pressed():
   $UI/PopupMenu.hide()

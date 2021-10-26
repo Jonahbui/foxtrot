@@ -8,6 +8,7 @@ extends KinematicBody2D
 export var charname : String = ""
 export var maxHealth : int = 100
 export var health : int = 100
+export var mana   : int = 100
 export var money  : int = 0
 var damageMultiplier = 1.0
 
@@ -45,6 +46,10 @@ func _input(event):
 
 func _init():
   Signals.connect("on_interaction_changed", self, "ToggleInform")
+  Signals.emit_signal("on_player_loaded", self)
+
+func _ready():
+  self.charname = Save.save[Globals.PLAYER_NAME]
 
 func _physics_process(delta: float) -> void:
   # If the dev console is open then do not move.

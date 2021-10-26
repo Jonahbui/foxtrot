@@ -1,17 +1,20 @@
 extends Node
 
 # Define config constants
-const VOLUME_MASTER = "masterVolume"
-const VOLUME_MUSIC = "musicVolume"
-const VOLUME_SFX  = "sfxVolume"
+const VOLUME_MASTER         = "masterVolume"
+const VOLUME_MUSIC          = "musicVolume"
+const VOLUME_SFX            = "sfxVolume"
 const VOLUME_MASTER_TOGGLE  = "masterVolumeToggle"
-const VOLUME_MUSIC_TOGGLE  = "musicVolumeToggle"
-const VOLUME_SFX_TOGGLE  = "sfxVolumeToggle"
+const VOLUME_MUSIC_TOGGLE   = "musicVolumeToggle"
+const VOLUME_SFX_TOGGLE     = "sfxVolumeToggle"
 
 # Define save constants
-const PLAYER_NAME   = "playerName"
-const PLAYER_HEALTH = "playerHealth"
-const PLAYER_MONEY  = "playerMoney"
+const PLAYER_DIFFICULTY   = "playerDifficulty"
+const PLAYER_INVENTORY    = "playerInventory"
+const PLAYER_NAME         = "playerName"
+const PLAYER_HEALTH       = "playerHealth"
+const PLAYER_MANA         = "playerMana"
+const PLAYER_MONEY        = "playerMoney"
 
 const GRAPHICS_FULLSCREEN = 'fullscreen'
 
@@ -46,8 +49,7 @@ const LEVEL_PATH = [
 # --------------------------------------------------------------------------------------------------
 # Gameplay Management
 # --------------------------------------------------------------------------------------------------
-
-# TA: to remove since we added pause_flags
+var isInSpawn     : bool = false
 var isGamePlaying : bool = false
 var isNewGame     : bool = false
 var isHardcoreMode: bool = false

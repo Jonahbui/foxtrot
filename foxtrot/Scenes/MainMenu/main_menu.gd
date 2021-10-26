@@ -5,13 +5,15 @@ func _ready():
   # If the main menu is ever loaded, the game is not being played anymore
   Globals.isGamePlaying = false
   Globals.pause_flags = 0
-  $Credits/UI.hide()
-  $SettingsMenu/UI.hide()
-
+  
 func _on_NewGameButton_pressed():
   $MainMenu/UI/ModePopup.visible = true
+  Save.reset_save()
+  Globals.isNewGame = true
+  
 func _on_LoadGameButton_pressed():
-  pass # Replace with function body.
+  # Load all the save files so that they may be displayed to the user
+  Save.list_saves()
 
 # Used to open up the settings. Note: the Settings.tscn is expected to be imported
 # into the main menu scene.
@@ -52,4 +54,3 @@ func StartNewGame():
   Globals.isNewGame = true
   if get_tree().change_scene(Globals.SPATH_CHARACTER_CREATION) != OK:
     print("[Main Menu] Error. Could not change scene from main menu to character creation...")
-

@@ -15,21 +15,33 @@ const MAX_HOTBAR = 10
 const ARMOR_SLOTS = 4
 var armor_slot_id : int
 
+# Textures to change to if a hotbar is not selected
 export(String, FILE) var hotbar_hover
 export(String, FILE) var hotbar_pressed
 export(String, FILE) var hotbar_normal
 
+# Textures to change to if a hotbar is selected
 export(String, FILE) var hotbar_select_hover
 export(String, FILE) var hotbar_select_pressed
 export(String, FILE) var hotbar_select_normal
 
+# The current slot the player has selected in the hotbar
 var curr_slot_id : int = 0
+
+# An array of all the slots in the player inventory
 var slots = []
+
+# The slots the player clicked on while trying to perform an inventory swap operation
 var selectedSlot1 : int = -1
 var selectedSlot2 : int = -1
+
+# Determines whether or not the player's cursor is on the inventory UI
 var isInventoryHover : bool = false
 
+# The actual player. Used to reference the players script
 var player = null
+
+# A node in the scene storing all the item instances that should belong in the player inventory
 var playerInventory = null
 
 # A dictionary establishing a relationship with a slot and an equip
@@ -66,6 +78,9 @@ func _input(event):
   if Globals.IsFlagSet(Globals.FLAG_INVENTORY):
     if event.is_action_pressed("fire"):
       DropSelectedItem()
+
+func _init():
+  Signals.emit_signal("on_inventory_loaded", self)
 
 func _ready():
   hotbar_hover = load(hotbar_hover)
@@ -108,9 +123,14 @@ func InitalizeInventoryUI():
   slots.append_array(armor_slots.get_children())
 
 func GetNextSlot(moveForward=true):
+  # Keep track of the old slot, so that we know which slot to change textures for since it will not
+  # be selected any longer.
   var prev_slot_id = curr_slot_id
+  
+  # Calculate the new slot id based off whether we are incrementing up or down the hotbar
   var new_slot_id = curr_slot_id+1 if moveForward else curr_slot_id-1
   
+  # Make sure the hotbar wraps over if the index goes out of bounds
   if new_slot_id >= MAX_HOTBAR:
     new_slot_id = 0
   elif new_slot_id < 0:
