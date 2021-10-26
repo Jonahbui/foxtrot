@@ -40,9 +40,9 @@ anchor_top = 1.0
 anchor_right = 0.131
 anchor_bottom = 1.0
 margin_left = -72.5013
-margin_top = -86.4003
+margin_top = -42.063
 margin_right = 81.4987
-margin_bottom = -56.4003
+margin_bottom = -12.063
 custom_fonts/font = SubResource( 1 )
 text = "Below zero"
 align = 1
@@ -56,7 +56,7 @@ anchor_bottom = 1.0
 margin_left = 20.0
 margin_top = 20.0
 margin_right = -10.0
-margin_bottom = -109.0
+margin_bottom = -48.0
 custom_styles/panel = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -84,7 +84,7 @@ custom_styles/normal = ExtResource( 6 )
 custom_fonts/font = ExtResource( 4 )
 text = "Resume"
 
-[node name="SettingsButton" type="Button" parent="UI/Background/ButtonVbox"]
+[node name="SaveButton" type="Button" parent="UI/Background/ButtonVbox"]
 margin_top = 54.0
 margin_right = 90.0
 margin_bottom = 81.0
@@ -93,9 +93,12 @@ custom_styles/pressed = ExtResource( 9 )
 custom_styles/disabled = ExtResource( 7 )
 custom_styles/normal = ExtResource( 6 )
 custom_fonts/font = ExtResource( 4 )
-text = "Settings"
+text = "Save"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="MainMenuButton" type="Button" parent="UI/Background/ButtonVbox"]
+[node name="SettingsButton" type="Button" parent="UI/Background/ButtonVbox"]
 margin_top = 108.0
 margin_right = 90.0
 margin_bottom = 135.0
@@ -104,9 +107,9 @@ custom_styles/pressed = ExtResource( 9 )
 custom_styles/disabled = ExtResource( 7 )
 custom_styles/normal = ExtResource( 6 )
 custom_fonts/font = ExtResource( 4 )
-text = "Main Menu"
+text = "Settings"
 
-[node name="ExitButton" type="Button" parent="UI/Background/ButtonVbox"]
+[node name="MainMenuButton" type="Button" parent="UI/Background/ButtonVbox"]
 margin_top = 162.0
 margin_right = 90.0
 margin_bottom = 189.0
@@ -115,10 +118,38 @@ custom_styles/pressed = ExtResource( 9 )
 custom_styles/disabled = ExtResource( 7 )
 custom_styles/normal = ExtResource( 6 )
 custom_fonts/font = ExtResource( 4 )
+text = "Main Menu"
+
+[node name="ExitButton" type="Button" parent="UI/Background/ButtonVbox"]
+margin_top = 216.0
+margin_right = 90.0
+margin_bottom = 243.0
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 9 )
+custom_styles/disabled = ExtResource( 7 )
+custom_styles/normal = ExtResource( 6 )
+custom_fonts/font = ExtResource( 4 )
 text = "Exit"
 
+[node name="SaveStateLabel" type="Label" parent="UI"]
+visible = false
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -188.135
+margin_top = -43.5194
+margin_right = -34.1353
+margin_bottom = -13.5194
+custom_fonts/font = ExtResource( 4 )
+text = "TEXT HERE"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="SettingsMenu" parent="." instance=ExtResource( 5 )]
-layer = 4
 
 [node name="UI" parent="SettingsMenu" index="0"]
 visible = false
@@ -127,6 +158,7 @@ visible = false
 group = SubResource( 2 )
 
 [connection signal="pressed" from="UI/Background/ButtonVbox/ResumeButton" to="." method="_on_ResumeButton_pressed"]
+[connection signal="pressed" from="UI/Background/ButtonVbox/SaveButton" to="." method="_on_SaveButton_pressed"]
 [connection signal="pressed" from="UI/Background/ButtonVbox/SettingsButton" to="." method="_on_SettingsButton_pressed"]
 [connection signal="pressed" from="UI/Background/ButtonVbox/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
 [connection signal="pressed" from="UI/Background/ButtonVbox/ExitButton" to="." method="_on_ExitButton_pressed"]

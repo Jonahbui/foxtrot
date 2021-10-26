@@ -3,6 +3,13 @@ extends "res://Scenes/level.gd"
 var isTouching = false
 var currentItemToPurchase : int
 
+func _enter_tree():
+  # The store is considered part of spawn
+  Globals.isInSpawn = true
+  
+func _exit_tree():
+  Globals.isInSpawn = false
+
 func _ready():
   InitializeStore()
   currentItemToPurchase = 0
@@ -58,7 +65,6 @@ func ToggleStore(forceState=false, state=false):
 
 func UpdateSelectedItem(equip_id):
   currentItemToPurchase = equip_id
-  equip_id = str(equip_id)
   var texture = load(Equips.equips[equip_id]["resource"])
   if Equips.equips[equip_id]["type"] == "weapon":
     $UI/Store/TabContainer/Weapons/Description.text = Equips.equips[equip_id]["desc"]
@@ -75,17 +81,17 @@ func _on_PurchaseButton_pressed():
   var player = self.get_tree().get_root().get_node_or_null("/root/Base/Player")
   
   ## Player does not have sufficent money, reject purchase
-  if player.money - Equips.equips[str(currentItemToPurchase)]["price"] < 0: 
-    print("[Store] Insufficent money to purchase (%s) %s" % [currentItemToPurchase, Equips.equips[str(currentItemToPurchase)]["name"]])  
+  if player.money - Equips.equips[currentItemToPurchase]["price"] < 0: 
+    print("[Store] Insufficent money to purchase (%s) %s" % [currentItemToPurchase, Equips.equips[currentItemToPurchase]["name"]])  
     return
   
   # Subtract the money from the player if sufficient
-  player.money -= int(Equips.equips[str(currentItemToPurchase)]["price"])
+  player.money -= int(Equips.equips[currentItemToPurchase]["price"])
   
   # Add item to the player inventory
   var inventory = self.get_tree().get_root().get_node_or_null("/root/Base/Player/UI/Inventory")
   inventory.AddItem(currentItemToPurchase)
-  print("[Store] Purchasing (%s) %s" % [currentItemToPurchase, Equips.equips[str(currentItemToPurchase)]["name"]])
+  print("[Store] Purchasing (%s) %s" % [currentItemToPurchase, Equips.equips[currentItemToPurchase]["name"]])
 
 func _on_CloseStoreButton_pressed():
   ToggleStore(true, false)

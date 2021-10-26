@@ -4,7 +4,6 @@ func _enter_tree():
   Globals.isInSpawn = true
   
 func _exit_tree():
-  Save.save_file()
   Globals.isInSpawn = false
 
 func _on_PortalShop_body_entered(_body):

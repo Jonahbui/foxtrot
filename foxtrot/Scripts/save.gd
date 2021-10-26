@@ -13,6 +13,7 @@ func _init():
   
   Signals.connect("on_player_loaded", self, "init_player")
   Signals.connect("on_inventory_loaded", self, "init_inventory")
+  Signals.connect("on_base_game_loaded", self, "init_game")
   
 func _ready():
   save = empty_save_data()
@@ -96,7 +97,7 @@ var inventory = null
 func create_save_data(reset_save=false):
   var data = {
     Globals.PLAYER_DIFFICULTY : Globals.isGamePlaying,
-    Globals.PLAYER_INVENTORY  : inventory.inventory if not reset_save else {},
+    Globals.PLAYER_INVENTORY  : inventory.InventoryToJSON() if not reset_save else {},
     Globals.PLAYER_NAME       : player.charname if not reset_save  else "",
     Globals.PLAYER_HEALTH     : player.health if not reset_save  else 0,
     Globals.PLAYER_MANA       : player.mana if not reset_save  else 0,
@@ -127,7 +128,12 @@ func save_file():
   file.open("user://saves/%s.save" % [data[Globals.PLAYER_NAME]], File.WRITE)
     
   # Write the data to the file
-  if(data != null): file.store_line(to_json(data))
+  if(data != null): 
+    file.store_line(to_json(data))
+    Signals.emit_signal("on_game_saved", OK)
+  else:
+    Signals.emit_signal("on_game_saved", ERR_FILE_CORRUPT)    
+    
   file.close()
   
 func load_file(filename):
@@ -188,13 +194,17 @@ func init_player(player):
   
 func init_inventory(inventory):
   self.inventory = inventory
-  
   # The player contains the inventory, so if the inventory is loaded, the player is loaded as well.
   
-  # If the game is a new game, save the player file
+  # After the inventory is loaded, the base game is considered done loading.
+  Signals.emit_signal("on_base_game_loaded")
+
+func init_game():
+  # Restore the player inventory and player stats
+  player.RestorePlayerData(self.save)
+  inventory.RestoreInventoryData(self.save[Globals.PLAYER_INVENTORY])
+  
+  # If the game is a new game, save the player file.
   if Globals.isNewGame:
     Save.save_file()
     Globals.isNewGame = false
-  else:
-    player.RestorePlayerData(self.save)
-    inventory.RestoreInventoryData(self.save[Globals.PLAYER_INVENTORY])

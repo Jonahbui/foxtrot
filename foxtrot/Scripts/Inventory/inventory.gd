@@ -79,9 +79,6 @@ func _input(event):
     if event.is_action_pressed("fire"):
       DropSelectedItem()
 
-func _init():
-  Signals.emit_signal("on_inventory_loaded", self)
-
 func _ready():
   hotbar_hover = load(hotbar_hover)
   hotbar_pressed = load(hotbar_pressed)
@@ -97,6 +94,7 @@ func _ready():
 
   InitalizeInventoryUI()
   InitializeInventory()
+  Signals.emit_signal("on_inventory_loaded", self)
 
   # Set the active slot to default to the first hotbar slot
   SetActiveSlot(0, true)
@@ -176,7 +174,7 @@ func AddItem(item_to_add):
   
   # TA: changes strings to CONST later
   # If the item is stackable, attempt to stack it with item in inventory
-  if Equips.equips[str(item_id)]["subtype"] == "stackable":
+  if Equips.equips[item_id]["subtype"] == "stackable":
     
     # Find a free stack
     for item_key in inventory:
@@ -202,7 +200,7 @@ func AddItem(item_to_add):
   #   - If there is an overflow from stacking, create an item
   var item = null
   if typeof(item_to_add) == TYPE_INT:
-    item = load(Equips.equips[str(item_to_add)]["instance"]).instance()
+    item = load(Equips.equips[item_to_add]["instance"]).instance()
     item.id = item_to_add
   else:
     item = item_to_add
@@ -237,7 +235,8 @@ func RemoveItem(item):
 func IsSelectedHotbar(slot_num):
   return slot_num == curr_slot_id
   
-func RefreshInventorySlots(refreshSlots : Array):
+func RefreshInventorySlots(refreshSlots):
+  # Expects an array
   # Loop through all the slots and update their textures
   if refreshSlots == null:
     for i in range(0, slots.size()):
@@ -252,12 +251,14 @@ func RefreshInventorySlot(slot_num : int):
   var count_label = slots[slot_num].get_node_or_null("ItemCountLabel")
   # If the inventory is not null, update its texture to the one in the current inventory slot
   if inventory[slot_num] != null:
-    var texture = load(Equips.equips[str(inventory[slot_num].id)]["resource"])
+    print("[Inventory] Slot at %d is being refreshed..." % [slot_num])
+    
+    var texture = load(Equips.equips[inventory[slot_num].id]["resource"])
     itemframe.texture = texture
     itemframe.set_size(Vector2(24, 24))
     
     # If the item is stackable show it's stack count
-    if Equips.equips[str(inventory[slot_num].id)]["subtype"] == "stackable":
+    if Equips.equips[inventory[slot_num].id]["subtype"] == "stackable":
       var stack_amt = inventory[slot_num].curr_stack_amt
       if stack_amt > 0:
         count_label.visible = true
@@ -266,7 +267,7 @@ func RefreshInventorySlot(slot_num : int):
         count_label.visible = false
     else:
       count_label.visible = false
-    
+
     # If the current slot is one of the ones being refreshed, make sure to
     # disable/enable the item in that slot
     var itemState = true if IsSelectedHotbar(slot_num) else false
@@ -274,6 +275,7 @@ func RefreshInventorySlot(slot_num : int):
     
   # If the inventory is null, set texture to null
   else:
+    print("[Inventory] Slot at %d is null..." % [slot_num])
     itemframe.texture = null
     count_label.visible = false
 
@@ -377,7 +379,36 @@ func _on_Inventory_mouse_exited():
   Globals.isManagingInv = false  
 
 func GetEquip(item):
-  return Equips.equips[str(item.id)]
+  return Equips.equips[item.id]
 
 func RestoreInventoryData(items):
-  pass
+  print("\n[Inventory] Restoring player inventory...")
+  print(inventory)
+  
+  # Recreate every item in the player's inventory and place them in their original slots
+  for key in items.keys():
+    inventory[int(key)] = RestoreItem(items[key])
+  
+  # Refresh inventory to reflect restoration
+  RefreshInventorySlots(null)
+
+func InventoryToJSON():
+  var dict = {}
+  
+  # Convert each item into a JSON to store in a dictionary with their associated slot
+  # {slot id : item in JSON format}
+  for i in range(slots.size()):
+    if inventory[i] != null:
+      dict[i] = inventory[i].ToJSON()
+  return dict
+    
+func RestoreItem(item):
+  var id = int(item["id"])
+  
+  # Load up an instance of the item and place it in the player inventory node in the base scene
+  var item_instance = load(Equips.equips[id]["instance"]).instance()
+  playerInventory.add_child(item_instance)
+  
+  # Restore the item's data
+  item_instance.FromJSON(item)
+  return item_instance

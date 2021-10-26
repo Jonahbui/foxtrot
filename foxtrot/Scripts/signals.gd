@@ -21,10 +21,13 @@ signal on_dialogue_trigger(dialogue_id)
 # Informs the player that they can or cannot interact with the object they have entered
 signal on_interaction_changed(state)
 
-
+# Signals that the base game has been fully loaded.
+signal on_base_game_loaded()
 #--------------------------------------------------------------------------------------------------
 # Save System Signals
 #--------------------------------------------------------------------------------------------------
 signal on_player_loaded(player)
 
 signal on_inventory_loaded(inventory)
+
+signal on_game_saved(state)
