@@ -28,11 +28,6 @@ func _ready():
   cmdline = self.get_node(cmdline)
   logs = self.get_node(logs)
   
-  # If the game is a new game, save the player file
-  if Globals.isNewGame:
-    Save.save_file()
-    Globals.isNewGame = false
-  
   print()
   if Signals.connect("on_player_death", self, "OnDeath") != OK:
     print("[Base] Error. Failed to connect to signal on_player_death...")

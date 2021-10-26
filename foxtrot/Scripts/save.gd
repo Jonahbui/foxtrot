@@ -14,7 +14,6 @@ func _init():
   Signals.connect("on_player_loaded", self, "init_player")
   Signals.connect("on_inventory_loaded", self, "init_inventory")
   
-  
 func _ready():
   save = empty_save_data()
   
@@ -131,8 +130,29 @@ func save_file():
   if(data != null): file.store_line(to_json(data))
   file.close()
   
-func load_file():
-  pass
+func load_file(filename):
+  # Check for file existance before reading
+  var file = File.new()
+  if not file.file_exists("user://saves/%s" % [filename]): 
+    print("[Save] Error. File %s not found..." % [filename])
+    return null
+  
+  # Read in the save file
+  file.open("user://saves/%s" % [filename], File.READ)
+  var line = file.get_line()
+  var data = parse_json(line)
+  if data == null: 
+    print("[Save] Error. No data found for file %s..." % [filename])
+    return null
+  
+  # Insert the data into the save (Do not set config equal to data. People may
+  # insert their own values) dictionary.
+  var save_data = empty_save_data()
+  for key in save_data.keys():
+    if save_data.has(key): save_data[key] = data[key]
+  
+  print("\n[Save] Loading %s save file..." % [save_data[Globals.PLAYER_NAME]])
+  return save_data
   
 func list_saves():
   # Used to return the filenames of all player saves
@@ -151,7 +171,8 @@ func list_saves():
     dir.list_dir_end()
   
   print("[Save] Loading save files...")
-  print(saves)
+  for save in saves:
+    print("\t%s" % [save])
   return saves
       
 func create_save_dir():
@@ -162,7 +183,18 @@ func create_save_dir():
       dir.make_dir("saves")  
 
 func init_player(player):
+
   self.player = player
   
 func init_inventory(inventory):
   self.inventory = inventory
+  
+  # The player contains the inventory, so if the inventory is loaded, the player is loaded as well.
+  
+  # If the game is a new game, save the player file
+  if Globals.isNewGame:
+    Save.save_file()
+    Globals.isNewGame = false
+  else:
+    player.RestorePlayerData(self.save)
+    inventory.RestoreInventoryData(self.save[Globals.PLAYER_INVENTORY])

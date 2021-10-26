@@ -378,3 +378,6 @@ func _on_Inventory_mouse_exited():
 
 func GetEquip(item):
   return Equips.equips[str(item.id)]
+
+func RestoreInventoryData(items):
+  pass

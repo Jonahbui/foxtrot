@@ -141,8 +141,15 @@ func ResetPlayer():
   
   # Reset stamina/magic as well
 
+func RestorePlayerData(data):
+  Globals.isHardcoreMode = data[Globals.PLAYER_DIFFICULTY]
+  self.health = int(data[Globals.PLAYER_HEALTH])
+  self.mana   = int(data[Globals.PLAYER_MANA])
+  self.charname = data[Globals.PLAYER_NAME]
+  self.money = data[Globals.PLAYER_MONEY]
 # --------------------------------------------------------------------------------------------------
 # Dialogue Functions
 # --------------------------------------------------------------------------------------------------
 func ToggleInform(state):
+  # Display the inform panel
   $Inform.visible = state
