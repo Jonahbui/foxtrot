@@ -313,7 +313,7 @@ func _on_slot_pressed(slot_num):
           return
         
         # If swapping an armor piece with accessory piece in equip slots, reject.
-        if ( (item_slot1["subtype"] == "accessory" && item_slot2["subtype"] != "accessory") || (item_slot1["subtype"] != "accessory" && item_slot2["subtype"] == "accessory") ) && (selectedSlot1 > armor_slot_id || selectedSlot2 > armor_slot_id):
+        if ( (item_slot1["subtype"] == "accessory" && item_slot2["subtype"] != "accessory") || (item_slot1["subtype"] != "accessory" && item_slot2["subtype"] == "accessory") ) && (selectedSlot1 >= armor_slot_id || selectedSlot2 >= armor_slot_id):
           print("Cannot swap from slot #%d (%s) to slot #%d(%s). Invalid slots for items..." % [selectedSlot1, inventory[selectedSlot1].get_name(), selectedSlot2, inventory[selectedSlot2].get_name()])            
           ResetSelection()
           return
@@ -408,6 +408,8 @@ func RestoreItem(item):
   # Load up an instance of the item and place it in the player inventory node in the base scene
   var item_instance = load(Equips.equips[id]["instance"]).instance()
   playerInventory.add_child(item_instance)
+  item_instance.SetProcess(Globals.ItemProcess.Player) # TA: consider adding initalize method
+  item_instance.player_inv = self
   
   # Restore the item's data
   item_instance.FromJSON(item)
