@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Textures/Gameplay/player.png" type="Texture" id=1]
 [ext_resource path="res://Instances/Player/player.gd" type="Script" id=2]
@@ -16,6 +16,8 @@
 [ext_resource path="res://Textures/UI/hotbar_pressed.tres" type="StyleBox" id=14]
 [ext_resource path="res://Textures/UI/button_normal.png" type="Texture" id=15]
 [ext_resource path="res://Textures/Gameplay/Store/point_light.png" type="Texture" id=16]
+[ext_resource path="res://Textures/UI/icon_accessory.png" type="Texture" id=17]
+[ext_resource path="res://Textures/UI/icon_armor.png" type="Texture" id=18]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 24 )
@@ -151,6 +153,7 @@ __meta__ = {
 }
 
 [node name="Inventory" type="Control" parent="UI"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 9 )
@@ -166,7 +169,6 @@ hotbar_select_pressed = "res://Textures/UI/hotbar_select_pressed.tres"
 hotbar_select_normal = "res://Textures/UI/hotbar_select_normal.tres"
 
 [node name="Control" type="Control" parent="UI/Inventory"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -6.10352e-05
@@ -2607,6 +2609,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Hint" type="TextureRect" parent="UI/Inventory/Control/ArmorContainer/Slot1/CenterContainer"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = ExtResource( 18 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
 [node name="Item" type="TextureRect" parent="UI/Inventory/Control/ArmorContainer/Slot1/CenterContainer"]
 margin_right = 24.0
 margin_bottom = 24.0
@@ -2659,6 +2676,22 @@ margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
 mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Hint" type="TextureRect" parent="UI/Inventory/Control/ArmorContainer/Slot2/CenterContainer"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = ExtResource( 17 )
+expand = true
+stretch_mode = 4
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -2721,6 +2754,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Hint" type="TextureRect" parent="UI/Inventory/Control/ArmorContainer/Slot3/CenterContainer"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = ExtResource( 17 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
 [node name="Item" type="TextureRect" parent="UI/Inventory/Control/ArmorContainer/Slot3/CenterContainer"]
 margin_right = 24.0
 margin_bottom = 24.0
@@ -2773,6 +2822,22 @@ margin_bottom = -4.0
 rect_min_size = Vector2( 24, 24 )
 rect_clip_content = true
 mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Hint" type="TextureRect" parent="UI/Inventory/Control/ArmorContainer/Slot4/CenterContainer"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = ExtResource( 17 )
+expand = true
+stretch_mode = 4
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false

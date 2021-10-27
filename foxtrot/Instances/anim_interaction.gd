@@ -1,6 +1,6 @@
 # Note: the collider attached to this script must have a mask set for the Player bit and the layer
 # set for the interaction bit.
-extends Sprite
+extends AnimatedSprite
 
 # A bool used to determine whether or not the player is allowed to interact with this script.
 var canInteract : bool = false
