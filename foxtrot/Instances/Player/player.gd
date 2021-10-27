@@ -13,7 +13,7 @@ export var money  : int = 0
 var damageMultiplier = 1.0
 
 # --------------------------------------------------------------------------------------------------
-# Player Management
+# Player Management Vars
 # --------------------------------------------------------------------------------------------------
 var inWater = false
 var direction : = Vector2(1,0)
@@ -38,7 +38,10 @@ var speed    : = Vector2( 200.0, 800.0 )
 #   axes at present.  (It starts at ZERO since the player is
 #   initially not moving.)
 var velocity : = Vector2.ZERO
-# -------------------------------------------
+
+# --------------------------------------------------------------------------------------------------
+# Godot Functions
+# --------------------------------------------------------------------------------------------------
 
 func _input(event):
   if event.is_action_pressed("ui_inventory"):
@@ -118,9 +121,16 @@ func _physics_process(delta: float) -> void:
   #   move DOWN on the screen after we've hit the floor.
   velocity = move_and_slide( velocity, Vector2.UP )
 
+# --------------------------------------------------------------------------------------------------
+# Player UI Functions
+# --------------------------------------------------------------------------------------------------
 func toggle_inventory():
   $UI/Inventory/Control.visible = !$UI/Inventory/Control.visible
   Globals.SetFlag(Globals.FLAG_INVENTORY, $UI/Inventory/Control.visible)
+
+# --------------------------------------------------------------------------------------------------
+# Player Functions
+# --------------------------------------------------------------------------------------------------
 
 func TakeDamage(damage : int):
   health -= damage
