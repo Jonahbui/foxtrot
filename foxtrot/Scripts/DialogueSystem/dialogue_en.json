@@ -48,7 +48,7 @@
     "options" : {},
     "actor" : {
       "name" : "Sean",
-      "sprite" : "res://Textures/Gameplay/NPC/sean_portrait.png"
+      "sprite" : "res://Textures/Gameplay/NPC/angler_sean_portrait.png"
     }
   }
 }
