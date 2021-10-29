@@ -33,12 +33,14 @@ var config = null
 func create_config(default=false):
   # To add new elements to config, add here below. Define constants in globals:
   var new_config = {
-    Globals.VOLUME_MASTER : config[Globals.VOLUME_MASTER] if not default else 0.0,
-    Globals.VOLUME_MUSIC  : config[Globals.VOLUME_MUSIC] if not default else 0.0,
-    Globals.VOLUME_SFX    : config[Globals.VOLUME_SFX] if not default else 0.0,
-    Globals.VOLUME_MASTER_TOGGLE : config[Globals.VOLUME_MASTER_TOGGLE] if not default else false,
-    Globals.VOLUME_MUSIC_TOGGLE  : config[Globals.VOLUME_MUSIC_TOGGLE] if not default else false,
-    Globals.VOLUME_SFX_TOGGLE    : config[Globals.VOLUME_SFX_TOGGLE] if not default else false,
+    Globals.VOLUME_MASTER     : config[Globals.VOLUME_MASTER] if not default else 0.0,
+    Globals.VOLUME_MUSIC      : config[Globals.VOLUME_MUSIC] if not default else 0.0,
+    Globals.VOLUME_SFX        : config[Globals.VOLUME_SFX] if not default else 0.0,
+    Globals.VOLUME_AMBIENCE   : config[Globals.VOLUME_AMBIENCE] if not default else 0.0,    
+    Globals.VOLUME_MASTER_TOGGLE    : config[Globals.VOLUME_MASTER_TOGGLE] if not default else false,
+    Globals.VOLUME_MUSIC_TOGGLE     : config[Globals.VOLUME_MUSIC_TOGGLE] if not default else false,
+    Globals.VOLUME_SFX_TOGGLE       : config[Globals.VOLUME_SFX_TOGGLE] if not default else false,
+    Globals.VOLUME_AMBIENCE_TOGGLE  : config[Globals.VOLUME_AMBIENCE_TOGGLE] if not default else false,
       
     Globals.GRAPHICS_FULLSCREEN : config[Globals.GRAPHICS_FULLSCREEN] if not default else false
   }
@@ -98,7 +100,7 @@ func create_save_data(reset_save=false):
   var data = {
     Globals.PLAYER_DIFFICULTY : Globals.isGamePlaying,
     Globals.PLAYER_INVENTORY  : inventory.InventoryToJSON() if not reset_save else {},
-    Globals.PLAYER_NAME       : player.charname if not reset_save  else "",
+    Globals.PLAYER_NAME       : player.charname if not reset_save  else "default",
     Globals.PLAYER_HEALTH     : player.health if not reset_save  else 0,
     Globals.PLAYER_MANA       : player.mana if not reset_save  else 0,
     Globals.PLAYER_MONEY      : player.money if not reset_save  else 0

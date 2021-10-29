@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Textures/UI/slider_grabber.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/SettingsMenu/settings_menu.gd" type="Script" id=2]
@@ -8,37 +8,10 @@
 [ext_resource path="res://Textures/UI/checkbox_checked.png" type="Texture" id=6]
 [ext_resource path="res://Textures/UI/slider_grabber_area.png" type="Texture" id=7]
 [ext_resource path="res://Textures/UI/panel.tres" type="StyleBox" id=8]
-[ext_resource path="res://Textures/Gameplay/bubble.png" type="Texture" id=9]
 [ext_resource path="res://Textures/UI/button_pressed.tres" type="StyleBox" id=10]
 [ext_resource path="res://Textures/UI/button_normal.tres" type="StyleBox" id=11]
 [ext_resource path="res://Textures/UI/button_disabled.tres" type="StyleBox" id=12]
 [ext_resource path="res://Textures/UI/button_hover.tres" type="StyleBox" id=14]
-
-[sub_resource type="StyleBoxTexture" id=1]
-texture = ExtResource( 5 )
-region_rect = Rect2( 0, 0, 32, 32 )
-margin_left = 16.0
-margin_right = 16.0
-margin_top = 16.0
-margin_bottom = 16.0
-
-[sub_resource type="StyleBoxTexture" id=2]
-texture = ExtResource( 7 )
-region_rect = Rect2( 0, 0, 32, 32 )
-margin_left = 16.0
-margin_right = 16.0
-margin_top = 16.0
-margin_bottom = 16.0
-expand_margin_right = 8.0
-
-[sub_resource type="StyleBoxTexture" id=3]
-texture = ExtResource( 7 )
-region_rect = Rect2( 0, 0, 32, 32 )
-margin_left = 16.0
-margin_right = 16.0
-margin_top = 16.0
-margin_bottom = 16.0
-expand_margin_right = 16.0
 
 [sub_resource type="DynamicFont" id=4]
 size = 32
@@ -86,8 +59,18 @@ font_data = ExtResource( 3 )
 [node name="SettingsMenu" type="CanvasLayer"]
 layer = 4
 script = ExtResource( 2 )
+masterSlider = NodePath("UI/TabContainer/Audio/AudioVbox/MasterVolume/MasterSlider")
+musicSlider = NodePath("UI/TabContainer/Audio/AudioVbox/MusicVolume/MusicSlider")
+sfxSlider = NodePath("UI/TabContainer/Audio/AudioVbox/SFXVolume/SFXSlider")
+ambienceSlider = NodePath("UI/TabContainer/Audio/AudioVbox/AmbienceVolume/AmbienceSlider")
+masterToggle = NodePath("UI/TabContainer/Audio/AudioVbox/MasterVolume/MasterSlider/MasterCheckbox")
+musicToggle = NodePath("UI/TabContainer/Audio/AudioVbox/MusicVolume/MusicSlider/MusicCheckbox")
+sfxToggle = NodePath("UI/TabContainer/Audio/AudioVbox/SFXVolume/SFXSlider/SFXCheckbox")
+ambienceToggle = NodePath("UI/TabContainer/Audio/AudioVbox/AmbienceVolume/AmbienceSlider/AmbienceCheckbox")
+fullscreenCheckbox = NodePath("UI/TabContainer/Graphics/GraphicsVbox/Fullscreen/FullscreenCheckBox")
 
 [node name="UI" type="Control" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 48.0
@@ -98,19 +81,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel" type="Panel" parent="UI"]
-self_modulate = Color( 1, 1, 1, 0.713726 )
-anchor_left = -0.088
-anchor_top = -0.182
-anchor_right = 1.088
-anchor_bottom = 1.182
-margin_left = -0.127995
-margin_top = 0.0480042
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Background" type="Panel" parent="UI"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = ExtResource( 8 )
@@ -119,63 +91,41 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MusicSlider" type="HSlider" parent="UI"]
-visible = false
-anchor_left = 0.025
-anchor_top = 0.044
-anchor_right = 0.337
-anchor_bottom = 0.089
-margin_left = 184.0
-margin_top = 40.16
-margin_right = 368.32
-margin_bottom = 55.96
-rect_scale = Vector2( 0.5, 0.5 )
-rect_clip_content = true
-size_flags_horizontal = 12
-size_flags_vertical = 12
-custom_icons/grabber_highlight = ExtResource( 9 )
-custom_icons/grabber = ExtResource( 9 )
-custom_styles/slider = SubResource( 1 )
-custom_styles/grabber_area_highlight = SubResource( 2 )
-custom_styles/grabber_area = SubResource( 3 )
-min_value = -80.0
-max_value = 6.0
-value = 6.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MusicCheckbox" type="CheckBox" parent="UI/MusicSlider"]
-anchor_left = 1.0
+[node name="TabContainer" type="TabContainer" parent="UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.4523
-margin_top = -3.5994
-margin_right = 28.4523
-margin_bottom = 5.4006
-custom_icons/checked = ExtResource( 6 )
-custom_icons/unchecked = ExtResource( 5 )
+tab_align = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AudioVbox" type="VBoxContainer" parent="UI"]
-anchor_left = 0.029
-anchor_top = 0.061
-anchor_right = 0.029
-anchor_bottom = 0.061
-margin_left = 0.223999
-margin_top = -0.104002
-margin_right = 155.772
-margin_bottom = 134.896
+[node name="Audio" type="Tabs" parent="UI/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+tab_align = 0
+tab_close_display_policy = 2
+
+[node name="AudioVbox" type="VBoxContainer" parent="UI/TabContainer/Audio"]
+anchor_left = 0.022
+anchor_top = 0.035
+anchor_right = 0.022
+anchor_bottom = 0.035
+margin_left = 0.207999
+margin_top = 0.02
+margin_right = 155.756
+margin_bottom = 135.02
 rect_pivot_offset = Vector2( 116, 69.4569 )
 custom_constants/separation = 5
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="AudioLabel" type="Label" parent="UI/AudioVbox"]
+[node name="AudioLabel" type="Label" parent="UI/TabContainer/Audio/AudioVbox"]
 margin_right = 155.0
 margin_bottom = 30.0
 custom_fonts/font = SubResource( 4 )
@@ -184,7 +134,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MasterVolume" type="Label" parent="UI/AudioVbox"]
+[node name="MasterVolume" type="Label" parent="UI/TabContainer/Audio/AudioVbox"]
 margin_top = 35.0
 margin_right = 155.0
 margin_bottom = 50.0
@@ -194,7 +144,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MasterSlider" type="HSlider" parent="UI/AudioVbox/MasterVolume"]
+[node name="MasterSlider" type="HSlider" parent="UI/TabContainer/Audio/AudioVbox/MasterVolume"]
 anchor_left = 0.981
 anchor_top = 0.5
 anchor_right = 0.981
@@ -216,7 +166,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MasterCheckbox" type="CheckBox" parent="UI/AudioVbox/MasterVolume/MasterSlider"]
+[node name="MasterCheckbox" type="CheckBox" parent="UI/TabContainer/Audio/AudioVbox/MasterVolume/MasterSlider"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -231,7 +181,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MusicVolume" type="Label" parent="UI/AudioVbox"]
+[node name="MusicVolume" type="Label" parent="UI/TabContainer/Audio/AudioVbox"]
 margin_top = 55.0
 margin_right = 155.0
 margin_bottom = 70.0
@@ -241,7 +191,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MusicSlider" type="HSlider" parent="UI/AudioVbox/MusicVolume"]
+[node name="MusicSlider" type="HSlider" parent="UI/TabContainer/Audio/AudioVbox/MusicVolume"]
 anchor_left = 0.981
 anchor_top = 0.5
 anchor_right = 0.981
@@ -264,7 +214,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MusicCheckbox" type="CheckBox" parent="UI/AudioVbox/MusicVolume/MusicSlider"]
+[node name="MusicCheckbox" type="CheckBox" parent="UI/TabContainer/Audio/AudioVbox/MusicVolume/MusicSlider"]
 anchor_left = 1.0
 anchor_top = 0.528
 anchor_right = 1.0
@@ -279,7 +229,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SFXVolume" type="Label" parent="UI/AudioVbox"]
+[node name="SFXVolume" type="Label" parent="UI/TabContainer/Audio/AudioVbox"]
 margin_top = 75.0
 margin_right = 155.0
 margin_bottom = 90.0
@@ -289,7 +239,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SFXSlider" type="HSlider" parent="UI/AudioVbox/SFXVolume"]
+[node name="SFXSlider" type="HSlider" parent="UI/TabContainer/Audio/AudioVbox/SFXVolume"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -311,7 +261,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SFXCheckbox" type="CheckBox" parent="UI/AudioVbox/SFXVolume/SFXSlider"]
+[node name="SFXCheckbox" type="CheckBox" parent="UI/TabContainer/Audio/AudioVbox/SFXVolume/SFXSlider"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -326,22 +276,89 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GraphicsVbox" type="VBoxContainer" parent="UI"]
-anchor_left = 0.029
-anchor_top = 0.061
-anchor_right = 0.029
-anchor_bottom = 0.061
-margin_left = 0.223999
-margin_top = 103.896
-margin_right = 176.224
-margin_bottom = 312.896
-custom_constants/separation = 5
+[node name="AmbienceVolume" type="Label" parent="UI/TabContainer/Audio/AudioVbox"]
+margin_top = 95.0
+margin_right = 155.0
+margin_bottom = 110.0
+custom_fonts/font = SubResource( 5 )
+text = "Ambience Volume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AmbienceSlider" type="HSlider" parent="UI/TabContainer/Audio/AudioVbox/AmbienceVolume"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 21.0
+margin_top = -8.5
+margin_right = 309.0
+margin_bottom = 23.5
+rect_scale = Vector2( 0.5, 0.5 )
+custom_icons/grabber_highlight = ExtResource( 1 )
+custom_icons/grabber = ExtResource( 1 )
+custom_styles/slider = SubResource( 6 )
+custom_styles/grabber_area_highlight = SubResource( 7 )
+custom_styles/grabber_area = SubResource( 8 )
+min_value = -80.0
+max_value = 6.0
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="GraphicsLabel" type="Label" parent="UI/GraphicsVbox"]
+[node name="AmbienceCheckbox" type="CheckBox" parent="UI/TabContainer/Audio/AudioVbox/AmbienceVolume/AmbienceSlider"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 16.0
+margin_top = -19.599
+margin_right = 56.0
+margin_bottom = 21.401
+custom_icons/checked = ExtResource( 6 )
+custom_icons/unchecked = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Gameplay" type="Tabs" parent="UI/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+tab_align = 0
+tab_close_display_policy = 2
+
+[node name="Graphics" type="Tabs" parent="UI/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+tab_align = 0
+tab_close_display_policy = 2
+
+[node name="GraphicsVbox" type="VBoxContainer" parent="UI/TabContainer/Graphics"]
+anchor_left = 0.022
+anchor_top = 0.035
+anchor_right = 0.022
+anchor_bottom = 0.035
+margin_left = 0.207999
+margin_top = 0.02
+margin_right = 176.208
+margin_bottom = 209.02
+custom_constants/separation = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GraphicsLabel" type="Label" parent="UI/TabContainer/Graphics/GraphicsVbox"]
 margin_right = 176.0
 margin_bottom = 30.0
 custom_fonts/font = SubResource( 4 )
@@ -350,7 +367,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Quality" type="Label" parent="UI/GraphicsVbox"]
+[node name="Quality" type="Label" parent="UI/TabContainer/Graphics/GraphicsVbox"]
 visible = false
 margin_top = 35.0
 margin_right = 176.0
@@ -361,7 +378,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OptionButton" type="OptionButton" parent="UI/GraphicsVbox/Quality"]
+[node name="OptionButton" type="OptionButton" parent="UI/TabContainer/Graphics/GraphicsVbox/Quality"]
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -374,7 +391,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Resolution" type="Label" parent="UI/GraphicsVbox"]
+[node name="Resolution" type="Label" parent="UI/TabContainer/Graphics/GraphicsVbox"]
 visible = false
 margin_top = 50.0
 margin_right = 176.0
@@ -385,7 +402,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OptionButton" type="OptionButton" parent="UI/GraphicsVbox/Resolution"]
+[node name="OptionButton" type="OptionButton" parent="UI/TabContainer/Graphics/GraphicsVbox/Resolution"]
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -399,7 +416,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Fullscreen" type="Label" parent="UI/GraphicsVbox"]
+[node name="Fullscreen" type="Label" parent="UI/TabContainer/Graphics/GraphicsVbox"]
 margin_top = 35.0
 margin_right = 176.0
 margin_bottom = 50.0
@@ -409,7 +426,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FullscreenCheckBox" type="CheckBox" parent="UI/GraphicsVbox/Fullscreen"]
+[node name="FullscreenCheckBox" type="CheckBox" parent="UI/TabContainer/Graphics/GraphicsVbox/Fullscreen"]
 anchor_left = 0.5
 anchor_top = 0.467
 anchor_right = 0.5
@@ -425,15 +442,47 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="UI" type="Tabs" parent="UI/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+tab_align = 0
+tab_close_display_policy = 2
+
+[node name="Stats" type="Tabs" parent="UI/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+tab_align = 0
+tab_close_display_policy = 2
+
+[node name="Achievements" type="Tabs" parent="UI/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 64.0
+margin_bottom = 28.0
+tab_align = 0
+tab_close_display_policy = 2
+
 [node name="Reset" type="Button" parent="UI"]
 anchor_left = 0.971
 anchor_top = 0.939
 anchor_right = 0.971
 anchor_bottom = 0.939
-margin_left = -128.224
-margin_top = -47.896
-margin_right = -6.22406
-margin_bottom = -5.89601
+margin_left = -120.224
+margin_top = -39.896
+margin_right = 1.77588
+margin_bottom = 2.10399
 custom_styles/hover = ExtResource( 14 )
 custom_styles/pressed = ExtResource( 10 )
 custom_styles/disabled = ExtResource( 12 )
@@ -447,13 +496,13 @@ __meta__ = {
 
 [node name="BackButton" type="Button" parent="UI"]
 anchor_left = 0.971
-anchor_top = 0.061
+anchor_top = 0.152
 anchor_right = 0.971
-anchor_bottom = 0.061
-margin_left = -48.2241
-margin_top = 7.896
-margin_right = -4.22406
-margin_bottom = 51.896
+anchor_bottom = 0.152
+margin_left = -48.224
+margin_top = -0.128002
+margin_right = -4.224
+margin_bottom = 43.872
 custom_styles/hover = ExtResource( 14 )
 custom_styles/pressed = ExtResource( 10 )
 custom_styles/disabled = ExtResource( 12 )
@@ -465,13 +514,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="value_changed" from="UI/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
-[connection signal="toggled" from="UI/MusicSlider/MusicCheckbox" to="." method="_on_MusicCheckbox_toggled"]
-[connection signal="value_changed" from="UI/AudioVbox/MasterVolume/MasterSlider" to="." method="_on_MasterSlider_value_changed"]
-[connection signal="toggled" from="UI/AudioVbox/MasterVolume/MasterSlider/MasterCheckbox" to="." method="_on_MasterCheckbox_toggled"]
-[connection signal="value_changed" from="UI/AudioVbox/MusicVolume/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
-[connection signal="toggled" from="UI/AudioVbox/MusicVolume/MusicSlider/MusicCheckbox" to="." method="_on_MusicCheckbox_toggled"]
-[connection signal="value_changed" from="UI/AudioVbox/SFXVolume/SFXSlider" to="." method="_on_SFXSlider_value_changed"]
-[connection signal="toggled" from="UI/AudioVbox/SFXVolume/SFXSlider/SFXCheckbox" to="." method="_on_SFXCheckbox_toggled"]
-[connection signal="toggled" from="UI/GraphicsVbox/Fullscreen/FullscreenCheckBox" to="." method="_on_FullScreenCheckBox_toggled"]
+[connection signal="value_changed" from="UI/TabContainer/Audio/AudioVbox/MasterVolume/MasterSlider" to="." method="_on_MasterSlider_value_changed"]
+[connection signal="toggled" from="UI/TabContainer/Audio/AudioVbox/MasterVolume/MasterSlider/MasterCheckbox" to="." method="_on_MasterCheckbox_toggled"]
+[connection signal="value_changed" from="UI/TabContainer/Audio/AudioVbox/MusicVolume/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
+[connection signal="toggled" from="UI/TabContainer/Audio/AudioVbox/MusicVolume/MusicSlider/MusicCheckbox" to="." method="_on_MusicCheckbox_toggled"]
+[connection signal="value_changed" from="UI/TabContainer/Audio/AudioVbox/SFXVolume/SFXSlider" to="." method="_on_SFXSlider_value_changed"]
+[connection signal="toggled" from="UI/TabContainer/Audio/AudioVbox/SFXVolume/SFXSlider/SFXCheckbox" to="." method="_on_SFXCheckbox_toggled"]
+[connection signal="value_changed" from="UI/TabContainer/Audio/AudioVbox/AmbienceVolume/AmbienceSlider" to="." method="_on_AmbienceSlider_value_changed"]
+[connection signal="toggled" from="UI/TabContainer/Audio/AudioVbox/AmbienceVolume/AmbienceSlider/AmbienceCheckbox" to="." method="_on_AmbienceCheckbox_toggled"]
+[connection signal="toggled" from="UI/TabContainer/Graphics/GraphicsVbox/Fullscreen/FullscreenCheckBox" to="." method="_on_FullScreenCheckBox_toggled"]
 [connection signal="pressed" from="UI/Reset" to="." method="_on_Reset_pressed"]

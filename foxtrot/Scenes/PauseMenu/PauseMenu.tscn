@@ -151,9 +151,6 @@ __meta__ = {
 
 [node name="SettingsMenu" parent="." instance=ExtResource( 5 )]
 
-[node name="UI" parent="SettingsMenu" index="0"]
-visible = false
-
 [node name="OptionButton" parent="SettingsMenu/UI/GraphicsVbox/Quality" index="0"]
 group = SubResource( 2 )
 

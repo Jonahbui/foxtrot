@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Textures/Gameplay/Chest/ChestAnim.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Instances/Gameplay/chest.gd" type="Script" id=2]
+[ext_resource path="res://Node/Interaction.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 14.6723, 14.4653 )
+extents = Vector2( 14.5028, 12.8398 )
 
 [node name="Chest" type="AnimatedSprite"]
 scale = Vector2( 2, 2 )
@@ -12,11 +13,12 @@ frames = ExtResource( 1 )
 animation = "opening"
 script = ExtResource( 2 )
 
-[node name="Player" type="Area2D" parent="."]
+[node name="Interaction" parent="." instance=ExtResource( 3 )]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2( 0.264862, 5.29731 )
+[node name="CollisionShape2D" parent="Interaction" index="0"]
+position = Vector2( 0.117981, 1.41581 )
 shape = SubResource( 1 )
 
-[connection signal="body_entered" from="Player" to="." method="_on_Player_body_entered"]
-[connection signal="body_exited" from="Player" to="." method="_on_Player_body_exited"]
+[connection signal="interaction_triggered" from="Interaction" to="." method="Open"]
+
+[editable path="Interaction"]

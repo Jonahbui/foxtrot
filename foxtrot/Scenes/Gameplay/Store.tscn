@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Textures/Gameplay/Store/store_tiles.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Gameplay/store.gd" type="Script" id=2]
@@ -24,12 +24,16 @@
 [ext_resource path="res://Textures/Gameplay/Store/exit_sign.png" type="Texture" id=22]
 [ext_resource path="res://Textures/Gameplay/Store/aquatic_background.png" type="Texture" id=23]
 [ext_resource path="res://Textures/Gameplay/player.png" type="Texture" id=24]
-[ext_resource path="res://Instances/dialogue_interaction.gd" type="Script" id=25]
+[ext_resource path="res://Node/dialogue_interaction.gd" type="Script" id=25]
 [ext_resource path="res://Textures/Gameplay/Store/spotlight512.png" type="Texture" id=26]
 [ext_resource path="res://Shaders/godrays.gdshader" type="Shader" id=27]
+[ext_resource path="res://Textures/Gameplay/NPC/sean_sprite_sheet.png" type="Texture" id=28]
+[ext_resource path="res://Node/Interaction.tscn" type="PackedScene" id=29]
+[ext_resource path="res://Node/DialogueInteraction.tscn" type="PackedScene" id=30]
+[ext_resource path="res://Node/ChangeLevelInteraction.tscn" type="PackedScene" id=31]
 
 [sub_resource type="OccluderPolygon2D" id=1]
-polygon = PoolVector2Array( 115.564, 351.147, 1171.81, 345.62, 1174.73, 480.022, 98.7122, 450.762 )
+polygon = PoolVector2Array( 120, 352, 1160, 352, 1160, 448, 120, 448 )
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 27 )
@@ -67,15 +71,9 @@ shader_param/seed = 5.0
 extents = Vector2( 56, 32 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 21.8409, 33.8456 )
-
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 56.1088, 26.2995 )
-
-[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 96, 8 )
 
-[sub_resource type="StyleBoxTexture" id=8]
+[sub_resource type="StyleBoxTexture" id=6]
 texture = ExtResource( 13 )
 region_rect = Rect2( 0, 0, 32, 32 )
 margin_left = 2.0
@@ -83,23 +81,42 @@ margin_right = 2.0
 margin_top = 2.0
 margin_bottom = 2.0
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=7]
 font_data = ExtResource( 3 )
 
-[sub_resource type="StyleBoxTexture" id=10]
+[sub_resource type="StyleBoxTexture" id=8]
 texture = ExtResource( 15 )
 region_rect = Rect2( 0, 0, 16, 16 )
 
-[sub_resource type="StyleBoxTexture" id=11]
+[sub_resource type="StyleBoxTexture" id=9]
 texture = ExtResource( 16 )
 region_rect = Rect2( 0, 0, 16, 16 )
 
-[sub_resource type="StyleBoxTexture" id=12]
+[sub_resource type="StyleBoxTexture" id=10]
 texture = ExtResource( 14 )
 region_rect = Rect2( 0, 0, 16, 16 )
 
-[sub_resource type="RectangleShape2D" id=13]
-extents = Vector2( 40, 40 )
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 32, 40 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 28 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 28 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=14]
+animations = [ {
+"frames": [ SubResource( 12 ), SubResource( 13 ) ],
+"loop": true,
+"name": "blinking",
+"speed": 0.5
+} ]
+
+[sub_resource type="RectangleShape2D" id=15]
+extents = Vector2( 32, 40 )
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 2 )
@@ -174,38 +191,31 @@ __meta__ = {
 
 [node name="Godrays2" type="Sprite" parent="Lighting"]
 material = SubResource( 3 )
-position = Vector2( 746, 244 )
+position = Vector2( 744, 248 )
 scale = Vector2( 3.25781, 0.453125 )
 texture = ExtResource( 26 )
 
 [node name="Sprites" type="Node2D" parent="."]
 
-[node name="Store Door" type="Sprite" parent="Sprites"]
+[node name="Store Entrance" type="Sprite" parent="Sprites"]
 position = Vector2( 1224, 272 )
 scale = Vector2( 3, 3 )
 z_index = 1
 texture = ExtResource( 11 )
 script = ExtResource( 12 )
 
-[node name="DoorDetector" type="Area2D" parent="Sprites/Store Door"]
+[node name="DoorDetector" type="Area2D" parent="Sprites/Store Entrance"]
 position = Vector2( -616, -144 )
 scale = Vector2( 0.5, 0.5 )
 collision_layer = 16
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprites/Store Door/DoorDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprites/Store Entrance/DoorDetector"]
 position = Vector2( 1232, 288 )
 shape = SubResource( 4 )
 
-[node name="PortalSpawn" type="Area2D" parent="Sprites/Store Door"]
-position = Vector2( -408, -90.6667 )
-scale = Vector2( 0.333333, 0.333333 )
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprites/Store Door/PortalSpawn"]
-position = Vector2( 1224, 288 )
-shape = SubResource( 5 )
+[node name="ChangeLevelInteraction" parent="Sprites/Store Entrance" instance=ExtResource( 31 )]
+level = "res://Scenes/Gameplay/Spawn.tscn"
 
 [node name="Wanted Poster 1" type="Sprite" parent="Sprites"]
 position = Vector2( 1761.63, 235.364 )
@@ -222,23 +232,14 @@ position = Vector2( -120.218, 276.599 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 20 )
 
-[node name="ShopCollider" type="Area2D" parent="Sprites/Cash Register"]
-position = Vector2( -105.571, -137.985 )
-scale = Vector2( 0.5, 0.5 )
-collision_layer = 16
-collision_mask = 2
-
-[node name="InteractCollider" type="CollisionShape2D" parent="Sprites/Cash Register/ShopCollider"]
-position = Vector2( 211.359, 271.37 )
-scale = Vector2( 2, 2 )
-shape = SubResource( 6 )
+[node name="Interaction" parent="Sprites/Cash Register" instance=ExtResource( 29 )]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Sprites/Cash Register"]
 
 [node name="CounterCollider" type="CollisionShape2D" parent="Sprites/Cash Register/StaticBody2D"]
 position = Vector2( 0.108765, -6.2995 )
 scale = Vector2( 0.5, 0.5 )
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 one_way_collision = true
 
 [node name="ExitSign" type="Sprite" parent="Sprites"]
@@ -246,7 +247,6 @@ position = Vector2( 1224, 208 )
 texture = ExtResource( 22 )
 
 [node name="Light2D" type="Light2D" parent="Sprites/ExitSign"]
-position = Vector2( 0.00012207, 0 )
 scale = Vector2( 0.8125, 0.5625 )
 texture = ExtResource( 19 )
 color = Color( 0.654902, 0.819608, 0.643137, 1 )
@@ -273,7 +273,7 @@ tile_data = PoolIntArray( 589827, 3, 0, 589828, 3, 0, 589829, 3, 0, 589830, 3, 0
 motion_scale = Vector2( 0.9, 0.9 )
 motion_mirroring = Vector2( 1280, 0 )
 
-[node name="Sprite" type="Sprite" parent="World/AquaticLife (Sand)/ParallaxLayer"]
+[node name="SandBackground" type="Sprite" parent="World/AquaticLife (Sand)/ParallaxLayer"]
 position = Vector2( 624, 184 )
 texture = ExtResource( 23 )
 
@@ -295,10 +295,10 @@ __meta__ = {
 [node name="Spawnpoint" type="Node2D" parent="."]
 position = Vector2( 1144, 280 )
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="Store" type="CanvasLayer" parent="."]
 layer = 2
 
-[node name="Store" type="Panel" parent="UI"]
+[node name="UI" type="Panel" parent="Store"]
 visible = false
 self_modulate = Color( 1, 0.870588, 0.392157, 1 )
 margin_left = 16.0
@@ -309,7 +309,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TabContainer" type="TabContainer" parent="UI/Store"]
+[node name="TabContainer" type="TabContainer" parent="Store/UI"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -304.0
@@ -317,7 +317,7 @@ margin_bottom = 328.0
 custom_styles/tab_fg = ExtResource( 4 )
 custom_styles/tab_disabled = ExtResource( 10 )
 custom_styles/tab_bg = ExtResource( 10 )
-custom_styles/panel = SubResource( 8 )
+custom_styles/panel = SubResource( 6 )
 custom_fonts/font = ExtResource( 5 )
 custom_constants/side_margin = 0
 tab_align = 0
@@ -325,7 +325,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Weapons" type="Tabs" parent="UI/Store/TabContainer"]
+[node name="Weapons" type="Tabs" parent="Store/UI/TabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 2.0
@@ -333,7 +333,7 @@ margin_top = 29.0
 margin_right = -2.0
 margin_bottom = -2.0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="UI/Store/TabContainer/Weapons"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Store/UI/TabContainer/Weapons"]
 margin_left = 6.0
 margin_top = 3.0
 margin_right = 174.0
@@ -342,12 +342,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Store/TabContainer/Weapons/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Store/UI/TabContainer/Weapons/ScrollContainer"]
 margin_right = 164.0
 rect_min_size = Vector2( 164, 0 )
 rect_clip_content = true
 
-[node name="DescriptionPanel" type="Panel" parent="UI/Store/TabContainer/Weapons"]
+[node name="DescriptionPanel" type="Panel" parent="Store/UI/TabContainer/Weapons"]
 self_modulate = Color( 1, 1, 1, 0.313726 )
 anchor_left = 0.581
 anchor_top = 0.384
@@ -361,7 +361,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Description" type="Label" parent="UI/Store/TabContainer/Weapons"]
+[node name="Description" type="Label" parent="Store/UI/TabContainer/Weapons"]
 anchor_left = 0.608
 anchor_top = 0.411
 anchor_right = 0.959
@@ -370,14 +370,14 @@ margin_left = 0.0319824
 margin_top = -0.012001
 margin_right = 0.135986
 margin_bottom = -0.139999
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 7 )
 text = "Description here"
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PurchaseButton" type="Button" parent="UI/Store/TabContainer/Weapons"]
+[node name="PurchaseButton" type="Button" parent="Store/UI/TabContainer/Weapons"]
 anchor_left = 0.581
 anchor_top = 0.849
 anchor_right = 0.986
@@ -396,7 +396,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="EquipFrame" type="TextureRect" parent="UI/Store/TabContainer/Weapons"]
+[node name="EquipFrame" type="TextureRect" parent="Store/UI/TabContainer/Weapons"]
 anchor_left = 0.58
 anchor_top = 0.01
 anchor_right = 0.98
@@ -410,7 +410,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Equip" type="TextureRect" parent="UI/Store/TabContainer/Weapons"]
+[node name="Equip" type="TextureRect" parent="Store/UI/TabContainer/Weapons"]
 anchor_left = 0.662
 anchor_top = 0.055
 anchor_right = 0.905
@@ -425,7 +425,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Armor" type="Tabs" parent="UI/Store/TabContainer"]
+[node name="Armor" type="Tabs" parent="Store/UI/TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -434,7 +434,7 @@ margin_top = 29.0
 margin_right = -2.0
 margin_bottom = -2.0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="UI/Store/TabContainer/Armor"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Store/UI/TabContainer/Armor"]
 margin_left = 6.0
 margin_top = 3.0
 margin_right = 174.0
@@ -443,12 +443,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Store/TabContainer/Armor/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Store/UI/TabContainer/Armor/ScrollContainer"]
 margin_right = 164.0
 rect_min_size = Vector2( 164, 0 )
 rect_clip_content = true
 
-[node name="DescriptionPanel" type="Panel" parent="UI/Store/TabContainer/Armor"]
+[node name="DescriptionPanel" type="Panel" parent="Store/UI/TabContainer/Armor"]
 self_modulate = Color( 1, 1, 1, 0.313726 )
 anchor_left = 0.581
 anchor_top = 0.384
@@ -462,7 +462,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Description" type="Label" parent="UI/Store/TabContainer/Armor"]
+[node name="Description" type="Label" parent="Store/UI/TabContainer/Armor"]
 anchor_left = 0.608
 anchor_top = 0.411
 anchor_right = 0.959
@@ -471,14 +471,14 @@ margin_left = 0.0319824
 margin_top = -0.012001
 margin_right = 0.135986
 margin_bottom = -0.139999
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 7 )
 text = "Description here"
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PurchaseButton" type="Button" parent="UI/Store/TabContainer/Armor"]
+[node name="PurchaseButton" type="Button" parent="Store/UI/TabContainer/Armor"]
 anchor_left = 0.581
 anchor_top = 0.849
 anchor_right = 0.986
@@ -497,7 +497,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="EquipFrame" type="TextureRect" parent="UI/Store/TabContainer/Armor"]
+[node name="EquipFrame" type="TextureRect" parent="Store/UI/TabContainer/Armor"]
 anchor_left = 0.58
 anchor_top = 0.01
 anchor_right = 0.98
@@ -511,7 +511,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Equip" type="TextureRect" parent="UI/Store/TabContainer/Armor"]
+[node name="Equip" type="TextureRect" parent="Store/UI/TabContainer/Armor"]
 anchor_left = 0.662
 anchor_top = 0.055
 anchor_right = 0.905
@@ -526,7 +526,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Items" type="Tabs" parent="UI/Store/TabContainer"]
+[node name="Items" type="Tabs" parent="Store/UI/TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -535,7 +535,7 @@ margin_top = 29.0
 margin_right = -2.0
 margin_bottom = -2.0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="UI/Store/TabContainer/Items"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Store/UI/TabContainer/Items"]
 margin_left = 6.0
 margin_top = 3.0
 margin_right = 174.0
@@ -544,12 +544,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Store/TabContainer/Items/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Store/UI/TabContainer/Items/ScrollContainer"]
 margin_right = 164.0
 rect_min_size = Vector2( 164, 0 )
 rect_clip_content = true
 
-[node name="DescriptionPanel" type="Panel" parent="UI/Store/TabContainer/Items"]
+[node name="DescriptionPanel" type="Panel" parent="Store/UI/TabContainer/Items"]
 self_modulate = Color( 1, 1, 1, 0.313726 )
 anchor_left = 0.581
 anchor_top = 0.384
@@ -563,7 +563,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Description" type="Label" parent="UI/Store/TabContainer/Items"]
+[node name="Description" type="Label" parent="Store/UI/TabContainer/Items"]
 anchor_left = 0.608
 anchor_top = 0.411
 anchor_right = 0.959
@@ -572,14 +572,14 @@ margin_left = 0.0319824
 margin_top = -0.012001
 margin_right = 0.135986
 margin_bottom = -0.139999
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 7 )
 text = "Description here"
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PurchaseButton" type="Button" parent="UI/Store/TabContainer/Items"]
+[node name="PurchaseButton" type="Button" parent="Store/UI/TabContainer/Items"]
 anchor_left = 0.581
 anchor_top = 0.849
 anchor_right = 0.986
@@ -598,7 +598,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="EquipFrame" type="TextureRect" parent="UI/Store/TabContainer/Items"]
+[node name="EquipFrame" type="TextureRect" parent="Store/UI/TabContainer/Items"]
 anchor_left = 0.58
 anchor_top = 0.01
 anchor_right = 0.98
@@ -612,7 +612,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Equip" type="TextureRect" parent="UI/Store/TabContainer/Items"]
+[node name="Equip" type="TextureRect" parent="Store/UI/TabContainer/Items"]
 anchor_left = 0.662
 anchor_top = 0.055
 anchor_right = 0.905
@@ -627,13 +627,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CloseStoreButton" type="Button" parent="UI/Store"]
+[node name="CloseStoreButton" type="Button" parent="Store/UI"]
 margin_left = 277.0
 margin_right = 304.0
 margin_bottom = 27.0
-custom_styles/hover = SubResource( 10 )
-custom_styles/pressed = SubResource( 11 )
-custom_styles/normal = SubResource( 12 )
+custom_styles/hover = SubResource( 8 )
+custom_styles/pressed = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -648,22 +648,41 @@ texture = ExtResource( 24 )
 script = ExtResource( 25 )
 dialogue = "sir_diver1"
 
-[node name="Area2D" type="Area2D" parent="Entities/Sir Diver"]
-collision_layer = 32
-collision_mask = 2
+[node name="DialogueInteraction" parent="Entities/Sir Diver" instance=ExtResource( 30 )]
+dialogue = "sir_diver1"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Sir Diver/Area2D"]
-shape = SubResource( 13 )
+[node name="CollisionShape2D" parent="Entities/Sir Diver/DialogueInteraction" index="0"]
+shape = SubResource( 11 )
 
-[connection signal="body_entered" from="Sprites/Store Door/DoorDetector" to="Sprites/Store Door" method="_on_DoorDetector_body_entered"]
-[connection signal="body_exited" from="Sprites/Store Door/DoorDetector" to="Sprites/Store Door" method="_on_DoorDetector_body_exited"]
-[connection signal="body_entered" from="Sprites/Store Door/PortalSpawn" to="Sprites/Store Door" method="_on_Player_body_entered"]
-[connection signal="body_exited" from="Sprites/Store Door/PortalSpawn" to="Sprites/Store Door" method="_on_Player_body_exited"]
-[connection signal="body_entered" from="Sprites/Cash Register/ShopCollider" to="." method="_on_ShopCollider_body_entered"]
-[connection signal="body_exited" from="Sprites/Cash Register/ShopCollider" to="." method="_on_ShopCollider_body_exited"]
-[connection signal="pressed" from="UI/Store/TabContainer/Weapons/PurchaseButton" to="." method="_on_PurchaseButton_pressed"]
-[connection signal="pressed" from="UI/Store/TabContainer/Armor/PurchaseButton" to="." method="_on_PurchaseButton_pressed"]
-[connection signal="pressed" from="UI/Store/TabContainer/Items/PurchaseButton" to="." method="_on_PurchaseButton_pressed"]
-[connection signal="pressed" from="UI/Store/CloseStoreButton" to="." method="_on_CloseStoreButton_pressed"]
-[connection signal="body_entered" from="Entities/Sir Diver/Area2D" to="Entities/Sir Diver" method="_on_Player_body_entered"]
-[connection signal="body_exited" from="Entities/Sir Diver/Area2D" to="Entities/Sir Diver" method="_on_Player_body_exited"]
+[node name="Sean" type="AnimatedSprite" parent="Entities"]
+position = Vector2( 1104, 304 )
+scale = Vector2( 4, 4 )
+z_index = -2
+z_as_relative = false
+frames = SubResource( 14 )
+animation = "blinking"
+frame = 1
+playing = true
+flip_h = true
+
+[node name="DialogueInteraction" parent="Entities/Sean" instance=ExtResource( 30 )]
+position = Vector2( 48, 0 )
+scale = Vector2( 0.25, 0.25 )
+dialogue = "sean_intro1"
+
+[node name="CollisionShape2D" parent="Entities/Sean/DialogueInteraction" index="0"]
+position = Vector2( -192, 0 )
+shape = SubResource( 15 )
+
+[connection signal="body_entered" from="Sprites/Store Entrance/DoorDetector" to="Sprites/Store Entrance" method="_on_DoorDetector_body_entered"]
+[connection signal="body_exited" from="Sprites/Store Entrance/DoorDetector" to="Sprites/Store Entrance" method="_on_DoorDetector_body_exited"]
+[connection signal="interaction_triggered" from="Sprites/Cash Register/Interaction" to="." method="ToggleStore"]
+[connection signal="pressed" from="Store/UI/TabContainer/Weapons/PurchaseButton" to="." method="_on_PurchaseButton_pressed"]
+[connection signal="pressed" from="Store/UI/TabContainer/Armor/PurchaseButton" to="." method="_on_PurchaseButton_pressed"]
+[connection signal="pressed" from="Store/UI/TabContainer/Items/PurchaseButton" to="." method="_on_PurchaseButton_pressed"]
+[connection signal="pressed" from="Store/UI/CloseStoreButton" to="." method="_on_CloseStoreButton_pressed"]
+
+[editable path="Sprites/Store Entrance/ChangeLevelInteraction"]
+[editable path="Sprites/Cash Register/Interaction"]
+[editable path="Entities/Sir Diver/DialogueInteraction"]
+[editable path="Entities/Sean/DialogueInteraction"]

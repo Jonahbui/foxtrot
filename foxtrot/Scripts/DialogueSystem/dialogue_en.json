@@ -1,5 +1,5 @@
 {
-  "sir_diver1" : {
+  "sir_diver1"            : {
     "text"    : "First time here huh?",
     "next"    : "",
     "options" : {
@@ -38,6 +38,17 @@
     "actor" : {
       "name" : "Sir Diver",
       "sprite" : "res://Textures/Gameplay/player.png"
+    }
+  },
+
+
+  "sean_intro1"         : {
+    "text"    : "Help! I've been caught!",
+    "next"    : "",
+    "options" : {},
+    "actor" : {
+      "name" : "Sean",
+      "sprite" : "res://Textures/Gameplay/NPC/sean_portrait.png"
     }
   }
 }

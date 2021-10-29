@@ -54,6 +54,7 @@ func ToggleDialogueBox(force_set=false, value=false):
 func SetDialogueBox(id):
   if id == "":
     ToggleDialogueBox(true, false)
+    Signals.emit_signal("on_dialogue_exited")
     return
   
   # Update which dialogue the game is on

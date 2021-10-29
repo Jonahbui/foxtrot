@@ -24,6 +24,7 @@ bus = "SFX"
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 8, 0 )
+z_as_relative = false
 
 [node name="DialogueSystem" type="CanvasLayer" parent="."]
 layer = 2
@@ -207,8 +208,20 @@ __meta__ = {
 
 [node name="PauseMenu" parent="." instance=ExtResource( 1 )]
 
-[node name="OptionButton" parent="PauseMenu/SettingsMenu/UI/GraphicsVbox/Quality" index="0"]
+[node name="Audio" parent="PauseMenu/SettingsMenu/UI/TabContainer" index="0"]
+visible = true
+
+[node name="Graphics" parent="PauseMenu/SettingsMenu/UI/TabContainer" index="2"]
+visible = false
+
+[node name="OptionButton" parent="PauseMenu/SettingsMenu/UI/TabContainer/Graphics/GraphicsVbox/Quality" index="0"]
 group = SubResource( 1 )
+
+[node name="Achievements" parent="PauseMenu/SettingsMenu/UI/TabContainer" index="5"]
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
 
 [node name="LoadingScreen" type="CanvasLayer" parent="."]
 layer = 3

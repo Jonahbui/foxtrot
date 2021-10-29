@@ -1,4 +1,4 @@
-extends "res://Instances/interaction.gd"
+extends "res://Node/interaction.gd"
 
 func Use():
   Signals.emit_signal("on_change_base_level", Globals.LPATH_SPAWN)

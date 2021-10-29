@@ -16,7 +16,10 @@ func _on_NewGameButton_pressed():
   Globals.isNewGame = true
   
 func _on_LoadGameButton_pressed():
-  $LoadMenu/NinePatchRect.visible = true
+  $MainMenu/UI.hide()
+  $SettingsMenu/UI.hide()
+  $Credits/UI.hide()
+  $LoadMenu/UI.show()
 
 # Used to open up the settings. Note: the Settings.tscn is expected to be imported
 # into the main menu scene.
@@ -53,7 +56,10 @@ func _on_CasualButton_pressed():
   StartNewGame()
   
 func _on_BackButton_pressed():
-  $LoadMenu/NinePatchRect.visible = false
+  $MainMenu/UI.show()
+  $SettingsMenu/UI.hide()
+  $Credits/UI.hide()
+  $LoadMenu/UI.hide()
 
 func StartNewGame():
   Globals.isGamePlaying = true
@@ -83,7 +89,7 @@ func CreateLoadPanels():
     instance.connect("_on_load_panel_click", self, "LoadFile")
     
     # Add panel to scene
-    $LoadMenu/NinePatchRect/ScrollContainer/VBoxContainer.add_child(instance)
+    $LoadMenu/UI/NinePatchRect/ScrollContainer/VBoxContainer.add_child(instance)
 
 func LoadFile(name):
   # Ensure the game is not a new game. If the game is a new game, then the save system will not load

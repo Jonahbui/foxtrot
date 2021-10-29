@@ -1,6 +1,5 @@
 extends "res://Scenes/level.gd"
 
-var isTouching = false
 var currentItemToPurchase : int
 
 func _enter_tree():
@@ -15,16 +14,12 @@ func _ready():
   currentItemToPurchase = 0
   UpdateSelectedItem(0)
 
-func _input(event):
-  if event.is_action_pressed("interact") && isTouching:
-    ToggleStore()
-
 func _on_ShopCollider_body_entered(_body):
-  isTouching = true
+  #isTouching = true
   Signals.emit_signal("on_interaction_changed", true)
 
 func _on_ShopCollider_body_exited(_body):
-  isTouching = false
+  #isTouching = false
   ToggleStore(true, false)
   Signals.emit_signal("on_interaction_changed", false)
 
@@ -45,36 +40,38 @@ func InitializeStore():
     
     # Update the purchase frame to reflect the item
     if Equips.equips[equip_id]["type"] == "weapon":
-      $UI/Store/TabContainer/Weapons/ScrollContainer/VBoxContainer.add_child(instance)
+      $Store/UI/TabContainer/Weapons/ScrollContainer/VBoxContainer.add_child(instance)
     elif Equips.equips[equip_id]["type"] == "armor":
-      $UI/Store/TabContainer/Armor/ScrollContainer/VBoxContainer.add_child(instance)
+      $Store/UI/TabContainer/Armor/ScrollContainer/VBoxContainer.add_child(instance)
     else:
-      $UI/Store/TabContainer/Items/ScrollContainer/VBoxContainer.add_child(instance)
+      $Store/UI/TabContainer/Items/ScrollContainer/VBoxContainer.add_child(instance)
 
 func ToggleStore(forceState=false, state=false):
   if forceState:
-    $UI/Store.visible = state
+    $Store/UI.visible = state
   else:
-    $UI/Store.visible = !$UI/Store.visible
+    $Store/UI.visible = !$Store/UI.visible
     
-  if $UI/Store.visible:
+  if $Store/UI.visible:
     Signals.emit_signal("on_play_sfx", "res://Audio/SoundEffects/cash_register.mp3")
+  else:
+    Signals.emit_signal("on_interaction_changed", false)
   
   # Set playser as interacting or not
-  Globals.SetFlag(Globals.FLAG_INTERACTING, $UI/Store.visible)
+  Globals.SetFlag(Globals.FLAG_INTERACTING, $Store/UI.visible)
 
 func UpdateSelectedItem(equip_id):
   currentItemToPurchase = equip_id
   var texture = load(Equips.equips[equip_id]["resource"])
   if Equips.equips[equip_id]["type"] == "weapon":
-    $UI/Store/TabContainer/Weapons/Description.text = Equips.equips[equip_id]["desc"]
-    $UI/Store/TabContainer/Weapons/Equip.texture = texture
+    $Store/UI/TabContainer/Weapons/Description.text = Equips.equips[equip_id]["desc"]
+    $Store/UI/TabContainer/Weapons/Equip.texture = texture
   elif Equips.equips[equip_id]["type"] == "armor":
-    $UI/Store/TabContainer/Armor/Description.text = Equips.equips[equip_id]["desc"]
-    $UI/Store/TabContainer/Armor/Equip.texture = texture
+    $Store/UI/TabContainer/Armor/Description.text = Equips.equips[equip_id]["desc"]
+    $Store/UI/TabContainer/Armor/Equip.texture = texture
   else:
-    $UI/Store/TabContainer/Items/Description.text = Equips.equips[equip_id]["desc"]
-    $UI/Store/TabContainer/Items/Equip.texture = texture
+    $Store/UI/TabContainer/Items/Description.text = Equips.equips[equip_id]["desc"]
+    $Store/UI/TabContainer/Items/Equip.texture = texture
 
 func _on_PurchaseButton_pressed():
   # Check if player is able to purchase
