@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/angler_sean_sprite_sheet.png-5edf26249461e1a0ad2ffb930bd464a8.stex"
+path="res://.import/squid_darla.png-68820341a82b6c603e973b02a38bcbff.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Gameplay/NPC/angler_sean_sprite_sheet.png"
-dest_files=[ "res://.import/angler_sean_sprite_sheet.png-5edf26249461e1a0ad2ffb930bd464a8.stex" ]
+source_file="res://Textures/Gameplay/NPC/squid_darla.png"
+dest_files=[ "res://.import/squid_darla.png-68820341a82b6c603e973b02a38bcbff.stex" ]
 
 [params]
 

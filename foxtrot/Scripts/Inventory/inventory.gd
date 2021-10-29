@@ -251,7 +251,7 @@ func RefreshInventorySlot(slot_num : int):
   var count_label = slots[slot_num].get_node_or_null("ItemCountLabel")
   # If the inventory is not null, update its texture to the one in the current inventory slot
   if inventory[slot_num] != null:
-    print("[Inventory] Slot at %d is being refreshed..." % [slot_num])
+    #print("[Inventory] Slot at %d is being refreshed..." % [slot_num])
     
     var texture = load(Equips.equips[inventory[slot_num].id]["resource"])
     itemframe.texture = texture
@@ -383,7 +383,7 @@ func GetEquip(item):
 
 func RestoreInventoryData(items):
   print("\n[Inventory] Restoring player inventory...")
-  print(inventory)
+  #print(inventory)
   
   # Recreate every item in the player's inventory and place them in their original slots
   for key in items.keys():

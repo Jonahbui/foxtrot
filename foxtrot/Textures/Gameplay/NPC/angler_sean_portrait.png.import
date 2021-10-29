@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sean_portrait.png-1682439b4410e6f9055f4bfe5dd8a212.stex"
+path="res://.import/angler_sean_portrait.png-b6ca1247bf124e313a99a3cf03e07ff5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Gameplay/NPC/sean_portrait.png"
-dest_files=[ "res://.import/sean_portrait.png-1682439b4410e6f9055f4bfe5dd8a212.stex" ]
+source_file="res://Textures/Gameplay/NPC/angler_sean_portrait.png"
+dest_files=[ "res://.import/angler_sean_portrait.png-b6ca1247bf124e313a99a3cf03e07ff5.stex" ]
 
 [params]
 

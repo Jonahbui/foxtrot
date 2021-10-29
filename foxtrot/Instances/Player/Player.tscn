@@ -171,6 +171,7 @@ hotbar_select_pressed = "res://Textures/UI/hotbar_select_pressed.tres"
 hotbar_select_normal = "res://Textures/UI/hotbar_select_normal.tres"
 
 [node name="Control" type="Control" parent="UI/Inventory"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -6.10352e-05

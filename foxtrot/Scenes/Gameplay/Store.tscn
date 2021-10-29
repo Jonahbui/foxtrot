@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://Textures/Gameplay/Store/store_tiles.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Gameplay/store.gd" type="Script" id=2]
@@ -27,7 +27,7 @@
 [ext_resource path="res://Node/dialogue_interaction.gd" type="Script" id=25]
 [ext_resource path="res://Textures/Gameplay/Store/spotlight512.png" type="Texture" id=26]
 [ext_resource path="res://Shaders/godrays.gdshader" type="Shader" id=27]
-[ext_resource path="res://Textures/Gameplay/NPC/sean_sprite_sheet.png" type="Texture" id=28]
+[ext_resource path="res://Textures/Gameplay/NPC/angler_sean_anim.tres" type="SpriteFrames" id=28]
 [ext_resource path="res://Node/Interaction.tscn" type="PackedScene" id=29]
 [ext_resource path="res://Node/DialogueInteraction.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Node/ChangeLevelInteraction.tscn" type="PackedScene" id=31]
@@ -51,24 +51,8 @@ shader_param/color = Color( 0.698039, 0.698039, 0.698039, 0.203922 )
 shader_param/hdr = true
 shader_param/seed = 5.0
 
-[sub_resource type="ShaderMaterial" id=3]
-shader = ExtResource( 27 )
-shader_param/angle = 0.12
-shader_param/position = 0.111
-shader_param/spread = 0.741
-shader_param/cutoff = 0.091
-shader_param/falloff = 1.0
-shader_param/edge_fade = 0.071
-shader_param/speed = 1.0
-shader_param/ray1_density = 8.0
-shader_param/ray2_density = 30.0
-shader_param/ray2_intensity = 0.3
-shader_param/color = Color( 0.215686, 0.254902, 0.298039, 0.8 )
-shader_param/hdr = false
-shader_param/seed = 5.0
-
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 56, 32 )
+extents = Vector2( 33.7769, 32 )
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 96, 8 )
@@ -98,22 +82,6 @@ region_rect = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 32, 40 )
-
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 28 )
-region = Rect2( 0, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 28 )
-region = Rect2( 16, 0, 16, 16 )
-
-[sub_resource type="SpriteFrames" id=14]
-animations = [ {
-"frames": [ SubResource( 12 ), SubResource( 13 ) ],
-"loop": true,
-"name": "blinking",
-"speed": 0.5
-} ]
 
 [sub_resource type="RectangleShape2D" id=15]
 extents = Vector2( 32, 40 )
@@ -189,12 +157,6 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Godrays2" type="Sprite" parent="Lighting"]
-material = SubResource( 3 )
-position = Vector2( 744, 248 )
-scale = Vector2( 3.25781, 0.453125 )
-texture = ExtResource( 26 )
-
 [node name="Sprites" type="Node2D" parent="."]
 
 [node name="Store Entrance" type="Sprite" parent="Sprites"]
@@ -207,7 +169,7 @@ script = ExtResource( 12 )
 [node name="DoorDetector" type="Area2D" parent="Sprites/Store Entrance"]
 position = Vector2( -616, -144 )
 scale = Vector2( 0.5, 0.5 )
-collision_layer = 16
+collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprites/Store Entrance/DoorDetector"]
@@ -659,7 +621,7 @@ position = Vector2( 1104, 304 )
 scale = Vector2( 4, 4 )
 z_index = -2
 z_as_relative = false
-frames = SubResource( 14 )
+frames = ExtResource( 28 )
 animation = "blinking"
 frame = 1
 playing = true
@@ -668,6 +630,7 @@ flip_h = true
 [node name="DialogueInteraction" parent="Entities/Sean" instance=ExtResource( 30 )]
 position = Vector2( 48, 0 )
 scale = Vector2( 0.25, 0.25 )
+collision_layer = 16
 dialogue = "sean_intro1"
 
 [node name="CollisionShape2D" parent="Entities/Sean/DialogueInteraction" index="0"]
