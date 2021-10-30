@@ -42,11 +42,6 @@ var velocity : = Vector2.ZERO
 # --------------------------------------------------------------------------------------------------
 # Godot Functions
 # --------------------------------------------------------------------------------------------------
-
-func _input(event):
-  if event.is_action_pressed("ui_inventory"):
-    toggle_inventory()
-
 func _init():
   Signals.connect("on_interaction_changed", self, "ToggleInform")
   Signals.emit_signal("on_player_loaded", self)
@@ -120,13 +115,6 @@ func _physics_process(delta: float) -> void:
   #   our version of velocity so we don't, e.g., keep trying to
   #   move DOWN on the screen after we've hit the floor.
   velocity = move_and_slide( velocity, Vector2.UP )
-
-# --------------------------------------------------------------------------------------------------
-# Player UI Functions
-# --------------------------------------------------------------------------------------------------
-func toggle_inventory():
-  $UI/Inventory/Control.visible = !$UI/Inventory/Control.visible
-  Globals.SetFlag(Globals.FLAG_INVENTORY, $UI/Inventory/Control.visible)
 
 # --------------------------------------------------------------------------------------------------
 # Player Functions

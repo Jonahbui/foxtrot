@@ -38,12 +38,14 @@ const SCENE_PATHS = [
  ]
 
 # Define level resource paths (levels that the player play in)
+const LPATH_AQUARIUM = "res://Scenes/Gameplay/Aquarium.tscn"
 const LPATH_SPAWN = "res://Scenes/Gameplay/Spawn.tscn"
 const LPATH_SEAFLOOR = "res://Scenes/Gameplay/Seafloor.tscn"
 
 ## Mainly used for dev console to verify that the path selected is one that the 
 ## player should be allowed to switch to.
 const LEVEL_PATH = [
+  LPATH_AQUARIUM,
   LPATH_SPAWN,
   LPATH_SEAFLOOR
  ]

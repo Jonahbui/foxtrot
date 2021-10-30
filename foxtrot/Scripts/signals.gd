@@ -3,6 +3,10 @@ extends Node
 # Inform the world that an `item` is to be dropped at `position`
 signal on_item_drop(item, position)
 
+signal on_inventory_add_item(item)
+
+signal on_inventory_add_item_stack(item, amount)
+
 # Inform the game that the player has died
 signal on_player_death()
 

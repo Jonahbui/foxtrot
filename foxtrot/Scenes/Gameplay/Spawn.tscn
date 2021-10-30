@@ -77,13 +77,13 @@ cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( 655381, 30, 0, 655382, 30, 0, 655383, 30, 0, 655384, 30, 0, 655385, 30, 0, 655386, 30, 0, 655387, 30, 0, 655388, 30, 0, 655389, 30, 0, 655390, 30, 0, 655391, 30, 0, 655392, 30, 0, 655393, 30, 0, 655394, 30, 0, 655395, 30, 0, 655396, 30, 0, 655397, 30, 0, 655398, 30, 0, 655399, 30, 0, 655400, 30, 0, 655401, 30, 0, 655402, 30, 0, 655403, 30, 0, 655404, 30, 0, 655405, 30, 0, 720917, 31, 0, 720918, 31, 0, 720919, 31, 0, 720920, 31, 0, 720921, 31, 0, 720922, 31, 0, 720923, 31, 0, 720924, 31, 0, 720925, 31, 0, 720926, 31, 0, 720927, 31, 0, 720928, 31, 0, 720929, 31, 0, 720930, 31, 0, 720931, 31, 0, 720932, 31, 0, 720933, 31, 0, 720934, 31, 0, 720935, 31, 0, 720936, 31, 0, 720937, 31, 0, 720938, 31, 0, 720939, 31, 0, 720940, 31, 0, 720941, 31, 0, 786453, 31, 0, 786454, 31, 0, 786455, 31, 0, 786456, 31, 0, 786457, 31, 0, 786458, 31, 0, 786459, 31, 0, 786460, 31, 0, 786461, 31, 0, 786462, 31, 0, 786463, 31, 0, 786464, 31, 0, 786465, 31, 0, 786466, 31, 0, 786467, 31, 0, 786468, 31, 0, 786469, 31, 0, 786470, 31, 0, 786471, 31, 0, 786472, 31, 0, 786473, 31, 0, 786474, 31, 0, 786475, 31, 0, 786476, 31, 0, 786477, 31, 0 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="World"]
+[node name="AquariumDoor" type="AnimatedSprite" parent="World"]
 position = Vector2( 32, 192 )
 
-[node name="ChangeLevelInteraction" parent="World/AnimatedSprite" instance=ExtResource( 15 )]
-level = "res://Scenes/Gameplay/Store.tscn"
+[node name="ChangeLevelInteraction" parent="World/AquariumDoor" instance=ExtResource( 15 )]
+level = "res://Scenes/Gameplay/Aquarium.tscn"
 
-[node name="CollisionShape2D" parent="World/AnimatedSprite/ChangeLevelInteraction" index="0"]
+[node name="CollisionShape2D" parent="World/AquariumDoor/ChangeLevelInteraction" index="0"]
 shape = SubResource( 1 )
 
 [node name="Spawnpoint" type="Node2D" parent="."]
@@ -219,5 +219,5 @@ stream = ExtResource( 11 )
 autoplay = true
 bus = "Ambience"
 
-[editable path="World/AnimatedSprite/ChangeLevelInteraction"]
+[editable path="World/AquariumDoor/ChangeLevelInteraction"]
 [editable path="Background Objects/yellow_submarine/ChangeLevelInteraction"]

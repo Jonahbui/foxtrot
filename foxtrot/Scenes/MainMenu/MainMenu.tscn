@@ -396,11 +396,20 @@ visible = false
 
 [node name="SettingsMenu" parent="." instance=ExtResource( 6 )]
 
-[node name="UI" parent="SettingsMenu" index="0"]
+[node name="Audio" parent="SettingsMenu/UI/TabContainer" index="0"]
+visible = true
+
+[node name="Graphics" parent="SettingsMenu/UI/TabContainer" index="2"]
 visible = false
 
-[node name="OptionButton" parent="SettingsMenu/UI/GraphicsVbox/Quality" index="0"]
+[node name="OptionButton" parent="SettingsMenu/UI/TabContainer/Graphics/GraphicsVbox/Quality" index="0"]
 group = SubResource( 8 )
+
+[node name="Achievements" parent="SettingsMenu/UI/TabContainer" index="5"]
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 9 )

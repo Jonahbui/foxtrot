@@ -1,0 +1,3472 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Fonts/thaelahfat_pure_16x.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Textures/UI/icon_accessory.png" type="Texture" id=3]
+[ext_resource path="res://Textures/UI/slot_submarine_normal.png" type="Texture" id=4]
+[ext_resource path="res://Textures/UI/icon_armor.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/Inventory/inventory.gd" type="Script" id=7]
+[ext_resource path="res://Textures/UI/slot_hover.tres" type="StyleBox" id=8]
+[ext_resource path="res://Textures/UI/slot.tres" type="StyleBox" id=9]
+[ext_resource path="res://Textures/UI/hotbar_hover.tres" type="StyleBox" id=10]
+[ext_resource path="res://Textures/UI/hotbar_normal.tres" type="StyleBox" id=11]
+[ext_resource path="res://Textures/UI/hotbar_pressed.tres" type="StyleBox" id=13]
+[ext_resource path="res://Textures/UI/slot_pressed.tres" type="StyleBox" id=14]
+
+[sub_resource type="StyleBoxTexture" id=5]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="Inventory" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+hotbar_hover = "res://Textures/UI/hotbar_select_normal.tres"
+hotbar_pressed = "res://Textures/UI/hotbar_select_normal.tres"
+hotbar_normal = "res://Textures/UI/hotbar_select_normal.tres"
+hotbar_select_hover = "res://Textures/UI/hotbar_select_normal.tres"
+hotbar_select_pressed = "res://Textures/UI/hotbar_select_normal.tres"
+hotbar_select_normal = "res://Textures/UI/hotbar_select_normal.tres"
+inventory_stash = NodePath("InventoryStash")
+hotbar_ui = NodePath("UI/Hotbar")
+inventory_ui = NodePath("UI/Inventory")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Inventory" type="Control" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -6.10352e-05
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Panels" type="Control" parent="UI/Inventory"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="RaycastCatch" type="Panel" parent="UI/Inventory/Panels"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 640.0
+margin_bottom = 360.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerProfilePanel" type="Panel" parent="UI/Inventory/Panels"]
+self_modulate = Color( 1, 1, 1, 0.188235 )
+anchor_right = 0.4
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_top = 48.0
+margin_right = 16.0
+margin_bottom = -40.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="InventoryPanel" type="Panel" parent="UI/Inventory/Panels"]
+self_modulate = Color( 1, 1, 1, 0.188235 )
+anchor_left = 0.988
+anchor_top = 0.133
+anchor_right = 0.988
+anchor_bottom = 0.133
+margin_left = -336.32
+margin_top = 0.119999
+margin_right = -0.319946
+margin_bottom = 144.12
+rect_min_size = Vector2( 336, 144 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UI/Inventory"]
+anchor_left = 0.262
+anchor_top = 0.133
+anchor_right = 0.337
+anchor_bottom = 0.333
+margin_left = 0.319977
+margin_top = 0.119999
+margin_right = 0.319992
+margin_bottom = 0.119995
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ArmorContainer" type="VBoxContainer" parent="UI/Inventory"]
+margin_left = 40.0
+margin_top = 56.0
+margin_right = 72.0
+margin_bottom = 296.0
+rect_min_size = Vector2( 32, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot1" type="Button" parent="UI/Inventory/ArmorContainer" groups=[
+"InventorySlots",
+]]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 10 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/normal = ExtResource( 11 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/ArmorContainer/Slot1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Hint" type="TextureRect" parent="UI/Inventory/ArmorContainer/Slot1/CenterContainer"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = ExtResource( 5 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/ArmorContainer/Slot1/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/ArmorContainer/Slot1"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot2" type="Button" parent="UI/Inventory/ArmorContainer" groups=[
+"InventorySlots",
+]]
+margin_top = 36.0
+margin_right = 32.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 10 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/normal = ExtResource( 11 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/ArmorContainer/Slot2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Hint" type="TextureRect" parent="UI/Inventory/ArmorContainer/Slot2/CenterContainer"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/ArmorContainer/Slot2/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/ArmorContainer/Slot2"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot3" type="Button" parent="UI/Inventory/ArmorContainer" groups=[
+"InventorySlots",
+]]
+margin_top = 72.0
+margin_right = 32.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 10 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/normal = ExtResource( 11 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/ArmorContainer/Slot3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Hint" type="TextureRect" parent="UI/Inventory/ArmorContainer/Slot3/CenterContainer"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/ArmorContainer/Slot3/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/ArmorContainer/Slot3"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot4" type="Button" parent="UI/Inventory/ArmorContainer" groups=[
+"InventorySlots",
+]]
+margin_top = 108.0
+margin_right = 32.0
+margin_bottom = 140.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 10 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/normal = ExtResource( 11 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/ArmorContainer/Slot4"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Hint" type="TextureRect" parent="UI/Inventory/ArmorContainer/Slot4/CenterContainer"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/ArmorContainer/Slot4/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/ArmorContainer/Slot4"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotGridContainer" type="GridContainer" parent="UI/Inventory"]
+margin_left = 304.0
+margin_top = 56.0
+margin_right = 624.0
+margin_bottom = 184.0
+custom_constants/vseparation = 0
+custom_constants/hseparation = 0
+columns = 10
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Slot1" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot1/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot1"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot2" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 32.0
+margin_right = 64.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot2/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot2"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot3" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 64.0
+margin_right = 96.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot3/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot3"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot4" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 96.0
+margin_right = 128.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot4"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot4/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot4"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot5" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 128.0
+margin_right = 160.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot5"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot5/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot5"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot6" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 160.0
+margin_right = 192.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot6"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot6/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot6"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot7" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 192.0
+margin_right = 224.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot7"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot7/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot7"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot8" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 224.0
+margin_right = 256.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot8"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot8/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot8"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot9" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 256.0
+margin_right = 288.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot9"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot9/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot9"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot10" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot10"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot10/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot10"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot11" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_top = 32.0
+margin_right = 32.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot11"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot11/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot11"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot12" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot12"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot12/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot12"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot13" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 64.0
+margin_top = 32.0
+margin_right = 96.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot13"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot13/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot13"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot14" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 96.0
+margin_top = 32.0
+margin_right = 128.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot14"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot14/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot14"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot15" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 128.0
+margin_top = 32.0
+margin_right = 160.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot15"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot15/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot15"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot16" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 160.0
+margin_top = 32.0
+margin_right = 192.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot16"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot16/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot16"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot17" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 192.0
+margin_top = 32.0
+margin_right = 224.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot17"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot17/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot17"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot18" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 224.0
+margin_top = 32.0
+margin_right = 256.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot18"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot18/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot18"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot19" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 256.0
+margin_top = 32.0
+margin_right = 288.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot19"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot19/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot19"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot20" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 288.0
+margin_top = 32.0
+margin_right = 320.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot20"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot20/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot20"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot21" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_top = 64.0
+margin_right = 32.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot21"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot21/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot21"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot22" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 32.0
+margin_top = 64.0
+margin_right = 64.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot22"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot22/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot22"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot23" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 96.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot23"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot23/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot23"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot24" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 96.0
+margin_top = 64.0
+margin_right = 128.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot24"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot24/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot24"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot25" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 128.0
+margin_top = 64.0
+margin_right = 160.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot25"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot25/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot25"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot26" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 160.0
+margin_top = 64.0
+margin_right = 192.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot26"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot26/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot26"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot27" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 192.0
+margin_top = 64.0
+margin_right = 224.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot27"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot27/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot27"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot28" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 224.0
+margin_top = 64.0
+margin_right = 256.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot28"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot28/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot28"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot29" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 256.0
+margin_top = 64.0
+margin_right = 288.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot29"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot29/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot29"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot30" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 288.0
+margin_top = 64.0
+margin_right = 320.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot30"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot30/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot30"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot31" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_top = 96.0
+margin_right = 32.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot31"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot31/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot31"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot32" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 32.0
+margin_top = 96.0
+margin_right = 64.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot32"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot32/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot32"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot33" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 64.0
+margin_top = 96.0
+margin_right = 96.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot33"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot33/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot33"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot34" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 96.0
+margin_top = 96.0
+margin_right = 128.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot34"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot34/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot34"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot35" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 128.0
+margin_top = 96.0
+margin_right = 160.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot35"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot35/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot35"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot36" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 160.0
+margin_top = 96.0
+margin_right = 192.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot36"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot36/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot36"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot37" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 192.0
+margin_top = 96.0
+margin_right = 224.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot37"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot37/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot37"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot38" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 224.0
+margin_top = 96.0
+margin_right = 256.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot38"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot38/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot38"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot39" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 256.0
+margin_top = 96.0
+margin_right = 288.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot39"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot39/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot39"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot40" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
+"InventorySlots",
+]]
+margin_left = 288.0
+margin_top = 96.0
+margin_right = 320.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/normal = ExtResource( 9 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Inventory/SlotGridContainer/Slot40"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Inventory/SlotGridContainer/Slot40/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Inventory/SlotGridContainer/Slot40"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Hotbar" type="HBoxContainer" parent="UI"]
+anchor_left = 0.987
+anchor_right = 0.987
+margin_left = -327.68
+margin_top = 8.0
+margin_right = -7.67999
+margin_bottom = 40.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot1" type="Button" parent="UI/Hotbar" groups=[
+"InventorySlots",
+]]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 10 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/normal = SubResource( 5 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Hotbar/Slot1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Hotbar/Slot1/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Hotbar/Slot1"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -16.0
+margin_right = -16.0
+margin_bottom = -1.0
+custom_fonts/font = ExtResource( 1 )
+text = "1"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Hotbar/Slot1"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot2" type="Button" parent="UI/Hotbar" groups=[
+"InventorySlots",
+]]
+margin_left = 32.0
+margin_right = 64.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 10 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/normal = SubResource( 5 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Hotbar/Slot2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Hotbar/Slot2/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+stretch_mode = 5
+flip_h = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Hotbar/Slot2"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -16.0
+margin_right = -16.0
+margin_bottom = -1.0
+custom_fonts/font = ExtResource( 1 )
+text = "2"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Hotbar/Slot2"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot3" type="Button" parent="UI/Hotbar" groups=[
+"InventorySlots",
+]]
+margin_left = 64.0
+margin_right = 96.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 10 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/normal = SubResource( 5 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Hotbar/Slot3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Hotbar/Slot3/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+flip_h = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Hotbar/Slot3"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -16.0
+margin_right = -16.0
+margin_bottom = -1.0
+custom_fonts/font = ExtResource( 1 )
+text = "3"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Hotbar/Slot3"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot4" type="Button" parent="UI/Hotbar" groups=[
+"InventorySlots",
+]]
+margin_left = 96.0
+margin_right = 128.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 10 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/normal = SubResource( 5 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Hotbar/Slot4"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Hotbar/Slot4/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+flip_h = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Hotbar/Slot4"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -16.0
+margin_right = -16.0
+margin_bottom = -1.0
+custom_fonts/font = ExtResource( 1 )
+text = "4"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Hotbar/Slot4"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot5" type="Button" parent="UI/Hotbar" groups=[
+"InventorySlots",
+]]
+margin_left = 128.0
+margin_right = 160.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 10 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/normal = SubResource( 5 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Hotbar/Slot5"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Hotbar/Slot5/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+flip_h = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Hotbar/Slot5"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -16.0
+margin_right = -16.0
+margin_bottom = -1.0
+custom_fonts/font = ExtResource( 1 )
+text = "5"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Hotbar/Slot5"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot6" type="Button" parent="UI/Hotbar" groups=[
+"InventorySlots",
+]]
+margin_left = 160.0
+margin_right = 192.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 10 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/normal = SubResource( 5 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Hotbar/Slot6"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Hotbar/Slot6/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+flip_h = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Hotbar/Slot6"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -16.0
+margin_right = -16.0
+margin_bottom = -1.0
+custom_fonts/font = ExtResource( 1 )
+text = "6"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Hotbar/Slot6"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot7" type="Button" parent="UI/Hotbar" groups=[
+"InventorySlots",
+]]
+margin_left = 192.0
+margin_right = 224.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 10 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/normal = SubResource( 5 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Hotbar/Slot7"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Hotbar/Slot7/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+flip_h = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Hotbar/Slot7"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -16.0
+margin_right = -16.0
+margin_bottom = -1.0
+custom_fonts/font = ExtResource( 1 )
+text = "7"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Hotbar/Slot7"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot8" type="Button" parent="UI/Hotbar" groups=[
+"InventorySlots",
+]]
+margin_left = 224.0
+margin_right = 256.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 10 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/normal = SubResource( 5 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Hotbar/Slot8"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Hotbar/Slot8/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+flip_h = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Hotbar/Slot8"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -16.0
+margin_right = -16.0
+margin_bottom = -1.0
+custom_fonts/font = ExtResource( 1 )
+text = "8"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Hotbar/Slot8"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot9" type="Button" parent="UI/Hotbar" groups=[
+"InventorySlots",
+]]
+margin_left = 256.0
+margin_right = 288.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 10 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/normal = SubResource( 5 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Hotbar/Slot9"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Hotbar/Slot9/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+flip_h = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Hotbar/Slot9"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -16.0
+margin_right = -16.0
+margin_bottom = -1.0
+custom_fonts/font = ExtResource( 1 )
+text = "9"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Hotbar/Slot9"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Slot0" type="Button" parent="UI/Hotbar" groups=[
+"InventorySlots",
+]]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+rect_clip_content = true
+custom_styles/hover = ExtResource( 10 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/normal = SubResource( 5 )
+expand_icon = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Hotbar/Slot0"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 24, 24 )
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="UI/Hotbar/Slot0/CenterContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+flip_h = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SlotNumberLabel" type="Label" parent="UI/Hotbar/Slot0"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -16.0
+margin_right = -16.0
+margin_bottom = -1.0
+custom_fonts/font = ExtResource( 1 )
+text = "0	"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="ItemCountLabel" type="Label" parent="UI/Hotbar/Slot0"]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 1 )
+text = "#"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="InventoryStash" type="Node2D" parent="."]
+
+[connection signal="mouse_entered" from="UI/Inventory/Panels/PlayerProfilePanel" to="." method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Panels/PlayerProfilePanel" to="." method="_on_Inventory_mouse_exited"]
+[connection signal="mouse_entered" from="UI/Inventory/Panels/InventoryPanel" to="." method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Panels/InventoryPanel" to="." method="_on_Inventory_mouse_exited"]

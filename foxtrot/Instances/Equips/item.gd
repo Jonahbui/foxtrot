@@ -38,15 +38,17 @@ func Use():
 func Pickup():
   player_body.inventory.AddItem(self)
   
-func SetProcess(item_process : int):
-  if item_process == Globals.ItemProcess.World:
-    enable_gravity = true
-    Helper.SetActive(self, true)
-    player_inv = null
-  elif item_process == Globals.ItemProcess.Player:
-    enable_gravity = false
-  else:
-    pass
+func SetProcess(item_process : int, player_inv):
+  match(item_process):
+    Globals.ItemProcess.World:
+      enable_gravity = true
+      Helper.SetActive(self, true)
+      player_inv = null
+    Globals.ItemProcess.Player:
+      enable_gravity = false
+      self.player_inv = player_inv
+    _:
+      pass
 
 func _on_PickupDetector_body_entered(body):
   isPlayerTouching = true
@@ -62,9 +64,9 @@ func ToJSON():
   # Return(s) : A dictionary
   return {
     # Need to know what item to restore, signified by its ID
-    "id" : id,
+    Save.SAVE_ID : id,
    }
   
 func FromJson(item):
   # Restore the id of the item
-  self.id = item["id"]
+  self.id = item[Save.SAVE_ID]

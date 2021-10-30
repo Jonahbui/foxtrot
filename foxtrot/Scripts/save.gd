@@ -85,6 +85,8 @@ func reset_config():
 # TA: Need to guard against save overwrite
 
 const FILENAME_DEFAULT_AUTO   = "autosave.save"
+const SAVE_ID = "id"
+const SAVE_CURR_STACK_AMT = "curr_stack_amt"
 
 # Holds the player information here
 var save = null
@@ -203,8 +205,15 @@ func init_inventory(inventory):
 
 func init_game():
   # Restore the player inventory and player stats
-  player.RestorePlayerData(self.save)
-  inventory.RestoreInventoryData(self.save[Globals.PLAYER_INVENTORY])
+  if player == null:
+    print("[Save] Error. Failed to restore player stats...")
+  else:
+    player.RestorePlayerData(self.save)
+    
+  if inventory == null:
+    print("[Save] Error. Failed to restore player inventory...")
+  else:
+    inventory.RestoreInventoryData(self.save[Globals.PLAYER_INVENTORY])
   
   # If the game is a new game, save the player file.
   if Globals.isNewGame:

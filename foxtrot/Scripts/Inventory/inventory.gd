@@ -1,8 +1,4 @@
 extends Node
-
-# Note: in scene hierarchy the Hud must be behind Invetory or else the hotbar
-# cannot be clicked...
-
 # --------------------------------------------------------------------------------------------------
 # Slots Information
 # --------------------------------------------------------------------------------------------------
@@ -11,10 +7,14 @@ extends Node
 #   - Slots 10-49 are for the inventory slots
 #   - Slot 50 is for armor
 #   - Slots 51-53 are for accessories
+const SLOT_COUNT = 54
 const MAX_HOTBAR = 10
 const ARMOR_SLOTS = 4
-var armor_slot_id : int
+const ARMOR_SLOT_ID = SLOT_COUNT - ARMOR_SLOTS
 
+# --------------------------------------------------------------------------------------------------
+# Variables
+# --------------------------------------------------------------------------------------------------
 # Textures to change to if a hotbar is not selected
 export(String, FILE) var hotbar_hover
 export(String, FILE) var hotbar_pressed
@@ -24,6 +24,11 @@ export(String, FILE) var hotbar_normal
 export(String, FILE) var hotbar_select_hover
 export(String, FILE) var hotbar_select_pressed
 export(String, FILE) var hotbar_select_normal
+
+# Node references
+export(NodePath) onready var inventory_stash
+export(NodePath) onready var hotbar_ui
+export(NodePath) onready var inventory_ui
 
 # The current slot the player has selected in the hotbar
 var curr_slot_id : int = 0
@@ -38,22 +43,22 @@ var selectedSlot2 : int = -1
 # Determines whether or not the player's cursor is on the inventory UI
 var isInventoryHover : bool = false
 
-# The actual player. Used to reference the players script
-var player = null
-
-# A node in the scene storing all the item instances that should belong in the player inventory
-var playerInventory = null
-
 # A dictionary establishing a relationship with a slot and an equip
 var inventory = {}
 
+# --------------------------------------------------------------------------------------------------
+# Godot Functions
+# --------------------------------------------------------------------------------------------------
 func _input(event):
+  # Cycles through the hotbar
   if event.is_action_pressed("ui_hotbar_forward"):
     GetNextSlot(false)
   elif event.is_action_pressed("ui_hotbar_backward"):
     GetNextSlot()
+  # Drops the currently equipped item to the world
   elif event.is_action_pressed("drop"):
     DropCurrentItem()
+  # Change selected slot to the according slot in the hotbar
   elif event.is_action_pressed("hotkey1"):
     SetActiveSlot(0, curr_slot_id)
   elif event.is_action_pressed("hotkey2"):
@@ -74,24 +79,37 @@ func _input(event):
     SetActiveSlot(8, curr_slot_id)
   elif event.is_action_pressed("hotkey0"):
     SetActiveSlot(9, curr_slot_id)
-    
-  if Globals.IsFlagSet(Globals.FLAG_INVENTORY):
-    if event.is_action_pressed("fire"):
+  elif event.is_action_pressed("fire"):
+    # Drops the item the player has selected
+    if Globals.IsFlagSet(Globals.FLAG_INVENTORY):
       DropSelectedItem()
+  # Open the 
+  elif event.is_action_pressed("ui_inventory"):
+    var ui = $UI/Inventory
+    ui.visible = !ui.visible
+    Globals.SetFlag(Globals.FLAG_INVENTORY, ui.visible)
+
+func _init():
+  Signals.connect("on_inventory_add_item", self, "AppendItem")
+  Signals.connect("on_inventory_add_item_stack", self, "AppendItemStack")
 
 func _ready():
-  hotbar_hover = load(hotbar_hover)
-  hotbar_pressed = load(hotbar_pressed)
-  hotbar_normal = load(hotbar_normal)
+  ToggleInventory(true, false)
 
-  hotbar_select_hover = load(hotbar_select_hover)
+  # Load the textures for the hotbar
+  hotbar_hover    = load(hotbar_hover)
+  hotbar_pressed  = load(hotbar_pressed)
+  hotbar_normal   = load(hotbar_normal)
+
+  hotbar_select_hover   = load(hotbar_select_hover)
   hotbar_select_pressed = load(hotbar_select_pressed)
-  hotbar_select_normal = load(hotbar_select_normal)
-  
-  player = self.get_tree().get_root().get_node_or_null("/root/Base/Player")  
-  playerInventory = self.get_tree().get_root().get_node_or_null("/root/Base/Player/Inventory")
-  if playerInventory == null: playerInventory = self.get_tree().get_root().get_node_or_null("Player/Inventory")
+  hotbar_select_normal  = load(hotbar_select_normal)
 
+  # Load references for the nodes
+  inventory_stash = get_node_or_null(inventory_stash)
+  hotbar_ui       = get_node_or_null(hotbar_ui)
+  inventory_ui    = get_node_or_null(inventory_ui)
+  
   InitalizeInventoryUI()
   InitializeInventory()
   Signals.emit_signal("on_inventory_loaded", self)
@@ -99,26 +117,187 @@ func _ready():
   # Set the active slot to default to the first hotbar slot
   SetActiveSlot(0, true)
 
+# --------------------------------------------------------------------------------------------------
+# Inventory Functions
+# --------------------------------------------------------------------------------------------------
+func AddItem(item, slot_id):
+  
+  # Add item to the player stash so the player can quickly use it
+  if item.get_parent() != null:
+    item.get_parent().remove_child(item)
+  inventory_stash.add_child(item)
+  
+  # Set item physics to interact with player
+  item.SetProcess(Globals.ItemProcess.Player, self)
+  
+  # Add item to the inventory
+  inventory[slot_id] = item
+
+  # Update UI to reflect inventory update
+  RefreshInventorySlot(slot_id)
+
+func AddItemToStack(item_id, amount):
+  
+  # Find a free stack in the inventory
+  for slot_id in inventory:
+    var curr_item = inventory[slot_id]
+    
+    # Ignore empty slots
+    if curr_item == null: continue
+    
+    # Only add to a stack that has the same item type and is not at full capacity
+    if curr_item.id == item_id && curr_item.curr_stack_amt < curr_item.max_stack_amt:
+      
+      var overflow = inventory[slot_id].AddToStack(amount)
+      
+      # If all item in stacks were added, do no proceed in creating an item.
+      if overflow == 0:
+        # Update UI to reflect new stack amount
+        RefreshInventorySlot(slot_id)
+        return 0
+      # Else create item and add it
+      else:
+        return overflow
+
+func AppendItem(item_to_add):
+  # Create the item if necessary:
+  #   - Only when an ID is presented, we create the item and add it
+  
+  var item = CreateItem(item_to_add)
+  
+  # Find a slot to add the item
+  var slot_id = FindEmptySlot()
+  if slot_id != null:
+    AddItem(item, slot_id)
+    return slot_id
+    
+  # Drop item into the world, where its parent position is, if there is no space to add the item
+  else:
+    DropItem(item)
+    return -1
+
+func AppendItemStack(item_to_add, amount=1):
+  # Stackable items should be stacked with items (that are not already maxed) with the same ID
+
+  # Cases to consider for adding to inventory slots
+  # 1) If a slot is found stack and the addition overflows, create a new item with overflow amount
+  # 2) If stack not found, create a new item with the input amount
+  # 3) If found stack but adding overflows, add to stack and create new item with overflow amount
+  
+  # Create the item if necessary:
+  #   - Only when an ID is presented, we create the item and add it
+  #   - If there is an overflow from stacking, create an item
+  var item_id = item_to_add.id if typeof(item_to_add) != TYPE_INT else item_to_add
+  
+  var stack_slot_id = FindStackSlot(item_id, amount)
+  
+  # No slot found. Create a new stack with the input amount
+  if stack_slot_id < 0:
+    var item_slot_id = AppendItem(item_id)
+    inventory[item_slot_id].curr_stack_amt = amount
+    RefreshInventorySlot(item_slot_id)    
+  else:
+    # Add amount to item
+    var overflow = inventory[stack_slot_id].AddToStack(amount)
+    RefreshInventorySlot(stack_slot_id)
+    
+    # If the amount overflows, create a stack for that new amount
+    if overflow:
+      var item_slot_id = AppendItem(item_id)
+      inventory[item_slot_id].curr_stack_amt = overflow
+      RefreshInventorySlot(item_slot_id)
+
+func CreateItem(item_to_add):
+  # If instance of an item is provided, do not create an instance
+  # If ID provided, create the item and add it
+  var item = item_to_add
+  if typeof(item_to_add) == TYPE_INT:
+    item = load(Equips.equips[item_to_add][Equips.EQUIP_INSTANCE]).instance()
+    item.id = item_to_add
+
+  return item
+  
+func DropCurrentItem():
+  DropItemFromSlot(curr_slot_id)
+
+func DropItem(item):
+  item.SetProcess(Globals.ItemProcess.World, self)
+  Signals.emit_signal("on_item_drop", item, self.get_parent().position)
+
+func DropItemFromSlot(slot_id):
+  var curr_item = inventory[slot_id]
+  if curr_item != null:
+    print("[Inventory] Droppping %s from slot %d" % [curr_item.get_name(), slot_id])
+    RemoveItemFromSlot(slot_id)
+    DropItem(curr_item)
+
+func DropSelectedItem():
+  if selectedSlot1 != -1 && not isInventoryHover:
+    DropItemFromSlot(selectedSlot1)
+    selectedSlot1 = -1
+    selectedSlot2 = -1
+
+func FindEmptySlot():
+  # The last few slots are dedicated for armors/accessories and should not be searched
+  for i in range(0, ARMOR_SLOT_ID):
+    if inventory[i] == null : return i
+    
+  # No slot found. Return null
+  return null
+  
+func FindStackSlot(item_id, amount):
+  for i in range(0, ARMOR_SLOT_ID):
+    
+    var curr_item = inventory[i]
+    
+    # Ignore empty slots
+    if curr_item == null: continue
+    
+    # Only add to a stack that has the same item type and is not at full capacity
+    if item_id == curr_item.id && curr_item.curr_stack_amt < curr_item.max_stack_amt:
+      return i
+  return -1
+
+func RemoveItem(item):
+  for i in range(0, slots.size()):
+    if inventory[i] == item:
+      print("[Inventory] Removing %s from inventory at slot %d" % [inventory[i].get_name(), i])
+      inventory[i] = null
+      RefreshInventorySlot(i)
+      return OK
+  return FAILED
+
+func RemoveItemFromSlot(slot_id):
+  print("[Inventory] Removing %s from inventory at slot %d" % [inventory[slot_id].get_name(), slot_id])
+  inventory[slot_id] = null
+  RefreshInventorySlot(slot_id)
+
 func InitializeInventory():
   # Add all the slots to put equips into 
   ## Establish the inventory array to be the size of the number of slots available
-  for i in range(0, slots.size()):
+  for i in range(0, SLOT_COUNT):
     inventory[i] = null
-  
-  armor_slot_id = slots.size() - ARMOR_SLOTS
 
+# --------------------------------------------------------------------------------------------------
+# Inventory UI Functions
+# --------------------------------------------------------------------------------------------------
 func InitalizeInventoryUI():
   # Append hotbar slots
-  var hotbar_hud = $HotBarMain
-  slots.append_array(hotbar_hud.get_children())
+  slots.append_array(hotbar_ui.get_children())
   
   # Append inventory slots
-  var inv_slots = $Control/ScrollContainer/GridContainer
-  slots.append_array(inv_slots.get_children())
+  var inventory_slots = inventory_ui.get_node("SlotGridContainer")
+  slots.append_array(inventory_slots.get_children())
   
   # Append armor/accessories slots
-  var armor_slots = $Control/ArmorContainer
+  var armor_slots = inventory_ui.get_node("ArmorContainer")
   slots.append_array(armor_slots.get_children())
+  
+  # Need to set slot value so the inventory knows which slots to swap
+  for i in range(0, SLOT_COUNT):
+    slots[i].connect("pressed", self, "_on_slot_pressed", [i])
+    slots[i].connect("mouse_entered", self, "_on_Inventory_mouse_entered")
+    slots[i].connect("mouse_exited", self, "_on_Inventory_mouse_exited")
 
 func GetNextSlot(moveForward=true):
   # Keep track of the old slot, so that we know which slot to change textures for since it will not
@@ -155,82 +334,6 @@ func SetActiveSlot(active_slot_id : int, prev_slot_id : int, ignoreSound=false):
   curr_slot.set("custom_styles/normal", hotbar_select_normal)
   if inventory[active_slot_id] != null:
     Helper.SetActive(inventory[active_slot_id], true)
-
-func FindOpenSlot():
-  # The last ARMOR_SLOTS slots are dedicated for armors/accessories and should not be searched
-  for i in range(0, armor_slot_id):
-    if inventory[i] == null:
-      return i
-  return null
-
-func AddItem(item_to_add):
-  
-  # Cases
-  # 1) If found stack and overflow, create new item with overflow amount
-  # 2) If cant find stack, create new item with input amount
-  # 3) If found stack but adding overflows, add to stack and create new item with overflow amount
-  
-  var item_id = item_to_add.id if typeof(item_to_add) != TYPE_INT else item_to_add
-  
-  # TA: changes strings to CONST later
-  # If the item is stackable, attempt to stack it with item in inventory
-  if Equips.equips[item_id]["subtype"] == "stackable":
-    
-    # Find a free stack
-    for item_key in inventory:
-      
-      # Ignore empty slots
-      if inventory[item_key] == null: continue
-      
-      # Only add to stacks that are of the same item type and have space to add
-      if inventory[item_key].id == item_id && inventory[item_key].curr_stack_amt < inventory[item_key].max_stack_amt:
-        
-        # TA: should stack add more than just one on purchase?
-        var overflow = inventory[item_key].AddToStack(1)
-        
-        # Update UI to reflect new stack amount
-        RefreshInventorySlot(int(item_key))
-        
-        # If all items were used, do no proceed in creating an item.
-        if overflow == 0:
-          return
-      
-  # Create the item if necessary:
-  #   - When only an ID is presented, we create the item and add it
-  #   - If there is an overflow from stacking, create an item
-  var item = null
-  if typeof(item_to_add) == TYPE_INT:
-    item = load(Equips.equips[item_to_add]["instance"]).instance()
-    item.id = item_to_add
-  else:
-    item = item_to_add
-  
-  # Find a slot to add the item
-  var slot_id = FindOpenSlot()
-  if slot_id != null:
-
-    # Add item to inventory
-    if item.get_parent() != null:
-      item.get_parent().remove_child(item)
-    item.SetProcess(Globals.ItemProcess.Player) # TA: consider adding initalize method
-    item.player_inv = self
-    inventory[slot_id] = item
-    playerInventory.add_child(item) # playerInventory is a container storing all items for the player
-
-    # Update UI to reflect inventory update
-    RefreshInventorySlot(slot_id)
-  else:
-    item.SetProcess(Globals.ItemProcess.World)
-    Signals.emit_signal("on_item_drop", item, player.position)
-
-func RemoveItem(item):
-  for i in range(0, slots.size()):
-    if inventory[i] == item:
-      print("[Inventory] Removing %s from inventory at slot %d" % [inventory[i].get_name(), i])
-      inventory[i] = null
-      RefreshInventorySlot(i)
-      return OK
-  return FAILED
   
 func IsSelectedHotbar(slot_num):
   return slot_num == curr_slot_id
@@ -253,12 +356,12 @@ func RefreshInventorySlot(slot_num : int):
   if inventory[slot_num] != null:
     #print("[Inventory] Slot at %d is being refreshed..." % [slot_num])
     
-    var texture = load(Equips.equips[inventory[slot_num].id]["resource"])
+    var texture = load(Equips.equips[inventory[slot_num].id][Equips.EQUIP_RESOURCE])
     itemframe.texture = texture
     itemframe.set_size(Vector2(24, 24))
     
     # If the item is stackable show it's stack count
-    if Equips.equips[inventory[slot_num].id]["subtype"] == "stackable":
+    if Equips.equips[inventory[slot_num].id][Equips.EQUIP_SUBTYPE] == Equips.Subtype.stackable:
       var stack_amt = inventory[slot_num].curr_stack_amt
       if stack_amt > 0:
         count_label.visible = true
@@ -275,13 +378,20 @@ func RefreshInventorySlot(slot_num : int):
     
   # If the inventory is null, set texture to null
   else:
-    print("[Inventory] Slot at %d is null..." % [slot_num])
+    #print("[Inventory] Slot at %d is null..." % [slot_num])
     itemframe.texture = null
     count_label.visible = false
 
 func RefreshInventoryForItemInUse():
   RefreshInventorySlot(curr_slot_id)
-  
+
+func ToggleInventory(forceState=false, state=false):
+  if forceState:
+    $UI/Inventory.visible = state
+  else:
+    $UI/Inventory.visible = !$UI/Inventory.visible
+  Globals.SetFlag(Globals.FLAG_INVENTORY, $UI/Inventory.visible)
+
 func _on_slot_pressed(slot_num):
   print("[Inventory] Slot #%d selected." % [slot_num])
   Signals.emit_signal("on_play_sfx", "res://Audio/SoundEffects/wet_click.wav")
@@ -307,13 +417,13 @@ func _on_slot_pressed(slot_num):
         var item_slot2 = GetEquip(inventory[selectedSlot2])
         
         # If swapping armor with non-armor piece or swapping non-armor into non armor slot, reject.
-        if ( (item_slot1["type"] == "armor" && item_slot2["type"] != "armor") || (item_slot1["type"] != "armor" && item_slot2["type"] == "armor") ) && (selectedSlot1 == armor_slot_id || selectedSlot2 == armor_slot_id):
+        if ( (item_slot1[Equips.EQUIP_TYPE] == Equips.Type.armor && item_slot2[Equips.EQUIP_TYPE] != Equips.Type.armor) || (item_slot1[Equips.EQUIP_TYPE] != Equips.Type.armor && item_slot2[Equips.EQUIP_TYPE] == Equips.Type.armor) ) && (selectedSlot1 == ARMOR_SLOT_ID || selectedSlot2 == ARMOR_SLOT_ID):
           print("Cannot swap from slot #%d (%s) to slot #%d(%s). Invalid slots for items..." % [selectedSlot1, inventory[selectedSlot1].get_name(), selectedSlot2, inventory[selectedSlot2].get_name()])            
           ResetSelection()
           return
         
         # If swapping an armor piece with accessory piece in equip slots, reject.
-        if ( (item_slot1["subtype"] == "accessory" && item_slot2["subtype"] != "accessory") || (item_slot1["subtype"] != "accessory" && item_slot2["subtype"] == "accessory") ) && (selectedSlot1 >= armor_slot_id || selectedSlot2 >= armor_slot_id):
+        if ( (item_slot1[Equips.EQUIP_TYPE] == Equips.Type.accessory && item_slot2[Equips.EQUIP_TYPE] != Equips.Type.accessory) || (item_slot1[Equips.EQUIP_TYPE] != Equips.Type.accessory && item_slot2[Equips.EQUIP_TYPE] == Equips.Type.accessory) ) && (selectedSlot1 >= ARMOR_SLOT_ID || selectedSlot2 >= ARMOR_SLOT_ID):
           print("Cannot swap from slot #%d (%s) to slot #%d(%s). Invalid slots for items..." % [selectedSlot1, inventory[selectedSlot1].get_name(), selectedSlot2, inventory[selectedSlot2].get_name()])            
           ResetSelection()
           return
@@ -329,13 +439,13 @@ func _on_slot_pressed(slot_num):
         var item_slot1 = GetEquip(inventory[selectedSlot1])
         
         # If moving non-armor piece to equip, reject.
-        if item_slot1["subtype"] != "armor" && selectedSlot2 == armor_slot_id:
+        if item_slot1[Equips.EQUIP_TYPE] != Equips.Type.armor && selectedSlot2 == ARMOR_SLOT_ID:
           print("Cannot swap from slot #%d (%s) to slot #%d. Invalid slots for items..." % [selectedSlot1, inventory[selectedSlot1].get_name(), selectedSlot2])      
           ResetSelection()
           return
           
         # If moving non-accessory piece to equip, reject.
-        elif item_slot1["subtype"] != "accessory" && selectedSlot2 > armor_slot_id:
+        elif item_slot1[Equips.EQUIP_TYPE] != Equips.Type.accessory && selectedSlot2 > ARMOR_SLOT_ID:
           print("Cannot swap from slot #%d (%s) to slot #%d. Invalid slots for items..." % [selectedSlot1, inventory[selectedSlot1].get_name(), selectedSlot2])      
           ResetSelection()
           return
@@ -353,23 +463,6 @@ func ResetSelection():
   selectedSlot1 = -1
   selectedSlot2 = -1
 
-func DropCurrentItem():
-  DropItem(curr_slot_id)
-
-func DropItem(idx):
-  var curr_item = inventory[idx]
-  if curr_item != null:
-    print("[Inventory] Droppping %s from slot %d" % [curr_item.get_name(), idx])
-    RemoveItem(curr_item)
-    curr_item.SetProcess(Globals.ItemProcess.World)
-    Signals.emit_signal("on_item_drop", curr_item, player.position)
-
-func DropSelectedItem():
-  if selectedSlot1 != -1 && not isInventoryHover:
-    DropItem(selectedSlot1)
-    selectedSlot1 = -1
-    selectedSlot2 = -1
-
 func _on_Inventory_mouse_entered():
   isInventoryHover = true
   Globals.isManagingInv = true
@@ -381,13 +474,17 @@ func _on_Inventory_mouse_exited():
 func GetEquip(item):
   return Equips.equips[item.id]
 
+# --------------------------------------------------------------------------------------------------
+# Inventory Save Functions
+# --------------------------------------------------------------------------------------------------
 func RestoreInventoryData(items):
   print("\n[Inventory] Restoring player inventory...")
   #print(inventory)
   
   # Recreate every item in the player's inventory and place them in their original slots
   for key in items.keys():
-    inventory[int(key)] = RestoreItem(items[key])
+    var slot_id = int(key)
+    RestoreItem(items[key], slot_id)
   
   # Refresh inventory to reflect restoration
   RefreshInventorySlots(null)
@@ -402,14 +499,12 @@ func InventoryToJSON():
       dict[i] = inventory[i].ToJSON()
   return dict
     
-func RestoreItem(item):
-  var id = int(item["id"])
+func RestoreItem(item, slot_id):
+  var id = int(item[Save.SAVE_ID])
   
   # Load up an instance of the item and place it in the player inventory node in the base scene
-  var item_instance = load(Equips.equips[id]["instance"]).instance()
-  playerInventory.add_child(item_instance)
-  item_instance.SetProcess(Globals.ItemProcess.Player) # TA: consider adding initalize method
-  item_instance.player_inv = self
+  var item_instance = CreateItem(id)
+  AddItem(item_instance, slot_id)
   
   # Restore the item's data
   item_instance.FromJSON(item)

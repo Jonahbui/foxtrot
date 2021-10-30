@@ -13,7 +13,7 @@
   "512"   : {
     "name"	   	: "Diver Suit",
     "type"     	: "armor",
-    "subtype"   : "armor",
+    "subtype"   : "nonstackable",
     "price"	   	: 0,
     "resource" 	: "res://Textures/Gameplay/Armor/diver_suit.png",
     "instance" 	: "res://Instances/Equips/Armor/DiverSuit.tscn",
@@ -23,8 +23,8 @@
 
   "1024"   : {
     "name"	   	: "White Shell",
-    "type"     	: "armor",
-    "subtype"   : "accessory",
+    "type"     	: "accessory",
+    "subtype"   : "nonstackable",
     "price"	   	: 0,
     "resource" 	: "res://Textures/Gameplay/Accessory/white_shell.png",
     "instance" 	: "res://Instances/Equips/Accessory/WhiteShell.tscn",
