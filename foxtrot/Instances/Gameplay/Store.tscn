@@ -284,6 +284,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[connection signal="body_entered" from="Interaction" to="." method="_on_Interaction_body_entered"]
+[connection signal="body_exited" from="Interaction" to="." method="_on_Interaction_body_exited"]
 [connection signal="interaction_triggered" from="Interaction" to="." method="ToggleStore"]
 [connection signal="pressed" from="Store/UI/InfoPanel/PurchaseButton" to="." method="_on_PurchaseButton_pressed"]
 [connection signal="pressed" from="Store/UI/CloseStoreButton" to="." method="_on_CloseStoreButton_pressed"]

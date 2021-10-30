@@ -9,6 +9,11 @@ export(NodePath) onready var weapon_container
 export(NodePath) onready var armor_container
 export(NodePath) onready var accessory_container
 
+var player = null
+
+# --------------------------------------------------------------------------------------------------
+# Godot Functions
+# --------------------------------------------------------------------------------------------------
 func _ready():
   ToggleStore(true, false)
   
@@ -20,6 +25,9 @@ func _ready():
   UpdateSelectedItem(0)
   curr_purchase_item = 0
 
+# --------------------------------------------------------------------------------------------------
+# Store Functions
+# --------------------------------------------------------------------------------------------------
 func InitializeStore():
   purchase_frame = load(purchase_frame)
   for equip_id in Equips.equips:
@@ -50,6 +58,14 @@ func InitializeStore():
       _:
         print("[Store] Error. Could not match item...")
 
+func _on_Interaction_body_entered(body):
+  player = body
+
+func _on_Interaction_body_exited(body):
+  player = null
+# --------------------------------------------------------------------------------------------------
+# Store UI Functions
+# --------------------------------------------------------------------------------------------------
 func ToggleStore(forceState=false, state=false):
   if forceState:
     $Store/UI.visible = state
@@ -72,9 +88,11 @@ func UpdateSelectedItem(equip_id):
   $Store/UI/InfoPanel/Description.text = description
   $Store/UI/InfoPanel/Equip.texture = texture
 
+func _on_CloseStoreButton_pressed():
+  ToggleStore(true, false)
+
 func _on_PurchaseButton_pressed():
   # Check if player is able to purchase
-  var player = self.get_tree().get_root().get_node_or_null("/root/Base/Player")
   
   ## Player does not have sufficent money, reject purchase
   if player.money - Equips.equips[curr_purchase_item][Equips.EQUIP_PRICE] < 0: 
@@ -92,6 +110,3 @@ func _on_PurchaseButton_pressed():
     Signals.emit_signal("on_inventory_add_item", curr_purchase_item)
 
   print("[Store] Purchasing (%s) %s" % [curr_purchase_item, Equips.equips[curr_purchase_item][Equips.EQUIP_NAME]])
-
-func _on_CloseStoreButton_pressed():
-  ToggleStore(true, false)

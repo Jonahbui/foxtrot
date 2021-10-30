@@ -5,9 +5,9 @@ extends Node
 # A bool used to determine whether or not the player is allowed to interact with this script.
 var canInteract : bool = false
 
-signal interaction_zone_entered()
+#signal interaction_zone_entered()
 
-signal interaction_zone_exited()
+#signal interaction_zone_exited()
 
 signal interaction_triggered()
 

@@ -1,5 +1,5 @@
 {
-  "sir_diver1"            : {
+  "sir_diver1" : {
     "text"    : "First time here huh?",
     "next"    : "",
     "options" : {
@@ -12,7 +12,7 @@
     }
   },
 
-  "sir_diver_response1"  : {
+  "sir_diver_response1" : {
     "text"    : "Oh.",
     "next"    : "", 
     "options" : {},
@@ -22,7 +22,7 @@
     }
   },
 
-  "sir_diver_response2"  : {
+  "sir_diver_response2" : {
     "text"    : "Okay! Explanation of controls here...",
     "next"    : "sir_diver_response3",
     "options" : {},
@@ -31,7 +31,7 @@
       "sprite" : "res://Textures/Gameplay/player.png"
     }
   },
-  "sir_diver_response3"  : {
+  "sir_diver_response3": {
     "text"    : "Come back to me if you forget!",
     "next"    : "",
     "options" : {},
@@ -42,7 +42,7 @@
   },
 
 
-  "sean_intro1"         : {
+  "sean_intro1" : {
     "text"    : "Help! I've been caught!",
     "next"    : "",
     "options" : {},

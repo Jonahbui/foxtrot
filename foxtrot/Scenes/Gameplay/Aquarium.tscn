@@ -42,10 +42,10 @@ shader_param/seed = 5.0
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 33.7769, 32 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 32, 40 )
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 32, 40 )
 
 [node name="Level" type="Node2D"]
@@ -220,7 +220,7 @@ dialogue = "sir_diver1"
 dialogue = "sir_diver1"
 
 [node name="CollisionShape2D" parent="Entities/Sir Diver/DialogueInteraction" index="0"]
-shape = SubResource( 10 )
+shape = SubResource( 4 )
 
 [node name="Sean" type="AnimatedSprite" parent="Entities"]
 position = Vector2( 1104, 304 )
@@ -229,7 +229,6 @@ z_index = -2
 z_as_relative = false
 frames = ExtResource( 6 )
 animation = "blinking"
-frame = 1
 playing = true
 flip_h = true
 
@@ -241,7 +240,7 @@ dialogue = "sean_intro1"
 
 [node name="CollisionShape2D" parent="Entities/Sean/DialogueInteraction" index="0"]
 position = Vector2( -192, 0 )
-shape = SubResource( 11 )
+shape = SubResource( 5 )
 
 [connection signal="body_entered" from="Sprites/Store Entrance/DoorDetector" to="Sprites/Store Entrance" method="_on_DoorDetector_body_entered"]
 [connection signal="body_exited" from="Sprites/Store Entrance/DoorDetector" to="Sprites/Store Entrance" method="_on_DoorDetector_body_exited"]
