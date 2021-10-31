@@ -140,6 +140,7 @@ shape = SubResource( 3 )
 
 [node name="ChangeLevelInteraction" parent="Sprites/Store Entrance" instance=ExtResource( 25 )]
 level = "res://Scenes/Gameplay/Spawn.tscn"
+location = "AquariumDoor"
 
 [node name="Wanted Poster 1" type="Sprite" parent="Sprites"]
 position = Vector2( 1761.63, 235.364 )
@@ -223,12 +224,13 @@ dialogue = "sir_diver1"
 shape = SubResource( 4 )
 
 [node name="Sean" type="AnimatedSprite" parent="Entities"]
-position = Vector2( 1104, 304 )
+position = Vector2( 492.69, 287.049 )
 scale = Vector2( 4, 4 )
 z_index = -2
 z_as_relative = false
 frames = ExtResource( 6 )
 animation = "blinking"
+frame = 1
 playing = true
 flip_h = true
 

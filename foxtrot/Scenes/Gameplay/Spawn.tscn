@@ -13,13 +13,28 @@
 [ext_resource path="res://Audio/SoundEffects/seagulls_ocean_ambience.wav" type="AudioStream" id=11]
 [ext_resource path="res://Textures/Gameplay/Spawn/beach_chair.png" type="Texture" id=12]
 [ext_resource path="res://Textures/Gameplay/Spawn/beach_towel.png" type="Texture" id=13]
-[ext_resource path="res://Instances/Gameplay/Chest.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Instances/Equips/Weapon/Driftwood.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Node/ChangeLevelInteraction.tscn" type="PackedScene" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 64 )
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="GDScript" id=2]
+script/source = "extends \"res://Node/interaction.gd\"
+
+export(String, FILE) var level
+
+func Use():
+  Signals.emit_signal(\"on_change_base_level\", level)
+"
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 25.3333, 14.6667 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 10, 368 )
+
+[sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 3 )
 shader_param/angle = 0.836
 shader_param/position = 0.188
@@ -34,21 +49,6 @@ shader_param/ray2_intensity = 1.0
 shader_param/color = Color( 0.839844, 0.520776, 0.147629, 0.8 )
 shader_param/hdr = false
 shader_param/seed = 5.0
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 10, 368 )
-
-[sub_resource type="GDScript" id=4]
-script/source = "extends \"res://Node/interaction.gd\"
-
-export(String, FILE) var level
-
-func Use():
-  Signals.emit_signal(\"on_change_base_level\", level)
-"
-
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 25.3333, 14.6667 )
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 2 )
@@ -86,8 +86,59 @@ level = "res://Scenes/Gameplay/Aquarium.tscn"
 [node name="CollisionShape2D" parent="World/AquariumDoor/ChangeLevelInteraction" index="0"]
 shape = SubResource( 1 )
 
+[node name="Driftwood" parent="World" instance=ExtResource( 14 )]
+position = Vector2( 256, 320 )
+
 [node name="Spawnpoint" type="Node2D" parent="."]
-position = Vector2( 210.547, 248.599 )
+position = Vector2( 320, 264 )
+
+[node name="AquariumDoor" type="Node2D" parent="Spawnpoint"]
+position = Vector2( -288, -64 )
+
+[node name="Background Objects" type="Node2D" parent="."]
+
+[node name="beach_chair" type="Sprite" parent="Background Objects"]
+position = Vector2( 416, 296 )
+scale = Vector2( 5.1875, 4.54492 )
+texture = ExtResource( 12 )
+
+[node name="beachball" type="Sprite" parent="Background Objects"]
+position = Vector2( 424, 312 )
+texture = ExtResource( 7 )
+
+[node name="beach_umbrella" type="Sprite" parent="Background Objects"]
+position = Vector2( 400, 272 )
+rotation = 0.495241
+scale = Vector2( 1.58973, 1.97554 )
+texture = ExtResource( 8 )
+
+[node name="yellow_submarine" type="Sprite" parent="Background Objects"]
+self_modulate = Color( 1.1, 1.1, 1.1, 1 )
+position = Vector2( 664, 288 )
+scale = Vector2( 6, 6 )
+z_index = -1
+texture = ExtResource( 9 )
+script = SubResource( 2 )
+level = "res://Scenes/Gameplay/Seafloor.tscn"
+
+[node name="ChangeLevelInteraction" parent="Background Objects/yellow_submarine" instance=ExtResource( 15 )]
+level = "res://Scenes/Gameplay/Seafloor.tscn"
+
+[node name="CollisionShape2D" parent="Background Objects/yellow_submarine/ChangeLevelInteraction" index="0"]
+shape = SubResource( 3 )
+
+[node name="Control Boundaries" type="Node" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Control Boundaries"]
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control Boundaries/StaticBody2D"]
+position = Vector2( 672, 232 )
+shape = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Items" type="Node2D" parent="."]
 position = Vector2( 316.061, 290.847 )
@@ -95,7 +146,7 @@ position = Vector2( 316.061, 290.847 )
 [node name="Lighting" type="Node2D" parent="."]
 
 [node name="Godrays" type="Sprite" parent="Lighting"]
-material = SubResource( 2 )
+material = SubResource( 5 )
 position = Vector2( 756, 76 )
 scale = Vector2( 3.60938, 1.85937 )
 texture = ExtResource( 5 )
@@ -106,13 +157,20 @@ color = Color( 0.996078, 0.992157, 0.992157, 1 )
 
 [node name="Light2D" type="Light2D" parent="Lighting"]
 light_mask = 2
-position = Vector2( 944, 40 )
+position = Vector2( 992, 64 )
 rotation = 0.495241
 scale = Vector2( 5.1875, 4.54492 )
 texture = ExtResource( 5 )
 color = Color( 0.729412, 0.188235, 0.188235, 1 )
 energy = 1.26
 range_item_cull_mask = 3
+
+[node name="LocalAudio" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="LocalAudio"]
+stream = ExtResource( 11 )
+autoplay = true
+bus = "Ambience"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -166,62 +224,6 @@ rotation = -0.601348
 scale = Vector2( 0.804047, 1.06098 )
 texture = ExtResource( 13 )
 offset = Vector2( -2.90451, -2.31821 )
-
-[node name="Control Boundaries" type="Node" parent="."]
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Control Boundaries"]
-collision_layer = 128
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Control Boundaries/StaticBody2D"]
-position = Vector2( 672, 232 )
-shape = SubResource( 3 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Background Objects" type="Node2D" parent="."]
-
-[node name="beach_chair" type="Sprite" parent="Background Objects"]
-position = Vector2( 416, 296 )
-scale = Vector2( 5.1875, 4.54492 )
-texture = ExtResource( 12 )
-
-[node name="beachball" type="Sprite" parent="Background Objects"]
-position = Vector2( 424, 312 )
-texture = ExtResource( 7 )
-
-[node name="beach_umbrella" type="Sprite" parent="Background Objects"]
-position = Vector2( 400, 272 )
-rotation = 0.495241
-scale = Vector2( 1.58973, 1.97554 )
-texture = ExtResource( 8 )
-
-[node name="yellow_submarine" type="Sprite" parent="Background Objects"]
-self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-position = Vector2( 664, 288 )
-scale = Vector2( 6, 6 )
-z_index = -1
-texture = ExtResource( 9 )
-script = SubResource( 4 )
-level = "res://Scenes/Gameplay/Seafloor.tscn"
-
-[node name="ChangeLevelInteraction" parent="Background Objects/yellow_submarine" instance=ExtResource( 15 )]
-level = "res://Scenes/Gameplay/Seafloor.tscn"
-
-[node name="CollisionShape2D" parent="Background Objects/yellow_submarine/ChangeLevelInteraction" index="0"]
-shape = SubResource( 5 )
-
-[node name="Chest" parent="." instance=ExtResource( 14 )]
-position = Vector2( 256, 296 )
-animation = "idle"
-
-[node name="Node2D" type="Node2D" parent="."]
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Node2D"]
-stream = ExtResource( 11 )
-autoplay = true
-bus = "Ambience"
 
 [editable path="World/AquariumDoor/ChangeLevelInteraction"]
 [editable path="Background Objects/yellow_submarine/ChangeLevelInteraction"]

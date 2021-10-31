@@ -10,4 +10,4 @@ func AddItemToWorld(item, position):
   if item.get_parent() != null:
     item.get_parent().remove_child(item)
   items_node.add_child(item)
-  item.position = position
+  item.set_global_position(position)

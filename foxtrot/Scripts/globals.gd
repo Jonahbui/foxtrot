@@ -94,5 +94,6 @@ func ToggleFlag(flag):
 
 enum ItemProcess{
   World,
-  Player
+  Player,
+  WorldIdle
  }

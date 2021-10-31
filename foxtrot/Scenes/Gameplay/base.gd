@@ -68,7 +68,7 @@ func PlaySfx(clip):
   else:
     print("[Base] Error. Could not play \"%s\"" % [clip])
 
-func LoadLevel(path):
+func LoadLevel(path, location=""):
   ToggleLoadingScreen(true)
   
   # Give transition period
@@ -92,12 +92,14 @@ func LoadLevel(path):
   self.add_child(instance)
   
   # Get spawnpoint path and set player position to spawnpoint.
-  var spawnpoint = instance.get_node_or_null("Spawnpoint")
-  if spawnpoint != null:
-    $Player.position = spawnpoint.position
+  var spawnlocation = instance.get_node_or_null("Spawnpoint/%s" % [location])
+  if spawnlocation != null:
+    $Player.set_global_position(spawnlocation.get_global_position())
+    print("[Base] Loaded at \'Spawnpoint/%s\'..." % [location])    
   else:
-    printerr("The spawnpoint could not be located in %s" % [spawnpoint.get_name()])
-  
+    printerr("[Base] The location could not be located in Spawnpoint/%s..." % [location])
+
+    
   # After the level is loaded, reenable the player
   Helper.SetActive($Player, true)
   

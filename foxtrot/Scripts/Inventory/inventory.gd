@@ -131,6 +131,7 @@ func AddItem(item, slot_id):
   
   # Set item physics to interact with player
   item.SetProcess(Globals.ItemProcess.Player, self)
+  item.set_global_position(self.get_parent().get_global_position())
   
   # Add item to the inventory
   inventory[slot_id] = item
@@ -224,7 +225,8 @@ func DropCurrentItem():
 
 func DropItem(item):
   item.SetProcess(Globals.ItemProcess.World, self)
-  Signals.emit_signal("on_item_drop", item, self.get_parent().position)
+  item.player_inv = null
+  Signals.emit_signal("on_item_drop", item, self.get_parent().get_global_position())
 
 func DropItemFromSlot(slot_id):
   var curr_item = inventory[slot_id]

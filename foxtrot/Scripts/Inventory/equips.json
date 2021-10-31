@@ -9,6 +9,24 @@
     "desc"		  : "Explode your enemies with the power of bubbles!"
   },
   "1"     :	{
+    "name"	   	: "Driftwood",
+    "type"     	: "weapon",
+    "subtype"   : "nonstackable",
+    "price"	   	: 0,
+    "resource" 	: "res://Textures/Gameplay/Weapon/driftwood.png",
+    "instance" 	: "res://Instances/Equips/Weapon/Driftwood.tscn",
+    "desc"		  : "Go get one of the shore. What are you doing buying one?"
+  },
+  "2"     :	{
+    "name"	   	: "Fishing Pole",
+    "type"     	: "weapon",
+    "subtype"   : "nonstackable",
+    "price"	   	: 0,
+    "resource" 	: "res://Textures/Gameplay/Weapon/...",
+    "instance" 	: "res://Instances/Equips/Weapon/...",
+    "desc"		  : ""
+  },
+  "3"     :	{
     "name"	   	: "Harpoon Gun",
     "type"     	: "weapon",
     "subtype"   : "nonstackable",
