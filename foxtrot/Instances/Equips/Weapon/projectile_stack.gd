@@ -1,11 +1,33 @@
-extends "res://Instances/Equips/Weapon/weapon_stack.gd"
+extends "res://Instances/Equips/item_stack.gd"
+
+export(int) var damage = 1
+
+# Automatic weapons are expected to have an AnimationPlayer that triggers the Use function
+export(bool) var is_automatic = false
+var is_firing : bool = false
 
 export(String, FILE) var projectile
 
 func _ready():
   if projectile == null: print("[ProjectileStack] Could not find projectile to spawn. Was it assigned?")
   projectile = load(projectile)
+
+func _input(event):
+  if is_automatic:
+    if event.is_action_pressed("fire"):
+      is_firing = true
+      $Sprite/AnimationPlayer.play("reload")
+    elif event.is_action_released("fire"):
+      is_firing = false
+      $Sprite/AnimationPlayer.play("idle")
+  else:
+    ._input(event)
+    
+
+func _draw():
+  draw_line(self.position, get_local_mouse_position(), Color.red)  
   
+  update()
   
 func Use():
   # Do not allow item usage if no player is using it.
@@ -26,7 +48,7 @@ func Use():
   instance.damage = self.damage
   
   # Calculate the trajector of the projectile
-  var direction = (mousePos - self.get_global_transform_with_canvas().get_origin()).normalized()
+  var direction = (get_global_mouse_position() - self.get_global_transform().get_origin()).normalized()
   
   instance.SetProjectileDirection(direction)
   player.add_child(instance)

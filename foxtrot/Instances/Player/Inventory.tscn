@@ -1,44 +1,53 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Fonts/thaelahfat_pure_16x.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Textures/UI/panel-submarine2.tres" type="StyleBox" id=2]
 [ext_resource path="res://Textures/UI/icon_accessory.png" type="Texture" id=3]
-[ext_resource path="res://Textures/UI/slot_submarine_normal.png" type="Texture" id=4]
+[ext_resource path="res://Textures/submarine_inventory_theme.tres" type="Theme" id=4]
 [ext_resource path="res://Textures/UI/icon_armor.png" type="Texture" id=5]
 [ext_resource path="res://Scripts/Inventory/inventory.gd" type="Script" id=7]
-[ext_resource path="res://Textures/UI/slot_hover.tres" type="StyleBox" id=8]
-[ext_resource path="res://Textures/UI/slot.tres" type="StyleBox" id=9]
-[ext_resource path="res://Textures/UI/hotbar_hover.tres" type="StyleBox" id=10]
-[ext_resource path="res://Textures/UI/hotbar_normal.tres" type="StyleBox" id=11]
-[ext_resource path="res://Textures/UI/hotbar_pressed.tres" type="StyleBox" id=13]
-[ext_resource path="res://Textures/UI/slot_pressed.tres" type="StyleBox" id=14]
-
-[sub_resource type="StyleBoxTexture" id=5]
-texture = ExtResource( 4 )
-region_rect = Rect2( 0, 0, 32, 32 )
 
 [node name="Inventory" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = 8.0
+margin_bottom = 8.0
+rect_pivot_offset = Vector2( 568, 288 )
+theme = ExtResource( 4 )
 script = ExtResource( 7 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
-hotbar_hover = "res://Textures/UI/hotbar_select_normal.tres"
-hotbar_pressed = "res://Textures/UI/hotbar_select_normal.tres"
-hotbar_normal = "res://Textures/UI/hotbar_select_normal.tres"
-hotbar_select_hover = "res://Textures/UI/hotbar_select_normal.tres"
-hotbar_select_pressed = "res://Textures/UI/hotbar_select_normal.tres"
-hotbar_select_normal = "res://Textures/UI/hotbar_select_normal.tres"
+hotbar_hover = "res://Textures/UI/slot_submarine_hover.tres"
+hotbar_pressed = "res://Textures/UI/slot_submarine_pressed.tres"
+hotbar_normal = "res://Textures/UI/slot_submarine_normal.tres"
+hotbar_select_hover = "res://Textures/UI/slot_submarine_select_hover.tres"
+hotbar_select_pressed = "res://Textures/UI/slot_submarine_select_pressed.tres"
+hotbar_select_normal = "res://Textures/UI/slot_submarine_select_normal.tres"
 inventory_stash = NodePath("InventoryStash")
 hotbar_ui = NodePath("UI/Hotbar")
 inventory_ui = NodePath("UI/Inventory")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
+[node name="HotbarPanel" type="Panel" parent="UI"]
+anchor_left = 0.975
+anchor_right = 0.975
+margin_left = -320.0
+margin_top = 8.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 168, 24 )
+theme = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Inventory" type="Control" parent="UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -6.10352e-05
+theme = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -61,32 +70,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayerProfilePanel" type="Panel" parent="UI/Inventory/Panels"]
-self_modulate = Color( 1, 1, 1, 0.188235 )
+[node name="PlayerPanel" type="Panel" parent="UI/Inventory/Panels"]
 anchor_right = 0.4
 anchor_bottom = 1.0
-margin_left = 32.0
-margin_top = 48.0
-margin_right = 16.0
-margin_bottom = -40.0
+margin_left = 16.0
+margin_top = 56.0
+margin_right = 1.52588e-05
+margin_bottom = -32.0
+custom_styles/panel = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="InventoryPanel" type="Panel" parent="UI/Inventory/Panels"]
-self_modulate = Color( 1, 1, 1, 0.188235 )
-anchor_left = 0.988
-anchor_top = 0.133
-anchor_right = 0.988
-anchor_bottom = 0.133
-margin_left = -336.32
-margin_top = 0.119999
-margin_right = -0.319946
-margin_bottom = 144.12
-rect_min_size = Vector2( 336, 144 )
+anchor_left = 0.975
+anchor_right = 0.975
+margin_left = -322.0
+margin_top = 53.0
+margin_right = 2.00006
+margin_bottom = 187.0
+rect_scale = Vector2( 0.987, 0.957 )
+rect_pivot_offset = Vector2( 168, 72 )
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -105,12 +111,14 @@ __meta__ = {
 }
 
 [node name="ArmorContainer" type="VBoxContainer" parent="UI/Inventory"]
-margin_left = 40.0
-margin_top = 56.0
-margin_right = 72.0
-margin_bottom = 296.0
+margin_left = 24.0
+margin_top = 64.0
+margin_right = 56.0
+margin_bottom = 192.0
 rect_min_size = Vector2( 32, 0 )
+custom_constants/separation = 0
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -121,9 +129,6 @@ margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 10 )
-custom_styles/pressed = ExtResource( 13 )
-custom_styles/normal = ExtResource( 11 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -188,14 +193,11 @@ __meta__ = {
 [node name="Slot2" type="Button" parent="UI/Inventory/ArmorContainer" groups=[
 "InventorySlots",
 ]]
-margin_top = 36.0
+margin_top = 32.0
 margin_right = 32.0
-margin_bottom = 68.0
+margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 10 )
-custom_styles/pressed = ExtResource( 13 )
-custom_styles/normal = ExtResource( 11 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -261,14 +263,11 @@ __meta__ = {
 [node name="Slot3" type="Button" parent="UI/Inventory/ArmorContainer" groups=[
 "InventorySlots",
 ]]
-margin_top = 72.0
+margin_top = 64.0
 margin_right = 32.0
-margin_bottom = 104.0
+margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 10 )
-custom_styles/pressed = ExtResource( 13 )
-custom_styles/normal = ExtResource( 11 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -334,14 +333,11 @@ __meta__ = {
 [node name="Slot4" type="Button" parent="UI/Inventory/ArmorContainer" groups=[
 "InventorySlots",
 ]]
-margin_top = 108.0
+margin_top = 96.0
 margin_right = 32.0
-margin_bottom = 140.0
+margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 10 )
-custom_styles/pressed = ExtResource( 13 )
-custom_styles/normal = ExtResource( 11 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -405,15 +401,19 @@ __meta__ = {
 }
 
 [node name="SlotGridContainer" type="GridContainer" parent="UI/Inventory"]
-margin_left = 304.0
+anchor_left = 0.975
+anchor_right = 0.975
+margin_left = -320.0
 margin_top = 56.0
-margin_right = 624.0
+margin_right = 6.10352e-05
 margin_bottom = 184.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 custom_constants/vseparation = 0
 custom_constants/hseparation = 0
 columns = 10
 __meta__ = {
-"_edit_lock_": true
+"_edit_use_anchors_": false
 }
 
 [node name="Slot1" type="Button" parent="UI/Inventory/SlotGridContainer" groups=[
@@ -423,9 +423,6 @@ margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -480,9 +477,6 @@ margin_right = 64.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -537,9 +531,6 @@ margin_right = 96.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -594,9 +585,6 @@ margin_right = 128.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -651,9 +639,6 @@ margin_right = 160.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -708,9 +693,6 @@ margin_right = 192.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -765,9 +747,6 @@ margin_right = 224.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -822,9 +801,6 @@ margin_right = 256.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -879,9 +855,6 @@ margin_right = 288.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -936,9 +909,6 @@ margin_right = 320.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -993,9 +963,6 @@ margin_right = 32.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1051,9 +1018,6 @@ margin_right = 64.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1109,9 +1073,6 @@ margin_right = 96.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1167,9 +1128,6 @@ margin_right = 128.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1225,9 +1183,6 @@ margin_right = 160.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1283,9 +1238,6 @@ margin_right = 192.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1341,9 +1293,6 @@ margin_right = 224.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1399,9 +1348,6 @@ margin_right = 256.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1457,9 +1403,6 @@ margin_right = 288.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1515,9 +1458,6 @@ margin_right = 320.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1572,9 +1512,6 @@ margin_right = 32.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1630,9 +1567,6 @@ margin_right = 64.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1688,9 +1622,6 @@ margin_right = 96.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1746,9 +1677,6 @@ margin_right = 128.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1804,9 +1732,6 @@ margin_right = 160.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1862,9 +1787,6 @@ margin_right = 192.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1920,9 +1842,6 @@ margin_right = 224.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1978,9 +1897,6 @@ margin_right = 256.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2036,9 +1952,6 @@ margin_right = 288.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2094,9 +2007,6 @@ margin_right = 320.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2151,9 +2061,6 @@ margin_right = 32.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2209,9 +2116,6 @@ margin_right = 64.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2267,9 +2171,6 @@ margin_right = 96.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2325,9 +2226,6 @@ margin_right = 128.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2383,9 +2281,6 @@ margin_right = 160.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2441,9 +2336,6 @@ margin_right = 192.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2499,9 +2391,6 @@ margin_right = 224.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2557,9 +2446,6 @@ margin_right = 256.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2615,9 +2501,6 @@ margin_right = 288.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2673,9 +2556,6 @@ margin_right = 320.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 14 )
-custom_styles/normal = ExtResource( 9 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2723,15 +2603,14 @@ __meta__ = {
 }
 
 [node name="Hotbar" type="HBoxContainer" parent="UI"]
-anchor_left = 0.987
-anchor_right = 0.987
-margin_left = -327.68
+anchor_left = 0.975
+anchor_right = 0.975
+margin_left = -320.0
 margin_top = 8.0
-margin_right = -7.67999
 margin_bottom = 40.0
+theme = ExtResource( 4 )
 custom_constants/separation = 0
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -2742,9 +2621,8 @@ margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 10 )
-custom_styles/pressed = ExtResource( 13 )
-custom_styles/normal = SubResource( 5 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2814,9 +2692,8 @@ margin_right = 64.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 10 )
-custom_styles/pressed = ExtResource( 13 )
-custom_styles/normal = SubResource( 5 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2846,7 +2723,6 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
 stretch_mode = 5
-flip_h = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -2888,9 +2764,8 @@ margin_right = 96.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 10 )
-custom_styles/pressed = ExtResource( 13 )
-custom_styles/normal = SubResource( 5 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2919,7 +2794,6 @@ mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
-flip_h = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -2961,9 +2835,8 @@ margin_right = 128.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 10 )
-custom_styles/pressed = ExtResource( 13 )
-custom_styles/normal = SubResource( 5 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2992,7 +2865,6 @@ mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
-flip_h = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -3034,9 +2906,8 @@ margin_right = 160.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 10 )
-custom_styles/pressed = ExtResource( 13 )
-custom_styles/normal = SubResource( 5 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -3065,7 +2936,6 @@ mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
-flip_h = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -3107,9 +2977,8 @@ margin_right = 192.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 10 )
-custom_styles/pressed = ExtResource( 13 )
-custom_styles/normal = SubResource( 5 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -3138,7 +3007,6 @@ mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
-flip_h = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -3180,9 +3048,8 @@ margin_right = 224.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 10 )
-custom_styles/pressed = ExtResource( 13 )
-custom_styles/normal = SubResource( 5 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -3211,7 +3078,6 @@ mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
-flip_h = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -3253,9 +3119,8 @@ margin_right = 256.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 10 )
-custom_styles/pressed = ExtResource( 13 )
-custom_styles/normal = SubResource( 5 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -3284,7 +3149,6 @@ mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
-flip_h = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -3326,9 +3190,8 @@ margin_right = 288.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 10 )
-custom_styles/pressed = ExtResource( 13 )
-custom_styles/normal = SubResource( 5 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -3357,7 +3220,6 @@ mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
-flip_h = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -3399,9 +3261,8 @@ margin_right = 320.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
-custom_styles/hover = ExtResource( 10 )
-custom_styles/pressed = ExtResource( 13 )
-custom_styles/normal = SubResource( 5 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -3430,7 +3291,6 @@ mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 expand = true
-flip_h = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -3466,7 +3326,9 @@ __meta__ = {
 
 [node name="InventoryStash" type="Node2D" parent="."]
 
-[connection signal="mouse_entered" from="UI/Inventory/Panels/PlayerProfilePanel" to="." method="_on_Inventory_mouse_entered"]
-[connection signal="mouse_exited" from="UI/Inventory/Panels/PlayerProfilePanel" to="." method="_on_Inventory_mouse_exited"]
+[connection signal="mouse_entered" from="UI/HotbarPanel" to="." method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/HotbarPanel" to="." method="_on_Inventory_mouse_exited"]
+[connection signal="mouse_entered" from="UI/Inventory/Panels/PlayerPanel" to="." method="_on_Inventory_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Inventory/Panels/PlayerPanel" to="." method="_on_Inventory_mouse_exited"]
 [connection signal="mouse_entered" from="UI/Inventory/Panels/InventoryPanel" to="." method="_on_Inventory_mouse_entered"]
 [connection signal="mouse_exited" from="UI/Inventory/Panels/InventoryPanel" to="." method="_on_Inventory_mouse_exited"]

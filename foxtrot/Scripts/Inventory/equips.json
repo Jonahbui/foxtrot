@@ -8,6 +8,15 @@
     "instance" 	: "res://Instances/Equips/Weapon/BubbleNade.tscn",
     "desc"		  : "Explode your enemies with the power of bubbles!"
   },
+  "1"     :	{
+    "name"	   	: "Harpoon Gun",
+    "type"     	: "weapon",
+    "subtype"   : "nonstackable",
+    "price"	   	: 0,
+    "resource" 	: "res://Textures/Gameplay/Weapon/harpoon_gun.png",
+    "instance" 	: "res://Instances/Equips/Weapon/HarpoonGun.tscn",
+    "desc"		  : "Stab them all."
+  },
 
 
   "512"   : {

@@ -170,11 +170,15 @@ offset = Vector2( -2.90451, -2.31821 )
 [node name="Control Boundaries" type="Node" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Control Boundaries"]
-collision_mask = 2
+collision_layer = 128
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Control Boundaries/StaticBody2D"]
 position = Vector2( 672, 232 )
 shape = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Background Objects" type="Node2D" parent="."]
 

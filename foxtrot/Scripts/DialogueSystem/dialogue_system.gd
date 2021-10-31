@@ -41,7 +41,6 @@ func ReadDialogue():
   # Read in the config file
   file.open("res://Scripts/DialogueSystem/%s" % [FILENAME_DIALOGUE_EN], File.READ)
   var text = file.get_as_text()
-  print(text)
   var data = parse_json(text)
   if data == null: 
     return null

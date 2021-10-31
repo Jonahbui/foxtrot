@@ -1,0 +1,111 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Animation/HarpoonGun/harpoon_gun_reload_1.tres" type="Texture" id=1]
+[ext_resource path="res://Instances/Equips/Weapon/projectile_stack.gd" type="Script" id=2]
+[ext_resource path="res://Animation/HarpoonGun/harpoon_gun_reload_2.tres" type="Texture" id=3]
+[ext_resource path="res://Animation/HarpoonGun/harpoon_gun_reload_4.tres" type="Texture" id=4]
+[ext_resource path="res://Animation/HarpoonGun/harpoon_gun_reload_5.tres" type="Texture" id=5]
+[ext_resource path="res://Animation/HarpoonGun/harpoon_gun_reload_3.tres" type="Texture" id=6]
+[ext_resource path="res://Animation/HarpoonGun/harpoon_gun_reload_6.tres" type="Texture" id=7]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 11.3137
+
+[sub_resource type="Animation" id=5]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 7 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 1 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "Use"
+} ]
+}
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 14.3362
+
+[node name="HarpoonGun" type="KinematicBody2D"]
+collision_layer = 0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+max_stack_amt = 1
+isInfiniteUse = true
+is_automatic = true
+projectile = "res://Instances/Equips/Projectile/HarpoonProjectile.tscn"
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+position = Vector2( -0.0433426, 0.0883884 )
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -8, 0 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+offset = Vector2( 8, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+anims/idle = SubResource( 5 )
+anims/reload = SubResource( 3 )
+
+[node name="ProjectileSpawnpoint" type="Node2D" parent="Sprite"]
+position = Vector2( 10.9927, 0.0011723 )
+
+[node name="PickupDetector" type="Area2D" parent="."]
+position = Vector2( -8, 0 )
+collision_layer = 8
+collision_mask = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PickupCollider" type="CollisionShape2D" parent="PickupDetector"]
+position = Vector2( 8, 0 )
+shape = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[connection signal="body_entered" from="PickupDetector" to="Sprite" method="_on_PickupDetector_body_entered"]
+[connection signal="body_exited" from="PickupDetector" to="Sprite" method="_on_PickupDetector_body_exited"]

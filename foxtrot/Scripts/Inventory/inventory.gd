@@ -50,6 +50,8 @@ var inventory = {}
 # Godot Functions
 # --------------------------------------------------------------------------------------------------
 func _input(event):
+  if Globals.IsFlagSet(Globals.FLAG_DEV_OPEN): return
+  
   # Cycles through the hotbar
   if event.is_action_pressed("ui_hotbar_forward"):
     GetNextSlot(false)

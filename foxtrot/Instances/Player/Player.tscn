@@ -2,10 +2,11 @@
 
 [ext_resource path="res://Textures/Gameplay/player.png" type="Texture" id=1]
 [ext_resource path="res://Instances/Player/player.gd" type="Script" id=2]
-[ext_resource path="res://Textures/UI/slider.tres" type="StyleBox" id=4]
+[ext_resource path="res://Textures/UI/progressbar_fg_submarine.tres" type="StyleBox" id=3]
+[ext_resource path="res://Textures/UI/progressbar_fg_submarine.png" type="Texture" id=4]
 [ext_resource path="res://Fonts/thaelahfat_pure_16x.tres" type="DynamicFont" id=5]
-[ext_resource path="res://Textures/UI/slider_health_area.png" type="Texture" id=7]
-[ext_resource path="res://Textures/UI/slider_mana_area.png" type="Texture" id=8]
+[ext_resource path="res://Textures/submarine_player_theme.tres" type="Theme" id=6]
+[ext_resource path="res://Instances/Player/Crosshair.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Textures/UI/button_normal.png" type="Texture" id=15]
 [ext_resource path="res://Textures/Gameplay/Store/point_light.png" type="Texture" id=16]
 [ext_resource path="res://Instances/Player/Inventory.tscn" type="PackedScene" id=19]
@@ -14,27 +15,19 @@
 extents = Vector2( 8, 24 )
 
 [sub_resource type="StyleBoxTexture" id=2]
-texture = ExtResource( 7 )
-region_rect = Rect2( 3, 3, 26, 27 )
-margin_left = 7.0
-margin_right = 6.0
-margin_top = 5.0
-margin_bottom = 4.0
-expand_margin_right = 1.0
-
-[sub_resource type="StyleBoxTexture" id=3]
-texture = ExtResource( 8 )
-region_rect = Rect2( 3, 3, 26, 27 )
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 32, 32 )
 margin_left = 8.0
 margin_right = 8.0
 margin_top = 8.0
 margin_bottom = 8.0
 expand_margin_right = 1.0
+modulate_color = Color( 0.160784, 0.568627, 0.945098, 1 )
 
 [node name="Player" type="KinematicBody2D"]
 z_index = 1
 collision_layer = 2
-collision_mask = 21
+collision_mask = 213
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -57,6 +50,7 @@ smoothing_enabled = true
 [node name="UI" type="Control" parent="Stats"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 6 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -67,51 +61,46 @@ anchor_left = 0.008
 anchor_top = 0.022
 anchor_right = 1.0
 anchor_bottom = 0.022
-margin_left = -0.12
+margin_left = 10.88
 margin_top = 0.0799999
-margin_right = -384.0
+margin_right = -381.0
 margin_bottom = 32.08
 custom_constants/separation = 0
 alignment = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="HealthLabel" type="Label" parent="Stats/UI/StatsVbox"]
-margin_top = 2.0
-margin_right = 251.0
-margin_bottom = 17.0
-custom_fonts/font = ExtResource( 5 )
-text = "100 / 100"
-align = 2
-valign = 1
+[node name="Health" type="Control" parent="Stats/UI/StatsVbox"]
+margin_right = 243.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 0, 16 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="HealthBar" type="ProgressBar" parent="Stats/UI/StatsVbox/HealthLabel"]
-anchor_left = -0.0197092
-anchor_top = 0.4
-anchor_right = 0.999681
-anchor_bottom = 0.4
-margin_left = 7.947
-margin_top = -8.0
-margin_right = -63.92
-margin_bottom = 8.0
-custom_styles/fg = SubResource( 2 )
-custom_styles/bg = ExtResource( 4 )
+[node name="HealthBar" type="ProgressBar" parent="Stats/UI/StatsVbox/Health"]
+anchor_right = 0.724
+anchor_bottom = 1.0
+margin_right = 0.0679932
+custom_styles/fg = ExtResource( 3 )
 step = 1.0
 value = 100.0
 rounded = true
 percent_visible = false
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_lock_": true,
+"_edit_use_anchors_": false
 }
 
-[node name="ManaLabel" type="Label" parent="Stats/UI/StatsVbox"]
-margin_top = 17.0
-margin_right = 251.0
-margin_bottom = 32.0
+[node name="HealthLabel" type="Label" parent="Stats/UI/StatsVbox/Health"]
+anchor_left = 0.767
+anchor_right = 1.0
+anchor_bottom = 0.937
+margin_left = -0.0800018
+margin_bottom = 0.00799942
 custom_fonts/font = ExtResource( 5 )
 text = "100 / 100"
 align = 2
@@ -121,26 +110,52 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ManaBar" type="ProgressBar" parent="Stats/UI/StatsVbox/ManaLabel"]
-anchor_left = -0.0197092
-anchor_top = 0.467
-anchor_right = 0.999681
-anchor_bottom = 0.5
-margin_left = 7.947
-margin_top = -8.005
-margin_right = -63.92
-margin_bottom = 7.5
-custom_styles/fg = SubResource( 3 )
-custom_styles/bg = ExtResource( 4 )
+[node name="Mana" type="Control" parent="Stats/UI/StatsVbox"]
+margin_top = 16.0
+margin_right = 243.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 16 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ManaBar" type="ProgressBar" parent="Stats/UI/StatsVbox/Mana"]
+anchor_left = -0.000246366
+anchor_right = 0.724
+anchor_bottom = 1.0
+margin_left = 0.0598669
+margin_right = 0.0679932
+custom_styles/fg = SubResource( 2 )
 step = 1.0
 value = 100.0
 rounded = true
 percent_visible = false
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ManaLabel" type="Label" parent="Stats/UI/StatsVbox/Mana"]
+anchor_left = 0.767
+anchor_right = 1.0
+anchor_bottom = 0.937
+margin_left = -0.0800018
+margin_bottom = 0.00799942
+custom_fonts/font = ExtResource( 5 )
+text = "100 / 100"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
 }
 
 [node name="Inventory" parent="." instance=ExtResource( 19 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 0.0
+margin_bottom = 0.0
 
 [node name="Inform" type="Sprite" parent="."]
 visible = false
@@ -165,3 +180,5 @@ __meta__ = {
 [node name="Light2D" type="Light2D" parent="Inform"]
 texture = ExtResource( 16 )
 texture_scale = 0.45
+
+[node name="Crosshair" parent="." instance=ExtResource( 7 )]

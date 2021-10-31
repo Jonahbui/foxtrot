@@ -12,7 +12,6 @@ config_version=4
 
 config/name="foxtrot"
 run/main_scene="res://Scenes/SplashScreen/SplashScreen.tscn"
-boot_splash/image="res://Textures/UI/empty.png"
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://icon.png"
 config/windows_native_icon="res://icon.ico"
@@ -199,6 +198,10 @@ dialogue_continue={
 2d_physics/layer_4="Items"
 2d_physics/layer_5="Interaction"
 2d_physics/layer_6="Projectiles"
+2d_physics/layer_7="EnemyProjectiles"
+2d_physics/layer_8="Boundary"
+2d_physics/layer_9="Weapon"
+2d_physics/layer_10="EnemyWeapon"
 
 [physics]
 

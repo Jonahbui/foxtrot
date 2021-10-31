@@ -13,19 +13,17 @@ var speed    : = Vector2( 200.0, 800.0 )
 var velocity : = Vector2.ZERO
 var enable_gravity : = true
 
-var mousePos := Vector2.ZERO
-
 func _physics_process(delta: float) -> void:
   if enable_gravity:
     velocity.y += gravity * delta
   velocity = move_and_slide( velocity, Vector2.UP )
+  look_at(get_global_mouse_position())
 
 func _input(event):
   if Globals.pause_flags != 0 || Globals.isManagingInv:
     return
   
   if event.is_action_pressed("fire"):
-    mousePos = event.position
     Use()
   elif player_inv == null && player_body != null && event.is_action_pressed("interact"):
     # Need to check if player_body is not null because the player can possibly click and interact

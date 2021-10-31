@@ -132,31 +132,52 @@ func ProcessCmd(cmd):
   var parse = cmd.split(" ")
   
   # Organize commands by the number of parameters
-  if parse.size() == 0:
-    return
-  elif parse.size() == 1:
-    match parse[0]:
-      "clear":
-        logs.text = ""
-      "exit":
-        get_tree().quit()
-      "kill":
-        $Player.TakeDamage($Player.health)
-      
-  elif(parse.size() == 2):
-    match parse[0]:
-      "setlevel":
-        # Note: if leaving in for player, need to sanitize input just in case
-        # they load up a scene they should not be allowed to...
-        var valid : bool = File.new().file_exists(parse[1])
-        valid = parse[1] in Globals.LEVEL_PATH && valid
-        if valid : LoadLevel(parse[1])
-      
+  match parse.size():
+    0:
+      return
+    1:
+      match parse[0]:
+        "clear":
+          logs.text = ""
+        "exit":
+          get_tree().quit()
+        "kill":
+          $Player.TakeDamage($Player.health)
+        _:
+          logs.text += "\nCould not find command..."
+    2:
+      match parse[0]:
+        "setlevel":
+          # Note: if leaving in for player, need to sanitize input just in case
+          # they load up a scene they should not be allowed to...
+          var valid : bool = File.new().file_exists(parse[1])
+          valid = parse[1] in Globals.LEVEL_PATH && valid
+          if valid : LoadLevel(parse[1])
+        _:
+          logs.text += "\nCould not find command or not enough params provided..."
+    3:
+      match parse[0]:
+        "additem":
+          if not parse[1].is_valid_integer(): return
+          var item_id = int(parse[1])
+          if not item_id in Equips.equips: 
+            logs.text += "\nInvalid id presented. Could not find item..."
+            return
+          
+          if Equips.equips[item_id][Equips.EQUIP_SUBTYPE] != Equips.Subtype.stackable:
+            Signals.emit_signal("on_inventory_add_item", item_id)
+          else:
+            if not parse[2].is_valid_integer(): return
+            var amount = int(parse[2])
+            Signals.emit_signal("on_inventory_add_item_stack", item_id, amount)
+        _:
+          logs.text += "\nCould not find command or not enough params provided..."
+
 func UpdateHistory(cmd):
   if(history.size() > 10):
     history.pop_back()
   history.push_front(cmd)
-    
+
 func GetNextHistoryCmd(forward=true):
   if history.size() > 0:
     history_index = (history_index + 1) if(forward) else (history_index  - 1)

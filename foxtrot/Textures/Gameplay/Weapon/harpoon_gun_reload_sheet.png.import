@@ -1,0 +1,17 @@
+[remap]
+
+importer="texture_atlas"
+type="Texture"
+path="res://.import/harpoon_gun_reload_sheet.png-8b91487b0de8f7ee80e6789204d76dfa.res"
+group_file="res://Textures/Gameplay/Weapon/harpoon_gun_anim_atlas.png"
+valid=true
+[deps]
+
+
+source_file="res://Textures/Gameplay/Weapon/harpoon_gun_reload_sheet.png"
+dest_files=[ "res://.import/harpoon_gun_reload_sheet.png-8b91487b0de8f7ee80e6789204d76dfa.res" ]
+
+[params]
+
+atlas_file="res://Textures/Gameplay/Weapon/harpoon_gun_anim_atlas.png"
+import_mode=0
