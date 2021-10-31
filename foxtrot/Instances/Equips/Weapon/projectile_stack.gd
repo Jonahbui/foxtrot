@@ -33,7 +33,6 @@ func Use():
   # Do not allow item usage if no player is using it.
   # Probably should disable object processing until in use...
   if player_inv == null: return
-  if in_cooldown: return
   
   if not Input.is_action_pressed("fire"):
     $Sprite/AnimationPlayer.play("idle")
@@ -58,7 +57,8 @@ func Use():
   instance.SetProjectileDirection(direction)
   player.add_child(instance)
   
-  in_cooldown = true
+  if is_automatic:
+    in_cooldown = true
   
   # If no more projectiles are present, delete this item
   if curr_stack_amt == 0:
