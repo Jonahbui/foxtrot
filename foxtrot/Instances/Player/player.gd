@@ -45,6 +45,13 @@ var velocity : = Vector2.ZERO
 # --------------------------------------------------------------------------------------------------
 # Godot Functions
 # --------------------------------------------------------------------------------------------------
+func _input(event):
+  if event is InputEventMouseMotion:
+    var player_orienatation = get_global_mouse_position().x - self.global_position.x
+    if player_orienatation > 0:
+      $Sprite.scale.x = 1
+    else:
+      $Sprite.scale.x = -1
 func _init():
   Signals.connect("on_interaction_changed", self, "ToggleInform")
 
@@ -119,7 +126,6 @@ func _physics_process(delta: float) -> void:
   #   our version of velocity so we don't, e.g., keep trying to
   #   move DOWN on the screen after we've hit the floor.
   velocity = move_and_slide( velocity, Vector2.UP )
-
 # --------------------------------------------------------------------------------------------------
 # Player Functions
 # --------------------------------------------------------------------------------------------------
