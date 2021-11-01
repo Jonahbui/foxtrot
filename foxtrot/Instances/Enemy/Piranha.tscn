@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Textures/Gameplay/Enemy/Pirhana/pirhana_sheet.png" type="Texture" id=1]
+[ext_resource path="res://Textures/Gameplay/Enemy/Piranha/piranha_sheet.png" type="Texture" id=1]
 [ext_resource path="res://Instances/Enemy/enemy.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -45,7 +45,7 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 13.3333, 8 )
 
-[node name="Pirhana" type="KinematicBody2D"]
+[node name="Piranha" type="KinematicBody2D"]
 scale = Vector2( 3, 3 )
 collision_layer = 4
 collision_mask = 129
@@ -64,6 +64,7 @@ physics_process_parent = true
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 9 )
 animation = "swim"
+frame = 1
 playing = true
 
 [node name="DamageDetector" type="Area2D" parent="."]

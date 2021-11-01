@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pirhana_sheet.png-e9141becc54cd83d8e3a6281d510b086.stex"
+path="res://.import/piranha_sheet.png-5cc4819a8b155a7896e8ec9c9ad4a671.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Gameplay/Enemy/Pirhana/pirhana_sheet.png"
-dest_files=[ "res://.import/pirhana_sheet.png-e9141becc54cd83d8e3a6281d510b086.stex" ]
+source_file="res://Textures/Gameplay/Enemy/Piranha/piranha_sheet.png"
+dest_files=[ "res://.import/piranha_sheet.png-5cc4819a8b155a7896e8ec9c9ad4a671.stex" ]
 
 [params]
 

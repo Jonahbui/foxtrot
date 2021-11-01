@@ -4,7 +4,7 @@
 [ext_resource path="res://Node/ChangeLevelInteraction.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Textures/Gameplay/Spawn/yellow_submarine.png" type="Texture" id=3]
 [ext_resource path="res://Textures/Gameplay/Levels/submarine_resurface.png" type="Texture" id=4]
-[ext_resource path="res://Instances/Enemy/Pirhana.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Instances/Enemy/Piranha.tscn" type="PackedScene" id=5]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends \"res://Node/interaction.gd\"
@@ -38,7 +38,7 @@ position = Vector2( 92.3431, 222.968 )
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="Pirhana" parent="Enemies" instance=ExtResource( 5 )]
+[node name="Piranha" parent="Enemies" instance=ExtResource( 5 )]
 position = Vector2( 1040, 16 )
 
 [node name="Items" type="Node2D" parent="."]
