@@ -284,6 +284,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+position = Vector2( -1, 1 )
+scale = Vector2( 5.7, 2.3 )
+process_parent = true
+physics_process_parent = true
+
 [connection signal="body_entered" from="Interaction" to="." method="_on_Interaction_body_entered"]
 [connection signal="body_exited" from="Interaction" to="." method="_on_Interaction_body_exited"]
 [connection signal="interaction_triggered" from="Interaction" to="." method="ToggleStore"]
