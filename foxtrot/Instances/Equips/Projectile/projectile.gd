@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 export(int) var damage = 0
-export(float) var knocback = 0
+export(float) var knockback = 0
 
 export(float) var gravity = 3000.0
 export(float) var speed = 2000.0
@@ -19,4 +19,6 @@ func SetProjectileDirection(new_direction : Vector2):
   self.rotation = new_direction.angle()
 
 func _on_CollisionDetector_body_shape_entered(_body_id, _body, _body_shape, _local_shape):
+  self.visible = false
+  yield(get_tree().create_timer(0.1), "timeout")
   self.queue_free()

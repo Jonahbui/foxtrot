@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Textures/Gameplay/Spawn/spawn_tiles.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Gameplay/spawn.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Textures/Gameplay/Spawn/beach_towel.png" type="Texture" id=13]
 [ext_resource path="res://Instances/Equips/Weapon/Driftwood.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Node/ChangeLevelInteraction.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Instances/Enemy/Piranha.tscn" type="PackedScene" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 64 )
@@ -224,6 +225,11 @@ rotation = -0.601348
 scale = Vector2( 0.804047, 1.06098 )
 texture = ExtResource( 13 )
 offset = Vector2( -2.90451, -2.31821 )
+
+[node name="Piranha" parent="." instance=ExtResource( 16 )]
+position = Vector2( 416, 248 )
+runSpeed = 0
+speed = Vector2( 0, 0 )
 
 [editable path="World/AquariumDoor/ChangeLevelInteraction"]
 [editable path="Background Objects/yellow_submarine/ChangeLevelInteraction"]

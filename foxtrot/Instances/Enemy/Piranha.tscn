@@ -4,7 +4,7 @@
 [ext_resource path="res://Instances/Enemy/enemy.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 13.3333, 8 )
+extents = Vector2( 12.843, 6.69411 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
@@ -43,7 +43,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 13.3333, 8 )
+extents = Vector2( 14.0215, 8.5208 )
 
 [node name="Piranha" type="KinematicBody2D"]
 scale = Vector2( 3, 3 )
@@ -64,7 +64,7 @@ physics_process_parent = true
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 9 )
 animation = "swim"
-frame = 1
+frame = 5
 playing = true
 
 [node name="DamageDetector" type="Area2D" parent="."]

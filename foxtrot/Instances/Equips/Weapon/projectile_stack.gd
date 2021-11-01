@@ -34,9 +34,14 @@ func Use():
   # Probably should disable object processing until in use...
   if player_inv == null: return
   
+  if in_cooldown: return
+  
   if not Input.is_action_pressed("fire"):
     $Sprite/AnimationPlayer.play("idle")
     return
+  
+  if is_automatic:
+    in_cooldown = true
   
   # Decrement the item because we used it
   if not isInfiniteUse:
@@ -57,10 +62,8 @@ func Use():
   var direction = (get_global_mouse_position() - self.get_global_transform().get_origin()).normalized()
   
   instance.SetProjectileDirection(direction)
-  player.add_child(instance)
-  
-  if is_automatic:
-    in_cooldown = true
+  instance.set_global_position(self.global_position)
+  player.get_parent().add_child(instance)
   
   # If no more projectiles are present, delete this item
   if curr_stack_amt == 0:
