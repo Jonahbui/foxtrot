@@ -40,7 +40,8 @@ func _ready():
 func _physics_process(delta: float) -> void:
   if enable_gravity:
     velocity.y += gravity * delta
-  velocity = move_and_slide( velocity, Vector2.UP )
+    velocity = move_and_slide( velocity, Vector2.UP )
+  
   if player_inv != null:
     look_at(get_global_mouse_position())
 

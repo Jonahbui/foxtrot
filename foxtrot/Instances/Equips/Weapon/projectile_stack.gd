@@ -49,7 +49,9 @@ func Use():
   
   # Spawn projectile
   var instance = projectile.instance()
-  instance.damage = self.damage
+  
+  # The individual projectiles have their own damage, but we can add a damage multiplier to them.
+  #instance.damage = self.damage
   
   # Calculate the trajector of the projectile
   var direction = (get_global_mouse_position() - self.get_global_transform().get_origin()).normalized()

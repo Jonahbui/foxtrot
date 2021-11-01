@@ -25,7 +25,10 @@ var forward : bool = true
 # References
 # --------------------------------------------------------------------------------------------------
 onready var inventory = $UI/Inventory
-
+onready var health_bar = $Stats/UI/StatsVbox/Health/HealthBar
+onready var health_label = $Stats/UI/StatsVbox/Health/HealthLabel
+onready var mana_bar = $Stats/UI/StatsVbox/Mana/ManaBar
+onready var mana_label = $Stats/UI/StatsVbox/Mana/ManaLabel
 # "gravity" is an acceleration:  it's that many units
 #   per second per second.  It's positive because "down" on the
 #   screen is the POSITIVE Y axis direction.
@@ -44,10 +47,11 @@ var velocity : = Vector2.ZERO
 # --------------------------------------------------------------------------------------------------
 func _init():
   Signals.connect("on_interaction_changed", self, "ToggleInform")
-  Signals.emit_signal("on_player_loaded", self)
 
 func _ready():
   self.charname = Save.save[Globals.PLAYER_NAME]
+  RefreshStats()
+  Signals.emit_signal("on_player_loaded", self)
 
 func _physics_process(delta: float) -> void:
   # If the dev console is open then do not move.
@@ -119,26 +123,41 @@ func _physics_process(delta: float) -> void:
 # --------------------------------------------------------------------------------------------------
 # Player Functions
 # --------------------------------------------------------------------------------------------------
+func ResetPlayer():
+  health = maxHealth
+  health_bar.value = health
+  health_label.text = "%d / %d" % [health, maxHealth]
+  
+  # Reset stamina/magic as well
+  
+  RefreshStats()
 
 func TakeDamage(damage : int):
   health -= damage
   
-  $UI/Hud/StatsVbox/HealthLabel/HealthBar.value = health
-  $UI/Hud/StatsVbox/HealthLabel.text = "%d / %d" % [$UI/Hud/StatsVbox/HealthLabel/HealthBar.value, maxHealth]
+  RefreshHealth()
   if health <= 0:
     # Play death animation
     
     # Disable player
     
     Signals.emit_signal("on_player_death")
-
-func ResetPlayer():
-  health = maxHealth
-  $UI/Hud/StatsVbox/HealthLabel/HealthBar.value = health
-  $UI/Hud/StatsVbox/HealthLabel.text = "%d / %d" % [health, maxHealth]
+# --------------------------------------------------------------------------------------------------
+# Player UI Functions
+# --------------------------------------------------------------------------------------------------
+func RefreshHealth():
+  health_bar.value = health
+  health_label.text = "%d / %d" % [health_bar.value, maxHealth]
   
-  # Reset stamina/magic as well
-
+func RefreshMana():
+  pass
+  
+func RefreshStats():
+  RefreshHealth()
+  RefreshMana()
+# --------------------------------------------------------------------------------------------------
+# Player Save Functions
+# --------------------------------------------------------------------------------------------------
 func RestorePlayerData(data):
   Globals.isHardcoreMode = data[Globals.PLAYER_DIFFICULTY]
   self.health = int(data[Globals.PLAYER_HEALTH])
@@ -151,3 +170,6 @@ func RestorePlayerData(data):
 func ToggleInform(state):
   # Display the inform panel
   $Inform.visible = state
+
+func _on_DamageDetector_body_entered(body):
+  TakeDamage(body.damage)

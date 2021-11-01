@@ -92,6 +92,8 @@ func ToggleFlag(flag):
   SetFlag(flag, result)
   return result
 
+const GROUP_PLAYER_WEAPON_HITBOX = "PlayerWeaponHitbox"
+
 enum ItemProcess{
   World,
   Player,

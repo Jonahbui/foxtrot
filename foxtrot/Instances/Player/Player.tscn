@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Textures/Gameplay/player.png" type="Texture" id=1]
 [ext_resource path="res://Instances/Player/player.gd" type="Script" id=2]
@@ -14,6 +14,9 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 24 )
 
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 11.6424, 24 )
+
 [sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 4 )
 region_rect = Rect2( 0, 0, 32, 32 )
@@ -27,7 +30,7 @@ modulate_color = Color( 0.160784, 0.568627, 0.945098, 1 )
 [node name="Player" type="KinematicBody2D"]
 z_index = 1
 collision_layer = 2
-collision_mask = 213
+collision_mask = 145
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -44,6 +47,46 @@ current = true
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 smoothing_enabled = true
+
+[node name="DamageDetector" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 580
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageDetector"]
+position = Vector2( 0, 8 )
+shape = SubResource( 3 )
+
+[node name="------------------------------------------------------" type="Node2D" parent="."]
+
+[node name="Inform" type="Sprite" parent="."]
+visible = false
+position = Vector2( 0, -64 )
+texture = ExtResource( 15 )
+
+[node name="Label" type="Label" parent="Inform"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -16.0
+margin_top = -16.0
+margin_right = -16.0
+margin_bottom = -16.0
+custom_fonts/font = ExtResource( 5 )
+text = "E"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Light2D" type="Light2D" parent="Inform"]
+texture = ExtResource( 16 )
+texture_scale = 0.45
+
+[node name="Inventory" parent="." instance=ExtResource( 19 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 0.0
+margin_bottom = 0.0
 
 [node name="Stats" type="CanvasLayer" parent="."]
 
@@ -77,14 +120,12 @@ margin_right = 243.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 0, 16 )
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="HealthBar" type="ProgressBar" parent="Stats/UI/StatsVbox/Health"]
-anchor_right = 0.724
-anchor_bottom = 1.0
-margin_right = 0.0679932
+margin_right = 176.0
+margin_bottom = 16.0
 custom_styles/fg = ExtResource( 3 )
 step = 1.0
 value = 100.0
@@ -96,11 +137,9 @@ __meta__ = {
 }
 
 [node name="HealthLabel" type="Label" parent="Stats/UI/StatsVbox/Health"]
-anchor_left = 0.767
-anchor_right = 1.0
-anchor_bottom = 0.937
-margin_left = -0.0800018
-margin_bottom = 0.00799942
+margin_left = 184.0
+margin_right = 240.699
+margin_bottom = 15.0
 custom_fonts/font = ExtResource( 5 )
 text = "100 / 100"
 align = 2
@@ -116,16 +155,15 @@ margin_right = 243.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 16 )
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="ManaBar" type="ProgressBar" parent="Stats/UI/StatsVbox/Mana"]
 anchor_left = -0.000246366
-anchor_right = 0.724
-anchor_bottom = 1.0
+anchor_right = -0.000246366
 margin_left = 0.0598669
-margin_right = 0.0679932
+margin_right = 176.06
+margin_bottom = 16.0
 custom_styles/fg = SubResource( 2 )
 step = 1.0
 value = 100.0
@@ -137,11 +175,9 @@ __meta__ = {
 }
 
 [node name="ManaLabel" type="Label" parent="Stats/UI/StatsVbox/Mana"]
-anchor_left = 0.767
-anchor_right = 1.0
-anchor_bottom = 0.937
-margin_left = -0.0800018
-margin_bottom = 0.00799942
+margin_left = 184.0
+margin_right = 240.699
+margin_bottom = 15.0
 custom_fonts/font = ExtResource( 5 )
 text = "100 / 100"
 align = 2
@@ -151,34 +187,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Inventory" parent="." instance=ExtResource( 19 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 0.0
-margin_bottom = 0.0
-
-[node name="Inform" type="Sprite" parent="."]
-visible = false
-position = Vector2( 0, -64 )
-texture = ExtResource( 15 )
-
-[node name="Label" type="Label" parent="Inform"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -16.0
-margin_top = -16.0
-margin_right = -16.0
-margin_bottom = -16.0
-custom_fonts/font = ExtResource( 5 )
-text = "E"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Light2D" type="Light2D" parent="Inform"]
-texture = ExtResource( 16 )
-texture_scale = 0.45
-
 [node name="Crosshair" parent="." instance=ExtResource( 7 )]
+
+[connection signal="body_entered" from="DamageDetector" to="." method="_on_DamageDetector_body_entered"]

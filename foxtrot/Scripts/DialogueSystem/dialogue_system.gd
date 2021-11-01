@@ -53,7 +53,7 @@ func ReadDialogue():
       for num in dialogue[key][DIALOGUE_OPTIONS]:
         dialogue[key][DIALOGUE_OPTIONS][int(num)] = dialogue[key][DIALOGUE_OPTIONS][num]
     
-  print("[Dialogue System] Dialogue: %s" % [dialogue])
+  #print("[Dialogue System] Dialogue: %s" % [dialogue])
 
 func ToggleDialogueBox(force_set=false, value=false):
   if force_set:

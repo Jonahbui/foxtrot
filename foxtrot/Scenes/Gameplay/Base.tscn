@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/PauseMenu/PauseMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Gameplay/base.gd" type="Script" id=2]
 [ext_resource path="res://Instances/Player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/DialogueSystem/dialogue_system.gd" type="Script" id=4]
+[ext_resource path="res://Textures/submarine_player_theme.tres" type="Theme" id=5]
+[ext_resource path="res://Textures/UI/icon_back.png" type="Texture" id=6]
 
 [sub_resource type="ButtonGroup" id=1]
 
@@ -62,7 +64,7 @@ margin_right = -8.0
 margin_bottom = -8.0
 mouse_filter = 2
 text = "Default
-"
+dsaf"
 readonly = true
 context_menu_enabled = false
 wrap_enabled = true
@@ -155,11 +157,11 @@ layer = 2
 visible = false
 anchor_right = 1.0
 anchor_bottom = 0.4
-margin_left = 5.0
-margin_top = 5.0
-margin_right = -5.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+theme = ExtResource( 5 )
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -167,33 +169,22 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="Log" type="TextEdit" parent="UI/DevConsole"]
 anchor_right = 1.0
-anchor_bottom = 0.825
-margin_left = 1.73511
-margin_top = 2.26488
-margin_right = -2.26489
-margin_bottom = -2.0
-mouse_filter = 2
-readonly = true
-context_menu_enabled = false
-wrap_enabled = true
+anchor_bottom = 0.824
+margin_bottom = 2.93599
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="CmdLine" type="LineEdit" parent="UI/DevConsole"]
-anchor_top = 0.819
+anchor_top = 0.838
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 2.0
-margin_right = -2.0
-margin_bottom = -2.0
+margin_top = 0.0319901
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath(".")
 focus_neighbour_right = NodePath(".")
@@ -201,8 +192,8 @@ focus_neighbour_bottom = NodePath(".")
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
 context_menu_enabled = false
+right_icon = ExtResource( 6 )
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 

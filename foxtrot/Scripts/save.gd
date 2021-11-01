@@ -103,8 +103,8 @@ func create_save_data(reset_save=false):
     Globals.PLAYER_DIFFICULTY : Globals.isGamePlaying,
     Globals.PLAYER_INVENTORY  : inventory.InventoryToJSON() if not reset_save else {},
     Globals.PLAYER_NAME       : player.charname if not reset_save  else "default",
-    Globals.PLAYER_HEALTH     : player.health if not reset_save  else 0,
-    Globals.PLAYER_MANA       : player.mana if not reset_save  else 0,
+    Globals.PLAYER_HEALTH     : player.health if not reset_save  else 25,
+    Globals.PLAYER_MANA       : player.mana if not reset_save  else 25,
     Globals.PLAYER_MONEY      : player.money if not reset_save  else 0
   }
   return data
@@ -117,9 +117,9 @@ func empty_save_data():
     Globals.PLAYER_DIFFICULTY : false,
     Globals.PLAYER_INVENTORY  : {},
     Globals.PLAYER_NAME       : "",
-    Globals.PLAYER_HEALTH     : 0,
+    Globals.PLAYER_HEALTH     : 25,
     Globals.PLAYER_MANA       : 0,
-    Globals.PLAYER_MONEY      : 0
+    Globals.PLAYER_MONEY      : 25
   }
   return data
 
@@ -193,15 +193,15 @@ func create_save_dir():
       dir.make_dir("saves")  
 
 func init_player(player):
-
+  print("[Save] Initializing player...")
   self.player = player
+
+  Signals.emit_signal("on_base_game_loaded")
+  
   
 func init_inventory(inventory):
+  print("[Save] Initializing inventory...")  
   self.inventory = inventory
-  # The player contains the inventory, so if the inventory is loaded, the player is loaded as well.
-  
-  # After the inventory is loaded, the base game is considered done loading.
-  Signals.emit_signal("on_base_game_loaded")
 
 func init_game():
   # Restore the player inventory and player stats
@@ -209,6 +209,11 @@ func init_game():
     print("[Save] Error. Failed to restore player stats...")
   else:
     player.RestorePlayerData(self.save)
+    
+    if Globals.isNewGame:
+      player.ResetPlayer()
+      
+    player.RefreshStats()
     
   if inventory == null:
     print("[Save] Error. Failed to restore player inventory...")

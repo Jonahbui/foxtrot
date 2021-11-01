@@ -1,11 +1,22 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Fonts/thaelahfat_pure_16x.tres" type="DynamicFont" id=1]
-[ext_resource path="res://Textures/UI/panel-submarine2.tres" type="StyleBox" id=2]
+[ext_resource path="res://Textures/UI/panel_submarine2.tres" type="StyleBox" id=2]
 [ext_resource path="res://Textures/UI/icon_accessory.png" type="Texture" id=3]
 [ext_resource path="res://Textures/submarine_inventory_theme.tres" type="Theme" id=4]
 [ext_resource path="res://Textures/UI/icon_armor.png" type="Texture" id=5]
+[ext_resource path="res://Textures/Gameplay/Coin/coin.png" type="Texture" id=6]
 [ext_resource path="res://Scripts/Inventory/inventory.gd" type="Script" id=7]
+[ext_resource path="res://Textures/UI/icon_defense.png" type="Texture" id=8]
+[ext_resource path="res://Textures/UI/icon_damage_multiplier.png" type="Texture" id=9]
+[ext_resource path="res://Textures/Gameplay/Collectables/pink_seashell.png" type="Texture" id=10]
+[ext_resource path="res://Textures/Gameplay/Collectables/blue_seashell.png" type="Texture" id=11]
+[ext_resource path="res://Textures/Gameplay/Collectables/purple_seashell.png" type="Texture" id=12]
+[ext_resource path="res://Textures/Gameplay/Collectables/green_seashell.png" type="Texture" id=13]
+[ext_resource path="res://Textures/Gameplay/Collectables/yellow_seashell.png" type="Texture" id=14]
+[ext_resource path="res://Textures/Gameplay/Collectables/white_seashell.png" type="Texture" id=15]
+[ext_resource path="res://Textures/Gameplay/Abilities/empty_ability.png" type="Texture" id=16]
+[ext_resource path="res://Textures/UI/panel_submarine3.tres" type="StyleBox" id=17]
 
 [node name="Inventory" type="Control"]
 anchor_right = 1.0
@@ -71,13 +82,11 @@ __meta__ = {
 }
 
 [node name="PlayerPanel" type="Panel" parent="UI/Inventory/Panels"]
-anchor_right = 0.4
-anchor_bottom = 1.0
 margin_left = 16.0
 margin_top = 56.0
-margin_right = 1.52588e-05
-margin_bottom = -32.0
-custom_styles/panel = ExtResource( 2 )
+margin_right = 256.0
+margin_bottom = 344.0
+custom_styles/panel = ExtResource( 17 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -93,20 +102,7 @@ margin_bottom = 187.0
 rect_scale = Vector2( 0.987, 0.957 )
 rect_pivot_offset = Vector2( 168, 72 )
 __meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextureRect" type="TextureRect" parent="UI/Inventory"]
-anchor_left = 0.262
-anchor_top = 0.133
-anchor_right = 0.337
-anchor_bottom = 0.333
-margin_left = 0.319977
-margin_top = 0.119999
-margin_right = 0.319992
-margin_bottom = 0.119995
-mouse_filter = 2
-__meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -413,6 +409,7 @@ custom_constants/vseparation = 0
 custom_constants/hseparation = 0
 columns = 10
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -2599,6 +2596,299 @@ text = "#"
 align = 1
 __meta__ = {
 "_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Stats" type="Control" parent="UI/Inventory"]
+margin_right = 256.0
+margin_bottom = 360.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerInfoContainer" type="VBoxContainer" parent="UI/Inventory/Stats"]
+margin_left = 24.0
+margin_top = 200.0
+margin_right = 88.0
+margin_bottom = 336.0
+rect_pivot_offset = Vector2( -120, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/Inventory/Stats/PlayerInfoContainer"]
+margin_right = 64.0
+margin_bottom = 15.0
+text = "Stats	"
+valign = 2
+
+[node name="MoneyContainer" type="HBoxContainer" parent="UI/Inventory/Stats/PlayerInfoContainer"]
+margin_top = 19.0
+margin_right = 64.0
+margin_bottom = 35.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Inventory/Stats/PlayerInfoContainer/MoneyContainer"]
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 6 )
+expand = true
+
+[node name="Label" type="Label" parent="UI/Inventory/Stats/PlayerInfoContainer/MoneyContainer"]
+margin_left = 20.0
+margin_right = 28.0
+margin_bottom = 15.0
+text = "0"
+valign = 2
+
+[node name="DamageMultiplierContainer" type="HBoxContainer" parent="UI/Inventory/Stats/PlayerInfoContainer"]
+margin_top = 39.0
+margin_right = 64.0
+margin_bottom = 55.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Inventory/Stats/PlayerInfoContainer/DamageMultiplierContainer"]
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 9 )
+expand = true
+
+[node name="Label" type="Label" parent="UI/Inventory/Stats/PlayerInfoContainer/DamageMultiplierContainer"]
+margin_left = 20.0
+margin_right = 28.0
+margin_bottom = 15.0
+text = "0"
+valign = 2
+
+[node name="DefenseContainer" type="HBoxContainer" parent="UI/Inventory/Stats/PlayerInfoContainer"]
+margin_top = 59.0
+margin_right = 64.0
+margin_bottom = 75.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Inventory/Stats/PlayerInfoContainer/DefenseContainer"]
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 8 )
+expand = true
+
+[node name="Label" type="Label" parent="UI/Inventory/Stats/PlayerInfoContainer/DefenseContainer"]
+margin_left = 20.0
+margin_right = 28.0
+margin_bottom = 15.0
+text = "0"
+valign = 2
+
+[node name="ShellContainer" type="VBoxContainer" parent="UI/Inventory/Stats"]
+margin_left = 104.0
+margin_top = 200.0
+margin_right = 168.0
+margin_bottom = 336.0
+rect_pivot_offset = Vector2( -120, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/Inventory/Stats/ShellContainer"]
+margin_right = 64.0
+margin_bottom = 15.0
+text = "shells"
+valign = 2
+
+[node name="WhiteSeashellContainer" type="HBoxContainer" parent="UI/Inventory/Stats/ShellContainer"]
+margin_top = 19.0
+margin_right = 64.0
+margin_bottom = 35.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Inventory/Stats/ShellContainer/WhiteSeashellContainer"]
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 15 )
+expand = true
+
+[node name="Label" type="Label" parent="UI/Inventory/Stats/ShellContainer/WhiteSeashellContainer"]
+margin_left = 20.0
+margin_right = 28.0
+margin_bottom = 15.0
+text = "0"
+valign = 2
+
+[node name="GreenSeashellContainer" type="HBoxContainer" parent="UI/Inventory/Stats/ShellContainer"]
+margin_top = 39.0
+margin_right = 64.0
+margin_bottom = 55.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Inventory/Stats/ShellContainer/GreenSeashellContainer"]
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 13 )
+expand = true
+
+[node name="Label" type="Label" parent="UI/Inventory/Stats/ShellContainer/GreenSeashellContainer"]
+margin_left = 20.0
+margin_right = 28.0
+margin_bottom = 15.0
+text = "0"
+valign = 2
+
+[node name="BlueSeashellContainer" type="HBoxContainer" parent="UI/Inventory/Stats/ShellContainer"]
+margin_top = 59.0
+margin_right = 64.0
+margin_bottom = 75.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Inventory/Stats/ShellContainer/BlueSeashellContainer"]
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 11 )
+expand = true
+
+[node name="Label" type="Label" parent="UI/Inventory/Stats/ShellContainer/BlueSeashellContainer"]
+margin_left = 20.0
+margin_right = 28.0
+margin_bottom = 15.0
+text = "0"
+valign = 2
+
+[node name="PurpleSeashellContainer" type="HBoxContainer" parent="UI/Inventory/Stats/ShellContainer"]
+margin_top = 79.0
+margin_right = 64.0
+margin_bottom = 95.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Inventory/Stats/ShellContainer/PurpleSeashellContainer"]
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 12 )
+expand = true
+
+[node name="Label" type="Label" parent="UI/Inventory/Stats/ShellContainer/PurpleSeashellContainer"]
+margin_left = 20.0
+margin_right = 28.0
+margin_bottom = 15.0
+text = "0"
+valign = 2
+
+[node name="YellowSeashellContainer" type="HBoxContainer" parent="UI/Inventory/Stats/ShellContainer"]
+margin_top = 99.0
+margin_right = 64.0
+margin_bottom = 115.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Inventory/Stats/ShellContainer/YellowSeashellContainer"]
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 14 )
+expand = true
+
+[node name="Label" type="Label" parent="UI/Inventory/Stats/ShellContainer/YellowSeashellContainer"]
+margin_left = 20.0
+margin_right = 28.0
+margin_bottom = 15.0
+text = "0"
+valign = 2
+
+[node name="PinkSeashellContainer" type="HBoxContainer" parent="UI/Inventory/Stats/ShellContainer"]
+margin_top = 119.0
+margin_right = 64.0
+margin_bottom = 135.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Inventory/Stats/ShellContainer/PinkSeashellContainer"]
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 10 )
+expand = true
+
+[node name="Label" type="Label" parent="UI/Inventory/Stats/ShellContainer/PinkSeashellContainer"]
+margin_left = 20.0
+margin_right = 28.0
+margin_bottom = 15.0
+text = "0"
+valign = 2
+
+[node name="AbilitiesContainer" type="VBoxContainer" parent="UI/Inventory/Stats"]
+margin_left = 192.0
+margin_top = 200.0
+margin_right = 256.0
+margin_bottom = 336.0
+rect_pivot_offset = Vector2( -120, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/Inventory/Stats/AbilitiesContainer"]
+margin_right = 64.0
+margin_bottom = 15.0
+text = "abilities"
+valign = 2
+
+[node name="MoneyContainer" type="HBoxContainer" parent="UI/Inventory/Stats/AbilitiesContainer"]
+margin_top = 19.0
+margin_right = 64.0
+margin_bottom = 35.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Inventory/Stats/AbilitiesContainer/MoneyContainer"]
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 16 )
+expand = true
+
+[node name="Label" type="Label" parent="UI/Inventory/Stats/AbilitiesContainer/MoneyContainer"]
+margin_left = 20.0
+margin_right = 36.0
+margin_bottom = 15.0
+text = "0%"
+valign = 2
+
+[node name="DamageMultiplierContainer" type="HBoxContainer" parent="UI/Inventory/Stats/AbilitiesContainer"]
+margin_top = 39.0
+margin_right = 64.0
+margin_bottom = 55.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Inventory/Stats/AbilitiesContainer/DamageMultiplierContainer"]
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 16 )
+expand = true
+
+[node name="Label" type="Label" parent="UI/Inventory/Stats/AbilitiesContainer/DamageMultiplierContainer"]
+margin_left = 20.0
+margin_right = 36.0
+margin_bottom = 15.0
+text = "0%"
+valign = 2
+
+[node name="DefenseContainer" type="HBoxContainer" parent="UI/Inventory/Stats/AbilitiesContainer"]
+margin_top = 59.0
+margin_right = 64.0
+margin_bottom = 75.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Inventory/Stats/AbilitiesContainer/DefenseContainer"]
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 16 )
+expand = true
+
+[node name="Label" type="Label" parent="UI/Inventory/Stats/AbilitiesContainer/DefenseContainer"]
+margin_left = 20.0
+margin_right = 36.0
+margin_bottom = 15.0
+text = "0%"
+valign = 2
+
+[node name="Panel" type="Panel" parent="UI/Inventory"]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 248.0
+margin_bottom = 192.0
+custom_styles/panel = ExtResource( 2 )
+__meta__ = {
 "_edit_use_anchors_": false
 }
 

@@ -3,32 +3,17 @@
 [ext_resource path="res://Textures/Gameplay/Weapon/driftwood.png" type="Texture" id=2]
 [ext_resource path="res://Instances/Equips/Weapon/weapon.gd" type="Script" id=8]
 
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 14.8695, 32.8851 )
-
 [sub_resource type="Animation" id=2]
 resource_name = "attack"
 length = 0.6
 loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/type = "method"
+tracks/0/path = NodePath("..")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1e-05 ),
-"update": 0,
-"values": [ -30.0, 240.0, -30.0 ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath("..")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
@@ -39,34 +24,57 @@ tracks/1/keys = {
 "method": "ResetCooldown"
 } ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 240.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../HitDetector/HitCollider:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.0808055, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "idle"
 loop = true
 
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 8.04334, 16.0884 )
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 10, 26.3445 )
 
-[sub_resource type="CircleShape2D" id=4]
-radius = 16.0
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7.92381, 52.6585 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 52.7611, 65.7302 )
 
 [node name="Driftwood" type="KinematicBody2D"]
+rotation = -0.523599
 collision_layer = 0
+collision_mask = 257
 script = ExtResource( 8 )
 __meta__ = {
 "_edit_lock_": true
 }
 id = 1
-
-[node name="Collider" type="CollisionShape2D" parent="."]
-position = Vector2( -7.79149, -13.3452 )
-rotation = -0.523599
-scale = Vector2( 0.5, 0.5 )
-shape = SubResource( 6 )
+damage = 5
 
 [node name="Sprite" type="Sprite" parent="."]
-rotation = -0.523599
-scale = Vector2( 2, 2 )
+scale = Vector2( 2, 3 )
 texture = ExtResource( 2 )
 offset = Vector2( 0, -8 )
 
@@ -74,21 +82,33 @@ offset = Vector2( 0, -8 )
 anims/attack = SubResource( 2 )
 anims/idle = SubResource( 3 )
 
-[node name="Hitbox" type="Area2D" parent="Sprite"]
-
-[node name="Collider" type="CollisionShape2D" parent="Sprite/Hitbox"]
-position = Vector2( -0.366873, -7.86512 )
-scale = Vector2( 0.5, 0.5 )
-shape = SubResource( 5 )
-
 [node name="PickupDetector" type="Area2D" parent="."]
+visible = false
 position = Vector2( -8, 0 )
 collision_layer = 8
 collision_mask = 2
 
 [node name="PickupCollider" type="CollisionShape2D" parent="PickupDetector"]
-position = Vector2( 0, -13.5 )
+position = Vector2( 9.01518, -23.2249 )
 shape = SubResource( 4 )
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+position = Vector2( -0.148844, -26.2467 )
+scale = Vector2( 0.5, 0.5 )
+shape = SubResource( 1 )
+
+[node name="HitDetector" type="Area2D" parent="." groups=[
+"PlayerWeaponHitbox",
+]]
+collision_layer = 0
+collision_mask = 4
+
+[node name="HitCollider" type="CollisionShape2D" parent="HitDetector"]
+position = Vector2( 26.3743, 10.8569 )
+rotation = 0.371679
+scale = Vector2( 0.5, 0.5 )
+shape = SubResource( 5 )
+disabled = true
 
 [connection signal="body_entered" from="PickupDetector" to="." method="_on_PickupDetector_body_entered"]
 [connection signal="body_exited" from="PickupDetector" to="." method="_on_PickupDetector_body_exited"]

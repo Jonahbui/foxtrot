@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 export(int) var damage = 0
+export(float) var knocback = 0
 
 export(float) var gravity = 3000.0
 export(float) var speed = 2000.0
