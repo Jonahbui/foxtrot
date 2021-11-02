@@ -51,3 +51,10 @@ func ToJSON():
 func FromJSON(item):
   self.id = item[Save.SAVE_ID]
   self.curr_stack_amt = item[Save.SAVE_CURR_STACK_AMT]
+
+func Pickup():
+  if Equips.equips[id][Equips.EQUIP_SUBTYPE] == Equips.Subtype.stackable:
+    Signals.emit_signal("on_inventory_add_item_stack", id, curr_stack_amt)
+    self.queue_free()
+  else:
+    .Pickup()

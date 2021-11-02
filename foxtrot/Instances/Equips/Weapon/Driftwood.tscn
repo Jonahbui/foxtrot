@@ -3,7 +3,7 @@
 [ext_resource path="res://Textures/Gameplay/Weapon/driftwood.png" type="Texture" id=2]
 [ext_resource path="res://Instances/Equips/Weapon/weapon.gd" type="Script" id=8]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "attack"
 length = 0.6
 loop = true
@@ -49,14 +49,14 @@ tracks/2/keys = {
 "values": [ true, false, true ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "idle"
 loop = true
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 10, 26.3445 )
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 7.92381, 52.6585 )
 
 [sub_resource type="RectangleShape2D" id=5]
@@ -79,8 +79,8 @@ texture = ExtResource( 2 )
 offset = Vector2( 0, -8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
-anims/attack = SubResource( 2 )
-anims/idle = SubResource( 3 )
+anims/attack = SubResource( 1 )
+anims/idle = SubResource( 2 )
 
 [node name="PickupDetector" type="Area2D" parent="."]
 visible = false
@@ -90,12 +90,12 @@ collision_mask = 2
 
 [node name="PickupCollider" type="CollisionShape2D" parent="PickupDetector"]
 position = Vector2( 9.01518, -23.2249 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2( -0.148844, -26.2467 )
 scale = Vector2( 0.5, 0.5 )
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 
 [node name="HitDetector" type="Area2D" parent="." groups=[
 "PlayerWeaponHitbox",

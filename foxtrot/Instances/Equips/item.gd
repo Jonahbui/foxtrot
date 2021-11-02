@@ -26,12 +26,20 @@ var enable_gravity : = true
 func _input(event):
   if Globals.pause_flags != 0 || Globals.isManagingInv: return
   
-  if event.is_action_pressed("fire"):
-    Use()
-  elif player_inv == null && player_body != null && event.is_action_pressed("interact"):
+  if player_inv == null && player_body != null && event.is_action_pressed("interact"):
     # Need to check if player_body is not null because the player can possibly click and interact
     # after the body has exited and has been set to null.
     Pickup()
+    return
+
+  _process_input(event)
+
+func _process_input(event):
+  # Godot treats _input differently... cannot just override like other functions. _input is called in
+  # every class. Doesn't really override.
+  
+  if event.is_action_pressed("fire"):
+    Use()
 
 func _ready():
   if override_process:

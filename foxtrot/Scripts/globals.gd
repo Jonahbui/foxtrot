@@ -93,6 +93,7 @@ func ToggleFlag(flag):
   return result
 
 const GROUP_PLAYER_WEAPON_HITBOX = "PlayerWeaponHitbox"
+const GROUP_PLAYER_PROJECTILE_HITBOX = "PlayerProjectileHitbox"
 
 enum ItemProcess{
   World,

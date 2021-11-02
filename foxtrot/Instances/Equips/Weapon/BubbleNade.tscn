@@ -11,7 +11,8 @@ radius = 14.3362
 
 [node name="BubbleNade" type="KinematicBody2D"]
 z_index = 4
-collision_layer = 0
+collision_layer = 8
+collision_mask = 129
 script = ExtResource( 2 )
 id = 0
 max_stack_amt = 8
@@ -27,7 +28,7 @@ position = Vector2( -0.771694, 1.68369 )
 shape = SubResource( 1 )
 
 [node name="PickupDetector" type="Area2D" parent="."]
-collision_layer = 8
+collision_layer = 0
 collision_mask = 2
 
 [node name="PickupCollider" type="CollisionShape2D" parent="PickupDetector"]

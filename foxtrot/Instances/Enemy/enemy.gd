@@ -29,7 +29,7 @@ func _physics_process(delta):
 func TakeDamage(body):
   # Deal damage
   health -= body.damage
-  print(health)
+  print("[%s] Current health = %d. Damage taken = %d." % [body.get_name(), health, body.damage])
   
   # Deal knockback
   var direction = (self.get_global_transform().get_origin() - body.get_global_transform().get_origin()).normalized()
@@ -47,5 +47,5 @@ func _on_DamageDetector_body_entered(body):
 
 func _on_DamageDetector_area_shape_entered(area_id, area, area_shape, local_shape):
   # Apparently this signal disregards the masks set, so need another way to identify the area
-  if area.is_in_group(Globals.GROUP_PLAYER_WEAPON_HITBOX):
+  if area.is_in_group(Globals.GROUP_PLAYER_WEAPON_HITBOX) || area.is_in_group(Globals.GROUP_PLAYER_PROJECTILE_HITBOX):
     TakeDamage(area.get_parent())

@@ -11,18 +11,12 @@ func _ready():
   if projectile == null: print("[ProjectileStack] Could not find projectile to spawn. Was it assigned?")
   projectile = load(projectile)
 
-func _input(event):
-  if Globals.pause_flags != 0 || Globals.isManagingInv: return
-
+func _process_input(event):
   if is_automatic:
     if event.is_action_pressed("fire") && not in_cooldown:
       $Sprite/AnimationPlayer.play("reload")
-    elif player_inv == null && player_body != null && event.is_action_pressed("interact"):
-      # Need to check if player_body is not null because the player can possibly click and interact
-      # after the body has exited and has been set to null.
-      Pickup()
   else:
-    ._input(event)
+    ._process_input(event)
 
 func _draw():
   draw_line(self.position, get_local_mouse_position(), Color.red)  
@@ -74,10 +68,3 @@ func Use():
 
 # Note to self: instantiating an instance is not enough. You must also set a
 # parent for it or else it won't appear in the scene.
-
-func Pickup():
-  if Equips.equips[id][Equips.EQUIP_SUBTYPE] == Equips.Subtype.stackable:
-    Signals.emit_signal("on_inventory_add_item_stack", id, curr_stack_amt)
-    self.queue_free()
-  else:
-    .Pickup()

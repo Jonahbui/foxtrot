@@ -230,6 +230,7 @@ z_index = -2
 z_as_relative = false
 frames = ExtResource( 6 )
 animation = "blinking"
+frame = 1
 playing = true
 flip_h = true
 

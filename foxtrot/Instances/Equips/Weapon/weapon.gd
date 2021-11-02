@@ -3,9 +3,7 @@ extends "res://Instances/Equips/item.gd"
 export var damage : int = 0
 export var knockback : float = 100
 
-func _input(event):
-  if player_inv == null: return
-  
+func _process_input(event):
   if event.is_action_pressed("fire") && not in_cooldown:
     $Sprite/AnimationPlayer.play("attack")
 
