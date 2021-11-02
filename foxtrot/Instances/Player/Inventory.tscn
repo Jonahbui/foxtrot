@@ -76,6 +76,7 @@ __meta__ = {
 modulate = Color( 1, 1, 1, 0 )
 margin_right = 640.0
 margin_bottom = 360.0
+mouse_filter = 2
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -86,6 +87,7 @@ margin_left = 16.0
 margin_top = 56.0
 margin_right = 256.0
 margin_bottom = 344.0
+mouse_filter = 2
 custom_styles/panel = ExtResource( 17 )
 __meta__ = {
 "_edit_lock_": true,
@@ -2602,6 +2604,7 @@ __meta__ = {
 [node name="Stats" type="Control" parent="UI/Inventory"]
 margin_right = 256.0
 margin_bottom = 360.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }

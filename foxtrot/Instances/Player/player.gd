@@ -24,7 +24,6 @@ var forward : bool = true
 # --------------------------------------------------------------------------------------------------
 # References
 # --------------------------------------------------------------------------------------------------
-onready var inventory = $UI/Inventory
 onready var health_bar = $Stats/UI/StatsVbox/Health/HealthBar
 onready var health_label = $Stats/UI/StatsVbox/Health/HealthLabel
 onready var mana_bar = $Stats/UI/StatsVbox/Mana/ManaBar

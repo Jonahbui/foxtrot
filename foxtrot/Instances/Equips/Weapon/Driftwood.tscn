@@ -14,11 +14,14 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.0394408, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
 "args": [  ],
 "method": "Use"
+}, {
+"args": [  ],
+"method": "PlayAttack"
 }, {
 "args": [  ],
 "method": "ResetCooldown"
@@ -71,6 +74,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 id = 1
+attack_sound = "res://Audio/SoundEffects/whack_2.wav"
 damage = 5
 
 [node name="Sprite" type="Sprite" parent="."]

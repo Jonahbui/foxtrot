@@ -258,7 +258,7 @@ func FindStackSlot(item_id, amount):
     if curr_item == null: continue
     
     # Only add to a stack that has the same item type and is not at full capacity
-    if item_id == curr_item.id && curr_item.curr_stack_amt < curr_item.max_stack_amt:
+    if item_id == curr_item.id && curr_item.curr_stack_amt + amount <= curr_item.max_stack_amt:
       return i
   return -1
 
@@ -320,7 +320,7 @@ func GetNextSlot(moveForward=true):
   SetActiveSlot(new_slot_id, prev_slot_id)
 
 func SetActiveSlot(active_slot_id : int, prev_slot_id : int, ignoreSound=false):
-  if not ignoreSound: Signals.emit_signal("on_play_sfx", "res://Audio/SoundEffects/plop16.mp3")
+  if not ignoreSound: Signals.emit_signal("on_play_sfx", "res://Audio/SoundEffects/bubbles_1.wav")
   if active_slot_id == prev_slot_id: return
   
   curr_slot_id = active_slot_id
@@ -398,7 +398,7 @@ func ToggleInventory(forceState=false, state=false):
 
 func _on_slot_pressed(slot_num):
   print("[Inventory] Slot #%d selected." % [slot_num])
-  Signals.emit_signal("on_play_sfx", "res://Audio/SoundEffects/wet_click.wav")
+  Signals.emit_signal("on_play_sfx", "res://Audio/SoundEffects/bubbles_1.wav")
   if selectedSlot1 == -1:
     # Ignore first selections if the slot is null. Cannot select anything that 
     # is null first. It is okay to select a second slot that is null, as long as
