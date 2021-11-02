@@ -45,14 +45,14 @@ expand_margin_right = 7.0
 
 [sub_resource type="CameraTexture" id=6]
 
-[sub_resource type="StyleBoxTexture" id=10]
+[sub_resource type="StyleBoxTexture" id=7]
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=8]
 font_data = ExtResource( 3 )
 
-[sub_resource type="ButtonGroup" id=8]
+[sub_resource type="ButtonGroup" id=9]
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=10]
 size = 32
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
@@ -74,6 +74,7 @@ uiToggle = NodePath("UI/TabContainer/Audio/AudioVbox/UserInterfaceVolume/UserInt
 fullscreenCheckbox = NodePath("UI/TabContainer/Graphics/GraphicsVbox/Fullscreen/FullscreenCheckBox")
 
 [node name="UI" type="Control" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 48.0
@@ -282,7 +283,7 @@ __meta__ = {
 margin_top = 95.0
 margin_right = 156.0
 margin_bottom = 98.0
-custom_styles/separator = SubResource( 10 )
+custom_styles/separator = SubResource( 7 )
 
 [node name="AmbienceVolume" type="Label" parent="UI/TabContainer/Audio/AudioVbox"]
 margin_top = 103.0
@@ -440,8 +441,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 88.0
 margin_bottom = 6.0
-custom_fonts/font = SubResource( 7 )
-group = SubResource( 8 )
+custom_fonts/font = SubResource( 8 )
+group = SubResource( 9 )
 text = "Graphics"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -466,7 +467,7 @@ margin_left = -0.445435
 margin_top = 0.445435
 margin_right = 102.555
 margin_bottom = 6.44543
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
 text = "Resolution"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -544,7 +545,7 @@ custom_styles/hover = ExtResource( 14 )
 custom_styles/pressed = ExtResource( 10 )
 custom_styles/disabled = ExtResource( 12 )
 custom_styles/normal = ExtResource( 11 )
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Reset"
 __meta__ = {
@@ -564,7 +565,7 @@ custom_styles/hover = ExtResource( 14 )
 custom_styles/pressed = ExtResource( 10 )
 custom_styles/disabled = ExtResource( 12 )
 custom_styles/normal = ExtResource( 11 )
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 icon = ExtResource( 4 )
 expand_icon = true
