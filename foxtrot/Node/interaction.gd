@@ -17,6 +17,7 @@ func Use():
   # After the player has interacted with the entity associated with this script, toggle off the 
   # player's inform box
   Signals.emit_signal("on_interaction_changed", false)
+  self.emit_signal("interaction_triggered")
   
 func _on_InteractionCollider_body_entered(body):
   # If the player is in the body of the interactable entity, the player may interact with it
