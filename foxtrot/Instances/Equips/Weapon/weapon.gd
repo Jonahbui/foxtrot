@@ -27,4 +27,4 @@ func SetIdle():
   $Sprite/AnimationPlayer.play("idle")
 
 func PlayAttack():
-  Signals.emit_signal("on_play_sfx", attack_sound)
+  Signals.emit_signal("on_play_audio", attack_sound, 1)

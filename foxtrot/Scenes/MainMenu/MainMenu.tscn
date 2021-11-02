@@ -146,6 +146,12 @@ autoplay = true
 
 [node name="SFXStream" type="AudioStreamPlayer" parent="Audio"]
 
+[node name="AmbienceStream" type="AudioStreamPlayer" parent="Audio"]
+bus = "Ambience"
+
+[node name="UIStream" type="AudioStreamPlayer" parent="Audio"]
+bus = "UI"
+
 [node name="LoadMenu" type="CanvasLayer" parent="."]
 
 [node name="UI" type="Control" parent="LoadMenu"]

@@ -32,11 +32,9 @@ func _ready():
   if Signals.connect("on_player_death", self, "OnDeath") != OK:
     print("[Base] Error. Failed to connect to signal on_player_death...")
   
-  if Signals.connect("on_play_sfx", self, "PlaySfx") != OK:
-    print("[Base] Error. Failed to connect to signal on_play_sfx...")
+  if Signals.connect("on_play_audio", self, "PlayAudio") != OK:
+    print("[Base] Error. Failed to connect to signal on_play_audio...")
     
-  if Signals.connect("on_play_music", self, "PlayMusic") != OK:
-    print("[Base] Error. Failed to connect to signal on_play_music...")
 
   if Signals.connect("on_change_base_level", self, "LoadLevel") != OK:
     print("[Base] Error. Failed to connect to signal on_change_base_level...")
@@ -50,12 +48,23 @@ func ToggleDevConsole():
   if dev_console.visible:
     cmdline.grab_focus()
   
-func PlayMusic(clip):
+func PlayAudio(clip, source):
   var audio = load(clip)
   
   if audio:
-    $Audio/MusicStream.stream = audio    
-    $Audio/MusicStream.play()
+    match source:
+      0:
+        $Audio/MusicStream.stream = audio    
+        $Audio/MusicStream.play()
+      1:
+        $Audio/SFXStream.stream = audio    
+        $Audio/SFXStream.play()
+      2:
+        $Audio/AmbienceStream.stream = audio    
+        $Audio/AmbienceStream.play()
+      3:
+        $Audio/UIStream.stream = audio    
+        $Audio/UIStream.play()
   else:
     print("[Base] Error. Could not play \"%s\"" % [clip])
   

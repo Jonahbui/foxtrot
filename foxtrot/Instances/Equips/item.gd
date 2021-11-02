@@ -46,6 +46,8 @@ func _ready():
     SetProcess(process, null)
 
 func _physics_process(delta: float) -> void:
+  if Globals.pause_flags != 0 || Globals.isManagingInv: return
+  
   if enable_gravity:
     velocity.y += gravity * delta
     velocity = move_and_slide( velocity, Vector2.UP )

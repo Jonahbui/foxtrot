@@ -24,6 +24,12 @@ bus = "Music"
 [node name="SFXStream" type="AudioStreamPlayer" parent="Audio"]
 bus = "SFX"
 
+[node name="AmbienceStream" type="AudioStreamPlayer" parent="Audio"]
+bus = "Ambience"
+
+[node name="UIStream" type="AudioStreamPlayer" parent="Audio"]
+bus = "UI"
+
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 8, 0 )
 z_as_relative = false
@@ -199,20 +205,18 @@ __meta__ = {
 
 [node name="PauseMenu" parent="." instance=ExtResource( 1 )]
 
-[node name="Audio" parent="PauseMenu/SettingsMenu/UI/TabContainer" index="0"]
+[node name="UI" parent="PauseMenu" index="0"]
 visible = true
 
-[node name="Graphics" parent="PauseMenu/SettingsMenu/UI/TabContainer" index="2"]
-visible = false
+[node name="Panel" type="Panel" parent="PauseMenu/UI" index="1"]
+self_modulate = Color( 1, 1, 1, 0.560784 )
+anchor_right = 0.997
+anchor_bottom = 0.999
+margin_right = -0.0802002
+margin_bottom = 0.359985
 
 [node name="OptionButton" parent="PauseMenu/SettingsMenu/UI/TabContainer/Graphics/GraphicsVbox/Quality" index="0"]
 group = SubResource( 1 )
-
-[node name="Achievements" parent="PauseMenu/SettingsMenu/UI/TabContainer" index="5"]
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
 
 [node name="LoadingScreen" type="CanvasLayer" parent="."]
 layer = 3

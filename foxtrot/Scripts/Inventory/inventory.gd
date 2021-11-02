@@ -320,7 +320,7 @@ func GetNextSlot(moveForward=true):
   SetActiveSlot(new_slot_id, prev_slot_id)
 
 func SetActiveSlot(active_slot_id : int, prev_slot_id : int, ignoreSound=false):
-  if not ignoreSound: Signals.emit_signal("on_play_sfx", "res://Audio/SoundEffects/bubbles_1.wav")
+  if not ignoreSound: Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/bubbles_1.wav", 3)
   if active_slot_id == prev_slot_id: return
   
   curr_slot_id = active_slot_id
@@ -398,7 +398,7 @@ func ToggleInventory(forceState=false, state=false):
 
 func _on_slot_pressed(slot_num):
   print("[Inventory] Slot #%d selected." % [slot_num])
-  Signals.emit_signal("on_play_sfx", "res://Audio/SoundEffects/bubbles_1.wav")
+  Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/bubbles_1.wav", 3)
   if selectedSlot1 == -1:
     # Ignore first selections if the slot is null. Cannot select anything that 
     # is null first. It is okay to select a second slot that is null, as long as

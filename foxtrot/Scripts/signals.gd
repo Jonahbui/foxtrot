@@ -18,10 +18,7 @@ signal on_player_death()
 # Audio System Signals
 #--------------------------------------------------------------------------------------------------
 # Inform the game to play the clip in the music source
-signal on_play_music(clip)
-
-# Inform the game to play the clip in the sfx source
-signal on_play_sfx(clip)
+signal on_play_audio(clip, source)
 #--------------------------------------------------------------------------------------------------
 # Base Signals
 #--------------------------------------------------------------------------------------------------

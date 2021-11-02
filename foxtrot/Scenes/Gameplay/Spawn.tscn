@@ -167,8 +167,9 @@ range_item_cull_mask = 3
 
 [node name="LocalAudio" type="Node2D" parent="."]
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="LocalAudio"]
+[node name="Seagulls+Waves Ambience" type="AudioStreamPlayer2D" parent="LocalAudio"]
 stream = ExtResource( 11 )
+volume_db = 1.0
 autoplay = true
 bus = "Ambience"
 

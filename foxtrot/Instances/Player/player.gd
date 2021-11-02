@@ -45,6 +45,8 @@ var velocity : = Vector2.ZERO
 # Godot Functions
 # --------------------------------------------------------------------------------------------------
 func _input(event):
+  if Globals.pause_flags != 0 : return
+  
   if event is InputEventMouseMotion:
     var player_orienatation = get_global_mouse_position().x - self.global_position.x
     if player_orienatation > 0:
@@ -61,8 +63,7 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
   # If the dev console is open then do not move.
-  if Globals.pause_flags != 0 :
-    return
+  if Globals.pause_flags != 0 : return
   # If the player is in the middle of a jump (the Y velocity is
   #   less than zero, indicating the player is moving UP on the
   #   screen) and the user lets go of the JUMP key (detected using

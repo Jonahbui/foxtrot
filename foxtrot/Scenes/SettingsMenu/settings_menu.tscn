@@ -85,6 +85,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Panel" type="Panel" parent="UI"]
+self_modulate = Color( 1, 1, 1, 0.560784 )
+anchor_left = -0.088
+anchor_top = -0.152
+anchor_right = 1.088
+anchor_bottom = 1.182
+margin_left = -0.127995
+margin_top = -7.872
+margin_right = 0.127991
+margin_bottom = -0.0480042
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Background" type="Panel" parent="UI"]
 visible = false
 anchor_right = 1.0

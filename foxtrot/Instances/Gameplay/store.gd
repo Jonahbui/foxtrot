@@ -73,7 +73,7 @@ func ToggleStore(forceState=false, state=false):
     $Store/UI.visible = !$Store/UI.visible
     
   if $Store/UI.visible:
-    Signals.emit_signal("on_play_sfx", "res://Audio/SoundEffects/cash_register.mp3")
+    Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/cash_register.mp3", 1)
   else:
     Signals.emit_signal("on_interaction_changed", false)
   
