@@ -205,9 +205,6 @@ __meta__ = {
 
 [node name="PauseMenu" parent="." instance=ExtResource( 1 )]
 
-[node name="UI" parent="PauseMenu" index="0"]
-visible = true
-
 [node name="Panel" type="Panel" parent="PauseMenu/UI" index="1"]
 self_modulate = Color( 1, 1, 1, 0.560784 )
 anchor_right = 0.997

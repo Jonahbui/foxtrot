@@ -151,7 +151,7 @@ __meta__ = {
 
 [node name="SettingsMenu" parent="." instance=ExtResource( 5 )]
 
-[node name="OptionButton" parent="SettingsMenu/UI/GraphicsVbox/Quality" index="0"]
+[node name="OptionButton" parent="SettingsMenu/UI/TabContainer/Graphics/GraphicsVbox/Quality" index="0"]
 group = SubResource( 2 )
 
 [connection signal="pressed" from="UI/Background/ButtonVbox/ResumeButton" to="." method="_on_ResumeButton_pressed"]
