@@ -1,6 +1,5 @@
 extends Node2D
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
   # If the main menu is ever loaded, the game is not being played anymore
@@ -19,6 +18,11 @@ func _on_LoadGameButton_pressed():
   $MainMenu/UI.hide()
   $SettingsMenu/UI.hide()
   $Credits/UI.hide()
+  
+  $AnimationPlayer.play("MainToLoad")
+  
+  while $AnimationPlayer.is_playing():
+    yield(get_tree().create_timer(0.5), "timeout")
   $LoadMenu/UI.show()
 
 # Used to open up the settings. Note: the Settings.tscn is expected to be imported
@@ -56,10 +60,14 @@ func _on_CasualButton_pressed():
   StartNewGame()
   
 func _on_BackButton_pressed():
-  $MainMenu/UI.show()
+  $LoadMenu/UI.hide()
   $SettingsMenu/UI.hide()
   $Credits/UI.hide()
-  $LoadMenu/UI.hide()
+  
+  $AnimationPlayer.play_backwards("MainToLoad")
+  while $AnimationPlayer.is_playing():
+    yield(get_tree().create_timer(0.5), "timeout")
+  $MainMenu/UI.show()
 
 func StartNewGame():
   Globals.isGamePlaying = true
@@ -71,15 +79,28 @@ func StartNewGame():
 # Load Game Functions
 #--------------------------------------------------------------------------------------------------
 export(String, FILE) var load_panel
+export(StyleBoxTexture) var sodacan_red
+export(StyleBoxTexture) var sodacan_blue
+export(StyleBoxTexture) var sodacan_green
+
 
 func CreateLoadPanels():
   var saves = Save.list_saves()
   load_panel = load(load_panel)
-  
+  var rotate_i = 0
   for save_name in saves:
     # Create instance
     var instance = load_panel.instance()
-    
+    match rotate_i:
+      0:
+        instance.add_stylebox_override("panel", sodacan_red)
+      1:
+        instance.add_stylebox_override("panel",sodacan_blue)
+      2:
+        instance.add_stylebox_override("panel",sodacan_green)
+    rotate_i += 1
+    if rotate_i > 2: rotate_i = 0
+
     # Load the player data to provide identification data to the panel
     var save_data = Save.load_file(save_name)
     var name_label = instance.get_node_or_null("NameLabel")

@@ -4,11 +4,13 @@ export(NodePath) var masterSlider
 export(NodePath) var musicSlider
 export(NodePath) var sfxSlider
 export(NodePath) var ambienceSlider
+export(NodePath) var uiSlider
 
 export(NodePath) var masterToggle
 export(NodePath) var musicToggle
 export(NodePath) var sfxToggle
 export(NodePath) var ambienceToggle
+export(NodePath) var uiToggle
 
 export(NodePath) var fullscreenCheckbox
 func _ready():
@@ -16,12 +18,14 @@ func _ready():
   musicSlider = get_node(musicSlider)
   sfxSlider = get_node(sfxSlider)
   ambienceSlider = get_node(ambienceSlider)
+  uiSlider = get_node(uiSlider)
   
   masterToggle = get_node(masterToggle)
   musicToggle = get_node(musicToggle)
   sfxToggle = get_node(sfxToggle)
   ambienceToggle = get_node(ambienceToggle)
-  
+  uiToggle = get_node(uiToggle)
+
   fullscreenCheckbox = get_node(fullscreenCheckbox)
   LoadConfigToSettings()
 
@@ -30,11 +34,13 @@ func LoadConfigToSettings():
   masterSlider.value = Save.config[Globals.VOLUME_MASTER]
   musicSlider.value = Save.config[Globals.VOLUME_MUSIC]
   sfxSlider.value = Save.config[Globals.VOLUME_SFX]
-  ambienceSlider.value = Save.config[Globals.VOLUME_SFX]
+  ambienceSlider.value = Save.config[Globals.VOLUME_AMBIENCE]
+  uiSlider.value = Save.config[Globals.VOLUME_UI]
   masterToggle.pressed = Save.config[Globals.VOLUME_MASTER_TOGGLE]
   musicToggle.pressed = Save.config[Globals.VOLUME_MUSIC_TOGGLE]
   sfxToggle.pressed = Save.config[Globals.VOLUME_SFX_TOGGLE]
-  ambienceToggle.pressed = Save.config[Globals.VOLUME_SFX_TOGGLE]
+  ambienceToggle.pressed = Save.config[Globals.VOLUME_AMBIENCE_TOGGLE]
+  uiToggle.pressed = Save.config[Globals.VOLUME_UI_TOGGLE]
   
   fullscreenCheckbox.pressed = Save.config[Globals.GRAPHICS_FULLSCREEN]
 
@@ -61,6 +67,11 @@ func _on_AmbienceSlider_value_changed(value):
   Save.config[Globals.VOLUME_AMBIENCE] = value
   AudioServer.set_bus_volume_db(3, value)
 
+func _on_UserInterfaceSlider_value_changed(value):
+  Save.config[Globals.VOLUME_UI] = value
+  AudioServer.set_bus_volume_db(4, value)
+
+
 func _on_MasterCheckbox_toggled(button_pressed):
   Save.config[Globals.VOLUME_MASTER_TOGGLE] = button_pressed
   AudioServer.set_bus_mute(0, button_pressed)
@@ -77,6 +88,10 @@ func _on_AmbienceCheckbox_toggled(button_pressed):
   Save.config[Globals.VOLUME_AMBIENCE_TOGGLE] = button_pressed
   AudioServer.set_bus_mute(3, button_pressed)
 
+func _on_UserInterfaceCheckbox_toggled(button_pressed):
+  Save.config[Globals.VOLUME_UI_TOGGLE] = button_pressed
+  AudioServer.set_bus_mute(4, button_pressed)
+
 func _on_Reset_pressed():
   Save.reset_config()
   LoadConfigToSettings()
@@ -88,3 +103,5 @@ func _on_Reset_pressed():
 func _on_FullScreenCheckBox_toggled(button_pressed):
   OS.window_fullscreen = button_pressed
   Save.config[Globals.GRAPHICS_FULLSCREEN] = button_pressed
+
+

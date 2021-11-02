@@ -5,7 +5,7 @@ extends KinematicBody2D
 # --------------------------------------------------------------------------------------------------
 # Player Information
 # --------------------------------------------------------------------------------------------------
-export var charname : String = ""
+export var charname : String = "default"
 export var maxHealth : int = 100
 export var health : int = 100
 export var mana   : int = 100

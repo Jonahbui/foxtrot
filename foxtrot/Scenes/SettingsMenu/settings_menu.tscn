@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Textures/UI/slider_grabber.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/SettingsMenu/settings_menu.gd" type="Script" id=2]
@@ -13,18 +13,18 @@
 [ext_resource path="res://Textures/UI/button_disabled.tres" type="StyleBox" id=12]
 [ext_resource path="res://Textures/UI/button_hover.tres" type="StyleBox" id=14]
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=1]
 size = 32
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=2]
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 3 )
 
-[sub_resource type="StyleBoxTexture" id=6]
+[sub_resource type="StyleBoxTexture" id=3]
 texture = ExtResource( 5 )
 region_rect = Rect2( 0, 0, 32, 32 )
 margin_left = 6.0
@@ -32,7 +32,7 @@ margin_right = 6.0
 margin_top = 6.0
 margin_bottom = 6.0
 
-[sub_resource type="StyleBoxTexture" id=7]
+[sub_resource type="StyleBoxTexture" id=4]
 texture = ExtResource( 7 )
 region_rect = Rect2( 0, 0, 32, 32 )
 margin_left = 8.0
@@ -41,16 +41,18 @@ margin_top = 8.0
 margin_bottom = 8.0
 expand_margin_right = 7.0
 
-[sub_resource type="StyleBoxTexture" id=8]
+[sub_resource type="StyleBoxTexture" id=5]
 
-[sub_resource type="CameraTexture" id=9]
+[sub_resource type="CameraTexture" id=6]
 
-[sub_resource type="DynamicFont" id=10]
+[sub_resource type="StyleBoxTexture" id=10]
+
+[sub_resource type="DynamicFont" id=7]
 font_data = ExtResource( 3 )
 
-[sub_resource type="ButtonGroup" id=11]
+[sub_resource type="ButtonGroup" id=8]
 
-[sub_resource type="DynamicFont" id=12]
+[sub_resource type="DynamicFont" id=9]
 size = 32
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
@@ -63,14 +65,15 @@ masterSlider = NodePath("UI/TabContainer/Audio/AudioVbox/MasterVolume/MasterSlid
 musicSlider = NodePath("UI/TabContainer/Audio/AudioVbox/MusicVolume/MusicSlider")
 sfxSlider = NodePath("UI/TabContainer/Audio/AudioVbox/SFXVolume/SFXSlider")
 ambienceSlider = NodePath("UI/TabContainer/Audio/AudioVbox/AmbienceVolume/AmbienceSlider")
+uiSlider = NodePath("UI/TabContainer/Audio/AudioVbox/UserInterfaceVolume/UserInterfaceSlider")
 masterToggle = NodePath("UI/TabContainer/Audio/AudioVbox/MasterVolume/MasterSlider/MasterCheckbox")
 musicToggle = NodePath("UI/TabContainer/Audio/AudioVbox/MusicVolume/MusicSlider/MusicCheckbox")
 sfxToggle = NodePath("UI/TabContainer/Audio/AudioVbox/SFXVolume/SFXSlider/SFXCheckbox")
 ambienceToggle = NodePath("UI/TabContainer/Audio/AudioVbox/AmbienceVolume/AmbienceSlider/AmbienceCheckbox")
+uiToggle = NodePath("UI/TabContainer/Audio/AudioVbox/UserInterfaceVolume/UserInterfaceSlider/UserInterfaceCheckbox")
 fullscreenCheckbox = NodePath("UI/TabContainer/Graphics/GraphicsVbox/Fullscreen/FullscreenCheckBox")
 
 [node name="UI" type="Control" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 48.0
@@ -100,7 +103,6 @@ __meta__ = {
 }
 
 [node name="Audio" type="Tabs" parent="UI/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -126,9 +128,9 @@ __meta__ = {
 }
 
 [node name="AudioLabel" type="Label" parent="UI/TabContainer/Audio/AudioVbox"]
-margin_right = 155.0
+margin_right = 156.0
 margin_bottom = 30.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 1 )
 text = "Audio"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -136,9 +138,9 @@ __meta__ = {
 
 [node name="MasterVolume" type="Label" parent="UI/TabContainer/Audio/AudioVbox"]
 margin_top = 35.0
-margin_right = 155.0
+margin_right = 156.0
 margin_bottom = 50.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 2 )
 text = "Master Volume"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -156,9 +158,9 @@ margin_bottom = 23.5
 rect_scale = Vector2( 0.5, 0.5 )
 custom_icons/grabber_highlight = ExtResource( 1 )
 custom_icons/grabber = ExtResource( 1 )
-custom_styles/slider = SubResource( 6 )
-custom_styles/grabber_area_highlight = SubResource( 7 )
-custom_styles/grabber_area = SubResource( 8 )
+custom_styles/slider = SubResource( 3 )
+custom_styles/grabber_area_highlight = SubResource( 4 )
+custom_styles/grabber_area = SubResource( 5 )
 min_value = -80.0
 max_value = 6.0
 __meta__ = {
@@ -183,9 +185,9 @@ __meta__ = {
 
 [node name="MusicVolume" type="Label" parent="UI/TabContainer/Audio/AudioVbox"]
 margin_top = 55.0
-margin_right = 155.0
+margin_right = 156.0
 margin_bottom = 70.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 2 )
 text = "Music Volume"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -201,12 +203,12 @@ margin_top = -8.5
 margin_right = 311.945
 margin_bottom = 23.5
 rect_scale = Vector2( 0.5, 0.5 )
-custom_icons/tick = SubResource( 9 )
+custom_icons/tick = SubResource( 6 )
 custom_icons/grabber_highlight = ExtResource( 1 )
 custom_icons/grabber = ExtResource( 1 )
-custom_styles/slider = SubResource( 6 )
-custom_styles/grabber_area_highlight = SubResource( 7 )
-custom_styles/grabber_area = SubResource( 8 )
+custom_styles/slider = SubResource( 3 )
+custom_styles/grabber_area_highlight = SubResource( 4 )
+custom_styles/grabber_area = SubResource( 5 )
 min_value = -80.0
 max_value = 6.0
 __meta__ = {
@@ -231,9 +233,9 @@ __meta__ = {
 
 [node name="SFXVolume" type="Label" parent="UI/TabContainer/Audio/AudioVbox"]
 margin_top = 75.0
-margin_right = 155.0
+margin_right = 156.0
 margin_bottom = 90.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 2 )
 text = "Sound Effects Volume"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -251,9 +253,9 @@ margin_bottom = 23.5
 rect_scale = Vector2( 0.5, 0.5 )
 custom_icons/grabber_highlight = ExtResource( 1 )
 custom_icons/grabber = ExtResource( 1 )
-custom_styles/slider = SubResource( 6 )
-custom_styles/grabber_area_highlight = SubResource( 7 )
-custom_styles/grabber_area = SubResource( 8 )
+custom_styles/slider = SubResource( 3 )
+custom_styles/grabber_area_highlight = SubResource( 4 )
+custom_styles/grabber_area = SubResource( 5 )
 min_value = -80.0
 max_value = 6.0
 __meta__ = {
@@ -276,11 +278,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AmbienceVolume" type="Label" parent="UI/TabContainer/Audio/AudioVbox"]
+[node name="VSeparator" type="VSeparator" parent="UI/TabContainer/Audio/AudioVbox"]
 margin_top = 95.0
-margin_right = 155.0
-margin_bottom = 110.0
-custom_fonts/font = SubResource( 5 )
+margin_right = 156.0
+margin_bottom = 98.0
+custom_styles/separator = SubResource( 10 )
+
+[node name="AmbienceVolume" type="Label" parent="UI/TabContainer/Audio/AudioVbox"]
+margin_top = 103.0
+margin_right = 156.0
+margin_bottom = 118.0
+custom_fonts/font = SubResource( 2 )
 text = "Ambience Volume"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -298,9 +306,9 @@ margin_bottom = 23.5
 rect_scale = Vector2( 0.5, 0.5 )
 custom_icons/grabber_highlight = ExtResource( 1 )
 custom_icons/grabber = ExtResource( 1 )
-custom_styles/slider = SubResource( 6 )
-custom_styles/grabber_area_highlight = SubResource( 7 )
-custom_styles/grabber_area = SubResource( 8 )
+custom_styles/slider = SubResource( 3 )
+custom_styles/grabber_area_highlight = SubResource( 4 )
+custom_styles/grabber_area = SubResource( 5 )
 min_value = -80.0
 max_value = 6.0
 __meta__ = {
@@ -309,6 +317,53 @@ __meta__ = {
 }
 
 [node name="AmbienceCheckbox" type="CheckBox" parent="UI/TabContainer/Audio/AudioVbox/AmbienceVolume/AmbienceSlider"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 16.0
+margin_top = -19.599
+margin_right = 56.0
+margin_bottom = 21.401
+custom_icons/checked = ExtResource( 6 )
+custom_icons/unchecked = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UserInterfaceVolume" type="Label" parent="UI/TabContainer/Audio/AudioVbox"]
+margin_top = 123.0
+margin_right = 156.0
+margin_bottom = 138.0
+custom_fonts/font = SubResource( 2 )
+text = "User interface Volume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UserInterfaceSlider" type="HSlider" parent="UI/TabContainer/Audio/AudioVbox/UserInterfaceVolume"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 21.0
+margin_top = -8.5
+margin_right = 309.0
+margin_bottom = 23.5
+rect_scale = Vector2( 0.5, 0.5 )
+custom_icons/grabber_highlight = ExtResource( 1 )
+custom_icons/grabber = ExtResource( 1 )
+custom_styles/slider = SubResource( 3 )
+custom_styles/grabber_area_highlight = SubResource( 4 )
+custom_styles/grabber_area = SubResource( 5 )
+min_value = -80.0
+max_value = 6.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="UserInterfaceCheckbox" type="CheckBox" parent="UI/TabContainer/Audio/AudioVbox/UserInterfaceVolume/UserInterfaceSlider"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -335,6 +390,7 @@ tab_align = 0
 tab_close_display_policy = 2
 
 [node name="Graphics" type="Tabs" parent="UI/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -361,7 +417,7 @@ __meta__ = {
 [node name="GraphicsLabel" type="Label" parent="UI/TabContainer/Graphics/GraphicsVbox"]
 margin_right = 176.0
 margin_bottom = 30.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 1 )
 text = "Graphics"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -372,7 +428,7 @@ visible = false
 margin_top = 35.0
 margin_right = 176.0
 margin_bottom = 50.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 2 )
 text = "Quality"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -384,8 +440,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 88.0
 margin_bottom = 6.0
-custom_fonts/font = SubResource( 10 )
-group = SubResource( 11 )
+custom_fonts/font = SubResource( 7 )
+group = SubResource( 8 )
 text = "Graphics"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -396,7 +452,7 @@ visible = false
 margin_top = 50.0
 margin_right = 176.0
 margin_bottom = 65.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 2 )
 text = "Resolution"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -410,7 +466,7 @@ margin_left = -0.445435
 margin_top = 0.445435
 margin_right = 102.555
 margin_bottom = 6.44543
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 7 )
 text = "Resolution"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -420,7 +476,7 @@ __meta__ = {
 margin_top = 35.0
 margin_right = 176.0
 margin_bottom = 50.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 2 )
 text = "FullSCreen"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -468,9 +524,10 @@ tab_close_display_policy = 2
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 8.0
-margin_top = 64.0
-margin_bottom = 28.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
 tab_align = 0
 tab_close_display_policy = 2
 
@@ -487,7 +544,7 @@ custom_styles/hover = ExtResource( 14 )
 custom_styles/pressed = ExtResource( 10 )
 custom_styles/disabled = ExtResource( 12 )
 custom_styles/normal = ExtResource( 11 )
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 9 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Reset"
 __meta__ = {
@@ -496,20 +553,21 @@ __meta__ = {
 
 [node name="BackButton" type="Button" parent="UI"]
 anchor_left = 0.971
-anchor_top = 0.152
+anchor_top = 0.121
 anchor_right = 0.971
-anchor_bottom = 0.152
-margin_left = -48.224
-margin_top = -0.128002
-margin_right = -4.224
-margin_bottom = 43.872
+anchor_bottom = 0.121
+margin_left = -48.2241
+margin_top = 0.0559978
+margin_right = -6.22406
+margin_bottom = 42.056
 custom_styles/hover = ExtResource( 14 )
 custom_styles/pressed = ExtResource( 10 )
 custom_styles/disabled = ExtResource( 12 )
 custom_styles/normal = ExtResource( 11 )
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 9 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 icon = ExtResource( 4 )
+expand_icon = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -522,5 +580,7 @@ __meta__ = {
 [connection signal="toggled" from="UI/TabContainer/Audio/AudioVbox/SFXVolume/SFXSlider/SFXCheckbox" to="." method="_on_SFXCheckbox_toggled"]
 [connection signal="value_changed" from="UI/TabContainer/Audio/AudioVbox/AmbienceVolume/AmbienceSlider" to="." method="_on_AmbienceSlider_value_changed"]
 [connection signal="toggled" from="UI/TabContainer/Audio/AudioVbox/AmbienceVolume/AmbienceSlider/AmbienceCheckbox" to="." method="_on_AmbienceCheckbox_toggled"]
+[connection signal="value_changed" from="UI/TabContainer/Audio/AudioVbox/UserInterfaceVolume/UserInterfaceSlider" to="." method="_on_UserInterfaceSlider_value_changed"]
+[connection signal="toggled" from="UI/TabContainer/Audio/AudioVbox/UserInterfaceVolume/UserInterfaceSlider/UserInterfaceCheckbox" to="." method="_on_UserInterfaceCheckbox_toggled"]
 [connection signal="toggled" from="UI/TabContainer/Graphics/GraphicsVbox/Fullscreen/FullscreenCheckBox" to="." method="_on_FullScreenCheckBox_toggled"]
 [connection signal="pressed" from="UI/Reset" to="." method="_on_Reset_pressed"]

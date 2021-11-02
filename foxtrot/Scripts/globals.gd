@@ -5,10 +5,12 @@ const VOLUME_MASTER         = "masterVolume"
 const VOLUME_MUSIC          = "musicVolume"
 const VOLUME_SFX            = "sfxVolume"
 const VOLUME_AMBIENCE       = "ambienceVolume"
+const VOLUME_UI             = "userInterfaceVolume"
 const VOLUME_MASTER_TOGGLE  = "masterVolumeToggle"
 const VOLUME_MUSIC_TOGGLE   = "musicVolumeToggle"
 const VOLUME_SFX_TOGGLE     = "sfxVolumeToggle"
 const VOLUME_AMBIENCE_TOGGLE= "ambienceVolumeToggle"
+const VOLUME_UI_TOGGLE      = "userInterfaceVolumeToggle"
 
 # Define save constants
 const PLAYER_DIFFICULTY   = "playerDifficulty"

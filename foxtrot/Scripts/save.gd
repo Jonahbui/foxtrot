@@ -33,14 +33,16 @@ var config = null
 func create_config(default=false):
   # To add new elements to config, add here below. Define constants in globals:
   var new_config = {
-    Globals.VOLUME_MASTER     : config[Globals.VOLUME_MASTER] if not default else 0.0,
-    Globals.VOLUME_MUSIC      : config[Globals.VOLUME_MUSIC] if not default else 0.0,
-    Globals.VOLUME_SFX        : config[Globals.VOLUME_SFX] if not default else 0.0,
-    Globals.VOLUME_AMBIENCE   : config[Globals.VOLUME_AMBIENCE] if not default else 0.0,    
+    Globals.VOLUME_MASTER           : config[Globals.VOLUME_MASTER] if not default else 0.0,
+    Globals.VOLUME_MUSIC            : config[Globals.VOLUME_MUSIC] if not default else 0.0,
+    Globals.VOLUME_SFX              : config[Globals.VOLUME_SFX] if not default else 0.0,
+    Globals.VOLUME_AMBIENCE         : config[Globals.VOLUME_AMBIENCE] if not default else 0.0,    
+    Globals.VOLUME_UI               : config[Globals.VOLUME_UI] if not default else 0.0,    
     Globals.VOLUME_MASTER_TOGGLE    : config[Globals.VOLUME_MASTER_TOGGLE] if not default else false,
     Globals.VOLUME_MUSIC_TOGGLE     : config[Globals.VOLUME_MUSIC_TOGGLE] if not default else false,
     Globals.VOLUME_SFX_TOGGLE       : config[Globals.VOLUME_SFX_TOGGLE] if not default else false,
     Globals.VOLUME_AMBIENCE_TOGGLE  : config[Globals.VOLUME_AMBIENCE_TOGGLE] if not default else false,
+    Globals.VOLUME_UI_TOGGLE        : config[Globals.VOLUME_UI_TOGGLE] if not default else false,
       
     Globals.GRAPHICS_FULLSCREEN : config[Globals.GRAPHICS_FULLSCREEN] if not default else false
   }
@@ -69,6 +71,7 @@ func load_config():
   
   # Insert the data into the config (Do not set config equal to data. People may
   # insert their own values) dictionary.
+  config = create_config(true)
   for key in data.keys():
     if config.has(key): config[key] = data[key]
   
@@ -161,7 +164,7 @@ func load_file(filename):
   for key in save_data.keys():
     if save_data.has(key): save_data[key] = data[key]
   
-  print("\n[Save] Loading %s save file..." % [save_data[Globals.PLAYER_NAME]])
+  #print("\n[Save] Loading %s save file..." % [save_data[Globals.PLAYER_NAME]])
   return save_data
   
 func list_saves():
