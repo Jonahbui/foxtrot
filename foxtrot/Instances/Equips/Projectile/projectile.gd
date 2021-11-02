@@ -9,6 +9,10 @@ export(Vector2) var velocity = Vector2( 200.0, -400.0 )
 
 onready var particle_emitter = get_node_or_null("Particles2D")
 
+func _ready():
+  yield(get_tree().create_timer(8.0), "timeout")
+  queue_free()
+
 func _physics_process(delta):
   velocity.y += gravity * delta
   velocity = move_and_slide( velocity, Vector2.UP )
@@ -32,3 +36,5 @@ func SpawnParticles():
     
     particle_emitter.set_global_position(self.global_position)
     particle_emitter.emitting = true
+    yield(get_tree().create_timer(2.0), "timeout")
+    particle_emitter.queue_free()
