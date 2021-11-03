@@ -30,12 +30,12 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
-hotbar_hover = "res://Textures/UI/slot_submarine_hover.tres"
-hotbar_pressed = "res://Textures/UI/slot_submarine_pressed.tres"
-hotbar_normal = "res://Textures/UI/slot_submarine_normal.tres"
-hotbar_select_hover = "res://Textures/UI/slot_submarine_select_hover.tres"
-hotbar_select_pressed = "res://Textures/UI/slot_submarine_select_pressed.tres"
-hotbar_select_normal = "res://Textures/UI/slot_submarine_select_normal.tres"
+hotbar_hover = "res://Textures/UI/Slot/slot_submarine_hover.tres"
+hotbar_pressed = "res://Textures/UI/Slot/slot_submarine_pressed.tres"
+hotbar_normal = "res://Textures/UI/Slot/slot_submarine_normal.tres"
+hotbar_select_hover = "res://Textures/UI/Slot/slot_submarine_select_hover.tres"
+hotbar_select_pressed = "res://Textures/UI/Slot/slot_submarine_select_pressed.tres"
+hotbar_select_normal = "res://Textures/UI/Slot/slot_submarine_select_hover.tres"
 inventory_stash = NodePath("InventoryStash")
 hotbar_ui = NodePath("UI/Hotbar")
 inventory_ui = NodePath("UI/Inventory")
