@@ -1,8 +1,8 @@
 [gd_resource type="Theme" load_steps=4 format=2]
 
-[ext_resource path="res://Textures/UI/progressbar_bg_submarine.tres" type="StyleBox" id=1]
-[ext_resource path="res://Textures/UI/progressbar_fg_submarine.tres" type="StyleBox" id=2]
-[ext_resource path="res://Textures/UI/panel_submarine2.tres" type="StyleBox" id=3]
+[ext_resource path="res://Textures/UI/Progressbar/progressbar_bg_submarine.tres" type="StyleBox" id=1]
+[ext_resource path="res://Textures/UI/Progressbar/progressbar_fg_submarine.tres" type="StyleBox" id=2]
+[ext_resource path="res://Textures/UI/Panel/panel_submarine2.tres" type="StyleBox" id=3]
 
 [resource]
 LineEdit/colors/clear_button_color = Color( 0.88, 0.88, 0.88, 1 )

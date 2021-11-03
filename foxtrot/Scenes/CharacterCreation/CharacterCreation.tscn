@@ -1,15 +1,16 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Textures/UI/panel.tres" type="StyleBox" id=1]
+[ext_resource path="res://Textures/UI/Panel/panel.tres" type="StyleBox" id=1]
 [ext_resource path="res://Textures/SplashScreen/solid_white.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/CharacterCreation/character_creation.gd" type="Script" id=3]
 [ext_resource path="res://Fonts/thaelahfat_pure_16x.tres" type="DynamicFont" id=4]
-[ext_resource path="res://Textures/UI/button_normal.tres" type="StyleBox" id=5]
-[ext_resource path="res://Textures/UI/button_disabled.tres" type="StyleBox" id=6]
-[ext_resource path="res://Textures/UI/button_hover.tres" type="StyleBox" id=7]
-[ext_resource path="res://Textures/UI/button_pressed.tres" type="StyleBox" id=8]
-[ext_resource path="res://Textures/UI/input_normal.png" type="Texture" id=9]
-[ext_resource path="res://Textures/UI/input_icon_reset_normal.png" type="Texture" id=10]
+[ext_resource path="res://Textures/UI/Button/button_normal.tres" type="StyleBox" id=5]
+[ext_resource path="res://Textures/UI/Button/button_disabled.tres" type="StyleBox" id=6]
+[ext_resource path="res://Textures/UI/Button/button_hover.tres" type="StyleBox" id=7]
+[ext_resource path="res://Textures/UI/Button/button_pressed.tres" type="StyleBox" id=8]
+[ext_resource path="res://Textures/UI/Button/input_normal.png" type="Texture" id=9]
+[ext_resource path="res://Textures/UI/Button/input_icon_reset_normal.png" type="Texture" id=10]
+
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 9 )

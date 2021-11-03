@@ -10,5 +10,5 @@ func ChangeLevel(level_path):
   if get_tree().change_scene(level_path) != OK:
     print("[Helper] Error. Failed to change to %s" % [level_path])
 
-func NumbericKeysToInt():
+func NumericKeysToInt():
   pass

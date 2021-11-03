@@ -1,11 +1,11 @@
 [gd_resource type="Theme" load_steps=7 format=2]
 
-[ext_resource path="res://Textures/UI/slot_submarine_normal.tres" type="StyleBox" id=1]
-[ext_resource path="res://Textures/UI/slot_submarine_pressed.tres" type="StyleBox" id=2]
+[ext_resource path="res://Textures/UI/Slot/slot_submarine_normal.tres" type="StyleBox" id=1]
+[ext_resource path="res://Textures/UI/Slot/slot_submarine_pressed.tres" type="StyleBox" id=2]
 [ext_resource path="res://Fonts/thaelahfat_pure_16x.tres" type="DynamicFont" id=3]
-[ext_resource path="res://Textures/UI/slot_submarine_hover.tres" type="StyleBox" id=4]
-[ext_resource path="res://Textures/UI/slot_submarine_focus.tres" type="StyleBox" id=5]
-[ext_resource path="res://Textures/UI/panel_submarine.tres" type="StyleBox" id=6]
+[ext_resource path="res://Textures/UI/Slot/slot_submarine_hover.tres" type="StyleBox" id=4]
+[ext_resource path="res://Textures/UI/Slot/slot_submarine_focus.tres" type="StyleBox" id=5]
+[ext_resource path="res://Textures/UI/Panel/panel_submarine.tres" type="StyleBox" id=6]
 
 [resource]
 default_font = ExtResource( 3 )
