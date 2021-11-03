@@ -5,7 +5,6 @@ extends Node
 # A bool used to determine whether or not the player is allowed to interact with this script.
 var canInteract : bool = false
 
-
 signal interaction_triggered()
 
 func _input(event):
@@ -19,13 +18,12 @@ func Use():
   Signals.emit_signal("on_interaction_changed", false)
   self.emit_signal("interaction_triggered")
   
-func _on_InteractionCollider_body_entered(body):
+func _on_InteractionCollider_body_entered(_body):
   # If the player is in the body of the interactable entity, the player may interact with it
   canInteract = true
   Signals.emit_signal("on_interaction_changed", true)
 
-func _on_InteractionCollider_body_exited(body):
+func _on_InteractionCollider_body_exited(_body):
   # If the player leaves the body of the interactable entity, the player may interact with it 
   canInteract = false
   Signals.emit_signal("on_interaction_changed", false)  
-  Signals.emit_signal("interaction_zone_exited", false)

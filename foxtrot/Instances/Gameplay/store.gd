@@ -61,7 +61,7 @@ func InitializeStore():
 func _on_Interaction_body_entered(body):
   player = body
 
-func _on_Interaction_body_exited(body):
+func _on_Interaction_body_exited(_body):
   player = null
 # --------------------------------------------------------------------------------------------------
 # Store UI Functions
@@ -104,7 +104,7 @@ func _on_PurchaseButton_pressed():
   
   # Add item to the player inventory
   var subtype = Equips.equips[curr_purchase_item][Equips.EQUIP_SUBTYPE]
-  if Equips.equips[curr_purchase_item][Equips.EQUIP_SUBTYPE] == Equips.Subtype.stackable:
+  if subtype == Equips.Subtype.stackable:
     Signals.emit_signal("on_inventory_add_item_stack", curr_purchase_item, 1)
   else:
     Signals.emit_signal("on_inventory_add_item", curr_purchase_item)

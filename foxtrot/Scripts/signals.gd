@@ -36,7 +36,7 @@ signal on_dialogue_trigger(dialogue_id)
 # Inform the dialogue system that a dialogue has ended
 signal on_dialogue_exited()
 #--------------------------------------------------------------------------------------------------
-# Player Signals
+# Player/ Interaction Signals
 #--------------------------------------------------------------------------------------------------
 # Informs the player that they can or cannot interact with the object they have entered
 signal on_interaction_changed(state)

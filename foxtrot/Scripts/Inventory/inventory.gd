@@ -92,8 +92,10 @@ func _input(event):
     Globals.SetFlag(Globals.FLAG_INVENTORY, ui.visible)
 
 func _init():
-  Signals.connect("on_inventory_add_item", self, "AppendItem")
-  Signals.connect("on_inventory_add_item_stack", self, "AppendItemStack")
+  if Signals.connect("on_inventory_add_item", self, "AppendItem") != OK:
+    print("[Inventory] Error. Failed to connect to signal on_inventory_add_item...")
+  if Signals.connect("on_inventory_add_item_stack", self, "AppendItemStack") != OK:
+    print("[Inventory] Error. Failed to connect to signal on_inventory_add_item_stack...")
 
 func _ready():
   ToggleInventory(true, false)

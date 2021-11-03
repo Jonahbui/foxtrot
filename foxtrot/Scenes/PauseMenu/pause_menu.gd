@@ -1,7 +1,8 @@
 extends CanvasLayer
 
 func _init():
-  Signals.connect("on_game_saved", self, "TriggerSaveMessage")
+  if Signals.connect("on_game_saved", self, "TriggerSaveMessage") != OK:
+    print("[Pause Menu] Error. Failed to connect to signal on_game_save...")
 
 func _ready():
   # If the pause menu is visible, then inform the game that it's paused

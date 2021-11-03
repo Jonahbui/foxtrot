@@ -24,7 +24,8 @@ func _input(event):
 
 func _init():
   ReadDialogue()
-  Signals.connect("on_dialogue_trigger", self, "SetDialogueBox")
+  if Signals.connect("on_dialogue_trigger", self, "SetDialogueBox") != OK:
+    print("[Dialgoue] Error. Failed to connect to signal on_dialogue_trigger...")
 
 
 # --------------------------------------------------------------------------------------------------

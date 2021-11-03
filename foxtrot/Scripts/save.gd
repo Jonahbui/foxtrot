@@ -11,10 +11,13 @@ func _enter_tree():
 func _init():
   create_save_dir()
   
-  Signals.connect("on_player_loaded", self, "init_player")
-  Signals.connect("on_inventory_loaded", self, "init_inventory")
-  Signals.connect("on_base_game_loaded", self, "init_game")
-  
+  if Signals.connect("on_player_loaded", self, "init_player") != OK:
+    print("[Save] Error. Failed to connect to signal on_player_loaded...")
+  if Signals.connect("on_inventory_loaded", self, "init_inventory") != OK:
+    print("[Save] Error. Failed to connect to signal on_inventory_loaded...")
+  if Signals.connect("on_base_game_loaded", self, "init_game") != OK:
+    print("[Save] Error. Failed to connect tosignal on_base_game_loaded...")
+
 func _ready():
   save = empty_save_data()
   
@@ -84,9 +87,6 @@ func reset_config():
 #--------------------------------------------------------------------------------------------------
 # Save Functions
 #--------------------------------------------------------------------------------------------------
-
-# TA: Need to guard against save overwrite
-
 const FILENAME_DEFAULT_AUTO   = "autosave.save"
 const SAVE_ID = "id"
 const SAVE_CURR_STACK_AMT = "curr_stack_amt"
@@ -169,7 +169,7 @@ func load_file(filename):
   
 func list_saves():
   # Used to return the filenames of all player saves
-  var saves = []
+  var save_files = []
 
   # Search for a valid save directory
   var dir = Directory.new()
@@ -179,14 +179,14 @@ func list_saves():
     # Append each name in the save directory to the saves array
     var save_file = dir.get_next()
     while save_file != "":
-      saves.append(save_file)
+      save_files.append(save_file)
       save_file = dir.get_next()
     dir.list_dir_end()
   
   print("[Save] Loading save files...")
-  for save in saves:
+  for save in save_files:
     print("\t%s" % [save])
-  return saves
+  return save_files
       
 func create_save_dir():
   # Create a directory for save files if one is not present

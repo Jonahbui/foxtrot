@@ -3,7 +3,8 @@ extends "res://Node/interaction.gd"
 export var dialogue = ""
 
 func _init():
-  Signals.connect("on_dialogue_exited", self, "OnDialogueExit")
+  if Signals.connect("on_dialogue_exited", self, "OnDialogueExit") != OK:
+    print("[Dialogue Interaction] Error. Failed to connect to signal on_dialogue_exited...")
 
 func Use():
   # After the player has interacted with the entity associated with this script, toggle off the 
