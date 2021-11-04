@@ -205,7 +205,7 @@ func _on_CmdLine_text_changed(new_text):
   cmdline.caret_position = old_pos
 
 func OnDeath():
-  if Globals.isHardcoreMode:
+  if Globals.is_hardcore_mode:
     # Go back to main menu
     Helper.ChangeLevel(Globals.SPATH_MAIN_MENU)
     # Restart game

@@ -31,10 +31,10 @@ onready var mana_label = $Stats/UI/StatsVbox/Mana/ManaLabel
 # "gravity" is an acceleration:  it's that many units
 #   per second per second.  It's positive because "down" on the
 #   screen is the POSITIVE Y axis direction.
-var gravity  : = 3000.0
+var gravity  : = 100.0
 
 # speed.x is LEFT and RIGHT, speed.y is UP and DOWN.
-var speed    : = Vector2( 200.0, 800.0 )
+var speed    : = Vector2( 200.0, 150.0 )
 
 # "velocity" is how fast the player is moving along the X and Y
 #   axes at present.  (It starts at ZERO since the player is
@@ -53,14 +53,18 @@ func _input(event):
       $Sprite.scale.x = 1
     else:
       $Sprite.scale.x = -1
+
 func _init():
   if Signals.connect("on_interaction_changed", self, "ToggleInform") != OK:
     printerr("[Player] Error. Failed to connect to signal on_interaction_changed...")
+  if Signals.connect("on_level_loaded", self, "UpdateMovement") != OK:
+    printerr("[Player] Error. Failed to connect to signal on_level_loaded...")
 
 func _ready():
   self.charname = Save.save[Globals.PLAYER_NAME]
   RefreshStats()
   Signals.emit_signal("on_player_loaded", self)
+  UpdateMovement()
 
 func _physics_process(delta: float) -> void:
   # If the dev console is open then do not move.
@@ -109,7 +113,10 @@ func _physics_process(delta: float) -> void:
     #   frame.  "gravity" is units per second per second.
     #   Multiplying the two gives us the amount that our falling
     #   speed has increased since the last frame so we add it in.
-    velocity.y += gravity * delta
+    if Input.is_action_pressed("fall") :
+      velocity.y += gravity * delta + 20
+    else :
+      velocity.y += gravity * delta
   # --------------------------------------------------------------
   
   # Now that we know what our velocity is, we tell Godot to move
@@ -149,6 +156,14 @@ func TakeDamage(damage : int):
     # Disable player
     
     Signals.emit_signal("on_player_death")
+
+func UpdateMovement():
+  if Globals.is_in_spawn:
+    gravity  = 3000.0
+    speed    = Vector2( 200.0, 800.0 )
+  else:
+    gravity  = 100.0
+    speed    = Vector2( 200.0, 150.0 )
 # --------------------------------------------------------------------------------------------------
 # Player UI Functions
 # --------------------------------------------------------------------------------------------------
@@ -166,7 +181,7 @@ func RefreshStats():
 # Player Save Functions
 # --------------------------------------------------------------------------------------------------
 func RestorePlayerData(data):
-  Globals.isHardcoreMode = data[Globals.PLAYER_DIFFICULTY]
+  Globals.is_hardcore_mode = data[Globals.PLAYER_DIFFICULTY]
   self.health = int(data[Globals.PLAYER_HEALTH])
   self.mana   = int(data[Globals.PLAYER_MANA])
   self.charname = data[Globals.PLAYER_NAME]

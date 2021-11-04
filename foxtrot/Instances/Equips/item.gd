@@ -24,7 +24,7 @@ var velocity : = Vector2.ZERO
 var enable_gravity : = true
 
 func _input(event):
-  if Globals.pause_flags != 0 || Globals.isManagingInv: return
+  if Globals.pause_flags != 0 || Globals.is_managing_inventory: return
   
   if player_inv == null && player_body != null && event.is_action_pressed("interact"):
     # Need to check if player_body is not null because the player can possibly click and interact
@@ -46,7 +46,7 @@ func _ready():
     SetProcess(process, null)
 
 func _physics_process(delta: float) -> void:
-  if Globals.pause_flags != 0 || Globals.isManagingInv: return
+  if Globals.pause_flags != 0 || Globals.is_managing_inventory: return
   
   if enable_gravity:
     velocity.y += gravity * delta

@@ -3,7 +3,7 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
   # If the main menu is ever loaded, the game is not being played anymore
-  Globals.isGamePlaying = false
+  Globals.is_game_playing = false
   Globals.pause_flags = 0
   
   # Load all the save files so that they may be displayed to the user
@@ -12,7 +12,7 @@ func _ready():
 func _on_NewGameButton_pressed():
   $MainMenu/UI/ModePopup.visible = true
   Save.reset_save()
-  Globals.isNewGame = true
+  Globals.is_new_game = true
   
 func _on_LoadGameButton_pressed():
   $MainMenu/UI.hide()
@@ -52,11 +52,11 @@ func _on_CreditsBackButton_pressed():
   $Credits/UI.hide()
 
 func _on_HardcoreButton_pressed():
-  Globals.isHardcoreMode = true
+  Globals.is_hardcore_mode = true
   StartNewGame()
 
 func _on_CasualButton_pressed():
-  Globals.isHardcoreMode = false
+  Globals.is_hardcore_mode = false
   StartNewGame()
   
 func _on_BackButton_pressed():
@@ -70,8 +70,8 @@ func _on_BackButton_pressed():
   $MainMenu/UI.show()
 
 func StartNewGame():
-  Globals.isGamePlaying = true
-  Globals.isNewGame = true
+  Globals.is_game_playing = true
+  Globals.is_new_game = true
   if get_tree().change_scene(Globals.SPATH_CHARACTER_CREATION) != OK:
     printerr("[Main Menu] Error. Could not change scene from main menu to character creation...")
 
@@ -115,7 +115,7 @@ func CreateLoadPanels():
 func LoadFile(name):
   # Ensure the game is not a new game. If the game is a new game, then the save system will not load
   # the player data.
-  Globals.isNewGame = false
+  Globals.is_new_game = false
   
   # Sadly we store the name of the save file on the instnace of the load panel. However, a '.' is
   # not a valid character allowed in the name, so godot removes it. So instead we pass in just the

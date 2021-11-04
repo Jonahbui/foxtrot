@@ -25,8 +25,12 @@ signal on_play_audio(clip, source)
 # Inform the game when a level change request is sent
 signal on_change_base_level(level, location)
 
-# Signals that the base game has been fully loaded.
+# Signals that the base game has been fully loaded
 signal on_base_game_loaded()
+#--------------------------------------------------------------------------------------------------
+# Level Signals
+#--------------------------------------------------------------------------------------------------
+signal on_level_loaded()
 #--------------------------------------------------------------------------------------------------
 # Dialogue System Signals
 #--------------------------------------------------------------------------------------------------

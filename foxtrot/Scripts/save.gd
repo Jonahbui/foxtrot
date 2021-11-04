@@ -103,7 +103,7 @@ var inventory = null
 # Use player null to create default player save dictionary
 func create_save_data(reset_save=false):
   var data = {
-    Globals.PLAYER_DIFFICULTY : Globals.isGamePlaying,
+    Globals.PLAYER_DIFFICULTY : Globals.is_game_playing,
     Globals.PLAYER_INVENTORY  : inventory.InventoryToJSON() if not reset_save else {},
     Globals.PLAYER_NAME       : player.charname if not reset_save  else "default",
     Globals.PLAYER_HEALTH     : player.health if not reset_save  else 25,
@@ -213,7 +213,7 @@ func init_game():
   else:
     player.RestorePlayerData(self.save)
     
-    if Globals.isNewGame:
+    if Globals.is_new_game:
       player.ResetPlayer()
       
     player.RefreshStats()
@@ -224,6 +224,6 @@ func init_game():
     inventory.RestoreInventoryData(self.save[Globals.PLAYER_INVENTORY])
   
   # If the game is a new game, save the player file.
-  if Globals.isNewGame:
+  if Globals.is_new_game:
     Save.save_file()
-    Globals.isNewGame = false
+    Globals.is_new_game = false

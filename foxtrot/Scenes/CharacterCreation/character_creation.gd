@@ -28,6 +28,6 @@ func _on_CancelButton_pressed():
   $UI/PopupMenu.hide()
 
 func _on_BackButton_pressed():
-  Globals.isGamePlaying = false
+  Globals.is_game_playing = false
   if get_tree().change_scene(Globals.SPATH_MAIN_MENU) != OK:
     printerr("[Main Menu] Error. Could not load into main menu from character creation...")

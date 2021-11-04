@@ -471,11 +471,11 @@ func ResetSelection():
 
 func _on_Inventory_mouse_entered():
   isInventoryHover = true
-  Globals.isManagingInv = true
+  Globals.is_managing_inventory = true
 
 func _on_Inventory_mouse_exited():
   isInventoryHover = false
-  Globals.isManagingInv = false  
+  Globals.is_managing_inventory = false  
 
 func GetEquip(item):
   return Equips.equips[item.id]

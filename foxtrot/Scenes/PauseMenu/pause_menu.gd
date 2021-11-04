@@ -16,7 +16,7 @@ func _input(event):
     $UI.visible = result_state
     
     # Only show the save button if the player is in the spawn. Update when pause UI updates.
-    if Globals.isInSpawn:
+    if Globals.is_in_spawn:
       $UI/Background/ButtonVbox/SaveButton.visible = true
     else:
       $UI/Background/ButtonVbox/SaveButton.visible = false

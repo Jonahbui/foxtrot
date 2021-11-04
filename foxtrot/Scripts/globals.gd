@@ -55,11 +55,12 @@ const LEVEL_PATH = [
 # --------------------------------------------------------------------------------------------------
 # Gameplay Management
 # --------------------------------------------------------------------------------------------------
-var isInSpawn     : bool = false
-var isGamePlaying : bool = false
-var isNewGame     : bool = false
-var isHardcoreMode: bool = false
-var isManagingInv : bool = false
+var is_in_spawn           : bool = false
+var is_game_playing       : bool = false
+var is_new_game           : bool = false
+var is_hardcore_mode      : bool = false
+var is_managing_inventory : bool = false
+var is_in_water           : bool = false
 
 # Possible pause 'like' events that can occur
 const FLAG_DEV_OPEN = 1

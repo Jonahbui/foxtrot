@@ -5,12 +5,14 @@
 #    range in a separate array. The max range of an element is defined by the sum of the element and
 #    all the elements that came before it. The min range is the sum of the last element and all the
 #    elements before it. E.g. range = [x1, x1+x2, x1+x2+x3]
-# 2. Now generate a random number x_random from 0 to v_sum
-# 3. Search the range array from the beginning and find the first number xn that is greater than
+# 3. Now generate a random number x_random from 0 to v_sum
+# 4. Search the range array from the beginning and find the first number xn that is greater than
 #    x_random, and return the index if that number in the range array. That is the index of the
 #    loot that was chosen that you can find in the associated LOOT_ITEM array.
 #    E.g. x_random < x1
-#    Because x_random < x1, return 0 because [0 to x1, x1 to x1+x2]
+#    Because x_random < x1, return 0 because x1 is at index 0, and it's range is 0 to x1.
+
+# There are 2 tables for loot. One for the enemies and one for the levels (mainly used by chests).
 extends Node
 
 const COIN_PATH = "res://Instances/Gameplay/Coin.tscn"
