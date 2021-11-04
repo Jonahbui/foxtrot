@@ -31,7 +31,7 @@ func ReadEquips():
   # Check for file existance before reading
   var file = File.new()
   if not file.file_exists("res://Scripts/Inventory/%s" % [FILENAME_EQUIPS]): 
-    print("[Equips] Error. Equips file does not exist...")
+    printerr("[Equips] Error. Equips file does not exist...")
     return null
   
   # Read in the loot file
@@ -39,7 +39,7 @@ func ReadEquips():
   var text = file.get_as_text()
   var data = parse_json(text)
   if data == null: 
-    print("[Equips] Error. Could not parse data...")
+    printerr("[Equips] Error. Could not parse data...")
     return null
   
   for key in data:

@@ -12,11 +12,11 @@ func _init():
   create_save_dir()
   
   if Signals.connect("on_player_loaded", self, "init_player") != OK:
-    print("[Save] Error. Failed to connect to signal on_player_loaded...")
+    printerr("[Save] Error. Failed to connect to signal on_player_loaded...")
   if Signals.connect("on_inventory_loaded", self, "init_inventory") != OK:
-    print("[Save] Error. Failed to connect to signal on_inventory_loaded...")
+    printerr("[Save] Error. Failed to connect to signal on_inventory_loaded...")
   if Signals.connect("on_base_game_loaded", self, "init_game") != OK:
-    print("[Save] Error. Failed to connect tosignal on_base_game_loaded...")
+    printerr("[Save] Error. Failed to connect tosignal on_base_game_loaded...")
 
 func _ready():
   save = empty_save_data()
@@ -147,7 +147,7 @@ func load_file(filename):
   # Check for file existance before reading
   var file = File.new()
   if not file.file_exists("user://saves/%s" % [filename]): 
-    print("[Save] Error. File %s not found..." % [filename])
+    printerr("[Save] Error. File %s not found..." % [filename])
     return null
   
   # Read in the save file
@@ -155,7 +155,7 @@ func load_file(filename):
   var line = file.get_line()
   var data = parse_json(line)
   if data == null: 
-    print("[Save] Error. No data found for file %s..." % [filename])
+    printerr("[Save] Error. No data found for file %s..." % [filename])
     return null
   
   # Insert the data into the save (Do not set config equal to data. People may
@@ -209,7 +209,7 @@ func init_inventory(inventory):
 func init_game():
   # Restore the player inventory and player stats
   if player == null:
-    print("[Save] Error. Failed to restore player stats...")
+    printerr("[Save] Error. Failed to restore player stats...")
   else:
     player.RestorePlayerData(self.save)
     
@@ -219,7 +219,7 @@ func init_game():
     player.RefreshStats()
     
   if inventory == null:
-    print("[Save] Error. Failed to restore player inventory...")
+    printerr("[Save] Error. Failed to restore player inventory...")
   else:
     inventory.RestoreInventoryData(self.save[Globals.PLAYER_INVENTORY])
   

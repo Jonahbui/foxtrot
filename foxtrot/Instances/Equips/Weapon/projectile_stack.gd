@@ -8,7 +8,7 @@ export(bool) var is_automatic = false
 export(String, FILE) var projectile
 
 func _ready():
-  if projectile == null: print("[ProjectileStack] Could not find projectile to spawn. Was it assigned?")
+  if projectile == null: printerr("[ProjectileStack] Could not find projectile to spawn. Was it assigned?...")
   projectile = load(projectile)
 
 func _process_input(event):
@@ -64,7 +64,7 @@ func Use():
     if player_inv.RemoveItem(self) == OK:
       self.queue_free()
     else:
-      print("[ItemStack] Error. Failed to remove item from player inventory.")
+      printerr("[ItemStack] Error. Failed to remove item from player inventory...")
 
 # Note to self: instantiating an instance is not enough. You must also set a
 # parent for it or else it won't appear in the scene.

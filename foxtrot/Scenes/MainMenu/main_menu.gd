@@ -73,7 +73,7 @@ func StartNewGame():
   Globals.isGamePlaying = true
   Globals.isNewGame = true
   if get_tree().change_scene(Globals.SPATH_CHARACTER_CREATION) != OK:
-    print("[Main Menu] Error. Could not change scene from main menu to character creation...")
+    printerr("[Main Menu] Error. Could not change scene from main menu to character creation...")
 
 #--------------------------------------------------------------------------------------------------
 # Load Game Functions

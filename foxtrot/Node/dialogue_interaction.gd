@@ -4,7 +4,7 @@ export var dialogue = ""
 
 func _init():
   if Signals.connect("on_dialogue_exited", self, "OnDialogueExit") != OK:
-    print("[Dialogue Interaction] Error. Failed to connect to signal on_dialogue_exited...")
+    printerr("[Dialogue Interaction] Error. Failed to connect to signal on_dialogue_exited...")
 
 func Use():
   # After the player has interacted with the entity associated with this script, toggle off the 

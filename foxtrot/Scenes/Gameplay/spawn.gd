@@ -1,4 +1,4 @@
-extends "res://Scenes/level.gd"
+extends "res://Instances/level.gd"
 
 func _enter_tree():
   Globals.isInSpawn = true

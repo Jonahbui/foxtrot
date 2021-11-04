@@ -55,7 +55,7 @@ func _input(event):
       $Sprite.scale.x = -1
 func _init():
   if Signals.connect("on_interaction_changed", self, "ToggleInform") != OK:
-    print("[Player] Error. Failed to connect to signal on_interaction_changed...")
+    printerr("[Player] Error. Failed to connect to signal on_interaction_changed...")
 
 func _ready():
   self.charname = Save.save[Globals.PLAYER_NAME]

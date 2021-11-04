@@ -56,7 +56,7 @@ func InitializeStore():
       Equips.Type.accessory:
         accessory_container.add_child(instance)
       _:
-        print("[Store] Error. Could not match item...")
+        printerr("[Store] Error. Could not match item...")
 
 func _on_Interaction_body_entered(body):
   player = body

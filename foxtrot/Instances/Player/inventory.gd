@@ -93,9 +93,9 @@ func _input(event):
 
 func _init():
   if Signals.connect("on_inventory_add_item", self, "AppendItem") != OK:
-    print("[Inventory] Error. Failed to connect to signal on_inventory_add_item...")
+    printerr("[Inventory] Error. Failed to connect to signal on_inventory_add_item...")
   if Signals.connect("on_inventory_add_item_stack", self, "AppendItemStack") != OK:
-    print("[Inventory] Error. Failed to connect to signal on_inventory_add_item_stack...")
+    printerr("[Inventory] Error. Failed to connect to signal on_inventory_add_item_stack...")
 
 func _ready():
   ToggleInventory(true, false)

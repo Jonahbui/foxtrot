@@ -2,7 +2,7 @@ extends CanvasLayer
 
 func _init():
   if Signals.connect("on_game_saved", self, "TriggerSaveMessage") != OK:
-    print("[Pause Menu] Error. Failed to connect to signal on_game_save...")
+    printerr("[Pause Menu] Error. Failed to connect to signal on_game_save...")
 
 func _ready():
   # If the pause menu is visible, then inform the game that it's paused
@@ -44,7 +44,7 @@ func _on_MainMenuButton_pressed():
   
   # Switch to main menu
   if get_tree().change_scene(Globals.SPATH_MAIN_MENU) != OK:
-    print("[Scene] Failed to change scenes...")
+    printerr("[Scene] Error. Failed to change scenes...")
 
 func _on_ExitButton_pressed():
   get_tree().quit()

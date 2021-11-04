@@ -30,14 +30,14 @@ func _ready():
   
   print()
   if Signals.connect("on_player_death", self, "OnDeath") != OK:
-    print("[Base] Error. Failed to connect to signal on_player_death...")
+    printerr("[Base] Error. Failed to connect to signal on_player_death...")
   
   if Signals.connect("on_play_audio", self, "PlayAudio") != OK:
-    print("[Base] Error. Failed to connect to signal on_play_audio...")
+    printerr("[Base] Error. Failed to connect to signal on_play_audio...")
     
 
   if Signals.connect("on_change_base_level", self, "LoadLevel") != OK:
-    print("[Base] Error. Failed to connect to signal on_change_base_level...")
+    printerr("[Base] Error. Failed to connect to signal on_change_base_level...")
     
 func ToggleDevConsole():
   # Set the current visibility to the opposite of the current visibility
@@ -66,16 +66,7 @@ func PlayAudio(clip, source):
         $Audio/UIStream.stream = audio    
         $Audio/UIStream.play()
   else:
-    print("[Base] Error. Could not play \"%s\"" % [clip])
-  
-func PlaySfx(clip):
-  var audio = load(clip)
-    
-  if audio:
-    $Audio/SFXStream.stream = audio
-    $Audio/SFXStream.play()
-  else:
-    print("[Base] Error. Could not play \"%s\"" % [clip])
+    printerr("[Base] Error. Could not play \"%s\"" % [clip])
 
 func LoadLevel(path, location=""):
   ToggleLoadingScreen(true)

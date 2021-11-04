@@ -36,7 +36,7 @@ func ReadLootTable():
   # Check for file existance before reading
   var file = File.new()
   if not file.file_exists("res://Scripts/Loot/%s" % [FILENAME_LOOT]): 
-    print("[Loot] Error. Loot file does not exist...")
+    printerr("[Loot] Error. Loot file does not exist...")
     return null
   
   # Read in the loot file
@@ -44,7 +44,7 @@ func ReadLootTable():
   var text = file.get_as_text()
   var data = parse_json(text)
   if data == null: 
-    print("[Loot] Error. Could not parse data...")
+    printerr("[Loot] Error. Could not parse data...")
     return null
     
   print("\n[Loot] Loading loot table...")

@@ -23,7 +23,7 @@ func Use():
       if player_inv.RemoveItem(self) == OK:
         self.queue_free()
       else:
-        print("[ItemStack] Error. Failed to remove item from player inventory.")
+        printerr("[ItemStack] Error. Failed to remove item from player inventory...")
 
 func AddToStack(amount):
   # Add amount to stack 

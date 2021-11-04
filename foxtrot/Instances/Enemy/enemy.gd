@@ -55,7 +55,6 @@ func TakeDamage(body):
     self.get_node_or_null("/root/Base/Level/Items/").add_child(loot)
     loot.SetProcess(Globals.ItemProcess.World, null)
     loot.set_global_position(self.get_global_transform().get_origin())
-    print(loot.get_path())
     
     self.queue_free()
 

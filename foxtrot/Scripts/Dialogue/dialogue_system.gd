@@ -25,7 +25,7 @@ func _input(event):
 func _init():
   ReadDialogue()
   if Signals.connect("on_dialogue_trigger", self, "SetDialogueBox") != OK:
-    print("[Dialgoue] Error. Failed to connect to signal on_dialogue_trigger...")
+    printerr("[Dialgoue] Error. Failed to connect to signal on_dialogue_trigger...")
 
 
 # --------------------------------------------------------------------------------------------------
@@ -36,7 +36,7 @@ func ReadDialogue():
   # Check for file existance before reading
   var file = File.new()
   if not file.file_exists("res://Scripts/DialogueSystem/%s" % [FILENAME_DIALOGUE_EN]): 
-    print("[Dialogue System] Dialogue file does not exist. Aborting...")
+    printerr("[Dialogue System] Dialogue file does not exist. Aborting...")
     return null
   
   # Read in the config file
