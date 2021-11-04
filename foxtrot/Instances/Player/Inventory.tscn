@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Fonts/thaelahfat_pure_16x.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Textures/UI/Panel/panel_submarine2.tres" type="StyleBox" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://Textures/Gameplay/Collectables/white_seashell.png" type="Texture" id=15]
 [ext_resource path="res://Textures/Gameplay/Abilities/empty_ability.png" type="Texture" id=16]
 [ext_resource path="res://Textures/UI/Panel/panel_submarine3.tres" type="StyleBox" id=17]
+[ext_resource path="res://Instances/Player/stats.gd" type="Script" id=18]
 
 [node name="Inventory" type="Control"]
 anchor_right = 1.0
@@ -2605,6 +2606,7 @@ __meta__ = {
 margin_right = 256.0
 margin_bottom = 360.0
 mouse_filter = 2
+script = ExtResource( 18 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

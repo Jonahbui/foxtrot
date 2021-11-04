@@ -121,8 +121,8 @@ func empty_save_data():
     Globals.PLAYER_INVENTORY  : {},
     Globals.PLAYER_NAME       : "",
     Globals.PLAYER_HEALTH     : 25,
-    Globals.PLAYER_MANA       : 0,
-    Globals.PLAYER_MONEY      : 25
+    Globals.PLAYER_MANA       : 25,
+    Globals.PLAYER_MONEY      : 0
   }
   return data
 

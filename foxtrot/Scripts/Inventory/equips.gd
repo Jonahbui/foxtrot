@@ -34,7 +34,7 @@ func ReadEquips():
     print("[Equips] Error. Equips file does not exist...")
     return null
   
-  # Read in the config file
+  # Read in the loot file
   file.open("res://Scripts/Inventory/%s" % [FILENAME_EQUIPS], File.READ)
   var text = file.get_as_text()
   var data = parse_json(text)

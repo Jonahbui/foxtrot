@@ -51,6 +51,7 @@ collision_layer = 4
 collision_mask = 129
 script = ExtResource( 2 )
 health = 10
+loot_string = "piranha"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -64,7 +65,7 @@ physics_process_parent = true
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 9 )
 animation = "swim"
-frame = 4
+frame = 3
 playing = true
 
 [node name="DamageDetector" type="Area2D" parent="."]

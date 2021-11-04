@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Textures/Gameplay/dev_tiles.tres" type="TileSet" id=1]
 [ext_resource path="res://Node/ChangeLevelInteraction.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Textures/Gameplay/Spawn/yellow_submarine.png" type="Texture" id=3]
 [ext_resource path="res://Textures/Gameplay/Levels/submarine_resurface.png" type="Texture" id=4]
 [ext_resource path="res://Instances/Enemy/Piranha.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Instances/Gameplay/Chest.tscn" type="PackedScene" id=6]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends \"res://Node/interaction.gd\"
@@ -69,6 +70,12 @@ level = "res://Scenes/Gameplay/Spawn.tscn"
 
 [node name="CollisionShape2D" parent="Sprites/SubmarineResurface/ChangeLevelInteraction" index="0"]
 shape = SubResource( 3 )
+
+[node name="Treasure" type="Node" parent="."]
+
+[node name="Chest" parent="Treasure" instance=ExtResource( 6 )]
+position = Vector2( 1344.33, 196.005 )
+loot_string = "seafloor"
 
 [editable path="Sprites/YellowSubmarine/ChangeLevelInteraction"]
 [editable path="Sprites/SubmarineResurface/ChangeLevelInteraction"]

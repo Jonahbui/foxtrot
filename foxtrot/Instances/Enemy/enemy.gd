@@ -13,6 +13,8 @@ onready var player = get_node("/root/Base/Player")
 var direction = Vector2.ZERO
 var knockback_velocity = Vector2.ZERO
 
+export(String) var loot_string
+
 func _physics_process(delta):
   if Globals.pause_flags != 0 : return
   
@@ -47,6 +49,13 @@ func TakeDamage(body):
   # Case of death
   if health <= 0:
     # Play death animation and other crap here
+    
+    # Drop the item
+    var loot = Loot.GenerateLoot(Loot.table[Loot.LOOT_ENEMY][loot_string])
+    self.get_node_or_null("/root/Base/Level/Items/").add_child(loot)
+    loot.SetProcess(Globals.ItemProcess.World, null)
+    loot.set_global_position(self.get_global_transform().get_origin())
+    print(loot.get_path())
     
     self.queue_free()
 

@@ -101,6 +101,7 @@ func _on_PurchaseButton_pressed():
   
   # Subtract the money from the player if sufficient
   player.money -= abs(int(Equips.equips[curr_purchase_item][Equips.EQUIP_PRICE]))
+  Signals.emit_signal("on_money_update")
   
   # Add item to the player inventory
   var subtype = Equips.equips[curr_purchase_item][Equips.EQUIP_SUBTYPE]

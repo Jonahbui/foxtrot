@@ -38,6 +38,7 @@ Globals="*res://Scripts/globals.gd"
 Equips="*res://Scripts/Inventory/equips.gd"
 Helper="*res://Scripts/helper.gd"
 Audio="*res://Scripts/audio.gd"
+Loot="*res://Scripts/Loot/loot.gd"
 
 [display]
 

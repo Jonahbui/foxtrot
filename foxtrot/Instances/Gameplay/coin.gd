@@ -1,7 +1,9 @@
-extends Sprite
+extends "res://Instances/Equips/item.gd"
 
-var amount : int = 1
+export var value : int = 1
 
 func _on_CoinCollider_body_entered(body):
-  body.money += amount
+  print("[Coin] Adding %d to player wallet [%d]" % [value , body.money])
+  body.money += value
+  Signals.emit_signal("on_money_update")
   queue_free()
