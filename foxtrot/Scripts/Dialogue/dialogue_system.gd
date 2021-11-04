@@ -35,12 +35,12 @@ func ReadDialogue():
   print("\n[Dialogue System] Loading dialogue...")
   # Check for file existance before reading
   var file = File.new()
-  if not file.file_exists("res://Scripts/DialogueSystem/%s" % [FILENAME_DIALOGUE_EN]): 
+  if not file.file_exists("res://Scripts/Dialogue/%s" % [FILENAME_DIALOGUE_EN]): 
     printerr("[Dialogue System] Dialogue file does not exist. Aborting...")
     return null
   
   # Read in the config file
-  file.open("res://Scripts/DialogueSystem/%s" % [FILENAME_DIALOGUE_EN], File.READ)
+  file.open("res://Scripts/Dialogue/%s" % [FILENAME_DIALOGUE_EN], File.READ)
   var text = file.get_as_text()
   var data = parse_json(text)
   if data == null: 

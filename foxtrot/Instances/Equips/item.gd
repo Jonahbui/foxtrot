@@ -55,7 +55,6 @@ func _physics_process(delta: float) -> void:
   if player_inv != null:
     look_at(get_global_mouse_position())
 
-
 func Use():
   pass
   

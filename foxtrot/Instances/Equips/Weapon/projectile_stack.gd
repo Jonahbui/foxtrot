@@ -55,6 +55,9 @@ func Use():
   # Calculate the trajector of the projectile
   var direction = (get_global_mouse_position() - self.get_global_transform().get_origin()).normalized()
   
+  # Need to make it work with controller
+  # Vector2(Input.get_joy_axis(0, JOY_ANALOG_RX), Input.get_joy_axis(0, JOY_ANALOG_RY)).normalized()
+  
   instance.SetProjectileDirection(direction)
   instance.set_global_position(self.global_position)
   player.get_parent().add_child(instance)
