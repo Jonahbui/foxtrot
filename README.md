@@ -1,6 +1,6 @@
-# Project Foxtrot
+# Project Foxtrot / Below Zero
 ## Description
-TBA
+Below Zero is an aquatic run-and-gun dungeon splunking game. Fight the creatures of the deep and powerful foes that were thought to be fictional. Challenge the god of the sea, the owner of Davey Jone's locker, and much more... when we add it... with powerful weapons and shield yourself with ancient armor. You can choose to play on hardcore or casual to cater to your playstyle! However, if you die on hardcore, you won't be able to play again... 
 
 ## Installation
 To install development build, simply import project into Godot.
