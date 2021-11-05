@@ -10,12 +10,11 @@ export var maxHealth : int = 100
 export var health : int = 100
 export var mana   : int = 100
 export var money  : int = 0
-var damageMultiplier = 1.0
-
+var damage_multiplier = 1.0
+var defense : int  = 0
 # --------------------------------------------------------------------------------------------------
 # Player Management Vars
 # --------------------------------------------------------------------------------------------------
-var inWater = false
 var direction : = Vector2(1,0)
 
 # Forward is defined to be right

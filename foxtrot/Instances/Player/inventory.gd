@@ -16,14 +16,10 @@ const ARMOR_SLOT_ID = SLOT_COUNT - ARMOR_SLOTS
 # Variables
 # --------------------------------------------------------------------------------------------------
 # Textures to change to if a hotbar is not selected
-export(String, FILE) var hotbar_hover
-export(String, FILE) var hotbar_pressed
-export(String, FILE) var hotbar_normal
+export(String, FILE) var slot_theme
 
 # Textures to change to if a hotbar is selected
-export(String, FILE) var hotbar_select_hover
-export(String, FILE) var hotbar_select_pressed
-export(String, FILE) var hotbar_select_normal
+export(String, FILE) var slot_select_theme
 
 # Node references
 export(NodePath) onready var inventory_stash
@@ -100,14 +96,8 @@ func _init():
 func _ready():
   ToggleInventory(true, false)
 
-  # Load the textures for the hotbar
-  hotbar_hover    = load(hotbar_hover)
-  hotbar_pressed  = load(hotbar_pressed)
-  hotbar_normal   = load(hotbar_normal)
-
-  hotbar_select_hover   = load(hotbar_select_hover)
-  hotbar_select_pressed = load(hotbar_select_pressed)
-  hotbar_select_normal  = load(hotbar_select_normal)
+  slot_theme = load(slot_theme)
+  slot_select_theme = load(slot_select_theme)
 
   # Load references for the nodes
   inventory_stash = get_node_or_null(inventory_stash)
@@ -221,7 +211,7 @@ func CreateItem(item_to_add):
     item.id = item_to_add
 
   return item
-  
+
 func DropCurrentItem():
   DropItemFromSlot(curr_slot_id)
 
@@ -264,6 +254,12 @@ func FindStackSlot(item_id, amount):
       return i
   return -1
 
+func InitializeInventory():
+  # Add all the slots to put equips into 
+  ## Establish the inventory array to be the size of the number of slots available
+  for i in range(0, SLOT_COUNT):
+    inventory[i] = null
+
 func RemoveItem(item):
   for i in range(0, slots.size()):
     if inventory[i] == item:
@@ -278,12 +274,25 @@ func RemoveItemFromSlot(slot_id):
   inventory[slot_id] = null
   RefreshInventorySlot(slot_id)
 
-func InitializeInventory():
-  # Add all the slots to put equips into 
-  ## Establish the inventory array to be the size of the number of slots available
-  for i in range(0, SLOT_COUNT):
-    inventory[i] = null
-
+func SetActiveSlot(active_slot_id : int, prev_slot_id : int, ignoreSound=false):
+  if not ignoreSound: Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/bubbles_1.wav", 3)
+  if active_slot_id == prev_slot_id: return
+  
+  curr_slot_id = active_slot_id
+  
+  var prev_slot = slots[prev_slot_id]
+  prev_slot.set_theme(slot_theme)
+  if inventory[prev_slot_id] != null:
+    Helper.SetActive(inventory[prev_slot_id], false)
+  
+  var curr_slot = slots[active_slot_id]
+  curr_slot.set_theme(slot_select_theme)
+  if inventory[active_slot_id] != null:
+    Helper.SetActive(inventory[active_slot_id], true)
+    #propagate_call("update")
+  # If item is type weapon.
+  # If item is type defense update player defense
+  # If item is
 # --------------------------------------------------------------------------------------------------
 # Inventory UI Functions
 # --------------------------------------------------------------------------------------------------
@@ -321,29 +330,9 @@ func GetNextSlot(moveForward=true):
   
   SetActiveSlot(new_slot_id, prev_slot_id)
 
-func SetActiveSlot(active_slot_id : int, prev_slot_id : int, ignoreSound=false):
-  if not ignoreSound: Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/bubbles_1.wav", 3)
-  if active_slot_id == prev_slot_id: return
-  
-  curr_slot_id = active_slot_id
-  
-  var prev_slot = slots[prev_slot_id]
-  prev_slot.set("custom_styles/hover", hotbar_hover)
-  prev_slot.set("custom_styles/pressed", hotbar_pressed)
-  prev_slot.set("custom_styles/normal", hotbar_normal)
-  if inventory[prev_slot_id] != null:
-    Helper.SetActive(inventory[prev_slot_id], false)
-  
-  var curr_slot = slots[active_slot_id]
-  curr_slot.set("custom_styles/hover", hotbar_select_hover)
-  curr_slot.set("custom_styles/pressed", hotbar_select_pressed)
-  curr_slot.set("custom_styles/normal", hotbar_select_normal)
-  if inventory[active_slot_id] != null:
-    Helper.SetActive(inventory[active_slot_id], true)
-  
 func IsSelectedHotbar(slot_num):
   return slot_num == curr_slot_id
-  
+
 func RefreshInventorySlots(refreshSlots):
   # Expects an array
   # Loop through all the slots and update their textures
@@ -353,7 +342,7 @@ func RefreshInventorySlots(refreshSlots):
   else:
     for slot in refreshSlots:
       RefreshInventorySlot(slot)
-    
+
 func RefreshInventorySlot(slot_num : int):
   # Get the Texture2D that displays the item
   var itemframe = slots[slot_num].get_node_or_null("CenterContainer/Item")

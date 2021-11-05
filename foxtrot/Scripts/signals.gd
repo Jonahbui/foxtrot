@@ -45,8 +45,14 @@ signal on_dialogue_exited()
 # Informs the player that they can or cannot interact with the object they have entered
 signal on_interaction_changed(state)
 
-# Informs game that the player's money has changed
+# Send this signal to notify that the player's money has changed in amount
 signal on_money_update()
+
+# Send this signal to signify the player's base damage has changed
+signal on_damage_update()
+
+# Send this signal to signify the player's defense has changed
+signal on_defense_update()
 #--------------------------------------------------------------------------------------------------
 # Save System Signals
 #--------------------------------------------------------------------------------------------------

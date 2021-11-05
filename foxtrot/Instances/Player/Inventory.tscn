@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Fonts/thaelahfat_pure_16x.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Textures/UI/Panel/panel_submarine2.tres" type="StyleBox" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://Textures/Gameplay/Abilities/empty_ability.png" type="Texture" id=16]
 [ext_resource path="res://Textures/UI/Panel/panel_submarine3.tres" type="StyleBox" id=17]
 [ext_resource path="res://Instances/Player/stats.gd" type="Script" id=18]
+[ext_resource path="res://Textures/UI/Slot/slot_submarine.tres" type="Theme" id=19]
 
 [node name="Inventory" type="Control"]
 anchor_right = 1.0
@@ -31,12 +32,8 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
-hotbar_hover = "res://Textures/UI/Slot/slot_submarine_hover.tres"
-hotbar_pressed = "res://Textures/UI/Slot/slot_submarine_pressed.tres"
-hotbar_normal = "res://Textures/UI/Slot/slot_submarine_normal.tres"
-hotbar_select_hover = "res://Textures/UI/Slot/slot_submarine_select_hover.tres"
-hotbar_select_pressed = "res://Textures/UI/Slot/slot_submarine_select_pressed.tres"
-hotbar_select_normal = "res://Textures/UI/Slot/slot_submarine_select_hover.tres"
+slot_theme = "res://Textures/UI/Slot/slot_submarine.tres"
+slot_select_theme = "res://Textures/UI/Slot/slot_submarine_select.tres"
 inventory_stash = NodePath("InventoryStash")
 hotbar_ui = NodePath("UI/Hotbar")
 inventory_ui = NodePath("UI/Inventory")
@@ -128,6 +125,7 @@ margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -197,6 +195,7 @@ margin_right = 32.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -267,6 +266,7 @@ margin_right = 32.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -337,6 +337,7 @@ margin_right = 32.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -423,6 +424,7 @@ margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -477,6 +479,7 @@ margin_right = 64.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -531,6 +534,7 @@ margin_right = 96.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -585,6 +589,7 @@ margin_right = 128.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -639,6 +644,7 @@ margin_right = 160.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -693,6 +699,7 @@ margin_right = 192.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -747,6 +754,7 @@ margin_right = 224.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -801,6 +809,7 @@ margin_right = 256.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -855,6 +864,7 @@ margin_right = 288.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -909,6 +919,7 @@ margin_right = 320.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -963,6 +974,7 @@ margin_right = 32.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1018,6 +1030,7 @@ margin_right = 64.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1073,6 +1086,7 @@ margin_right = 96.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1128,6 +1142,7 @@ margin_right = 128.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1183,6 +1198,7 @@ margin_right = 160.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1238,6 +1254,7 @@ margin_right = 192.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1293,6 +1310,7 @@ margin_right = 224.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1348,6 +1366,7 @@ margin_right = 256.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1403,6 +1422,7 @@ margin_right = 288.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1458,6 +1478,7 @@ margin_right = 320.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1512,6 +1533,7 @@ margin_right = 32.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1567,6 +1589,7 @@ margin_right = 64.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1622,6 +1645,7 @@ margin_right = 96.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1677,6 +1701,7 @@ margin_right = 128.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1732,6 +1757,7 @@ margin_right = 160.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1787,6 +1813,7 @@ margin_right = 192.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1842,6 +1869,7 @@ margin_right = 224.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1897,6 +1925,7 @@ margin_right = 256.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -1952,6 +1981,7 @@ margin_right = 288.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2007,6 +2037,7 @@ margin_right = 320.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2061,6 +2092,7 @@ margin_right = 32.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2116,6 +2148,7 @@ margin_right = 64.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2171,6 +2204,7 @@ margin_right = 96.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2226,6 +2260,7 @@ margin_right = 128.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2281,6 +2316,7 @@ margin_right = 160.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2336,6 +2372,7 @@ margin_right = 192.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2391,6 +2428,7 @@ margin_right = 224.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2446,6 +2484,7 @@ margin_right = 256.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2501,6 +2540,7 @@ margin_right = 288.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2556,6 +2596,7 @@ margin_right = 320.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2916,8 +2957,10 @@ margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+focus_neighbour_right = NodePath("../Slot2")
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -2987,8 +3030,11 @@ margin_right = 64.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
+focus_neighbour_left = NodePath("../Slot1")
+focus_neighbour_right = NodePath("../Slot3")
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -3061,6 +3107,7 @@ rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -3132,6 +3179,7 @@ rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -3203,6 +3251,7 @@ rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -3274,6 +3323,7 @@ rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -3345,6 +3395,7 @@ rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -3416,6 +3467,7 @@ rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -3487,6 +3539,7 @@ rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
@@ -3558,6 +3611,7 @@ rect_min_size = Vector2( 32, 32 )
 rect_clip_content = true
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource( 19 )
 expand_icon = true
 __meta__ = {
 "_edit_lock_": true
