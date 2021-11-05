@@ -6,7 +6,7 @@ func _on_StartButton_pressed():
 func _on_ConfirmButton_pressed():
   # Do not allow the game to proceed if player did not provide a good name
   if $UI/NameInput.text.length() <= 0:
-    print("[Character Creation] Error. Name needed...")
+    printerr("[Character Creation] Error. Name needed...")
     return
   
   # Ensure that save name is unique
@@ -15,19 +15,19 @@ func _on_ConfirmButton_pressed():
     # Save files have a *.save extension preceded by the character name. Need to split the string 
     # and get the name.
     if save.split(".")[0] == $UI/NameInput.text.to_lower():
-      print("[Character Creation] Error. Name is not unique...")
+      printerr("[Character Creation] Error. Name is not unique...")
       return
   
   # Switch to the base scene to start the game
   Save.save[Globals.PLAYER_NAME] = $UI/NameInput.text.to_lower()
   if get_tree().change_scene(Globals.SPATH_BASE) != OK:
-    print("[Character Creation] Error. Could not load into base from main menu.")
+    printerr("[Character Creation] Error. Could not load into base from main menu...")
 
 
 func _on_CancelButton_pressed():
   $UI/PopupMenu.hide()
 
 func _on_BackButton_pressed():
-  Globals.isGamePlaying = false
+  Globals.is_game_playing = false
   if get_tree().change_scene(Globals.SPATH_MAIN_MENU) != OK:
-    print("[Main Menu] Error. Could not load into main menu from character creation.")
+    printerr("[Main Menu] Error. Could not load into main menu from character creation...")

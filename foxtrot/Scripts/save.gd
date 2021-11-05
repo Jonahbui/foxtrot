@@ -11,10 +11,13 @@ func _enter_tree():
 func _init():
   create_save_dir()
   
-  Signals.connect("on_player_loaded", self, "init_player")
-  Signals.connect("on_inventory_loaded", self, "init_inventory")
-  Signals.connect("on_base_game_loaded", self, "init_game")
-  
+  if Signals.connect("on_player_loaded", self, "init_player") != OK:
+    printerr("[Save] Error. Failed to connect to signal on_player_loaded...")
+  if Signals.connect("on_inventory_loaded", self, "init_inventory") != OK:
+    printerr("[Save] Error. Failed to connect to signal on_inventory_loaded...")
+  if Signals.connect("on_base_game_loaded", self, "init_game") != OK:
+    printerr("[Save] Error. Failed to connect tosignal on_base_game_loaded...")
+
 func _ready():
   save = empty_save_data()
   
@@ -33,12 +36,16 @@ var config = null
 func create_config(default=false):
   # To add new elements to config, add here below. Define constants in globals:
   var new_config = {
-    Globals.VOLUME_MASTER : config[Globals.VOLUME_MASTER] if not default else 0.0,
-    Globals.VOLUME_MUSIC  : config[Globals.VOLUME_MUSIC] if not default else 0.0,
-    Globals.VOLUME_SFX    : config[Globals.VOLUME_SFX] if not default else 0.0,
-    Globals.VOLUME_MASTER_TOGGLE : config[Globals.VOLUME_MASTER_TOGGLE] if not default else false,
-    Globals.VOLUME_MUSIC_TOGGLE  : config[Globals.VOLUME_MUSIC_TOGGLE] if not default else false,
-    Globals.VOLUME_SFX_TOGGLE    : config[Globals.VOLUME_SFX_TOGGLE] if not default else false,
+    Globals.VOLUME_MASTER           : config[Globals.VOLUME_MASTER] if not default else 0.0,
+    Globals.VOLUME_MUSIC            : config[Globals.VOLUME_MUSIC] if not default else 0.0,
+    Globals.VOLUME_SFX              : config[Globals.VOLUME_SFX] if not default else 0.0,
+    Globals.VOLUME_AMBIENCE         : config[Globals.VOLUME_AMBIENCE] if not default else 0.0,    
+    Globals.VOLUME_UI               : config[Globals.VOLUME_UI] if not default else 0.0,    
+    Globals.VOLUME_MASTER_TOGGLE    : config[Globals.VOLUME_MASTER_TOGGLE] if not default else false,
+    Globals.VOLUME_MUSIC_TOGGLE     : config[Globals.VOLUME_MUSIC_TOGGLE] if not default else false,
+    Globals.VOLUME_SFX_TOGGLE       : config[Globals.VOLUME_SFX_TOGGLE] if not default else false,
+    Globals.VOLUME_AMBIENCE_TOGGLE  : config[Globals.VOLUME_AMBIENCE_TOGGLE] if not default else false,
+    Globals.VOLUME_UI_TOGGLE        : config[Globals.VOLUME_UI_TOGGLE] if not default else false,
       
     Globals.GRAPHICS_FULLSCREEN : config[Globals.GRAPHICS_FULLSCREEN] if not default else false
   }
@@ -67,6 +74,7 @@ func load_config():
   
   # Insert the data into the config (Do not set config equal to data. People may
   # insert their own values) dictionary.
+  config = create_config(true)
   for key in data.keys():
     if config.has(key): config[key] = data[key]
   
@@ -79,10 +87,9 @@ func reset_config():
 #--------------------------------------------------------------------------------------------------
 # Save Functions
 #--------------------------------------------------------------------------------------------------
-
-# TA: Need to guard against save overwrite
-
 const FILENAME_DEFAULT_AUTO   = "autosave.save"
+const SAVE_ID = "id"
+const SAVE_CURR_STACK_AMT = "curr_stack_amt"
 
 # Holds the player information here
 var save = null
@@ -96,11 +103,11 @@ var inventory = null
 # Use player null to create default player save dictionary
 func create_save_data(reset_save=false):
   var data = {
-    Globals.PLAYER_DIFFICULTY : Globals.isGamePlaying,
+    Globals.PLAYER_DIFFICULTY : Globals.is_game_playing,
     Globals.PLAYER_INVENTORY  : inventory.InventoryToJSON() if not reset_save else {},
-    Globals.PLAYER_NAME       : player.charname if not reset_save  else "",
-    Globals.PLAYER_HEALTH     : player.health if not reset_save  else 0,
-    Globals.PLAYER_MANA       : player.mana if not reset_save  else 0,
+    Globals.PLAYER_NAME       : player.charname if not reset_save  else "default",
+    Globals.PLAYER_HEALTH     : player.health if not reset_save  else 25,
+    Globals.PLAYER_MANA       : player.mana if not reset_save  else 25,
     Globals.PLAYER_MONEY      : player.money if not reset_save  else 0
   }
   return data
@@ -113,8 +120,8 @@ func empty_save_data():
     Globals.PLAYER_DIFFICULTY : false,
     Globals.PLAYER_INVENTORY  : {},
     Globals.PLAYER_NAME       : "",
-    Globals.PLAYER_HEALTH     : 0,
-    Globals.PLAYER_MANA       : 0,
+    Globals.PLAYER_HEALTH     : 25,
+    Globals.PLAYER_MANA       : 25,
     Globals.PLAYER_MONEY      : 0
   }
   return data
@@ -140,7 +147,7 @@ func load_file(filename):
   # Check for file existance before reading
   var file = File.new()
   if not file.file_exists("user://saves/%s" % [filename]): 
-    print("[Save] Error. File %s not found..." % [filename])
+    printerr("[Save] Error. File %s not found..." % [filename])
     return null
   
   # Read in the save file
@@ -148,7 +155,7 @@ func load_file(filename):
   var line = file.get_line()
   var data = parse_json(line)
   if data == null: 
-    print("[Save] Error. No data found for file %s..." % [filename])
+    printerr("[Save] Error. No data found for file %s..." % [filename])
     return null
   
   # Insert the data into the save (Do not set config equal to data. People may
@@ -157,12 +164,12 @@ func load_file(filename):
   for key in save_data.keys():
     if save_data.has(key): save_data[key] = data[key]
   
-  print("\n[Save] Loading %s save file..." % [save_data[Globals.PLAYER_NAME]])
+  #print("\n[Save] Loading %s save file..." % [save_data[Globals.PLAYER_NAME]])
   return save_data
   
 func list_saves():
   # Used to return the filenames of all player saves
-  var saves = []
+  var save_files = []
 
   # Search for a valid save directory
   var dir = Directory.new()
@@ -172,14 +179,14 @@ func list_saves():
     # Append each name in the save directory to the saves array
     var save_file = dir.get_next()
     while save_file != "":
-      saves.append(save_file)
+      save_files.append(save_file)
       save_file = dir.get_next()
     dir.list_dir_end()
   
   print("[Save] Loading save files...")
-  for save in saves:
+  for save in save_files:
     print("\t%s" % [save])
-  return saves
+  return save_files
       
 func create_save_dir():
   # Create a directory for save files if one is not present
@@ -189,22 +196,34 @@ func create_save_dir():
       dir.make_dir("saves")  
 
 func init_player(player):
-
+  print("[Save] Initializing player...")
   self.player = player
+
+  Signals.emit_signal("on_base_game_loaded")
+  
   
 func init_inventory(inventory):
+  print("[Save] Initializing inventory...")  
   self.inventory = inventory
-  # The player contains the inventory, so if the inventory is loaded, the player is loaded as well.
-  
-  # After the inventory is loaded, the base game is considered done loading.
-  Signals.emit_signal("on_base_game_loaded")
 
 func init_game():
   # Restore the player inventory and player stats
-  player.RestorePlayerData(self.save)
-  inventory.RestoreInventoryData(self.save[Globals.PLAYER_INVENTORY])
+  if player == null:
+    printerr("[Save] Error. Failed to restore player stats...")
+  else:
+    player.RestorePlayerData(self.save)
+    
+    if Globals.is_new_game:
+      player.ResetPlayer()
+      
+    player.RefreshStats()
+    
+  if inventory == null:
+    printerr("[Save] Error. Failed to restore player inventory...")
+  else:
+    inventory.RestoreInventoryData(self.save[Globals.PLAYER_INVENTORY])
   
   # If the game is a new game, save the player file.
-  if Globals.isNewGame:
+  if Globals.is_new_game:
     Save.save_file()
-    Globals.isNewGame = false
+    Globals.is_new_game = false

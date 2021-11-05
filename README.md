@@ -20,10 +20,13 @@ Sounds:
 		- https://freesound.org/people/Mrthenoronha/sounds/420447/
 	- Cash Reigster:
 		- https://freesound.org/people/kiddpark/sounds/201159/
+	- Spawn Sounds:
+		- https://freesound.org/people/Eelke/sounds/144835/
+
 Fonts:
 	- Thaleah Fat Font:
 		- https://www.dafont.com/thaleahfat.font
-	
+
 Shaders:
 	- Godrays:
 		- https://godotshaders.com/shader/god-rays/

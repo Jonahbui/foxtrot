@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Textures/Gameplay/crosshair.png" type="Texture" id=1]
+[ext_resource path="res://Instances/Player/crosshair.gd" type="Script" id=2]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 4
+
+[node name="Crosshair" type="TextureRect" parent="."]
+margin_left = -4.0
+margin_top = -4.0
+margin_right = 4.0
+margin_bottom = 4.0
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 4, 4 )
+mouse_filter = 2
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

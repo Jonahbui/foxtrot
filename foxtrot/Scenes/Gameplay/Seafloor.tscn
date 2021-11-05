@@ -1,8 +1,30 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Textures/Gameplay/dev_tiles.tres" type="TileSet" id=1]
+[ext_resource path="res://Node/ChangeLevelInteraction.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Textures/Gameplay/Spawn/yellow_submarine.png" type="Texture" id=3]
+[ext_resource path="res://Textures/Gameplay/Levels/submarine_resurface.png" type="Texture" id=4]
+[ext_resource path="res://Instances/Enemy/Piranha.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Instances/Gameplay/Chest.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Instances/level.gd" type="Script" id=7]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends \"res://Node/interaction.gd\"
+
+export(String, FILE) var level
+
+func Use():
+  Signals.emit_signal(\"on_change_base_level\", level)
+"
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 25.3333, 14.6667 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 8, 14.6667 )
 
 [node name="Level" type="Node2D"]
+script = ExtResource( 7 )
 
 [node name="World" type="Node2D" parent="."]
 
@@ -12,9 +34,50 @@ tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( 196617, 3, 0, 262144, 0, 0, 262152, 3, 0, 262154, 3, 0, 327680, 0, 0, 327687, 3, 0, 327691, 3, 0, 393216, 1, 0, 393217, 1, 0, 393218, 1, 0, 393219, 1, 0, 393220, 1, 0, 393221, 1, 0, 393222, 1, 0, 393223, 1, 0, 393224, 1, 0, 393225, 1, 0, 393226, 1, 0, 393227, 1, 0, 393228, 1, 0, 393229, 1, 0, 393230, 1, 0, 393231, 1, 0, 393232, 1, 0, 393233, 1, 0, 393234, 1, 0, 393235, 1, 0 )
+tile_data = PoolIntArray( -1048471, 0, 0, -982935, 0, 0, -917399, 0, 0, -851863, 0, 0, -786327, 0, 0, -720791, 0, 0, -655360, 0, 0, -655255, 0, 0, -589824, 0, 0, -589719, 0, 0, -524288, 0, 0, -524183, 0, 0, -458752, 0, 0, -458647, 0, 0, -393216, 0, 0, -393111, 0, 0, -327680, 0, 0, -327575, 0, 0, -262144, 0, 0, -262039, 0, 0, -196608, 0, 0, -196503, 0, 0, -131072, 0, 0, -130967, 0, 0, -65536, 0, 0, -65431, 0, 0, 0, 0, 0, 105, 0, 0, 65536, 0, 0, 65559, 2, 0, 65560, 2, 0, 65561, 2, 0, 65562, 2, 0, 65563, 2, 0, 65641, 0, 0, 131072, 0, 0, 131177, 0, 0, 196608, 0, 0, 196617, 3, 0, 196713, 0, 0, 262144, 0, 0, 262152, 3, 0, 262154, 3, 0, 262185, 2, 0, 262186, 2, 0, 262249, 0, 0, 327680, 0, 0, 327687, 3, 0, 327691, 3, 0, 327720, 2, 0, 327721, 2, 0, 327722, 2, 0, 327723, 2, 0, 327785, 0, 0, 393216, 1, 0, 393217, 1, 0, 393218, 1, 0, 393219, 1, 0, 393220, 1, 0, 393221, 1, 0, 393222, 1, 0, 393223, 1, 0, 393224, 1, 0, 393225, 1, 0, 393226, 1, 0, 393227, 1, 0, 393228, 1, 0, 393229, 1, 0, 393230, 1, 0, 393231, 1, 0, 393232, 1, 0, 393233, 1, 0, 393234, 1, 0, 393235, 1, 0, 393236, 1, 0, 393237, 1, 0, 393238, 1, 0, 393239, 1, 0, 393240, 1, 0, 393241, 1, 0, 393242, 1, 0, 393243, 1, 0, 393244, 1, 0, 393245, 1, 0, 393246, 1, 0, 393247, 1, 0, 393248, 1, 0, 393249, 1, 0, 393250, 1, 0, 393251, 1, 0, 393252, 1, 0, 393253, 1, 0, 393254, 1, 0, 393255, 1, 0, 393256, 1, 0, 393257, 1, 0, 393258, 1, 0, 393259, 1, 0, 393260, 1, 0, 393261, 1, 0, 393262, 1, 0, 393263, 1, 0, 393264, 1, 0, 393265, 1, 0, 393266, 1, 0, 393321, 0, 0, 458802, 1, 0, 458857, 0, 0, 524338, 1, 0, 524393, 0, 0, 589874, 1, 0, 589929, 0, 0, 655410, 1, 0, 655411, 1, 0, 655412, 1, 0, 655413, 1, 0, 655414, 1, 0, 655415, 1, 0, 655416, 1, 0, 655417, 1, 0, 655418, 1, 0, 655419, 1, 0, 655420, 1, 0, 655421, 1, 0, 655422, 1, 0, 655423, 1, 0, 655424, 1, 0, 655425, 1, 0, 655426, 1, 0, 655427, 1, 0, 655428, 1, 0, 655429, 1, 0, 655430, 1, 0, 655431, 1, 0, 655432, 1, 0, 655433, 1, 0, 655465, 0, 0, 720969, 1, 0, 721001, 0, 0, 786505, 1, 0, 786537, 0, 0, 852041, 1, 0, 852073, 0, 0, 917577, 1, 0, 917578, 1, 0, 917579, 1, 0, 917580, 1, 0, 917581, 1, 0, 917582, 1, 0, 917583, 1, 0, 917584, 1, 0, 917585, 1, 0, 917586, 1, 0, 917587, 1, 0, 917588, 1, 0, 917589, 1, 0, 917590, 1, 0, 917591, 1, 0, 917592, 1, 0, 917593, 1, 0, 917594, 1, 0, 917595, 1, 0, 917596, 1, 0, 917597, 1, 0, 917598, 1, 0, 917599, 1, 0, 917600, 1, 0, 917601, 1, 0, 917602, 1, 0, 917603, 1, 0, 917604, 1, 0, 917605, 1, 0, 917606, 1, 0, 917607, 1, 0, 917608, 1, 0, 917609, 0, 0 )
 
 [node name="Spawnpoint" type="Node2D" parent="."]
 position = Vector2( 92.3431, 222.968 )
 
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Piranha" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 1040, 16 )
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="YellowSubmarine" type="Sprite" parent="Sprites"]
+self_modulate = Color( 1.1, 1.1, 1.1, 1 )
+position = Vector2( 3224, 464 )
+scale = Vector2( 6, 6 )
+z_index = -1
+texture = ExtResource( 3 )
+script = SubResource( 1 )
+
+[node name="ChangeLevelInteraction" parent="Sprites/YellowSubmarine" instance=ExtResource( 2 )]
+level = "res://Scenes/Gameplay/Seafloor.tscn"
+
+[node name="CollisionShape2D" parent="Sprites/YellowSubmarine/ChangeLevelInteraction" index="0"]
+shape = SubResource( 2 )
+
+[node name="SubmarineResurface" type="Sprite" parent="Sprites"]
+position = Vector2( 2912, 504 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 4 )
+
+[node name="ChangeLevelInteraction" parent="Sprites/SubmarineResurface" instance=ExtResource( 2 )]
+level = "res://Scenes/Gameplay/Spawn.tscn"
+
+[node name="CollisionShape2D" parent="Sprites/SubmarineResurface/ChangeLevelInteraction" index="0"]
+shape = SubResource( 3 )
+
+[node name="Treasure" type="Node" parent="."]
+
+[node name="Chest" parent="Treasure" instance=ExtResource( 6 )]
+position = Vector2( 1344.33, 196.005 )
+loot_string = "seafloor"
+
 [node name="Items" type="Node2D" parent="."]
+
+[editable path="Sprites/YellowSubmarine/ChangeLevelInteraction"]
+[editable path="Sprites/SubmarineResurface/ChangeLevelInteraction"]

@@ -4,9 +4,13 @@ extends Node
 const VOLUME_MASTER         = "masterVolume"
 const VOLUME_MUSIC          = "musicVolume"
 const VOLUME_SFX            = "sfxVolume"
+const VOLUME_AMBIENCE       = "ambienceVolume"
+const VOLUME_UI             = "userInterfaceVolume"
 const VOLUME_MASTER_TOGGLE  = "masterVolumeToggle"
 const VOLUME_MUSIC_TOGGLE   = "musicVolumeToggle"
 const VOLUME_SFX_TOGGLE     = "sfxVolumeToggle"
+const VOLUME_AMBIENCE_TOGGLE= "ambienceVolumeToggle"
+const VOLUME_UI_TOGGLE      = "userInterfaceVolumeToggle"
 
 # Define save constants
 const PLAYER_DIFFICULTY   = "playerDifficulty"
@@ -36,12 +40,14 @@ const SCENE_PATHS = [
  ]
 
 # Define level resource paths (levels that the player play in)
+const LPATH_AQUARIUM = "res://Scenes/Gameplay/Aquarium.tscn"
 const LPATH_SPAWN = "res://Scenes/Gameplay/Spawn.tscn"
 const LPATH_SEAFLOOR = "res://Scenes/Gameplay/Seafloor.tscn"
 
 ## Mainly used for dev console to verify that the path selected is one that the 
 ## player should be allowed to switch to.
 const LEVEL_PATH = [
+  LPATH_AQUARIUM,
   LPATH_SPAWN,
   LPATH_SEAFLOOR
  ]
@@ -49,11 +55,12 @@ const LEVEL_PATH = [
 # --------------------------------------------------------------------------------------------------
 # Gameplay Management
 # --------------------------------------------------------------------------------------------------
-var isInSpawn     : bool = false
-var isGamePlaying : bool = false
-var isNewGame     : bool = false
-var isHardcoreMode: bool = false
-var isManagingInv : bool = false
+var is_in_spawn           : bool = false
+var is_game_playing       : bool = false
+var is_new_game           : bool = false
+var is_hardcore_mode      : bool = false
+var is_managing_inventory : bool = false
+var is_in_water           : bool = false
 
 # Possible pause 'like' events that can occur
 const FLAG_DEV_OPEN = 1
@@ -88,7 +95,11 @@ func ToggleFlag(flag):
   SetFlag(flag, result)
   return result
 
+const GROUP_PLAYER_WEAPON_HITBOX = "PlayerWeaponHitbox"
+const GROUP_PLAYER_PROJECTILE_HITBOX = "PlayerProjectileHitbox"
+
 enum ItemProcess{
   World,
-  Player
+  Player,
+  WorldIdle
  }

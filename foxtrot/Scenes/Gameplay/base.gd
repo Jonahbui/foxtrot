@@ -30,16 +30,14 @@ func _ready():
   
   print()
   if Signals.connect("on_player_death", self, "OnDeath") != OK:
-    print("[Base] Error. Failed to connect to signal on_player_death...")
+    printerr("[Base] Error. Failed to connect to signal on_player_death...")
   
-  if Signals.connect("on_play_sfx", self, "PlaySfx") != OK:
-    print("[Base] Error. Failed to connect to signal on_play_sfx...")
+  if Signals.connect("on_play_audio", self, "PlayAudio") != OK:
+    printerr("[Base] Error. Failed to connect to signal on_play_audio...")
     
-  if Signals.connect("on_play_music", self, "PlayMusic") != OK:
-    print("[Base] Error. Failed to connect to signal on_play_music...")
 
   if Signals.connect("on_change_base_level", self, "LoadLevel") != OK:
-    print("[Base] Error. Failed to connect to signal on_change_base_level...")
+    printerr("[Base] Error. Failed to connect to signal on_change_base_level...")
     
 func ToggleDevConsole():
   # Set the current visibility to the opposite of the current visibility
@@ -50,25 +48,27 @@ func ToggleDevConsole():
   if dev_console.visible:
     cmdline.grab_focus()
   
-func PlayMusic(clip):
+func PlayAudio(clip, source):
   var audio = load(clip)
   
   if audio:
-    $Audio/MusicStream.stream = audio    
-    $Audio/MusicStream.play()
+    match source:
+      0:
+        $Audio/MusicStream.stream = audio    
+        $Audio/MusicStream.play()
+      1:
+        $Audio/SFXStream.stream = audio    
+        $Audio/SFXStream.play()
+      2:
+        $Audio/AmbienceStream.stream = audio    
+        $Audio/AmbienceStream.play()
+      3:
+        $Audio/UIStream.stream = audio    
+        $Audio/UIStream.play()
   else:
-    print("[Base] Error. Could not play \"%s\"" % [clip])
-  
-func PlaySfx(clip):
-  var audio = load(clip)
-    
-  if audio:
-    $Audio/SFXStream.stream = audio
-    $Audio/SFXStream.play()
-  else:
-    print("[Base] Error. Could not play \"%s\"" % [clip])
+    printerr("[Base] Error. Could not play \"%s\"" % [clip])
 
-func LoadLevel(path):
+func LoadLevel(path, location=""):
   ToggleLoadingScreen(true)
   
   # Give transition period
@@ -92,12 +92,14 @@ func LoadLevel(path):
   self.add_child(instance)
   
   # Get spawnpoint path and set player position to spawnpoint.
-  var spawnpoint = instance.get_node_or_null("Spawnpoint")
-  if spawnpoint != null:
-    $Player.position = spawnpoint.position
+  var spawnlocation = instance.get_node_or_null("Spawnpoint/%s" % [location])
+  if spawnlocation != null:
+    $Player.set_global_position(spawnlocation.get_global_position())
+    print("[Base] Loaded at \'Spawnpoint/%s\'..." % [location])    
   else:
-    printerr("The spawnpoint could not be located in %s" % [spawnpoint.get_name()])
-  
+    printerr("[Base] The location could not be located in Spawnpoint/%s..." % [location])
+
+    
   # After the level is loaded, reenable the player
   Helper.SetActive($Player, true)
   
@@ -132,31 +134,52 @@ func ProcessCmd(cmd):
   var parse = cmd.split(" ")
   
   # Organize commands by the number of parameters
-  if parse.size() == 0:
-    return
-  elif parse.size() == 1:
-    match parse[0]:
-      "clear":
-        logs.text = ""
-      "exit":
-        get_tree().quit()
-      "kill":
-        $Player.TakeDamage($Player.health)
-      
-  elif(parse.size() == 2):
-    match parse[0]:
-      "setlevel":
-        # Note: if leaving in for player, need to sanitize input just in case
-        # they load up a scene they should not be allowed to...
-        var valid : bool = File.new().file_exists(parse[1])
-        valid = parse[1] in Globals.LEVEL_PATH && valid
-        if valid : LoadLevel(parse[1])
-      
+  match parse.size():
+    0:
+      return
+    1:
+      match parse[0]:
+        "clear":
+          logs.text = ""
+        "exit":
+          get_tree().quit()
+        "kill":
+          $Player.TakeDamage($Player.health)
+        _:
+          logs.text += "\nCould not find command..."
+    2:
+      match parse[0]:
+        "setlevel":
+          # Note: if leaving in for player, need to sanitize input just in case
+          # they load up a scene they should not be allowed to...
+          var valid : bool = File.new().file_exists(parse[1])
+          valid = parse[1] in Globals.LEVEL_PATH && valid
+          if valid : LoadLevel(parse[1])
+        _:
+          logs.text += "\nCould not find command or not enough params provided..."
+    3:
+      match parse[0]:
+        "additem":
+          if not parse[1].is_valid_integer(): return
+          var item_id = int(parse[1])
+          if not item_id in Equips.equips: 
+            logs.text += "\nInvalid id presented. Could not find item..."
+            return
+          
+          if Equips.equips[item_id][Equips.EQUIP_SUBTYPE] != Equips.Subtype.stackable:
+            Signals.emit_signal("on_inventory_add_item", item_id)
+          else:
+            if not parse[2].is_valid_integer(): return
+            var amount = int(parse[2])
+            Signals.emit_signal("on_inventory_add_item_stack", item_id, amount)
+        _:
+          logs.text += "\nCould not find command or not enough params provided..."
+
 func UpdateHistory(cmd):
   if(history.size() > 10):
     history.pop_back()
   history.push_front(cmd)
-    
+
 func GetNextHistoryCmd(forward=true):
   if history.size() > 0:
     history_index = (history_index + 1) if(forward) else (history_index  - 1)
@@ -182,7 +205,7 @@ func _on_CmdLine_text_changed(new_text):
   cmdline.caret_position = old_pos
 
 func OnDeath():
-  if Globals.isHardcoreMode:
+  if Globals.is_hardcore_mode:
     # Go back to main menu
     Helper.ChangeLevel(Globals.SPATH_MAIN_MENU)
     # Restart game

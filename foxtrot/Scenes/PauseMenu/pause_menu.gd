@@ -1,7 +1,8 @@
 extends CanvasLayer
 
 func _init():
-  Signals.connect("on_game_saved", self, "TriggerSaveMessage")
+  if Signals.connect("on_game_saved", self, "TriggerSaveMessage") != OK:
+    printerr("[Pause Menu] Error. Failed to connect to signal on_game_save...")
 
 func _ready():
   # If the pause menu is visible, then inform the game that it's paused
@@ -15,7 +16,7 @@ func _input(event):
     $UI.visible = result_state
     
     # Only show the save button if the player is in the spawn. Update when pause UI updates.
-    if Globals.isInSpawn:
+    if Globals.is_in_spawn:
       $UI/Background/ButtonVbox/SaveButton.visible = true
     else:
       $UI/Background/ButtonVbox/SaveButton.visible = false
@@ -43,7 +44,7 @@ func _on_MainMenuButton_pressed():
   
   # Switch to main menu
   if get_tree().change_scene(Globals.SPATH_MAIN_MENU) != OK:
-    print("[Scene] Failed to change scenes...")
+    printerr("[Scene] Error. Failed to change scenes...")
 
 func _on_ExitButton_pressed():
   get_tree().quit()

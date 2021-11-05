@@ -1,28 +1,59 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=43 format=2]
 
-[ext_resource path="res://Textures/UI/button_normal.png" type="Texture" id=1]
+[ext_resource path="res://Textures/UI/Button/button_normal.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/MainMenu/main_menu.gd" type="Script" id=2]
 [ext_resource path="res://Textures/SplashScreen/solid_white.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/Credits/Credits.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Fonts/ThaleahFat_TTF.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Scenes/SettingsMenu/settings_menu.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Fonts/thaelahfat_pure_16x.tres" type="DynamicFont" id=7]
-[ext_resource path="res://Textures/UI/button_pressed.png" type="Texture" id=8]
-[ext_resource path="res://Textures/UI/button_disabled.png" type="Texture" id=9]
-[ext_resource path="res://Textures/UI/button_hover.png" type="Texture" id=10]
-[ext_resource path="res://Textures/UI/button_disabled.tres" type="StyleBox" id=11]
-[ext_resource path="res://Textures/UI/panel.tres" type="StyleBox" id=12]
-[ext_resource path="res://Textures/UI/button_hover.tres" type="StyleBox" id=13]
-[ext_resource path="res://Textures/UI/button_pressed.tres" type="StyleBox" id=14]
-[ext_resource path="res://Textures/UI/button_normal.tres" type="StyleBox" id=15]
-[ext_resource path="res://Textures/UI/panel.png" type="Texture" id=16]
+[ext_resource path="res://Textures/UI/Button/button_pressed.png" type="Texture" id=8]
+[ext_resource path="res://Textures/UI/Button/button_disabled.png" type="Texture" id=9]
+[ext_resource path="res://Textures/UI/Button/button_hover.png" type="Texture" id=10]
+[ext_resource path="res://Textures/UI/Button/button_disabled.tres" type="StyleBox" id=11]
+[ext_resource path="res://Textures/UI/Panel/panel.tres" type="StyleBox" id=12]
+[ext_resource path="res://Textures/UI/Button/button_hover.tres" type="StyleBox" id=13]
+[ext_resource path="res://Textures/UI/Button/button_pressed.tres" type="StyleBox" id=14]
+[ext_resource path="res://Textures/UI/Button/button_normal.tres" type="StyleBox" id=15]
+[ext_resource path="res://Textures/UI/Panel/soda_panel.png" type="Texture" id=16]
+[ext_resource path="res://Textures/UI/Button/input_icon_reset_normal.png" type="Texture" id=17]
+[ext_resource path="res://Textures/UI/Button/input_icon_reset_pressed.png" type="Texture" id=18]
+[ext_resource path="res://Textures/UI/Button/input_icon_reset_hover.png" type="Texture" id=19]
+[ext_resource path="res://Textures/UI/MainMenu/sodacan_2.tres" type="StyleBox" id=20]
+[ext_resource path="res://Textures/UI/Button/button_bubble_normal.png" type="Texture" id=21]
+[ext_resource path="res://Textures/UI/MainMenu/vending_machine.png" type="Texture" id=22]
+[ext_resource path="res://Textures/UI/MainMenu/sodacan_1.tres" type="StyleBox" id=23]
+[ext_resource path="res://Textures/UI/MainMenu/sodacan_3.tres" type="StyleBox" id=24]
+[ext_resource path="res://Textures/UI/MainMenu/sidewalk_right.png" type="Texture" id=25]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="StyleBoxTexture" id=2]
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 18 )
+region_rect = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 17 )
+region_rect = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="StyleBoxTexture" id=5]
+texture = ExtResource( 21 )
+region_rect = Rect2( 0, 0, 16, 16 )
+margin_left = 8.0
+margin_right = 6.0
+margin_top = 8.0
+margin_bottom = 5.0
+
+[sub_resource type="DynamicFont" id=6]
 size = 64
 outline_color = Color( 0.85098, 0.509804, 0.0235294, 1 )
 font_data = ExtResource( 5 )
 
-[sub_resource type="StyleBoxTexture" id=2]
+[sub_resource type="StyleBoxTexture" id=7]
 texture = ExtResource( 10 )
 region_rect = Rect2( 0, 0, 32, 32 )
 margin_left = 4.0
@@ -30,7 +61,7 @@ margin_right = 4.0
 margin_top = 4.0
 margin_bottom = 4.0
 
-[sub_resource type="StyleBoxTexture" id=3]
+[sub_resource type="StyleBoxTexture" id=8]
 texture = ExtResource( 8 )
 region_rect = Rect2( 0, 0, 32, 32 )
 margin_left = 4.0
@@ -38,9 +69,9 @@ margin_right = 4.0
 margin_top = 4.0
 margin_bottom = 4.0
 
-[sub_resource type="StyleBoxTexture" id=4]
+[sub_resource type="StyleBoxTexture" id=9]
 
-[sub_resource type="StyleBoxTexture" id=5]
+[sub_resource type="StyleBoxTexture" id=10]
 texture = ExtResource( 9 )
 region_rect = Rect2( 0, 0, 32, 32 )
 margin_left = 4.0
@@ -48,7 +79,7 @@ margin_right = 4.0
 margin_top = 4.0
 margin_bottom = 4.0
 
-[sub_resource type="StyleBoxTexture" id=6]
+[sub_resource type="StyleBoxTexture" id=11]
 texture = ExtResource( 1 )
 region_rect = Rect2( 0, 0, 32, 32 )
 margin_left = 4.0
@@ -56,20 +87,57 @@ margin_right = 4.0
 margin_top = 4.0
 margin_bottom = 4.0
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=12]
 size = 32
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 5 )
 
-[sub_resource type="ButtonGroup" id=8]
+[sub_resource type="ButtonGroup" id=13]
 
-[sub_resource type="Environment" id=9]
+[sub_resource type="Environment" id=14]
+
+[sub_resource type="StyleBoxTexture" id=15]
+texture = ExtResource( 22 )
+region_rect = Rect2( 0, 0, 32, 88 )
+
+[sub_resource type="Animation" id=16]
+resource_name = "IdleMain"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Camera2D:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 5, 5 ) ]
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "MainToLoad"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Camera2D:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ), Vector2( 0.4, 0.4 ) ]
+}
 
 [node name="MainMenu" type="Node2D"]
-position = Vector2( 73.9989, 65.5899 )
 script = ExtResource( 2 )
 load_panel = "res://Instances/UI/LoadPanel.tscn"
+sodacan_red = ExtResource( 23 )
+sodacan_blue = ExtResource( 20 )
+sodacan_green = ExtResource( 24 )
 
 [node name="Audio" type="Node" parent="."]
 
@@ -77,6 +145,80 @@ load_panel = "res://Instances/UI/LoadPanel.tscn"
 autoplay = true
 
 [node name="SFXStream" type="AudioStreamPlayer" parent="Audio"]
+
+[node name="AmbienceStream" type="AudioStreamPlayer" parent="Audio"]
+bus = "Ambience"
+
+[node name="UIStream" type="AudioStreamPlayer" parent="Audio"]
+bus = "UI"
+
+[node name="LoadMenu" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="LoadMenu"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="LoadMenu/UI"]
+anchor_right = 0.262
+anchor_bottom = 1.0
+margin_right = 0.319977
+texture = ExtResource( 16 )
+patch_margin_left = 13
+patch_margin_top = 13
+patch_margin_right = 13
+patch_margin_bottom = 13
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="LoadMenu/UI/NinePatchRect"]
+anchor_left = 0.05
+anchor_top = 0.022
+anchor_right = 0.948
+anchor_bottom = 0.978
+margin_top = 0.0799994
+margin_right = 0.319992
+margin_bottom = -0.0800171
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LoadMenu/UI/NinePatchRect/ScrollContainer"]
+
+[node name="BackButton" type="Button" parent="LoadMenu/UI"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -35.5066
+margin_top = 13.8468
+margin_right = -11.5066
+margin_bottom = 37.8468
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="LoadMenu/UI"]
+anchor_left = 0.262
+anchor_right = 0.262
+margin_left = 8.31998
+margin_top = 8.0
+margin_right = 98.3201
+margin_bottom = 36.0
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = ExtResource( 7 )
+text = "Stats"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="MainMenu" type="CanvasLayer" parent="."]
 
@@ -89,6 +231,7 @@ __meta__ = {
 }
 
 [node name="Background" type="TextureRect" parent="MainMenu/UI"]
+visible = false
 self_modulate = Color( 0.160784, 0.6, 0.815686, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -107,7 +250,7 @@ margin_left = -326.541
 margin_top = 12.756
 margin_right = -18.5409
 margin_bottom = 71.756
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color_shadow = Color( 1, 0.533333, 0, 1 )
 custom_constants/shadow_offset_y = 2
 text = "Below zero"
@@ -132,11 +275,11 @@ margin_right = 48.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
 rect_pivot_offset = Vector2( -420.576, 40 )
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/disabled = SubResource( 5 )
-custom_styles/normal = SubResource( 6 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 11 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -150,7 +293,7 @@ margin_left = 16.5297
 margin_top = -16.0
 margin_right = 199.53
 margin_bottom = 14.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 12 )
 text = "New Game"
 valign = 1
 __meta__ = {
@@ -164,11 +307,11 @@ margin_right = 48.0
 margin_bottom = 116.0
 rect_min_size = Vector2( 48, 48 )
 rect_pivot_offset = Vector2( -420.576, 40 )
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/disabled = SubResource( 5 )
-custom_styles/normal = SubResource( 6 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 11 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -182,7 +325,7 @@ margin_left = 16.5297
 margin_top = -16.0
 margin_right = 223.53
 margin_bottom = 14.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 12 )
 text = "Load Game"
 valign = 1
 __meta__ = {
@@ -196,11 +339,11 @@ margin_right = 48.0
 margin_bottom = 184.0
 rect_min_size = Vector2( 48, 48 )
 rect_pivot_offset = Vector2( -420.576, 40 )
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/disabled = SubResource( 5 )
-custom_styles/normal = SubResource( 6 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 11 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -214,7 +357,7 @@ margin_left = 16.5297
 margin_top = -16.0
 margin_right = 187.53
 margin_bottom = 14.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 12 )
 text = "Settings"
 valign = 1
 __meta__ = {
@@ -228,11 +371,11 @@ margin_right = 48.0
 margin_bottom = 252.0
 rect_min_size = Vector2( 48, 48 )
 rect_pivot_offset = Vector2( -420.576, 40 )
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/disabled = SubResource( 5 )
-custom_styles/normal = SubResource( 6 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 11 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -246,7 +389,7 @@ margin_left = 16.5297
 margin_top = -16.0
 margin_right = 166.53
 margin_bottom = 14.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 12 )
 text = "Credits	"
 valign = 1
 __meta__ = {
@@ -260,11 +403,11 @@ margin_right = 48.0
 margin_bottom = 320.0
 rect_min_size = Vector2( 48, 48 )
 rect_pivot_offset = Vector2( -420.576, 40 )
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/disabled = SubResource( 5 )
-custom_styles/normal = SubResource( 6 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 11 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -278,7 +421,7 @@ margin_left = 17.0
 margin_top = -16.0
 margin_right = 95.0
 margin_bottom = 14.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 12 )
 text = "Exit"
 valign = 1
 __meta__ = {
@@ -368,58 +511,68 @@ visible = false
 
 [node name="SettingsMenu" parent="." instance=ExtResource( 6 )]
 
-[node name="UI" parent="SettingsMenu" index="0"]
-visible = false
-
-[node name="OptionButton" parent="SettingsMenu/UI/GraphicsVbox/Quality" index="0"]
-group = SubResource( 8 )
+[node name="OptionButton" parent="SettingsMenu/UI/TabContainer/Graphics/GraphicsVbox/Quality" index="0"]
+group = SubResource( 13 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 9 )
+environment = SubResource( 14 )
 
-[node name="LoadMenu" type="CanvasLayer" parent="."]
+[node name="Control" type="Control" parent="."]
+margin_right = 640.0
+margin_bottom = 360.0
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
 
-[node name="NinePatchRect" type="NinePatchRect" parent="LoadMenu"]
-visible = false
-anchor_left = 0.037
-anchor_top = 0.067
-anchor_right = 0.45
-anchor_bottom = 0.956
-margin_left = 0.32
-margin_top = -0.120001
-margin_bottom = -0.160004
-texture = ExtResource( 16 )
-patch_margin_left = 30
-patch_margin_top = 30
-patch_margin_right = 30
-patch_margin_bottom = 30
+[node name="TextureRect2" type="TextureRect" parent="Control"]
+margin_left = -320.0
+margin_top = 480.0
+margin_right = 320.0
+margin_bottom = 512.0
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 25 )
+expand = true
+stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ScrollContainer" type="ScrollContainer" parent="LoadMenu/NinePatchRect"]
-anchor_left = 0.061
-anchor_top = 0.05
-anchor_right = 0.939
-anchor_bottom = 0.95
-margin_left = -0.104002
-margin_right = 0.103989
-scroll_horizontal_enabled = false
+[node name="TextureRect" type="TextureRect" parent="Control"]
+margin_left = -320.0
+margin_top = 232.0
+margin_right = 320.0
+margin_bottom = 264.0
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 25 )
+expand = true
+stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="LoadMenu/NinePatchRect/ScrollContainer"]
-
-[node name="BackButton" type="Button" parent="LoadMenu/NinePatchRect"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -24.0
-margin_bottom = 24.0
+[node name="Panel" type="Panel" parent="Control"]
+margin_left = 384.0
+margin_top = 76.0
+margin_right = 416.0
+margin_bottom = 164.0
+rect_scale = Vector2( 2, 2 )
+custom_styles/panel = SubResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 320, 180 )
+current = true
+zoom = Vector2( 2, 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/IdleMain = SubResource( 16 )
+anims/MainToLoad = SubResource( 17 )
+
+[connection signal="pressed" from="LoadMenu/UI/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="pressed" from="MainMenu/UI/ButtonsVbox/NewGameButton" to="." method="_on_NewGameButton_pressed"]
 [connection signal="pressed" from="MainMenu/UI/ButtonsVbox/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
 [connection signal="pressed" from="MainMenu/UI/ButtonsVbox/SettingsButton" to="." method="_on_SettingsButton_pressed"]
@@ -429,7 +582,6 @@ __meta__ = {
 [connection signal="pressed" from="MainMenu/UI/ModePopup/Panel/HBoxContainer/CasualButton" to="." method="_on_CasualButton_pressed"]
 [connection signal="pressed" from="Credits/UI/BackButton" to="." method="_on_CreditsBackButton_pressed"]
 [connection signal="pressed" from="SettingsMenu/UI/BackButton" to="." method="_on_SettingsBackButton_pressed"]
-[connection signal="pressed" from="LoadMenu/NinePatchRect/BackButton" to="." method="_on_BackButton_pressed"]
 
 [editable path="Credits"]
 [editable path="SettingsMenu"]

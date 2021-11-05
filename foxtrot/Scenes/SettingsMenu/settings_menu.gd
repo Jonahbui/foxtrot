@@ -1,18 +1,48 @@
 extends CanvasLayer
 
+export(NodePath) var masterSlider
+export(NodePath) var musicSlider
+export(NodePath) var sfxSlider
+export(NodePath) var ambienceSlider
+export(NodePath) var uiSlider
+
+export(NodePath) var masterToggle
+export(NodePath) var musicToggle
+export(NodePath) var sfxToggle
+export(NodePath) var ambienceToggle
+export(NodePath) var uiToggle
+
+export(NodePath) var fullscreenCheckbox
 func _ready():
+  masterSlider = get_node(masterSlider)
+  musicSlider = get_node(musicSlider)
+  sfxSlider = get_node(sfxSlider)
+  ambienceSlider = get_node(ambienceSlider)
+  uiSlider = get_node(uiSlider)
+  
+  masterToggle = get_node(masterToggle)
+  musicToggle = get_node(musicToggle)
+  sfxToggle = get_node(sfxToggle)
+  ambienceToggle = get_node(ambienceToggle)
+  uiToggle = get_node(uiToggle)
+
+  fullscreenCheckbox = get_node(fullscreenCheckbox)
   LoadConfigToSettings()
 
 func LoadConfigToSettings():
   # Set the volume settings to the ones in the config file.
-  $UI/AudioVbox/MasterVolume/MasterSlider.value = Save.config[Globals.VOLUME_MASTER]
-  $UI/AudioVbox/MusicVolume/MusicSlider.value = Save.config[Globals.VOLUME_MUSIC]
-  $UI/AudioVbox/SFXVolume/SFXSlider.value = Save.config[Globals.VOLUME_SFX]
-  $UI/AudioVbox/MasterVolume/MasterSlider/MasterCheckbox.pressed = Save.config[Globals.VOLUME_MASTER_TOGGLE]
-  $UI/AudioVbox/MusicVolume/MusicSlider/MusicCheckbox.pressed = Save.config[Globals.VOLUME_MUSIC_TOGGLE]
-  $UI/AudioVbox/SFXVolume/SFXSlider/SFXCheckbox.pressed = Save.config[Globals.VOLUME_SFX_TOGGLE]
+  masterSlider.value = Save.config[Globals.VOLUME_MASTER]
+  musicSlider.value = Save.config[Globals.VOLUME_MUSIC]
+  sfxSlider.value = Save.config[Globals.VOLUME_SFX]
+  ambienceSlider.value = Save.config[Globals.VOLUME_AMBIENCE]
+  uiSlider.value = Save.config[Globals.VOLUME_UI]
+  masterToggle.pressed = Save.config[Globals.VOLUME_MASTER_TOGGLE]
+  musicToggle.pressed = Save.config[Globals.VOLUME_MUSIC_TOGGLE]
+  sfxToggle.pressed = Save.config[Globals.VOLUME_SFX_TOGGLE]
+  ambienceToggle.pressed = Save.config[Globals.VOLUME_AMBIENCE_TOGGLE]
+  uiToggle.pressed = Save.config[Globals.VOLUME_UI_TOGGLE]
   
-  $UI/GraphicsVbox/Fullscreen/FullscreenCheckBox.pressed = Save.config[Globals.GRAPHICS_FULLSCREEN]
+  fullscreenCheckbox.pressed = Save.config[Globals.GRAPHICS_FULLSCREEN]
 
   # Note: updating the value of the sliders & checkboxes respectively with the 
   #   properties value and pressed will issue out signals indicating that their
@@ -33,6 +63,15 @@ func _on_SFXSlider_value_changed(value):
   Save.config[Globals.VOLUME_SFX] = value
   AudioServer.set_bus_volume_db(2, value)
 
+func _on_AmbienceSlider_value_changed(value):
+  Save.config[Globals.VOLUME_AMBIENCE] = value
+  AudioServer.set_bus_volume_db(3, value)
+
+func _on_UserInterfaceSlider_value_changed(value):
+  Save.config[Globals.VOLUME_UI] = value
+  AudioServer.set_bus_volume_db(4, value)
+
+
 func _on_MasterCheckbox_toggled(button_pressed):
   Save.config[Globals.VOLUME_MASTER_TOGGLE] = button_pressed
   AudioServer.set_bus_mute(0, button_pressed)
@@ -45,13 +84,24 @@ func _on_SFXCheckbox_toggled(button_pressed):
   Save.config[Globals.VOLUME_SFX_TOGGLE] = button_pressed
   AudioServer.set_bus_mute(2, button_pressed)
 
+func _on_AmbienceCheckbox_toggled(button_pressed):
+  Save.config[Globals.VOLUME_AMBIENCE_TOGGLE] = button_pressed
+  AudioServer.set_bus_mute(3, button_pressed)
+
+func _on_UserInterfaceCheckbox_toggled(button_pressed):
+  Save.config[Globals.VOLUME_UI_TOGGLE] = button_pressed
+  AudioServer.set_bus_mute(4, button_pressed)
+
 func _on_Reset_pressed():
   Save.reset_config()
   LoadConfigToSettings()
   AudioServer.set_bus_mute(0, Save.config[Globals.VOLUME_MASTER_TOGGLE])
   AudioServer.set_bus_mute(1, Save.config[Globals.VOLUME_MUSIC_TOGGLE])
   AudioServer.set_bus_mute(2, Save.config[Globals.VOLUME_SFX_TOGGLE])  
+  AudioServer.set_bus_mute(3, Save.config[Globals.VOLUME_AMBIENCE_TOGGLE])  
 
 func _on_FullScreenCheckBox_toggled(button_pressed):
   OS.window_fullscreen = button_pressed
   Save.config[Globals.GRAPHICS_FULLSCREEN] = button_pressed
+
+

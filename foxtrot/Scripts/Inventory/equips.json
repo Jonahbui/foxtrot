@@ -8,12 +8,39 @@
     "instance" 	: "res://Instances/Equips/Weapon/BubbleNade.tscn",
     "desc"		  : "Explode your enemies with the power of bubbles!"
   },
+  "1"     :	{
+    "name"	   	: "Driftwood",
+    "type"     	: "weapon",
+    "subtype"   : "nonstackable",
+    "price"	   	: 0,
+    "resource" 	: "res://Textures/Gameplay/Weapon/driftwood.png",
+    "instance" 	: "res://Instances/Equips/Weapon/Driftwood.tscn",
+    "desc"		  : "Go get one of the shore. What are you doing buying one?"
+  },
+  "2"     :	{
+    "name"	   	: "Fishing Pole",
+    "type"     	: "weapon",
+    "subtype"   : "nonstackable",
+    "price"	   	: 0,
+    "resource" 	: "res://Textures/Gameplay/Weapon/...",
+    "instance" 	: "res://Instances/Equips/Weapon/...",
+    "desc"		  : ""
+  },
+  "3"     :	{
+    "name"	   	: "Harpoon Gun",
+    "type"     	: "weapon",
+    "subtype"   : "nonstackable",
+    "price"	   	: 0,
+    "resource" 	: "res://Textures/Gameplay/Weapon/harpoon_gun.png",
+    "instance" 	: "res://Instances/Equips/Weapon/HarpoonGun.tscn",
+    "desc"		  : "Stab them all."
+  },
 
 
   "512"   : {
     "name"	   	: "Diver Suit",
     "type"     	: "armor",
-    "subtype"   : "armor",
+    "subtype"   : "nonstackable",
     "price"	   	: 0,
     "resource" 	: "res://Textures/Gameplay/Armor/diver_suit.png",
     "instance" 	: "res://Instances/Equips/Armor/DiverSuit.tscn",
@@ -23,8 +50,8 @@
 
   "1024"   : {
     "name"	   	: "White Shell",
-    "type"     	: "armor",
-    "subtype"   : "accessory",
+    "type"     	: "accessory",
+    "subtype"   : "nonstackable",
     "price"	   	: 0,
     "resource" 	: "res://Textures/Gameplay/Accessory/white_shell.png",
     "instance" 	: "res://Instances/Equips/Accessory/WhiteShell.tscn",

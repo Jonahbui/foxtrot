@@ -23,7 +23,7 @@ func Use():
       if player_inv.RemoveItem(self) == OK:
         self.queue_free()
       else:
-        print("[ItemStack] Error. Failed to remove item from player inventory.")
+        printerr("[ItemStack] Error. Failed to remove item from player inventory...")
 
 func AddToStack(amount):
   # Add amount to stack 
@@ -44,10 +44,17 @@ func AddToStack(amount):
 
 func ToJSON():
   return {
-    "id" : id,
-    "curr_stack_amt" : curr_stack_amt
+    Save.SAVE_ID : id,
+    Save.SAVE_CURR_STACK_AMT : curr_stack_amt
    }
 
 func FromJSON(item):
-  self.id = item["id"]
-  self.curr_stack_amt = item["curr_stack_amt"]
+  self.id = item[Save.SAVE_ID]
+  self.curr_stack_amt = item[Save.SAVE_CURR_STACK_AMT]
+
+func Pickup():
+  if Equips.equips[id][Equips.EQUIP_SUBTYPE] == Equips.Subtype.stackable:
+    Signals.emit_signal("on_inventory_add_item_stack", id, curr_stack_amt)
+    self.queue_free()
+  else:
+    .Pickup()

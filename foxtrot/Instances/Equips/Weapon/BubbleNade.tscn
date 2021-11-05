@@ -10,13 +10,17 @@ radius = 11.3137
 radius = 14.3362
 
 [node name="BubbleNade" type="KinematicBody2D"]
-collision_layer = 0
+z_index = 4
+collision_layer = 8
+collision_mask = 129
 script = ExtResource( 2 )
+id = 0
 max_stack_amt = 8
 damage = 10
 projectile = "res://Instances/Equips/Projectile/BubblenadeProjectile.tscn"
 
 [node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 1 )
 
 [node name="Collider" type="CollisionShape2D" parent="."]
@@ -24,12 +28,14 @@ position = Vector2( -0.771694, 1.68369 )
 shape = SubResource( 1 )
 
 [node name="PickupDetector" type="Area2D" parent="."]
-collision_layer = 8
+collision_layer = 0
 collision_mask = 2
 
 [node name="PickupCollider" type="CollisionShape2D" parent="PickupDetector"]
 position = Vector2( -0.708706, 1.73239 )
 shape = SubResource( 2 )
+
+[node name="Node2D" type="Node2D" parent="."]
 
 [connection signal="body_entered" from="PickupDetector" to="." method="_on_PickupDetector_body_entered"]
 [connection signal="body_exited" from="PickupDetector" to="." method="_on_PickupDetector_body_exited"]

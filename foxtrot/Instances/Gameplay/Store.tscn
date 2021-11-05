@@ -1,0 +1,297 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://Textures/Gameplay/Store/cash_register.png" type="Texture" id=1]
+[ext_resource path="res://Node/Interaction.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Textures/UI/Button/input_icon_reset_normal.png" type="Texture" id=3]
+[ext_resource path="res://Textures/UI/Button/input_icon_reset_pressed.png" type="Texture" id=4]
+[ext_resource path="res://Textures/UI/Button/input_icon_reset_hover.png" type="Texture" id=5]
+[ext_resource path="res://Fonts/thaelahfat_pure_16x.tres" type="DynamicFont" id=6]
+[ext_resource path="res://Textures/UI/Slider/tab_panel.png" type="Texture" id=7]
+[ext_resource path="res://Textures/UI/Panel/purchase_item_frame.png" type="Texture" id=8]
+[ext_resource path="res://Textures/UI/Button/button_pressed.tres" type="StyleBox" id=9]
+[ext_resource path="res://Textures/UI/Button/button_normal.tres" type="StyleBox" id=10]
+[ext_resource path="res://Textures/UI/Button/button_disabled.tres" type="StyleBox" id=11]
+[ext_resource path="res://Textures/UI/Button/button_hover.tres" type="StyleBox" id=12]
+[ext_resource path="res://Fonts/ThaleahFat_TTF.ttf" type="DynamicFontData" id=13]
+[ext_resource path="res://Instances/Gameplay/store.gd" type="Script" id=14]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 96, 8 )
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 7 )
+region_rect = Rect2( 0, 0, 32, 32 )
+margin_left = 2.0
+margin_right = 2.0
+margin_top = 2.0
+margin_bottom = 2.0
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 13 )
+
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="StyleBoxTexture" id=5]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="StyleBoxTexture" id=6]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 16, 16 )
+
+[node name="Store Front" type="Sprite"]
+self_modulate = Color( 2, 2, 2, 1 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+script = ExtResource( 14 )
+purchase_frame = "res://Instances/UI/PurchaseFrame.tscn"
+item_container = NodePath("Store/UI/TabContainer/Items/ScrollContainer/VBoxContainer")
+weapon_container = NodePath("Store/UI/TabContainer/Weapons/ScrollContainer/VBoxContainer")
+armor_container = NodePath("Store/UI/TabContainer/Armor/ScrollContainer/VBoxContainer")
+accessory_container = NodePath("Store/UI/TabContainer/Accessories/ScrollContainer/VBoxContainer")
+
+[node name="Interaction" parent="." instance=ExtResource( 2 )]
+
+[node name="CountertopCollider" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CountertopCollider"]
+position = Vector2( 0.108765, -6.2995 )
+scale = Vector2( 0.5, 0.5 )
+shape = SubResource( 1 )
+one_way_collision = true
+
+[node name="Store" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="UI" type="Panel" parent="Store"]
+self_modulate = Color( 1, 0.870588, 0.392157, 1 )
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 320.0
+margin_bottom = 344.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TabContainer" type="TabContainer" parent="Store/UI"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -304.0
+margin_bottom = 328.0
+custom_styles/tab_fg = ExtResource( 10 )
+custom_styles/tab_disabled = ExtResource( 11 )
+custom_styles/tab_bg = ExtResource( 11 )
+custom_styles/panel = SubResource( 2 )
+custom_fonts/font = ExtResource( 6 )
+custom_constants/side_margin = 0
+tab_align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Items" type="Tabs" parent="Store/UI/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 29.0
+margin_right = -2.0
+margin_bottom = -2.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Store/UI/TabContainer/Items"]
+margin_left = 6.0
+margin_top = 3.0
+margin_right = 174.0
+margin_bottom = 288.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Store/UI/TabContainer/Items/ScrollContainer"]
+margin_right = 164.0
+rect_min_size = Vector2( 164, 0 )
+rect_clip_content = true
+
+[node name="Weapons" type="Tabs" parent="Store/UI/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 29.0
+margin_right = -2.0
+margin_bottom = -2.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Store/UI/TabContainer/Weapons"]
+margin_left = 6.0
+margin_top = 3.0
+margin_right = 174.0
+margin_bottom = 288.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Store/UI/TabContainer/Weapons/ScrollContainer"]
+margin_right = 164.0
+rect_min_size = Vector2( 164, 0 )
+rect_clip_content = true
+
+[node name="Armor" type="Tabs" parent="Store/UI/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 29.0
+margin_right = -2.0
+margin_bottom = -2.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Store/UI/TabContainer/Armor"]
+margin_left = 6.0
+margin_top = 3.0
+margin_right = 174.0
+margin_bottom = 288.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Store/UI/TabContainer/Armor/ScrollContainer"]
+margin_right = 164.0
+rect_min_size = Vector2( 164, 0 )
+rect_clip_content = true
+
+[node name="Accessories" type="Tabs" parent="Store/UI/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 29.0
+margin_right = -2.0
+margin_bottom = -2.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Store/UI/TabContainer/Accessories"]
+margin_left = 6.0
+margin_top = 3.0
+margin_right = 174.0
+margin_bottom = 288.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Store/UI/TabContainer/Accessories/ScrollContainer"]
+margin_right = 164.0
+rect_min_size = Vector2( 164, 0 )
+rect_clip_content = true
+
+[node name="InfoPanel" type="Control" parent="Store/UI"]
+anchor_top = 0.088
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 0.135998
+margin_right = -2.0
+margin_bottom = -2.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DescriptionPanel" type="Panel" parent="Store/UI/InfoPanel"]
+self_modulate = Color( 1, 1, 1, 0.313726 )
+anchor_left = 0.581
+anchor_top = 0.384
+anchor_right = 0.986
+anchor_bottom = 0.849
+margin_left = 0.0239868
+margin_top = -0.127998
+margin_right = 0.143982
+margin_bottom = -7.908
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Description" type="Label" parent="Store/UI/InfoPanel"]
+anchor_left = 0.608
+anchor_top = 0.411
+anchor_right = 0.959
+anchor_bottom = 0.795
+margin_left = 0.0319824
+margin_top = -0.012001
+margin_right = 0.135986
+margin_bottom = -0.139999
+custom_fonts/font = SubResource( 3 )
+text = "Description here"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PurchaseButton" type="Button" parent="Store/UI/InfoPanel"]
+anchor_left = 0.581
+anchor_top = 0.849
+anchor_right = 0.986
+anchor_bottom = 0.986
+margin_left = 0.0239868
+margin_top = 0.0919952
+margin_right = 0.143982
+margin_bottom = 0.0879822
+custom_styles/hover = ExtResource( 12 )
+custom_styles/pressed = ExtResource( 9 )
+custom_styles/disabled = ExtResource( 9 )
+custom_styles/normal = ExtResource( 10 )
+custom_fonts/font = ExtResource( 6 )
+text = "PURCHASE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EquipFrame" type="TextureRect" parent="Store/UI/InfoPanel"]
+anchor_left = 0.58
+anchor_top = 0.01
+anchor_right = 0.98
+anchor_bottom = 0.36
+margin_left = -1.52588e-05
+margin_top = 0.0299997
+margin_bottom = 0.0799942
+texture = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Equip" type="TextureRect" parent="Store/UI/InfoPanel"]
+anchor_left = 0.662
+anchor_top = 0.055
+anchor_right = 0.905
+anchor_bottom = 0.301
+margin_left = 0.0479889
+margin_top = -0.0600014
+margin_right = 0.119995
+margin_bottom = 0.107994
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CloseStoreButton" type="Button" parent="Store/UI"]
+margin_left = 277.0
+margin_right = 304.0
+margin_bottom = 27.0
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/normal = SubResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+position = Vector2( -1, 1 )
+scale = Vector2( 5.7, 2.3 )
+process_parent = true
+physics_process_parent = true
+
+[connection signal="body_entered" from="Interaction" to="." method="_on_Interaction_body_entered"]
+[connection signal="body_exited" from="Interaction" to="." method="_on_Interaction_body_exited"]
+[connection signal="interaction_triggered" from="Interaction" to="." method="ToggleStore"]
+[connection signal="pressed" from="Store/UI/InfoPanel/PurchaseButton" to="." method="_on_PurchaseButton_pressed"]
+[connection signal="pressed" from="Store/UI/CloseStoreButton" to="." method="_on_CloseStoreButton_pressed"]
