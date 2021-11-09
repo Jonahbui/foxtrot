@@ -53,7 +53,7 @@ func TakeDamage(body):
     # Drop the item
     var loot = Loot.GenerateLoot(Loot.table[Loot.LOOT_ENEMY][loot_string])
     self.get_node_or_null("/root/Base/Level/Items/").add_child(loot)
-    loot.SetProcess(Globals.ItemProcess.World, null)
+    loot.SetProcess(Globals.ItemProcess.Dynamic, null)
     loot.set_global_position(self.get_global_transform().get_origin())
     
     self.queue_free()

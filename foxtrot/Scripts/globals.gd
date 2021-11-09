@@ -99,7 +99,8 @@ const GROUP_PLAYER_WEAPON_HITBOX = "PlayerWeaponHitbox"
 const GROUP_PLAYER_PROJECTILE_HITBOX = "PlayerProjectileHitbox"
 
 enum ItemProcess{
-  World,
-  Player,
-  WorldIdle
+  Dynamic,
+  Hidden,
+  Active,
+  Static
  }

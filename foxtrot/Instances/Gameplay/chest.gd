@@ -24,6 +24,6 @@ func Open():
   # Drop the item
   var loot = Loot.GenerateLoot(Loot.table[Loot.LOOT_LEVEL][loot_string])
   self.get_node_or_null("/root/Base/Level/Items/").add_child(loot)
-  loot.SetProcess(Globals.ItemProcess.WorldIdle, null)
+  loot.SetProcess(Globals.ItemProcess.Static, null)
   loot.set_global_position(self.get_global_transform().get_origin())
   # Destroy after opening?

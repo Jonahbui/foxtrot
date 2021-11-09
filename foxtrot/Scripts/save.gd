@@ -119,7 +119,7 @@ func empty_save_data():
   var data = {
     Globals.PLAYER_DIFFICULTY : false,
     Globals.PLAYER_INVENTORY  : {},
-    Globals.PLAYER_NAME       : "",
+    Globals.PLAYER_NAME       : "default",
     Globals.PLAYER_HEALTH     : 25,
     Globals.PLAYER_MANA       : 25,
     Globals.PLAYER_MONEY      : 0

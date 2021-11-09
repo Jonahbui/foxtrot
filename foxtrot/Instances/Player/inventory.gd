@@ -122,7 +122,7 @@ func AddItem(item, slot_id):
   inventory_stash.add_child(item)
   
   # Set item physics to interact with player
-  item.SetProcess(Globals.ItemProcess.Player, self)
+  item.SetProcess(Globals.ItemProcess.Hidden, self)
   item.set_global_position(self.get_parent().get_global_position())
   
   # Add item to the inventory
@@ -197,6 +197,7 @@ func AppendItemStack(item_to_add, amount=1):
     RefreshInventorySlot(stack_slot_id)
     
     # If the amount overflows, create a stack for that new amount
+    # TA: Need to account for multiple overflows!
     if overflow:
       var item_slot_id = AppendItem(item_id)
       inventory[item_slot_id].curr_stack_amt = overflow
@@ -207,7 +208,7 @@ func CreateItem(item_to_add):
   # If ID provided, create the item and add it
   var item = item_to_add
   if typeof(item_to_add) == TYPE_INT:
-    item = load(Equips.equips[item_to_add][Equips.EQUIP_INSTANCE]).instance()
+    item = load(Equips.equips[item_to_add].instance).instance()
     item.id = item_to_add
 
   return item
@@ -216,8 +217,7 @@ func DropCurrentItem():
   DropItemFromSlot(curr_slot_id)
 
 func DropItem(item):
-  item.SetProcess(Globals.ItemProcess.World, self)
-  item.player_inv = null
+  item.SetProcess(Globals.ItemProcess.Dynamic, self)
   Signals.emit_signal("on_item_drop", item, self.get_parent().get_global_position())
 
 func DropItemFromSlot(slot_id):
@@ -280,16 +280,21 @@ func SetActiveSlot(active_slot_id : int, prev_slot_id : int, ignoreSound=false):
   
   curr_slot_id = active_slot_id
   
+  # Set the theme of the previous slot to be a normal slot
   var prev_slot = slots[prev_slot_id]
   prev_slot.set_theme(slot_theme)
-  if inventory[prev_slot_id] != null:
-    Helper.SetActive(inventory[prev_slot_id], false)
   
+  # Set the previous item hidden if present in slot
+  var prev_item = inventory[prev_slot_id]
+  if prev_item != null: prev_item.SetProcess(Globals.ItemProcess.Hidden, self)
+
+  # Set the theme of the current slot to be a selected slot
   var curr_slot = slots[active_slot_id]
   curr_slot.set_theme(slot_select_theme)
-  if inventory[active_slot_id] != null:
-    Helper.SetActive(inventory[active_slot_id], true)
-    #propagate_call("update")
+  
+  # Set the current item active if present in slot
+  var curr_item = inventory[curr_slot_id]
+  if curr_item != null: curr_item.SetProcess(Globals.ItemProcess.Active, self)
   # If item is type weapon.
   # If item is type defense update player defense
   # If item is
@@ -348,16 +353,17 @@ func RefreshInventorySlot(slot_num : int):
   var itemframe = slots[slot_num].get_node_or_null("CenterContainer/Item")
   var count_label = slots[slot_num].get_node_or_null("ItemCountLabel")
   # If the inventory is not null, update its texture to the one in the current inventory slot
-  if inventory[slot_num] != null:
+  var item = inventory[slot_num]
+  if item != null:
     #print("[Inventory] Slot at %d is being refreshed..." % [slot_num])
     
-    var texture = load(Equips.equips[inventory[slot_num].id][Equips.EQUIP_RESOURCE])
+    var texture = load(Equips.equips[item.id].resource)
     itemframe.texture = texture
     itemframe.set_size(Vector2(24, 24))
     
     # If the item is stackable show it's stack count
-    if Equips.equips[inventory[slot_num].id][Equips.EQUIP_SUBTYPE] == Equips.Subtype.stackable:
-      var stack_amt = inventory[slot_num].curr_stack_amt
+    if Equips.equips[item.id].subtype == Equips.Subtype.stackable:
+      var stack_amt = item.curr_stack_amt
       if stack_amt > 0:
         count_label.visible = true
         count_label.text = str(stack_amt)
@@ -368,8 +374,8 @@ func RefreshInventorySlot(slot_num : int):
 
     # If the current slot is one of the ones being refreshed, make sure to
     # disable/enable the item in that slot
-    var itemState = true if IsSelectedHotbar(slot_num) else false
-    Helper.SetActive(inventory[slot_num], itemState)
+    if IsSelectedHotbar(slot_num):
+      item.SetProcess(Globals.ItemProcess.Active, self)
     
   # If the inventory is null, set texture to null
   else:
@@ -408,21 +414,22 @@ func _on_slot_pressed(slot_num):
       # Swap places in inventory for item in slot 1 with item in slot2
       if inventory[selectedSlot1] != null && inventory[selectedSlot2] != null:
         
-        var item_slot1 = GetEquip(inventory[selectedSlot1])
-        var item_slot2 = GetEquip(inventory[selectedSlot2])
+        var item_slot1 = GetItemInfo(inventory[selectedSlot1])
+        var item_slot2 = GetItemInfo(inventory[selectedSlot2])
         
         # If swapping armor with non-armor piece or swapping non-armor into non armor slot, reject.
-        if ( (item_slot1[Equips.EQUIP_TYPE] == Equips.Type.armor && item_slot2[Equips.EQUIP_TYPE] != Equips.Type.armor) || (item_slot1[Equips.EQUIP_TYPE] != Equips.Type.armor && item_slot2[Equips.EQUIP_TYPE] == Equips.Type.armor) ) && (selectedSlot1 == ARMOR_SLOT_ID || selectedSlot2 == ARMOR_SLOT_ID):
+        if ( (item_slot1.type == Equips.Type.armor && item_slot2.type != Equips.Type.armor) || (item_slot1.type != Equips.Type.armor && item_slot2.type == Equips.Type.armor) ) && (selectedSlot1 == ARMOR_SLOT_ID || selectedSlot2 == ARMOR_SLOT_ID):
           print("Cannot swap from slot #%d (%s) to slot #%d(%s). Invalid slots for items..." % [selectedSlot1, inventory[selectedSlot1].get_name(), selectedSlot2, inventory[selectedSlot2].get_name()])            
           ResetSelection()
           return
         
         # If swapping an armor piece with accessory piece in equip slots, reject.
-        if ( (item_slot1[Equips.EQUIP_TYPE] == Equips.Type.accessory && item_slot2[Equips.EQUIP_TYPE] != Equips.Type.accessory) || (item_slot1[Equips.EQUIP_TYPE] != Equips.Type.accessory && item_slot2[Equips.EQUIP_TYPE] == Equips.Type.accessory) ) && (selectedSlot1 >= ARMOR_SLOT_ID || selectedSlot2 >= ARMOR_SLOT_ID):
+        if ( (item_slot1.type == Equips.Type.accessory && item_slot2.type != Equips.Type.accessory) || (item_slot1.type != Equips.Type.accessory && item_slot2.type == Equips.Type.accessory) ) && (selectedSlot1 >= ARMOR_SLOT_ID || selectedSlot2 >= ARMOR_SLOT_ID):
           print("Cannot swap from slot #%d (%s) to slot #%d(%s). Invalid slots for items..." % [selectedSlot1, inventory[selectedSlot1].get_name(), selectedSlot2, inventory[selectedSlot2].get_name()])            
           ResetSelection()
           return
 
+        # Swap the two items normally
         print("Swapping from slot #%d (%s) to slot #%d(%s)..." % [selectedSlot1, inventory[selectedSlot1].get_name(), selectedSlot2, inventory[selectedSlot2].get_name()])      
         var temp = inventory[selectedSlot1]
         inventory[selectedSlot1] = inventory[selectedSlot2]
@@ -431,16 +438,16 @@ func _on_slot_pressed(slot_num):
       # Move slot 1 item to slot 2
       elif inventory[selectedSlot1] != null && inventory[selectedSlot2] == null:
         
-        var item_slot1 = GetEquip(inventory[selectedSlot1])
+        var item_slot1 = GetItemInfo(inventory[selectedSlot1])
         
         # If moving non-armor piece to equip, reject.
-        if item_slot1[Equips.EQUIP_TYPE] != Equips.Type.armor && selectedSlot2 == ARMOR_SLOT_ID:
+        if item_slot1.type != Equips.Type.armor && selectedSlot2 == ARMOR_SLOT_ID:
           print("Cannot swap from slot #%d (%s) to slot #%d. Invalid slots for items..." % [selectedSlot1, inventory[selectedSlot1].get_name(), selectedSlot2])      
           ResetSelection()
           return
           
         # If moving non-accessory piece to equip, reject.
-        elif item_slot1[Equips.EQUIP_TYPE] != Equips.Type.accessory && selectedSlot2 > ARMOR_SLOT_ID:
+        elif item_slot1.type != Equips.Type.accessory && selectedSlot2 > ARMOR_SLOT_ID:
           print("Cannot swap from slot #%d (%s) to slot #%d. Invalid slots for items..." % [selectedSlot1, inventory[selectedSlot1].get_name(), selectedSlot2])      
           ResetSelection()
           return
@@ -466,7 +473,7 @@ func _on_Inventory_mouse_exited():
   isInventoryHover = false
   Globals.is_managing_inventory = false  
 
-func GetEquip(item):
+func GetItemInfo(item):
   return Equips.equips[item.id]
 
 # --------------------------------------------------------------------------------------------------

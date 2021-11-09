@@ -55,29 +55,29 @@ func ReadLootTable():
 func CalculateLootTableMetadata(category):
   for item in table[category]:
     item = table[category][item]
-    item[LOOT_RANGE] = []
+    item.range = []
     
     # Calculate the sum total of all possibilities
-    item[LOOT_SUM] = 0
-    for num in item[LOOT_TABLE]:
-      item[LOOT_SUM] += num
+    item.sum = 0
+    for num in item.table:
+      item.sum += num
       
       # Calculate the loot range
-      item[LOOT_RANGE].append(item[LOOT_SUM])
+      item.range.append(item.sum)
 
 func GenerateLoot(chosen_table):
   var rng = RandomNumberGenerator.new()
   rng.randomize()
-  var num = rng.randi_range(0, chosen_table[LOOT_SUM])
+  var num = rng.randi_range(0, chosen_table.sum)
   
   var loot_index = 0
-  for i in range(0, chosen_table[LOOT_RANGE].size()):
-    if num < chosen_table[LOOT_RANGE][i]:
+  for i in range(0, chosen_table.range.size()):
+    if num < chosen_table.range[i]:
       loot_index = i
       break
   
   # Create a loot instance
-  var loot = chosen_table[LOOT_ITEM][loot_index]
+  var loot = chosen_table.item[loot_index]
   var loot_instance = load(loot).instance()
   
   if loot_instance == null:
@@ -85,8 +85,8 @@ func GenerateLoot(chosen_table):
   
   # If the item is a coin, the coin can have a random associated value with it that must be assigned
   if loot == COIN_PATH:
-    var coin_min = chosen_table[LOOT_COIN][0]
-    var coin_max = chosen_table[LOOT_COIN][1]
+    var coin_min = chosen_table.coin[0]
+    var coin_max = chosen_table.coin[1]
     loot_instance.value = rng.randi_range(coin_min, coin_max)
     
   return loot_instance

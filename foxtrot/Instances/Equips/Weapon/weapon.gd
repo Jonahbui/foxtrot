@@ -28,3 +28,6 @@ func SetIdle():
 
 func PlayAttack():
   Signals.emit_signal("on_play_audio", attack_sound, 1)
+  
+func FromJSON(item):
+  .FromJSON(item)

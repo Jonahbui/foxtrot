@@ -76,7 +76,7 @@ func LoadLevel(path, location=""):
   yield(get_tree().create_timer(time_in_seconds), "timeout")
   
   # Disable the player to prevent unwanted actions while changing levels
-  Helper.SetActive($Player, false)
+  Helper.SetActive($Player, false, false, false, false)
   
   # Load the current level.
   ## Check if there is already a level present
@@ -101,7 +101,7 @@ func LoadLevel(path, location=""):
 
     
   # After the level is loaded, reenable the player
-  Helper.SetActive($Player, true)
+  Helper.SetActive($Player, true, true, true, true)
   
   # Give transition period
   yield(get_tree().create_timer(time_in_seconds), "timeout")
@@ -166,7 +166,7 @@ func ProcessCmd(cmd):
             logs.text += "\nInvalid id presented. Could not find item..."
             return
           
-          if Equips.equips[item_id][Equips.EQUIP_SUBTYPE] != Equips.Subtype.stackable:
+          if Equips.equips[item_id].subtype != Equips.Subtype.stackable:
             Signals.emit_signal("on_inventory_add_item", item_id)
           else:
             if not parse[2].is_valid_integer(): return
