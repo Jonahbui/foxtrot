@@ -196,7 +196,7 @@ func AppendItemStack(item_to_add, amount=1):
     var add_stack_amt = item.max_stack_amt if overflow - item.max_stack_amt >= 0 else overflow
     item.curr_stack_amt = add_stack_amt
     overflow -= add_stack_amt
-    RefreshInventorySlots(null)
+  RefreshInventorySlots(null)
 
 func CreateItem(item_to_add):
   # If instance of an item is provided, do not create an instance
