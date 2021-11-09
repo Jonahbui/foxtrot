@@ -48,5 +48,5 @@ func ReadEquips():
     equips[id].type = Equips.Type.get(data[key].type)
     equips[id].subtype = Equips.Subtype.get(data[key].subtype)
     
-  print("\n[Equips] Loading resources...")
-  #print("[Equips] Resources: %s" % [equips])
+  print_debug("\n[Equips] Loading resources...")
+  #print_debug("[Equips] Resources: %s" % [equips])

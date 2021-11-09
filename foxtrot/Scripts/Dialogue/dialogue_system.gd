@@ -32,7 +32,7 @@ func _init():
 # Dialogue Functions
 # --------------------------------------------------------------------------------------------------
 func ReadDialogue():
-  print("\n[Dialogue System] Loading dialogue...")
+  print_debug("\n[Dialogue System] Loading dialogue...")
   # Check for file existance before reading
   var file = File.new()
   if not file.file_exists("res://Scripts/Dialogue/%s" % [FILENAME_DIALOGUE_EN]): 
@@ -54,7 +54,7 @@ func ReadDialogue():
       for num in dialogue[key][DIALOGUE_OPTIONS]:
         dialogue[key][DIALOGUE_OPTIONS][int(num)] = dialogue[key][DIALOGUE_OPTIONS][num]
     
-  #print("[Dialogue System] Dialogue: %s" % [dialogue])
+  #print_debug("[Dialogue System] Dialogue: %s" % [dialogue])
 
 func ToggleDialogueBox(force_set=false, value=false):
   if force_set:

@@ -96,7 +96,7 @@ func _on_PurchaseButton_pressed():
   
   ## Player does not have sufficent money, reject purchase
   if player.money - Equips.equips[curr_purchase_item].price < 0: 
-    print("[Store] Insufficent money to purchase (%s) %s" % [curr_purchase_item, Equips.equips[curr_purchase_item].name])  
+    print_debug("[Store] Insufficent money to purchase (%s) %s" % [curr_purchase_item, Equips.equips[curr_purchase_item].name])  
     return
   
   # Subtract the money from the player if sufficient
@@ -110,4 +110,4 @@ func _on_PurchaseButton_pressed():
   else:
     Signals.emit_signal("on_inventory_add_item", curr_purchase_item)
 
-  print("[Store] Purchasing (%s) %s" % [curr_purchase_item, Equips.equips[curr_purchase_item].name])
+  print_debug("[Store] Purchasing (%s) %s" % [curr_purchase_item, Equips.equips[curr_purchase_item].name])

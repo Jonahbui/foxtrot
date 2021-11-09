@@ -28,7 +28,6 @@ func _ready():
   cmdline = self.get_node(cmdline)
   logs = self.get_node(logs)
   
-  print()
   if Signals.connect("on_player_death", self, "OnDeath") != OK:
     printerr("[Base] Error. Failed to connect to signal on_player_death...")
   
@@ -95,7 +94,7 @@ func LoadLevel(path, location=""):
   var spawnlocation = instance.get_node_or_null("Spawnpoint/%s" % [location])
   if spawnlocation != null:
     $Player.set_global_position(spawnlocation.get_global_position())
-    print("[Base] Loaded at \'Spawnpoint/%s\'..." % [location])    
+    print_debug("[Base] Loaded at \'Spawnpoint/%s\'..." % [location])    
   else:
     printerr("[Base] The location could not be located in Spawnpoint/%s..." % [location])
 

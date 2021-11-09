@@ -22,8 +22,7 @@ func Use():
     
   in_cooldown = true
 
-func SetIdle():
-  .SetIdle()
+func AnimationStop():
   $Sprite/AnimationPlayer.play("idle")
 
 func PlayAttack():

@@ -49,7 +49,7 @@ func ReadLootTable():
     printerr("[Loot] Error. Could not parse data...")
     return null
     
-  print("\n[Loot] Loading loot table...")
+  print_debug("\n[Loot] Loading loot table...")
   table = data
 
 func CalculateLootTableMetadata(category):

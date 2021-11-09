@@ -40,7 +40,7 @@ func _physics_process(delta):
 func TakeDamage(body):
   # Deal damage
   health -= body.damage
-  print("[%s] Current health = %d. Damage taken = %d." % [body.get_name(), health, body.damage])
+  print_debug("[%s] Current health = %d. Damage taken = %d." % [body.get_name(), health, body.damage])
   
   # Deal knockback
   var direction = (self.get_global_transform().get_origin() - body.get_global_transform().get_origin()).normalized()

@@ -11,7 +11,7 @@ func _ready():
   #Input.set_custom_mouse_cursor(null)
   screen_center = get_viewport_rect().size
   screen_center /= 2
-  #print(screen_center)
+  #print_debug(screen_center)
 
 func _input(event):
   if event is InputEventMouseMotion:

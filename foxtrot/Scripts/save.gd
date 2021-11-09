@@ -78,8 +78,8 @@ func load_config():
   for key in data.keys():
     if config.has(key): config[key] = data[key]
   
-  print("\n[Save] Loading user configurations...")
-  print(config)
+  print_debug("\n[Save] Loading user configurations...")
+  print_debug(config)
 
 func reset_config():
   config = create_config(true)
@@ -164,7 +164,7 @@ func load_file(filename):
   for key in save_data.keys():
     if save_data.has(key): save_data[key] = data[key]
   
-  #print("\n[Save] Loading %s save file..." % [save_data[Globals.PLAYER_NAME]])
+  #print_debug("\n[Save] Loading %s save file..." % [save_data[Globals.PLAYER_NAME]])
   return save_data
   
 func list_saves():
@@ -183,9 +183,9 @@ func list_saves():
       save_file = dir.get_next()
     dir.list_dir_end()
   
-  print("[Save] Loading save files...")
+  print_debug("[Save] Loading save files...")
   for save in save_files:
-    print("\t%s" % [save])
+    print_debug("\t%s" % [save])
   return save_files
       
 func create_save_dir():
@@ -196,14 +196,14 @@ func create_save_dir():
       dir.make_dir("saves")  
 
 func init_player(player):
-  print("[Save] Initializing player...")
+  print_debug("[Save] Initializing player...")
   self.player = player
 
   Signals.emit_signal("on_base_game_loaded")
   
   
 func init_inventory(inventory):
-  print("[Save] Initializing inventory...")  
+  print_debug("[Save] Initializing inventory...")  
   self.inventory = inventory
 
 func init_game():
