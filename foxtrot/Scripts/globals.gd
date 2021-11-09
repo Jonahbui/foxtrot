@@ -59,7 +59,6 @@ var is_in_spawn           : bool = false
 var is_game_playing       : bool = false
 var is_new_game           : bool = false
 var is_hardcore_mode      : bool = false
-var is_managing_inventory : bool = false
 var is_in_water           : bool = false
 
 # Possible pause 'like' events that can occur

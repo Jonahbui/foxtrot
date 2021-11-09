@@ -29,7 +29,7 @@ export var gravity  : = 3000.0
 export var velocity : = Vector2.ZERO
 
 func _input(event):
-  if Globals.pause_flags != 0 || Globals.is_managing_inventory: return
+  if Globals.pause_flags != 0: return
   
   if player_inv == null:
     if player_body != null && event.is_action_pressed("interact"):
@@ -56,7 +56,7 @@ func _ready():
     SetProcess(process, null)
 
 func _physics_process(delta: float) -> void:
-  if Globals.pause_flags != 0 || Globals.is_managing_inventory: return
+  if Globals.pause_flags != 0: return
   
   velocity.y += gravity * delta
   velocity = move_and_slide( velocity, Vector2.UP )
