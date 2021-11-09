@@ -23,7 +23,7 @@ func _input(event):
 
 func _on_ResumeButton_pressed():
   # If resuming the game, unpause the game
-  Globals.SetFlag(Globals.FLAG_PAUSED, true)
+  Globals.SetFlag(Globals.FLAG_PAUSED, false)
   
   # Hide both the pause menu and settings menu when the game starts.
   # Need to hide settings menu because it can still be open even if the pause menu is not
