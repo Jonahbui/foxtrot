@@ -1,8 +1,9 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Instances/Gameplay/Store.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Textures/Gameplay/Fish/turtle_sheet.png" type="Texture" id=2]
 [ext_resource path="res://Textures/Gameplay/Accessory/hairbow.png" type="Texture" id=3]
+[ext_resource path="res://Audio/Music/aquarium1.mp3" type="AudioStream" id=4]
 [ext_resource path="res://Textures/Gameplay/player.png" type="Texture" id=5]
 [ext_resource path="res://Textures/Gameplay/NPC/angler_sean_anim.tres" type="SpriteFrames" id=6]
 [ext_resource path="res://Textures/Gameplay/Store/store_tiles.tres" type="TileSet" id=7]
@@ -314,6 +315,14 @@ texture = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="LocalAudio" type="Node2D" parent="."]
+
+[node name="Music" type="AudioStreamPlayer2D" parent="LocalAudio"]
+stream = ExtResource( 4 )
+volume_db = 1.0
+autoplay = true
+bus = "Music"
 
 [connection signal="body_entered" from="Sprites/Store Entrance/DoorDetector" to="Sprites/Store Entrance" method="_on_DoorDetector_body_entered"]
 [connection signal="body_exited" from="Sprites/Store Entrance/DoorDetector" to="Sprites/Store Entrance" method="_on_DoorDetector_body_exited"]

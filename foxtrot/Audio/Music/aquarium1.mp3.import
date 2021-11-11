@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/aquarium1.mp3-77ea57f6a3d2d046d3b9cc8e4266dcbb.mp3str"
+
+[deps]
+
+source_file="res://Audio/Music/aquarium1.mp3"
+dest_files=[ "res://.import/aquarium1.mp3-77ea57f6a3d2d046d3b9cc8e4266dcbb.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

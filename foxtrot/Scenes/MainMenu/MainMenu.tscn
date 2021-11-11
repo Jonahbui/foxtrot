@@ -1,6 +1,6 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=55 format=2]
 
-[ext_resource path="res://Textures/UI/Button/button_normal.png" type="Texture" id=1]
+[ext_resource path="res://Instances/LocalAudio.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/MainMenu/main_menu.gd" type="Script" id=2]
 [ext_resource path="res://Textures/SplashScreen/solid_white.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/Credits/Credits.tscn" type="PackedScene" id=4]
@@ -35,6 +35,8 @@
 [ext_resource path="res://Textures/UI/MainMenu/concrete_guard.png" type="Texture" id=33]
 [ext_resource path="res://Textures/UI/MainMenu/wooden_stairway.png" type="Texture" id=34]
 [ext_resource path="res://Textures/Gameplay/Spawn/beach_chair.png" type="Texture" id=35]
+[ext_resource path="res://Textures/UI/MainMenu/aquarium_sign.png" type="Texture" id=36]
+[ext_resource path="res://Textures/UI/MainMenu/aquarium_text.png" type="Texture" id=37]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 19 )
@@ -90,12 +92,8 @@ margin_top = 4.0
 margin_bottom = 4.0
 
 [sub_resource type="StyleBoxTexture" id=11]
-texture = ExtResource( 1 )
-region_rect = Rect2( 0, 0, 32, 32 )
-margin_left = 4.0
-margin_right = 4.0
-margin_top = 4.0
-margin_bottom = 4.0
+texture = ExtResource( 21 )
+region_rect = Rect2( 0, -1, 16, 17 )
 
 [sub_resource type="DynamicFont" id=12]
 size = 32
@@ -150,6 +148,9 @@ sodacan_blue = ExtResource( 20 )
 sodacan_green = ExtResource( 24 )
 
 [node name="Audio" type="Node" parent="."]
+script = ExtResource( 1 )
+button_down = "res://Audio/SoundEffects/button_down1.mp3"
+button_up = "res://Audio/SoundEffects/button_up1.mp3"
 
 [node name="MusicStream" type="AudioStreamPlayer" parent="Audio"]
 autoplay = true
@@ -623,6 +624,9 @@ __meta__ = {
 [node name="Beach Objects" type="Control" parent="Control"]
 margin_right = 960.0
 margin_bottom = 544.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Chair 1" type="TextureRect" parent="Control/Beach Objects"]
 anchor_right = 1.0
@@ -738,9 +742,9 @@ __meta__ = {
 anchor_right = 0.437
 anchor_bottom = 0.533
 margin_left = -320.0
-margin_top = -88.0
+margin_top = -144.0
 margin_right = -215.68
-margin_bottom = -23.88
+margin_bottom = -79.88
 rect_scale = Vector2( 2, 2 )
 texture = ExtResource( 28 )
 expand = true
@@ -761,6 +765,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Aquarium Sign2" type="TextureRect" parent="Control"]
+margin_left = 216.0
+margin_top = -120.0
+margin_right = 504.0
+margin_bottom = 152.0
+texture = ExtResource( 37 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Aquarium Sign" type="TextureRect" parent="Control"]
+margin_left = 80.0
+margin_top = 7.99998
+margin_right = 188.0
+margin_bottom = 172.0
+rect_rotation = -72.2099
+texture = ExtResource( 36 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 320, 180 )
 current = true
@@ -771,10 +798,20 @@ anims/IdleMain = SubResource( 16 )
 anims/MainToLoad = SubResource( 17 )
 
 [connection signal="pressed" from="LoadMenu/UI/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="button_down" from="MainMenu/UI/ButtonsVbox/NewGameButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="MainMenu/UI/ButtonsVbox/NewGameButton" to="Audio" method="_on_button_up"]
 [connection signal="pressed" from="MainMenu/UI/ButtonsVbox/NewGameButton" to="." method="_on_NewGameButton_pressed"]
+[connection signal="button_down" from="MainMenu/UI/ButtonsVbox/LoadGameButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="MainMenu/UI/ButtonsVbox/LoadGameButton" to="Audio" method="_on_button_up"]
 [connection signal="pressed" from="MainMenu/UI/ButtonsVbox/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
+[connection signal="button_down" from="MainMenu/UI/ButtonsVbox/SettingsButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="MainMenu/UI/ButtonsVbox/SettingsButton" to="Audio" method="_on_button_up"]
 [connection signal="pressed" from="MainMenu/UI/ButtonsVbox/SettingsButton" to="." method="_on_SettingsButton_pressed"]
+[connection signal="button_down" from="MainMenu/UI/ButtonsVbox/CreditsButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="MainMenu/UI/ButtonsVbox/CreditsButton" to="Audio" method="_on_button_up"]
 [connection signal="pressed" from="MainMenu/UI/ButtonsVbox/CreditsButton" to="." method="_on_CreditsButton_pressed"]
+[connection signal="button_down" from="MainMenu/UI/ButtonsVbox/ExitButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="MainMenu/UI/ButtonsVbox/ExitButton" to="Audio" method="_on_button_up"]
 [connection signal="pressed" from="MainMenu/UI/ButtonsVbox/ExitButton" to="." method="_on_ExitButton_pressed"]
 [connection signal="pressed" from="MainMenu/UI/ModePopup/Panel/HBoxContainer/HardcoreButton" to="." method="_on_HardcoreButton_pressed"]
 [connection signal="pressed" from="MainMenu/UI/ModePopup/Panel/HBoxContainer/CasualButton" to="." method="_on_CasualButton_pressed"]
