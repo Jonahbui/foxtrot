@@ -122,5 +122,9 @@ func LoadFile(name):
   # save name without the extension and add the extension on ourselves.
   Save.save = Save.load_file("%s.save" % [name])
   
-  # Load the main game
-  Helper.ChangeLevel(Globals.SPATH_BASE)
+  # Load the main game if the save file is valid and not null (check validity later)
+  if Save.save:
+    Helper.ChangeLevel(Globals.SPATH_BASE)
+  else:
+    # TA: add notification to player that file could not be loaded
+    printerr("[MainMenu] Error. Failed to load save file \"%s\"" % [name])
