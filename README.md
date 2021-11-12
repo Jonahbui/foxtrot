@@ -20,8 +20,15 @@ Sounds:
 		- https://freesound.org/people/Mrthenoronha/sounds/420447/
 	- Cash Reigster:
 		- https://freesound.org/people/kiddpark/sounds/201159/
-	- Spawn Sounds:
+	- Spawn:
 		- https://freesound.org/people/Eelke/sounds/144835/
+		- https://freesound.org/people/szegvari/sounds/548002/
+	- Aquarium: 
+		- https://freesound.org/people/ShortRecord/sounds/584430/
+	- UI:
+		- https://freesound.org/people/EminYILDIRIM/sounds/536108/
+		- https://freesound.org/people/InspectorJ/sounds/411089/
+
 
 Fonts:
 	- Thaleah Fat Font:

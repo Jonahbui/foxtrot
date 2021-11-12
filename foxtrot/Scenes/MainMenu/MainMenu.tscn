@@ -1,15 +1,15 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=53 format=2]
 
-[ext_resource path="res://Textures/UI/Button/button_normal.png" type="Texture" id=1]
+[ext_resource path="res://Instances/LocalAudio.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/MainMenu/main_menu.gd" type="Script" id=2]
-[ext_resource path="res://Textures/SplashScreen/solid_white.png" type="Texture" id=3]
+[ext_resource path="res://Textures/UI/Button/button_bubble_stretched_pressed.tres" type="StyleBox" id=3]
 [ext_resource path="res://Scenes/Credits/Credits.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Fonts/ThaleahFat_TTF.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Scenes/SettingsMenu/settings_menu.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Fonts/thaelahfat_pure_16x.tres" type="DynamicFont" id=7]
-[ext_resource path="res://Textures/UI/Button/button_pressed.png" type="Texture" id=8]
+[ext_resource path="res://Textures/UI/Button/button_bubble_unstretched_hover.tres" type="StyleBox" id=8]
 [ext_resource path="res://Textures/UI/Button/button_disabled.png" type="Texture" id=9]
-[ext_resource path="res://Textures/UI/Button/button_hover.png" type="Texture" id=10]
+[ext_resource path="res://Textures/UI/Button/button_bubble_unstretched_pressed.tres" type="StyleBox" id=10]
 [ext_resource path="res://Textures/UI/Button/button_disabled.tres" type="StyleBox" id=11]
 [ext_resource path="res://Textures/UI/Panel/panel.tres" type="StyleBox" id=12]
 [ext_resource path="res://Textures/UI/Button/button_hover.tres" type="StyleBox" id=13]
@@ -20,11 +20,25 @@
 [ext_resource path="res://Textures/UI/Button/input_icon_reset_pressed.png" type="Texture" id=18]
 [ext_resource path="res://Textures/UI/Button/input_icon_reset_hover.png" type="Texture" id=19]
 [ext_resource path="res://Textures/UI/MainMenu/sodacan_2.tres" type="StyleBox" id=20]
-[ext_resource path="res://Textures/UI/Button/button_bubble_normal.png" type="Texture" id=21]
+[ext_resource path="res://Textures/UI/Button/button_bubble_stretched_normal.tres" type="StyleBox" id=21]
 [ext_resource path="res://Textures/UI/MainMenu/vending_machine.png" type="Texture" id=22]
 [ext_resource path="res://Textures/UI/MainMenu/sodacan_1.tres" type="StyleBox" id=23]
 [ext_resource path="res://Textures/UI/MainMenu/sodacan_3.tres" type="StyleBox" id=24]
 [ext_resource path="res://Textures/UI/MainMenu/sidewalk_right.png" type="Texture" id=25]
+[ext_resource path="res://Textures/UI/MainMenu/road.png" type="Texture" id=26]
+[ext_resource path="res://Textures/UI/MainMenu/sky.png" type="Texture" id=27]
+[ext_resource path="res://Textures/UI/MainMenu/aquarium.png" type="Texture" id=28]
+[ext_resource path="res://Textures/UI/MainMenu/fence_right.png" type="Texture" id=29]
+[ext_resource path="res://Textures/UI/MainMenu/fence_left.png" type="Texture" id=30]
+[ext_resource path="res://Textures/UI/MainMenu/sand.png" type="Texture" id=31]
+[ext_resource path="res://Textures/UI/MainMenu/ocean.png" type="Texture" id=32]
+[ext_resource path="res://Textures/UI/MainMenu/concrete_guard.png" type="Texture" id=33]
+[ext_resource path="res://Textures/UI/MainMenu/wooden_stairway.png" type="Texture" id=34]
+[ext_resource path="res://Textures/Gameplay/Spawn/beach_chair.png" type="Texture" id=35]
+[ext_resource path="res://Textures/UI/MainMenu/aquarium_sign.png" type="Texture" id=36]
+[ext_resource path="res://Textures/UI/MainMenu/aquarium_text.png" type="Texture" id=37]
+[ext_resource path="res://Textures/UI/Button/button_bubble_unstretched_normal.tres" type="StyleBox" id=38]
+[ext_resource path="res://Textures/UI/Button/button_bubble_stretched_hover.tres" type="StyleBox" id=39]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 19 )
@@ -40,34 +54,10 @@ region_rect = Rect2( 0, 0, 16, 16 )
 texture = ExtResource( 17 )
 region_rect = Rect2( 0, 0, 16, 16 )
 
-[sub_resource type="StyleBoxTexture" id=5]
-texture = ExtResource( 21 )
-region_rect = Rect2( 0, 0, 16, 16 )
-margin_left = 8.0
-margin_right = 6.0
-margin_top = 8.0
-margin_bottom = 5.0
-
 [sub_resource type="DynamicFont" id=6]
 size = 64
 outline_color = Color( 0.85098, 0.509804, 0.0235294, 1 )
 font_data = ExtResource( 5 )
-
-[sub_resource type="StyleBoxTexture" id=7]
-texture = ExtResource( 10 )
-region_rect = Rect2( 0, 0, 32, 32 )
-margin_left = 4.0
-margin_right = 4.0
-margin_top = 4.0
-margin_bottom = 4.0
-
-[sub_resource type="StyleBoxTexture" id=8]
-texture = ExtResource( 8 )
-region_rect = Rect2( 0, 0, 32, 32 )
-margin_left = 4.0
-margin_right = 4.0
-margin_top = 4.0
-margin_bottom = 4.0
 
 [sub_resource type="StyleBoxTexture" id=9]
 
@@ -79,29 +69,21 @@ margin_right = 4.0
 margin_top = 4.0
 margin_bottom = 4.0
 
-[sub_resource type="StyleBoxTexture" id=11]
-texture = ExtResource( 1 )
-region_rect = Rect2( 0, 0, 32, 32 )
-margin_left = 4.0
-margin_right = 4.0
-margin_top = 4.0
-margin_bottom = 4.0
-
-[sub_resource type="DynamicFont" id=12]
+[sub_resource type="DynamicFont" id=11]
 size = 32
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 5 )
 
-[sub_resource type="ButtonGroup" id=13]
+[sub_resource type="ButtonGroup" id=12]
 
-[sub_resource type="Environment" id=14]
+[sub_resource type="Environment" id=13]
 
-[sub_resource type="StyleBoxTexture" id=15]
+[sub_resource type="StyleBoxTexture" id=14]
 texture = ExtResource( 22 )
 region_rect = Rect2( 0, 0, 32, 88 )
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=15]
 resource_name = "IdleMain"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Camera2D:zoom")
@@ -116,7 +98,7 @@ tracks/0/keys = {
 "values": [ Vector2( 5, 5 ) ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=16]
 resource_name = "MainToLoad"
 length = 0.5
 tracks/0/type = "value"
@@ -140,6 +122,9 @@ sodacan_blue = ExtResource( 20 )
 sodacan_green = ExtResource( 24 )
 
 [node name="Audio" type="Node" parent="."]
+script = ExtResource( 1 )
+button_down = "res://Audio/SoundEffects/button_down1.mp3"
+button_up = "res://Audio/SoundEffects/button_up1.mp3"
 
 [node name="MusicStream" type="AudioStreamPlayer" parent="Audio"]
 autoplay = true
@@ -206,14 +191,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="LoadMenu/UI"]
+[node name="StatsButton" type="Button" parent="LoadMenu/UI"]
 anchor_left = 0.262
 anchor_right = 0.262
 margin_left = 8.31998
 margin_top = 8.0
 margin_right = 98.3201
 margin_bottom = 36.0
-custom_styles/normal = SubResource( 5 )
+custom_styles/hover = ExtResource( 39 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/normal = ExtResource( 21 )
 custom_fonts/font = ExtResource( 7 )
 text = "Stats"
 __meta__ = {
@@ -226,20 +213,6 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Background" type="TextureRect" parent="MainMenu/UI"]
-visible = false
-self_modulate = Color( 0.160784, 0.6, 0.815686, 1 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = ExtResource( 3 )
-expand = true
-stretch_mode = 1
-__meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -275,11 +248,11 @@ margin_right = 48.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
 rect_pivot_offset = Vector2( -420.576, 40 )
-custom_styles/hover = SubResource( 7 )
-custom_styles/pressed = SubResource( 8 )
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 10 )
 custom_styles/focus = SubResource( 9 )
 custom_styles/disabled = SubResource( 10 )
-custom_styles/normal = SubResource( 11 )
+custom_styles/normal = ExtResource( 38 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -293,7 +266,7 @@ margin_left = 16.5297
 margin_top = -16.0
 margin_right = 199.53
 margin_bottom = 14.0
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 11 )
 text = "New Game"
 valign = 1
 __meta__ = {
@@ -307,11 +280,11 @@ margin_right = 48.0
 margin_bottom = 116.0
 rect_min_size = Vector2( 48, 48 )
 rect_pivot_offset = Vector2( -420.576, 40 )
-custom_styles/hover = SubResource( 7 )
-custom_styles/pressed = SubResource( 8 )
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 10 )
 custom_styles/focus = SubResource( 9 )
 custom_styles/disabled = SubResource( 10 )
-custom_styles/normal = SubResource( 11 )
+custom_styles/normal = ExtResource( 38 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -325,7 +298,7 @@ margin_left = 16.5297
 margin_top = -16.0
 margin_right = 223.53
 margin_bottom = 14.0
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 11 )
 text = "Load Game"
 valign = 1
 __meta__ = {
@@ -339,11 +312,11 @@ margin_right = 48.0
 margin_bottom = 184.0
 rect_min_size = Vector2( 48, 48 )
 rect_pivot_offset = Vector2( -420.576, 40 )
-custom_styles/hover = SubResource( 7 )
-custom_styles/pressed = SubResource( 8 )
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 10 )
 custom_styles/focus = SubResource( 9 )
 custom_styles/disabled = SubResource( 10 )
-custom_styles/normal = SubResource( 11 )
+custom_styles/normal = ExtResource( 38 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -357,7 +330,7 @@ margin_left = 16.5297
 margin_top = -16.0
 margin_right = 187.53
 margin_bottom = 14.0
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 11 )
 text = "Settings"
 valign = 1
 __meta__ = {
@@ -371,11 +344,11 @@ margin_right = 48.0
 margin_bottom = 252.0
 rect_min_size = Vector2( 48, 48 )
 rect_pivot_offset = Vector2( -420.576, 40 )
-custom_styles/hover = SubResource( 7 )
-custom_styles/pressed = SubResource( 8 )
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 10 )
 custom_styles/focus = SubResource( 9 )
 custom_styles/disabled = SubResource( 10 )
-custom_styles/normal = SubResource( 11 )
+custom_styles/normal = ExtResource( 38 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -389,7 +362,7 @@ margin_left = 16.5297
 margin_top = -16.0
 margin_right = 166.53
 margin_bottom = 14.0
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 11 )
 text = "Credits	"
 valign = 1
 __meta__ = {
@@ -403,11 +376,11 @@ margin_right = 48.0
 margin_bottom = 320.0
 rect_min_size = Vector2( 48, 48 )
 rect_pivot_offset = Vector2( -420.576, 40 )
-custom_styles/hover = SubResource( 7 )
-custom_styles/pressed = SubResource( 8 )
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 10 )
 custom_styles/focus = SubResource( 9 )
 custom_styles/disabled = SubResource( 10 )
-custom_styles/normal = SubResource( 11 )
+custom_styles/normal = ExtResource( 38 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -421,7 +394,7 @@ margin_left = 17.0
 margin_top = -16.0
 margin_right = 95.0
 margin_bottom = 14.0
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 11 )
 text = "Exit"
 valign = 1
 __meta__ = {
@@ -479,9 +452,9 @@ __meta__ = {
 }
 
 [node name="HardcoreButton" type="Button" parent="MainMenu/UI/ModePopup/Panel/HBoxContainer"]
-margin_left = 102.0
-margin_right = 176.0
-margin_bottom = 25.0
+margin_left = 101.0
+margin_right = 177.0
+margin_bottom = 27.0
 custom_styles/hover = ExtResource( 13 )
 custom_styles/pressed = ExtResource( 14 )
 custom_styles/disabled = ExtResource( 11 )
@@ -490,9 +463,9 @@ custom_fonts/font = ExtResource( 7 )
 text = "Hardcore"
 
 [node name="CasualButton" type="Button" parent="MainMenu/UI/ModePopup/Panel/HBoxContainer"]
-margin_left = 4.0
-margin_right = 80.0
-margin_bottom = 25.0
+margin_left = 5.0
+margin_right = 81.0
+margin_bottom = 27.0
 rect_min_size = Vector2( 76, 0 )
 custom_styles/hover = ExtResource( 13 )
 custom_styles/pressed = ExtResource( 14 )
@@ -512,12 +485,12 @@ visible = false
 [node name="SettingsMenu" parent="." instance=ExtResource( 6 )]
 
 [node name="OptionButton" parent="SettingsMenu/UI/TabContainer/Graphics/GraphicsVbox/Quality" index="0"]
-group = SubResource( 13 )
+group = SubResource( 12 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 14 )
+environment = SubResource( 13 )
 
-[node name="Control" type="Control" parent="."]
+[node name="MainMenu Background UI" type="Control" parent="."]
 margin_right = 640.0
 margin_bottom = 360.0
 mouse_filter = 2
@@ -526,20 +499,34 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect2" type="TextureRect" parent="Control"]
+[node name="Sky" type="TextureRect" parent="MainMenu Background UI"]
 margin_left = -320.0
-margin_top = 480.0
+margin_top = -184.0
 margin_right = 320.0
-margin_bottom = 512.0
+margin_bottom = 20.0
 rect_scale = Vector2( 2, 2 )
-texture = ExtResource( 25 )
+texture = ExtResource( 27 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Road" type="TextureRect" parent="MainMenu Background UI"]
+margin_left = -320.0
+margin_top = 296.0
+margin_right = 320.0
+margin_bottom = 392.0
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 26 )
 expand = true
 stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="Control"]
+[node name="Sidewalk Top" type="TextureRect" parent="MainMenu Background UI"]
 margin_left = -320.0
 margin_top = 232.0
 margin_right = 320.0
@@ -552,13 +539,213 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel" type="Panel" parent="Control"]
+[node name="Sidewalk Bottom" type="TextureRect" parent="MainMenu Background UI"]
+margin_left = -320.0
+margin_top = 488.0
+margin_right = 320.0
+margin_bottom = 520.0
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 25 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ocean" type="TextureRect" parent="MainMenu Background UI"]
+anchor_right = 0.437
+anchor_bottom = 0.533
+margin_left = 448.0
+margin_right = 424.32
+margin_bottom = 64.12
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 32 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Sand" type="TextureRect" parent="MainMenu Background UI"]
+anchor_right = 0.437
+anchor_bottom = 0.533
+margin_left = 448.0
+margin_top = 40.0
+margin_right = 424.32
+margin_bottom = 104.12
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 31 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Beach Objects" type="Control" parent="MainMenu Background UI"]
+margin_right = 960.0
+margin_bottom = 544.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Chair 1" type="TextureRect" parent="MainMenu Background UI/Beach Objects"]
+anchor_right = 1.0
+anchor_bottom = 0.985
+margin_left = 472.0
+margin_top = 144.0
+margin_right = -476.0
+margin_bottom = -387.84
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 8, 0 )
+texture = ExtResource( 35 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Chair 2" type="TextureRect" parent="MainMenu Background UI/Beach Objects"]
+self_modulate = Color( 5.2, 1.10588, 0.682353, 1 )
+anchor_right = 1.0
+anchor_bottom = 0.985
+margin_left = 472.0
+margin_top = 152.0
+margin_right = -476.0
+margin_bottom = -379.84
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 8, 0 )
+texture = ExtResource( 35 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Wooden Stairway" type="TextureRect" parent="MainMenu Background UI"]
+anchor_right = 0.437
+anchor_bottom = 0.533
+margin_left = 672.0
+margin_top = 168.0
+margin_right = 456.32
+margin_bottom = 8.11998
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 34 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Concrete Guard Right" type="TextureRect" parent="MainMenu Background UI"]
+anchor_right = 0.437
+anchor_bottom = 0.533
+margin_left = 792.0
+margin_top = 176.0
+margin_right = 596.32
+margin_bottom = 16.12
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 33 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Concrete Guard Left" type="TextureRect" parent="MainMenu Background UI"]
+anchor_right = 0.437
+anchor_bottom = 0.533
+margin_left = 432.0
+margin_top = 176.0
+margin_right = 276.32
+margin_bottom = 16.12
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 33 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Fencing Right" type="TextureRect" parent="MainMenu Background UI"]
+anchor_right = 0.437
+anchor_bottom = 0.533
+margin_left = 800.0
+margin_top = 160.0
+margin_right = 604.32
+margin_bottom = 0.11998
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 30 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Fencing Left" type="TextureRect" parent="MainMenu Background UI"]
+anchor_right = 0.437
+anchor_bottom = 0.533
+margin_left = 416.0
+margin_top = 160.0
+margin_right = 264.32
+margin_bottom = 0.11998
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 29 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Aquarium" type="TextureRect" parent="MainMenu Background UI"]
+anchor_right = 0.437
+anchor_bottom = 0.533
+margin_left = -320.0
+margin_top = -144.0
+margin_right = -215.68
+margin_bottom = -79.88
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 28 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Vending Machine" type="Panel" parent="MainMenu Background UI"]
 margin_left = 384.0
 margin_top = 76.0
 margin_right = 416.0
 margin_bottom = 164.0
 rect_scale = Vector2( 2, 2 )
-custom_styles/panel = SubResource( 15 )
+custom_styles/panel = SubResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Aquarium Sign2" type="TextureRect" parent="MainMenu Background UI"]
+margin_left = 216.0
+margin_top = -120.0
+margin_right = 504.0
+margin_bottom = 152.0
+texture = ExtResource( 37 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Aquarium Sign" type="TextureRect" parent="MainMenu Background UI"]
+margin_left = 80.0
+margin_top = 7.99998
+margin_right = 188.0
+margin_bottom = 172.0
+rect_rotation = -72.2099
+texture = ExtResource( 36 )
+stretch_mode = 6
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -569,17 +756,37 @@ current = true
 zoom = Vector2( 2, 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/IdleMain = SubResource( 16 )
-anims/MainToLoad = SubResource( 17 )
+anims/IdleMain = SubResource( 15 )
+anims/MainToLoad = SubResource( 16 )
 
+[connection signal="button_down" from="LoadMenu/UI/BackButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="LoadMenu/UI/BackButton" to="Audio" method="_on_button_up"]
 [connection signal="pressed" from="LoadMenu/UI/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="button_down" from="LoadMenu/UI/StatsButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="LoadMenu/UI/StatsButton" to="Audio" method="_on_button_up"]
+[connection signal="button_down" from="MainMenu/UI/ButtonsVbox/NewGameButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="MainMenu/UI/ButtonsVbox/NewGameButton" to="Audio" method="_on_button_up"]
 [connection signal="pressed" from="MainMenu/UI/ButtonsVbox/NewGameButton" to="." method="_on_NewGameButton_pressed"]
+[connection signal="button_down" from="MainMenu/UI/ButtonsVbox/LoadGameButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="MainMenu/UI/ButtonsVbox/LoadGameButton" to="Audio" method="_on_button_up"]
 [connection signal="pressed" from="MainMenu/UI/ButtonsVbox/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
+[connection signal="button_down" from="MainMenu/UI/ButtonsVbox/SettingsButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="MainMenu/UI/ButtonsVbox/SettingsButton" to="Audio" method="_on_button_up"]
 [connection signal="pressed" from="MainMenu/UI/ButtonsVbox/SettingsButton" to="." method="_on_SettingsButton_pressed"]
+[connection signal="button_down" from="MainMenu/UI/ButtonsVbox/CreditsButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="MainMenu/UI/ButtonsVbox/CreditsButton" to="Audio" method="_on_button_up"]
 [connection signal="pressed" from="MainMenu/UI/ButtonsVbox/CreditsButton" to="." method="_on_CreditsButton_pressed"]
+[connection signal="button_down" from="MainMenu/UI/ButtonsVbox/ExitButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="MainMenu/UI/ButtonsVbox/ExitButton" to="Audio" method="_on_button_up"]
 [connection signal="pressed" from="MainMenu/UI/ButtonsVbox/ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="button_down" from="MainMenu/UI/ModePopup/Panel/HBoxContainer/HardcoreButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="MainMenu/UI/ModePopup/Panel/HBoxContainer/HardcoreButton" to="Audio" method="_on_button_up"]
 [connection signal="pressed" from="MainMenu/UI/ModePopup/Panel/HBoxContainer/HardcoreButton" to="." method="_on_HardcoreButton_pressed"]
+[connection signal="button_down" from="MainMenu/UI/ModePopup/Panel/HBoxContainer/CasualButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="MainMenu/UI/ModePopup/Panel/HBoxContainer/CasualButton" to="Audio" method="_on_button_up"]
 [connection signal="pressed" from="MainMenu/UI/ModePopup/Panel/HBoxContainer/CasualButton" to="." method="_on_CasualButton_pressed"]
+[connection signal="button_down" from="Credits/UI/BackButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="Credits/UI/BackButton" to="Audio" method="_on_button_up"]
 [connection signal="pressed" from="Credits/UI/BackButton" to="." method="_on_CreditsBackButton_pressed"]
 [connection signal="pressed" from="SettingsMenu/UI/BackButton" to="." method="_on_SettingsBackButton_pressed"]
 

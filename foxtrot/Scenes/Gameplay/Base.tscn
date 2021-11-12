@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/PauseMenu/PauseMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Gameplay/base.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Scripts/Dialogue/dialogue_system.gd" type="Script" id=4]
 [ext_resource path="res://Textures/submarine_player_theme.tres" type="Theme" id=5]
 [ext_resource path="res://Textures/UI/Icon/icon_back.png" type="Texture" id=6]
+[ext_resource path="res://Instances/LocalAudio.gd" type="Script" id=7]
 
 [sub_resource type="ButtonGroup" id=1]
 
@@ -16,6 +17,9 @@ cmdline = NodePath("UI/DevConsole/CmdLine")
 logs = NodePath("UI/DevConsole/Log")
 
 [node name="Audio" type="Node" parent="."]
+script = ExtResource( 7 )
+button_down = "res://Audio/SoundEffects/button_down1.mp3"
+button_up = "res://Audio/SoundEffects/button_up1.mp3"
 
 [node name="MusicStream" type="AudioStreamPlayer" parent="Audio"]
 autoplay = true
@@ -236,6 +240,32 @@ anchor_bottom = 1.0
 [connection signal="pressed" from="DialogueSystem/DialogueBox/Options/Button3" to="DialogueSystem" method="OnOptionSelect" binds= [ 3 ]]
 [connection signal="text_changed" from="UI/DevConsole/CmdLine" to="." method="_on_CmdLine_text_changed"]
 [connection signal="text_entered" from="UI/DevConsole/CmdLine" to="." method="_on_CmdLine_text_entered"]
+[connection signal="button_down" from="PauseMenu/UI/Background/ButtonVbox/ResumeButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="PauseMenu/UI/Background/ButtonVbox/ResumeButton" to="Audio" method="_on_button_up"]
+[connection signal="button_down" from="PauseMenu/UI/Background/ButtonVbox/SaveButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="PauseMenu/UI/Background/ButtonVbox/SaveButton" to="Audio" method="_on_button_up"]
+[connection signal="button_down" from="PauseMenu/UI/Background/ButtonVbox/SettingsButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="PauseMenu/UI/Background/ButtonVbox/SettingsButton" to="Audio" method="_on_button_up"]
+[connection signal="button_up" from="PauseMenu/UI/Background/ButtonVbox/MainMenuButton" to="Audio" method="_on_button_up"]
+[connection signal="button_down" from="PauseMenu/UI/Background/ButtonVbox/ExitButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="PauseMenu/UI/Background/ButtonVbox/ExitButton" to="Audio" method="_on_button_up"]
+[connection signal="tab_changed" from="PauseMenu/SettingsMenu/UI/TabContainer" to="Audio" method="_on_tab_clicked"]
+[connection signal="button_down" from="PauseMenu/SettingsMenu/UI/TabContainer/Audio/AudioVbox/MasterVolume/MasterSlider/MasterCheckbox" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="PauseMenu/SettingsMenu/UI/TabContainer/Audio/AudioVbox/MasterVolume/MasterSlider/MasterCheckbox" to="Audio" method="_on_button_up"]
+[connection signal="button_down" from="PauseMenu/SettingsMenu/UI/TabContainer/Audio/AudioVbox/MusicVolume/MusicSlider/MusicCheckbox" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="PauseMenu/SettingsMenu/UI/TabContainer/Audio/AudioVbox/MusicVolume/MusicSlider/MusicCheckbox" to="Audio" method="_on_button_up"]
+[connection signal="button_down" from="PauseMenu/SettingsMenu/UI/TabContainer/Audio/AudioVbox/SFXVolume/SFXSlider/SFXCheckbox" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="PauseMenu/SettingsMenu/UI/TabContainer/Audio/AudioVbox/SFXVolume/SFXSlider/SFXCheckbox" to="Audio" method="_on_button_up"]
+[connection signal="button_down" from="PauseMenu/SettingsMenu/UI/TabContainer/Audio/AudioVbox/AmbienceVolume/AmbienceSlider/AmbienceCheckbox" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="PauseMenu/SettingsMenu/UI/TabContainer/Audio/AudioVbox/AmbienceVolume/AmbienceSlider/AmbienceCheckbox" to="Audio" method="_on_button_up"]
+[connection signal="button_down" from="PauseMenu/SettingsMenu/UI/TabContainer/Audio/AudioVbox/UserInterfaceVolume/UserInterfaceSlider/UserInterfaceCheckbox" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="PauseMenu/SettingsMenu/UI/TabContainer/Audio/AudioVbox/UserInterfaceVolume/UserInterfaceSlider/UserInterfaceCheckbox" to="Audio" method="_on_button_up"]
+[connection signal="button_down" from="PauseMenu/SettingsMenu/UI/TabContainer/Graphics/GraphicsVbox/Fullscreen/FullscreenCheckBox" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="PauseMenu/SettingsMenu/UI/TabContainer/Graphics/GraphicsVbox/Fullscreen/FullscreenCheckBox" to="Audio" method="_on_button_up"]
+[connection signal="button_down" from="PauseMenu/SettingsMenu/UI/Reset" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="PauseMenu/SettingsMenu/UI/Reset" to="Audio" method="_on_button_up"]
+[connection signal="button_down" from="PauseMenu/SettingsMenu/UI/BackButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="PauseMenu/SettingsMenu/UI/BackButton" to="Audio" method="_on_button_up"]
 
 [editable path="PauseMenu"]
 [editable path="PauseMenu/SettingsMenu"]

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/button_up1.mp3-a7086a390a093ced880c5d49aa40a5ed.mp3str"
+
+[deps]
+
+source_file="res://Audio/SoundEffects/button_up1.mp3"
+dest_files=[ "res://.import/button_up1.mp3-a7086a390a093ced880c5d49aa40a5ed.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

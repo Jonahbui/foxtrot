@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Textures/Gameplay/Spawn/spawn_tiles.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Gameplay/spawn.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Textures/Gameplay/Spawn/beach_towel.png" type="Texture" id=13]
 [ext_resource path="res://Instances/Equips/Weapon/Driftwood.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Node/ChangeLevelInteraction.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Audio/Music/spawn1.wav" type="AudioStream" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 64 )
@@ -175,6 +176,12 @@ stream = ExtResource( 11 )
 volume_db = 1.0
 autoplay = true
 bus = "Ambience"
+
+[node name="Music" type="AudioStreamPlayer2D" parent="LocalAudio"]
+stream = ExtResource( 16 )
+volume_db = 1.0
+autoplay = true
+bus = "Music"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
