@@ -102,18 +102,18 @@ __meta__ = {
 }
 
 [node name="Background" type="Panel" parent="UI"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = ExtResource( 8 )
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="TabContainer" type="TabContainer" parent="UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+custom_constants/side_margin = 0
+tab_align = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -398,10 +398,10 @@ __meta__ = {
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+margin_left = 30.0
+margin_top = 55.0
+margin_right = -30.0
+margin_bottom = -30.0
 tab_align = 0
 tab_close_display_policy = 2
 
@@ -409,10 +409,10 @@ tab_close_display_policy = 2
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+margin_left = 30.0
+margin_top = 55.0
+margin_right = -30.0
+margin_bottom = -30.0
 tab_align = 0
 tab_close_display_policy = 2
 
@@ -518,10 +518,10 @@ __meta__ = {
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+margin_left = 30.0
+margin_top = 55.0
+margin_right = -30.0
+margin_bottom = -30.0
 tab_align = 0
 tab_close_display_policy = 2
 
@@ -529,10 +529,10 @@ tab_close_display_policy = 2
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+margin_left = 30.0
+margin_top = 55.0
+margin_right = -30.0
+margin_bottom = -30.0
 tab_align = 0
 tab_close_display_policy = 2
 
@@ -540,10 +540,10 @@ tab_close_display_policy = 2
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+margin_left = 30.0
+margin_top = 55.0
+margin_right = -30.0
+margin_bottom = -30.0
 tab_align = 0
 tab_close_display_policy = 2
 

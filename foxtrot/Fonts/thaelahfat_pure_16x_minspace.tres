@@ -4,6 +4,6 @@
 
 [resource]
 outline_size = 1
-outline_color = Color( 0, 0, 0, 1 )
+outline_color = Color( 0.388235, 0.317647, 0.0588235, 1 )
 extra_spacing_bottom = -8
 font_data = ExtResource( 1 )
