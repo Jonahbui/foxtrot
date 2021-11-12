@@ -27,8 +27,14 @@ func PlayAudio(clip, source):
 func _on_button_down():
   PlayAudio(button_down, 3)
 
-
 func _on_button_up():
+  # There is a possibility that the player can click and almost instantenously let go of the LMB.
+  # If that occurs, then the sound played on LMB down will not be heard. We should wait until that
+  # finishes before we play the LMB up sound.
   while $UIStream.playing:
     yield(get_tree(), "idle_frame")
   PlayAudio(button_up, 3)
+
+func _on_tab_clicked(tab : int):
+  _on_button_down()
+  _on_button_up()

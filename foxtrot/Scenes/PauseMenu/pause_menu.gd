@@ -56,8 +56,11 @@ func _on_SettingsBackButton_pressed():
 func TriggerSaveMessage(state):
   $UI/SaveStateLabel.visible = true
   if state == OK:
+    $UI/SaveStateLabel.modulate = Color.green
     $UI/SaveStateLabel.text = "Saved..."
+    Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/save_success.wav", 3)
   else:
+    $UI/SaveStateLabel.modulate = Color.red
     $UI/SaveStateLabel.text = "Error. Could not save :("    
   yield(get_tree().create_timer(2.0), "timeout")
   $UI/SaveStateLabel.visible = false  

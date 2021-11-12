@@ -11,7 +11,6 @@
 [ext_resource path="res://Textures/UI/Button/input_normal.png" type="Texture" id=9]
 [ext_resource path="res://Textures/UI/Button/input_icon_reset_normal.png" type="Texture" id=10]
 
-
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 9 )
 region_rect = Rect2( 0, 0, 32, 32 )

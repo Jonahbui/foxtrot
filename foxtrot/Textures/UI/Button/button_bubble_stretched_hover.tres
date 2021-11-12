@@ -1,0 +1,12 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=2]
+
+[sub_resource type="StreamTexture" id=1]
+load_path = "res://.import/button_bubble_hover.png-d7d513744a12c129c1d8eb4f34ed21f2.stex"
+
+[resource]
+texture = SubResource( 1 )
+region_rect = Rect2( 0, 0, 16, 16 )
+margin_left = 8.0
+margin_right = 3.0
+margin_top = 8.0
+margin_bottom = 3.0
