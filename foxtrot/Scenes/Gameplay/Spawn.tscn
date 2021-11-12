@@ -92,6 +92,8 @@ shape = SubResource( 1 )
 
 [node name="Driftwood" parent="World" instance=ExtResource( 14 )]
 position = Vector2( 256, 320 )
+override_process = true
+process = 2
 
 [node name="Spawnpoint" type="Node2D" parent="."]
 position = Vector2( 320, 264 )
@@ -154,6 +156,9 @@ material = SubResource( 5 )
 position = Vector2( 756, 76 )
 scale = Vector2( 3.60938, 1.85937 )
 texture = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CanvasModulate" type="CanvasModulate" parent="Lighting"]
 visible = false
@@ -168,6 +173,9 @@ texture = ExtResource( 5 )
 color = Color( 0.729412, 0.188235, 0.188235, 1 )
 energy = 1.26
 range_item_cull_mask = 3
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="LocalAudio" type="Node2D" parent="."]
 
@@ -184,6 +192,7 @@ autoplay = true
 bus = "Music"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_ignore_camera_zoom = true
 
 [node name="SkyParallax" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_mirroring = Vector2( 256, 0 )
@@ -202,37 +211,33 @@ __meta__ = {
 
 [node name="SandParallax" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2( 0.9, 0.9 )
-motion_mirroring = Vector2( 2560, 0 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/SandParallax"]
 light_mask = 2
-position = Vector2( 872, 176 )
-scale = Vector2( 2, 2 )
+position = Vector2( 552, 240 )
 texture = ExtResource( 4 )
-__meta__ = {
-"_edit_lock_": true
-}
 
-[node name="sandcastle" type="Sprite" parent="ParallaxBackground/SandParallax/Sprite"]
-position = Vector2( -404, 8 )
+[node name="sandcastle" type="Sprite" parent="ParallaxBackground/SandParallax"]
+position = Vector2( 128, 256 )
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 10 )
 
-[node name="beach_towel" type="Sprite" parent="ParallaxBackground/SandParallax/Sprite"]
+[node name="beach_towel" type="Sprite" parent="ParallaxBackground/SandParallax"]
 self_modulate = Color( 0.427451, 0.729412, 1, 1 )
-position = Vector2( -344, 44 )
+position = Vector2( 154.145, 280.035 )
 rotation = -0.52961
-scale = Vector2( 0.999677, 1.15226 )
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 13 )
 offset = Vector2( -2.90451, -2.31821 )
 
-[node name="beach_towel2" type="Sprite" parent="ParallaxBackground/SandParallax/Sprite"]
+[node name="beach_towel2" type="Sprite" parent="ParallaxBackground/SandParallax"]
 self_modulate = Color( 0.462745, 0.898039, 0.654902, 1 )
-position = Vector2( -336, 36 )
+position = Vector2( 154.145, 272.035 )
 rotation = -0.601348
-scale = Vector2( 0.804047, 1.06098 )
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 13 )
 offset = Vector2( -2.90451, -2.31821 )
 
