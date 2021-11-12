@@ -9,6 +9,8 @@ const DIALOGUE_ACTOR = "actor"
 const DIALOGUE_ACTOR_NAME = "name"
 const DIALOGUE_ACTOR_SPRITE = "sprite"
 
+var dialogue_text_speed = 0.2
+
 # Used to determine if the player is currently given a choice in the current dialogue
 var is_choosing_option : bool = false
 
@@ -76,6 +78,7 @@ func SetDialogueBox(id):
   # Set the text for the current dialgoue
   var curr_dialogue = dialogue[current_dialogue_id]
   $DialogueBox/Log.text = curr_dialogue[DIALOGUE_TEXT]
+  PrintDialogueAtSpeed(curr_dialogue)
   ToggleDialogueBox(true, true)
   
   # Set the photo for the entity speaking/displaying a message
@@ -85,6 +88,7 @@ func SetDialogueBox(id):
   # If the dialogue features options, then list out those options
   if curr_dialogue[DIALOGUE_OPTIONS].size() > 0:
     is_choosing_option = true
+    $DialogueBox/HintLabel.visible = false
     if curr_dialogue[DIALOGUE_OPTIONS].has(3):
       $DialogueBox/Options/Button0.visible  = true
       $DialogueBox/Options/Button1.visible  = true
@@ -123,6 +127,7 @@ func SetDialogueBox(id):
   # Else do not show any options
   else:
     is_choosing_option = false
+    $DialogueBox/HintLabel.visible = true
     $DialogueBox/Options/Button0.visible  = false
     $DialogueBox/Options/Button1.visible  = false
     $DialogueBox/Options/Button2.visible  = false
@@ -136,3 +141,11 @@ func OnNextDialogue():
   var next_dialogue = dialogue[current_dialogue_id][DIALOGUE_NEXT]
   SetDialogueBox(next_dialogue)
 
+func PrintDialogueAtSpeed(text):
+  var text_length = len(text)
+  var label = $DialogueBox/Log
+  $DialogueBox/Tween.interpolate_property(label, "percent_visible", 0.0, 1.0, text_length * dialogue_text_speed, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+  $DialogueBox/Tween.start()
+  $DialogueBox/AudioStreamPlayer.playing = true
+  yield($DialogueBox/Tween, "tween_all_completed")
+  $DialogueBox/AudioStreamPlayer.playing = false

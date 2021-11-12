@@ -28,6 +28,7 @@ Sounds:
 	- UI:
 		- https://freesound.org/people/EminYILDIRIM/sounds/536108/
 		- https://freesound.org/people/InspectorJ/sounds/411089/
+		- https://freesound.org/people/SomeGuy22/sounds/431326/
 
 
 Fonts:
