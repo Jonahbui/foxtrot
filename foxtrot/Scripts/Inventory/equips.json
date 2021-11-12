@@ -18,13 +18,13 @@
     "desc"		  : "Go get one of the shore. What are you doing buying one?"
   },
   "2"     :	{
-    "name"	   	: "Fishing Pole",
+    "name"	   	: "Fishing Rod",
     "type"     	: "weapon",
     "subtype"   : "nonstackable",
     "price"	   	: 0,
-    "resource" 	: "res://Textures/Gameplay/Weapon/...",
-    "instance" 	: "res://Instances/Equips/Weapon/...",
-    "desc"		  : ""
+    "resource" 	: "res://Textures/Gameplay/Weapon/fishing_rod.png",
+    "instance" 	: "res://Instances/Equips/Weapon/FishingRod.tscn",
+    "desc"		  : "The struggle between man and fish."
   },
   "3"     :	{
     "name"	   	: "Harpoon Gun",
