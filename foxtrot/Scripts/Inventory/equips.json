@@ -5,7 +5,7 @@
     "subtype"   : "stackable",
     "price"	   	: 0,
     "resource" 	: "res://Textures/Gameplay/Weapon/bubble_nade.png",
-    "instance" 	: "res://Instances/Equips/Weapon/BubbleNade.tscn",
+    "instance" 	: "res://Instances/Equips/Weapon/Bubblenade.tscn",
     "desc"		  : "Explode your enemies with the power of bubbles!"
   },
   "1"     :	{

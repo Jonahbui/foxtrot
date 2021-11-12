@@ -32,7 +32,11 @@ func InitializeStore():
   purchase_frame = load(purchase_frame)
   for equip_id in Equips.equips:
     var instance = purchase_frame.instance()
-    var texture = load(Equips.equips[equip_id].resource)
+    var texture = null
+    if ResourceLoader.exists(Equips.equips[equip_id].resource):
+      texture = load(Equips.equips[equip_id].resource)
+    else:
+      printerr("[Store] Error. Could not load %s..." % [Equips.equips[equip_id].name])
     
     # Set the name, price, and texture for the item
     instance.get_node("ItemName").text = Equips.equips[equip_id].name
