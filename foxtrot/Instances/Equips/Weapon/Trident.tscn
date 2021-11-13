@@ -1,0 +1,126 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Textures/Gameplay/Weapon/trident.png" type="Texture" id=1]
+[ext_resource path="res://Instances/Equips/Weapon/weapon.gd" type="Script" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7.92381, 90.3579 )
+
+[sub_resource type="Animation" id=2]
+length = 0.6
+loop = true
+tracks/0/type = "method"
+tracks/0/path = NodePath("..")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.0394408, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "Use"
+}, {
+"args": [  ],
+"method": "PlayAttack"
+}, {
+"args": [  ],
+"method": "ResetCooldown"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 240.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../HitDetector/HitCollider:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.0808055, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+
+[sub_resource type="Animation" id=3]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 10, 46.641 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 52.7611, 65.7302 )
+
+[node name="Trident" type="KinematicBody2D"]
+rotation = -0.523599
+collision_layer = 0
+collision_mask = 129
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+id = 1
+attack_sound = "res://Audio/SoundEffects/whack_2.wav"
+damage = 5
+knockback = 300.0
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+position = Vector2( -0.148844, -26.2467 )
+scale = Vector2( 0.5, 0.5 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+rotation = 3.15616
+scale = Vector2( 2, 3 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, -8 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+anims/attack = SubResource( 2 )
+anims/idle = SubResource( 3 )
+
+[node name="PickupDetector" type="Area2D" parent="."]
+position = Vector2( -8, 0 )
+collision_layer = 8
+collision_mask = 2
+
+[node name="PickupCollider" type="CollisionShape2D" parent="PickupDetector"]
+position = Vector2( 9.0718, -17.8564 )
+shape = SubResource( 4 )
+
+[node name="HitDetector" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 0
+
+[node name="HitCollider" type="CollisionShape2D" parent="HitDetector"]
+position = Vector2( 45.5692, 17.0718 )
+rotation = 0.371679
+scale = Vector2( 0.5, 0.5 )
+shape = SubResource( 5 )
+
+[connection signal="body_entered" from="PickupDetector" to="." method="_on_PickupDetector_body_entered"]
+[connection signal="body_exited" from="PickupDetector" to="." method="_on_PickupDetector_body_exited"]

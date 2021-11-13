@@ -37,14 +37,14 @@ func _physics_process(delta):
    # velocity.x *= -1.0
   #velocity.y = move_and_slide(velocity,Vector2.UP).y
   
-func TakeDamage(body):
+func TakeDamage(area):
   # Deal damage
-  health -= body.damage
-  print_debug("[%s] Current health = %d. Damage taken = %d." % [body.get_name(), health, body.damage])
+  health -= area.damage
+  print_debug("[%s] Current health = %d. Damage taken = %d." % [area.get_name(), health, area.damage])
   
   # Deal knockback
-  var direction = (self.get_global_transform().get_origin() - body.get_global_transform().get_origin()).normalized()
-  knockback_velocity = direction * body.knockback
+  var direction = (self.get_global_transform().get_origin() - area.get_global_transform().get_origin()).normalized()
+  knockback_velocity = direction * area.knockback
   
   # Case of death
   if health <= 0:
@@ -58,11 +58,5 @@ func TakeDamage(body):
     
     self.queue_free()
 
-func _on_DamageDetector_body_entered(body):
-  TakeDamage(body)
-
-
-func _on_DamageDetector_area_shape_entered(area_id, area, area_shape, local_shape):
-  # Apparently this signal disregards the masks set, so need another way to identify the area
-  if area.is_in_group(Globals.GROUP_PLAYER_WEAPON_HITBOX) || area.is_in_group(Globals.GROUP_PLAYER_PROJECTILE_HITBOX):
-    TakeDamage(area.get_parent())
+func _on_DamageDetector_area_entered(area):
+  TakeDamage(area.get_parent())

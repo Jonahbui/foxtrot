@@ -17,10 +17,7 @@
 [ext_resource path="res://Node/ChangeLevelInteraction.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Audio/Music/spawn1.wav" type="AudioStream" id=16]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 32, 64 )
-
-[sub_resource type="GDScript" id=2]
+[sub_resource type="GDScript" id=1]
 script/source = "extends \"res://Node/interaction.gd\"
 
 export(String, FILE) var level
@@ -29,13 +26,13 @@ func Use():
   Signals.emit_signal(\"on_change_base_level\", level)
 "
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 25.3333, 14.6667 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 10, 368 )
 
-[sub_resource type="ShaderMaterial" id=5]
+[sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 3 )
 shader_param/angle = 0.836
 shader_param/position = 0.188
@@ -51,11 +48,159 @@ shader_param/color = Color( 0.839844, 0.520776, 0.147629, 0.8 )
 shader_param/hdr = false
 shader_param/seed = 5.0
 
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 32, 64 )
+
 [node name="Level" type="Node2D"]
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Background Objects" type="Node2D" parent="."]
+
+[node name="beach_chair" type="Sprite" parent="Background Objects"]
+position = Vector2( 416, 296 )
+scale = Vector2( 5.1875, 4.54492 )
+texture = ExtResource( 12 )
+
+[node name="beachball" type="Sprite" parent="Background Objects"]
+position = Vector2( 424, 312 )
+texture = ExtResource( 7 )
+
+[node name="beach_umbrella" type="Sprite" parent="Background Objects"]
+position = Vector2( 400, 272 )
+rotation = 0.495241
+scale = Vector2( 1.58973, 1.97554 )
+texture = ExtResource( 8 )
+
+[node name="yellow_submarine" type="Sprite" parent="Background Objects"]
+self_modulate = Color( 1.1, 1.1, 1.1, 1 )
+position = Vector2( 664, 288 )
+scale = Vector2( 6, 6 )
+z_index = -1
+texture = ExtResource( 9 )
+script = SubResource( 1 )
+level = "res://Scenes/Gameplay/Seafloor.tscn"
+
+[node name="ChangeLevelInteraction" parent="Background Objects/yellow_submarine" instance=ExtResource( 15 )]
+
+[node name="CollisionShape2D" parent="Background Objects/yellow_submarine/ChangeLevelInteraction" index="0"]
+shape = SubResource( 2 )
+
+[node name="Control Boundaries" type="Node" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Control Boundaries"]
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control Boundaries/StaticBody2D"]
+position = Vector2( 672, 232 )
+shape = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Items" type="Node2D" parent="."]
+position = Vector2( 316.061, 290.847 )
+
+[node name="Lighting" type="Node2D" parent="."]
+
+[node name="Godrays" type="Sprite" parent="Lighting"]
+material = SubResource( 4 )
+position = Vector2( 756, 76 )
+scale = Vector2( 3.60938, 1.85937 )
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Lighting"]
+visible = false
+color = Color( 0.996078, 0.992157, 0.992157, 1 )
+
+[node name="Light2D" type="Light2D" parent="Lighting"]
+light_mask = 2
+position = Vector2( 992, 64 )
+rotation = 0.495241
+scale = Vector2( 5.1875, 4.54492 )
+texture = ExtResource( 5 )
+color = Color( 0.729412, 0.188235, 0.188235, 1 )
+energy = 1.26
+range_item_cull_mask = 3
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LocalAudio" type="Node2D" parent="."]
+
+[node name="Seagulls+Waves Ambience" type="AudioStreamPlayer2D" parent="LocalAudio"]
+stream = ExtResource( 11 )
+volume_db = 1.0
+autoplay = true
+bus = "Ambience"
+
+[node name="Music" type="AudioStreamPlayer2D" parent="LocalAudio"]
+stream = ExtResource( 16 )
+volume_db = 1.0
+autoplay = true
+bus = "Music"
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_ignore_camera_zoom = true
+
+[node name="SkyParallax" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 256, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/SkyParallax"]
+light_mask = 2
+position = Vector2( 872, 176 )
+scale = Vector2( 32, 32 )
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SandParallax" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.9, 0.9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/SandParallax"]
+light_mask = 2
+position = Vector2( 552, 240 )
+texture = ExtResource( 4 )
+
+[node name="sandcastle" type="Sprite" parent="ParallaxBackground/SandParallax"]
+position = Vector2( 128, 256 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 10 )
+
+[node name="beach_towel" type="Sprite" parent="ParallaxBackground/SandParallax"]
+self_modulate = Color( 0.427451, 0.729412, 1, 1 )
+position = Vector2( 154.145, 280.035 )
+rotation = -0.52961
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 13 )
+offset = Vector2( -2.90451, -2.31821 )
+
+[node name="beach_towel2" type="Sprite" parent="ParallaxBackground/SandParallax"]
+self_modulate = Color( 0.462745, 0.898039, 0.654902, 1 )
+position = Vector2( 154.145, 272.035 )
+rotation = -0.601348
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 13 )
+offset = Vector2( -2.90451, -2.31821 )
+
+[node name="Spawnpoint" type="Node2D" parent="."]
+position = Vector2( 320, 264 )
+
+[node name="AquariumDoor" type="Node2D" parent="Spawnpoint"]
+position = Vector2( -288, -64 )
 
 [node name="World" type="Node2D" parent="."]
 
@@ -85,156 +230,14 @@ tile_data = PoolIntArray( 655381, 30, 0, 655382, 30, 0, 655383, 30, 0, 655384, 3
 position = Vector2( 32, 192 )
 
 [node name="ChangeLevelInteraction" parent="World/AquariumDoor" instance=ExtResource( 15 )]
-level = "res://Scenes/Gameplay/Aquarium.tscn"
 
 [node name="CollisionShape2D" parent="World/AquariumDoor/ChangeLevelInteraction" index="0"]
-shape = SubResource( 1 )
+shape = SubResource( 5 )
 
 [node name="Driftwood" parent="World" instance=ExtResource( 14 )]
 position = Vector2( 256, 320 )
+override_process = true
+process = 2
 
-[node name="Spawnpoint" type="Node2D" parent="."]
-position = Vector2( 320, 264 )
-
-[node name="AquariumDoor" type="Node2D" parent="Spawnpoint"]
-position = Vector2( -288, -64 )
-
-[node name="Background Objects" type="Node2D" parent="."]
-
-[node name="beach_chair" type="Sprite" parent="Background Objects"]
-position = Vector2( 416, 296 )
-scale = Vector2( 5.1875, 4.54492 )
-texture = ExtResource( 12 )
-
-[node name="beachball" type="Sprite" parent="Background Objects"]
-position = Vector2( 424, 312 )
-texture = ExtResource( 7 )
-
-[node name="beach_umbrella" type="Sprite" parent="Background Objects"]
-position = Vector2( 400, 272 )
-rotation = 0.495241
-scale = Vector2( 1.58973, 1.97554 )
-texture = ExtResource( 8 )
-
-[node name="yellow_submarine" type="Sprite" parent="Background Objects"]
-self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-position = Vector2( 664, 288 )
-scale = Vector2( 6, 6 )
-z_index = -1
-texture = ExtResource( 9 )
-script = SubResource( 2 )
-level = "res://Scenes/Gameplay/Seafloor.tscn"
-
-[node name="ChangeLevelInteraction" parent="Background Objects/yellow_submarine" instance=ExtResource( 15 )]
-level = "res://Scenes/Gameplay/Seafloor.tscn"
-
-[node name="CollisionShape2D" parent="Background Objects/yellow_submarine/ChangeLevelInteraction" index="0"]
-shape = SubResource( 3 )
-
-[node name="Control Boundaries" type="Node" parent="."]
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Control Boundaries"]
-collision_layer = 128
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Control Boundaries/StaticBody2D"]
-position = Vector2( 672, 232 )
-shape = SubResource( 4 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Items" type="Node2D" parent="."]
-position = Vector2( 316.061, 290.847 )
-
-[node name="Lighting" type="Node2D" parent="."]
-
-[node name="Godrays" type="Sprite" parent="Lighting"]
-material = SubResource( 5 )
-position = Vector2( 756, 76 )
-scale = Vector2( 3.60938, 1.85937 )
-texture = ExtResource( 5 )
-
-[node name="CanvasModulate" type="CanvasModulate" parent="Lighting"]
-visible = false
-color = Color( 0.996078, 0.992157, 0.992157, 1 )
-
-[node name="Light2D" type="Light2D" parent="Lighting"]
-light_mask = 2
-position = Vector2( 992, 64 )
-rotation = 0.495241
-scale = Vector2( 5.1875, 4.54492 )
-texture = ExtResource( 5 )
-color = Color( 0.729412, 0.188235, 0.188235, 1 )
-energy = 1.26
-range_item_cull_mask = 3
-
-[node name="LocalAudio" type="Node2D" parent="."]
-
-[node name="Seagulls+Waves Ambience" type="AudioStreamPlayer2D" parent="LocalAudio"]
-stream = ExtResource( 11 )
-volume_db = 1.0
-autoplay = true
-bus = "Ambience"
-
-[node name="Music" type="AudioStreamPlayer2D" parent="LocalAudio"]
-stream = ExtResource( 16 )
-volume_db = 1.0
-autoplay = true
-bus = "Music"
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="SkyParallax" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2( 256, 0 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/SkyParallax"]
-light_mask = 2
-position = Vector2( 872, 176 )
-scale = Vector2( 32, 32 )
-texture = ExtResource( 6 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="SandParallax" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.9, 0.9 )
-motion_mirroring = Vector2( 2560, 0 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/SandParallax"]
-light_mask = 2
-position = Vector2( 872, 176 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 4 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="sandcastle" type="Sprite" parent="ParallaxBackground/SandParallax/Sprite"]
-position = Vector2( -404, 8 )
-texture = ExtResource( 10 )
-
-[node name="beach_towel" type="Sprite" parent="ParallaxBackground/SandParallax/Sprite"]
-self_modulate = Color( 0.427451, 0.729412, 1, 1 )
-position = Vector2( -344, 44 )
-rotation = -0.52961
-scale = Vector2( 0.999677, 1.15226 )
-texture = ExtResource( 13 )
-offset = Vector2( -2.90451, -2.31821 )
-
-[node name="beach_towel2" type="Sprite" parent="ParallaxBackground/SandParallax/Sprite"]
-self_modulate = Color( 0.462745, 0.898039, 0.654902, 1 )
-position = Vector2( -336, 36 )
-rotation = -0.601348
-scale = Vector2( 0.804047, 1.06098 )
-texture = ExtResource( 13 )
-offset = Vector2( -2.90451, -2.31821 )
-
-[editable path="World/AquariumDoor/ChangeLevelInteraction"]
 [editable path="Background Objects/yellow_submarine/ChangeLevelInteraction"]
+[editable path="World/AquariumDoor/ChangeLevelInteraction"]

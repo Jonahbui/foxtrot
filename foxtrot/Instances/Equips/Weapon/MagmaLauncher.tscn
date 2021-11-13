@@ -1,0 +1,130 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Instances/Equips/Weapon/projectile_stack.gd" type="Script" id=2]
+[ext_resource path="res://Textures/Gameplay/Weapon/magma_launcher_sheet.png" type="Texture" id=3]
+[ext_resource path="res://Textures/Gameplay/Weapon/magma_launcher_atlas.tres" type="Texture" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 14.5714, 2.42868 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 22, 13 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ SubResource( 9 ) ]
+}
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 3 )
+region = Rect2( 44, 0, 22, 13 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 3 )
+region = Rect2( 66, 0, 22, 13 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 3 )
+region = Rect2( 88, 0, 22, 13 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 3 )
+region = Rect2( 110, 0, 22, 13 )
+
+[sub_resource type="Animation" id=3]
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 8 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), ExtResource( 8 ), SubResource( 8 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "Use"
+}, {
+"args": [  ],
+"method": "ResetCooldown"
+} ]
+}
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 14.3362
+
+[node name="HarpoonGun" type="KinematicBody2D"]
+collision_layer = 0
+collision_mask = 129
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+id = 3
+max_stack_amt = 1
+isInfiniteUse = true
+is_automatic = true
+projectile = "res://Instances/Equips/Projectile/MagmaProjectile.tscn"
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+position = Vector2( 7.04372, -2.03773 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -8, 0 )
+scale = Vector2( 2, 2 )
+texture = SubResource( 9 )
+offset = Vector2( 8, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+anims/idle = SubResource( 2 )
+anims/reload = SubResource( 3 )
+
+[node name="ProjectileSpawnpoint" type="Node2D" parent="Sprite"]
+position = Vector2( 16.886, -3.14411 )
+
+[node name="PickupDetector" type="Area2D" parent="."]
+position = Vector2( -8, 0 )
+collision_layer = 8
+collision_mask = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PickupCollider" type="CollisionShape2D" parent="PickupDetector"]
+position = Vector2( 8, 0 )
+shape = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[connection signal="body_entered" from="PickupDetector" to="." method="_on_PickupDetector_body_entered"]
+[connection signal="body_exited" from="PickupDetector" to="." method="_on_PickupDetector_body_exited"]

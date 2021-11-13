@@ -484,8 +484,38 @@ visible = false
 
 [node name="SettingsMenu" parent="." instance=ExtResource( 6 )]
 
+[node name="Gameplay" parent="SettingsMenu/UI/TabContainer" index="1"]
+margin_left = 30.0
+margin_top = 55.0
+margin_right = -30.0
+margin_bottom = -30.0
+
+[node name="Graphics" parent="SettingsMenu/UI/TabContainer" index="2"]
+margin_left = 30.0
+margin_top = 55.0
+margin_right = -30.0
+margin_bottom = -30.0
+
 [node name="OptionButton" parent="SettingsMenu/UI/TabContainer/Graphics/GraphicsVbox/Quality" index="0"]
 group = SubResource( 12 )
+
+[node name="UI" parent="SettingsMenu/UI/TabContainer" index="3"]
+margin_left = 30.0
+margin_top = 55.0
+margin_right = -30.0
+margin_bottom = -30.0
+
+[node name="Stats" parent="SettingsMenu/UI/TabContainer" index="4"]
+margin_left = 30.0
+margin_top = 55.0
+margin_right = -30.0
+margin_bottom = -30.0
+
+[node name="Achievements" parent="SettingsMenu/UI/TabContainer" index="5"]
+margin_left = 30.0
+margin_top = 55.0
+margin_right = -30.0
+margin_bottom = -30.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 13 )
@@ -788,6 +818,22 @@ anims/MainToLoad = SubResource( 16 )
 [connection signal="button_down" from="Credits/UI/BackButton" to="Audio" method="_on_button_down"]
 [connection signal="button_up" from="Credits/UI/BackButton" to="Audio" method="_on_button_up"]
 [connection signal="pressed" from="Credits/UI/BackButton" to="." method="_on_CreditsBackButton_pressed"]
+[connection signal="tab_changed" from="SettingsMenu/UI/TabContainer" to="Audio" method="_on_tab_clicked"]
+[connection signal="button_down" from="SettingsMenu/UI/TabContainer/Audio/AudioVbox/MasterVolume/MasterSlider/MasterCheckbox" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="SettingsMenu/UI/TabContainer/Audio/AudioVbox/MasterVolume/MasterSlider/MasterCheckbox" to="Audio" method="_on_button_up"]
+[connection signal="button_down" from="SettingsMenu/UI/TabContainer/Audio/AudioVbox/MusicVolume/MusicSlider/MusicCheckbox" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="SettingsMenu/UI/TabContainer/Audio/AudioVbox/MusicVolume/MusicSlider/MusicCheckbox" to="Audio" method="_on_button_up"]
+[connection signal="button_down" from="SettingsMenu/UI/TabContainer/Audio/AudioVbox/SFXVolume/SFXSlider/SFXCheckbox" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="SettingsMenu/UI/TabContainer/Audio/AudioVbox/SFXVolume/SFXSlider/SFXCheckbox" to="Audio" method="_on_button_up"]
+[connection signal="button_down" from="SettingsMenu/UI/TabContainer/Audio/AudioVbox/AmbienceVolume/AmbienceSlider/AmbienceCheckbox" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="SettingsMenu/UI/TabContainer/Audio/AudioVbox/AmbienceVolume/AmbienceSlider/AmbienceCheckbox" to="Audio" method="_on_button_up"]
+[connection signal="button_down" from="SettingsMenu/UI/TabContainer/Audio/AudioVbox/UserInterfaceVolume/UserInterfaceSlider/UserInterfaceCheckbox" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="SettingsMenu/UI/TabContainer/Audio/AudioVbox/UserInterfaceVolume/UserInterfaceSlider/UserInterfaceCheckbox" to="Audio" method="_on_button_up"]
+[connection signal="button_down" from="SettingsMenu/UI/TabContainer/Graphics/GraphicsVbox/Fullscreen/FullscreenCheckBox" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="SettingsMenu/UI/TabContainer/Graphics/GraphicsVbox/Fullscreen/FullscreenCheckBox" to="Audio" method="_on_button_up"]
+[connection signal="button_down" from="SettingsMenu/UI/Reset" to="Audio" method="_on_button_down"]
+[connection signal="button_down" from="SettingsMenu/UI/BackButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="SettingsMenu/UI/BackButton" to="Audio" method="_on_button_up"]
 [connection signal="pressed" from="SettingsMenu/UI/BackButton" to="." method="_on_SettingsBackButton_pressed"]
 
 [editable path="Credits"]

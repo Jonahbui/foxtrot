@@ -50,7 +50,7 @@ scale = Vector2( 3, 3 )
 collision_layer = 4
 collision_mask = 129
 script = ExtResource( 2 )
-health = 10
+health = 20
 loot_string = "piranha"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -65,17 +65,16 @@ physics_process_parent = true
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 9 )
 animation = "swim"
-frame = 3
+frame = 1
 playing = true
 
 [node name="DamageDetector" type="Area2D" parent="."]
 z_index = 1
 z_as_relative = false
-collision_layer = 4
+collision_layer = 0
 collision_mask = 288
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageDetector"]
 shape = SubResource( 10 )
 
-[connection signal="area_shape_entered" from="DamageDetector" to="." method="_on_DamageDetector_area_shape_entered"]
-[connection signal="body_entered" from="DamageDetector" to="." method="_on_DamageDetector_body_entered"]
+[connection signal="area_entered" from="DamageDetector" to="." method="_on_DamageDetector_area_entered"]

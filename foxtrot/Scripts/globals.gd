@@ -55,6 +55,8 @@ const LEVEL_PATH = [
 # --------------------------------------------------------------------------------------------------
 # Gameplay Management
 # --------------------------------------------------------------------------------------------------
+func Player():
+  return self.get_tree().get_root().get_node_or_null("/root/Base/Player")
 var is_in_spawn           : bool = false
 var is_game_playing       : bool = false
 var is_new_game           : bool = false

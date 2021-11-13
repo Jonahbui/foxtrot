@@ -247,7 +247,7 @@ func FindStackSlot(item_id):
     if curr_item == null: continue
     
     # Only add to a stack that has the same item type and is not at full capacity
-    if item_id == curr_item.id && curr_item.curr_stack_amt <= curr_item.max_stack_amt:
+    if item_id == curr_item.id && curr_item.curr_stack_amt < curr_item.max_stack_amt:
       return i
   return -1
 

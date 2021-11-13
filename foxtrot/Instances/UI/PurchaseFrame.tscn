@@ -8,7 +8,6 @@
 [ext_resource path="res://Textures/UI/Button/purchase_frame_pressed.png" type="Texture" id=6]
 [ext_resource path="res://Textures/UI/Button/purchase_frame_hover.png" type="Texture" id=7]
 
-
 [node name="PurchaseFrame" type="TextureButton"]
 margin_right = 152.0
 margin_bottom = 56.0

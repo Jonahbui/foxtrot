@@ -64,7 +64,7 @@ radius = 14.3362
 
 [node name="HarpoonGun" type="KinematicBody2D"]
 collision_layer = 0
-collision_mask = 5
+collision_mask = 129
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
@@ -93,7 +93,7 @@ anims/idle = SubResource( 2 )
 anims/reload = SubResource( 3 )
 
 [node name="ProjectileSpawnpoint" type="Node2D" parent="Sprite"]
-position = Vector2( 10.9927, 0.0011723 )
+position = Vector2( 11.0164, -1.4638 )
 
 [node name="PickupDetector" type="Area2D" parent="."]
 position = Vector2( -8, 0 )

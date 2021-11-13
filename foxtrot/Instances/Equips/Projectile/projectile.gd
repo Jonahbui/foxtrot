@@ -1,12 +1,21 @@
 extends KinematicBody2D
 
+# How much damage the projectile does
 export(int) var damage = 0
+
+# How much knockback the projectile does (in terms of force)
 export(float) var knockback = 0
 
+# Gravity of the projectile
 export(float) var gravity = 3000.0
-export(float) var speed = 2000.0
-export(Vector2) var velocity = Vector2( 200.0, -400.0 )
 
+# The initial speed of the projectile
+export(float) var speed = 2000.0
+
+# The velocity of the projectile. Determined by its speed and direction
+var velocity = Vector2( 200.0, -400.0 )
+
+# Particle to emit on projectile collide
 onready var particle_emitter = get_node_or_null("Particles2D")
 
 func _ready():
@@ -25,16 +34,14 @@ func SetProjectileDirection(new_direction : Vector2):
   self.rotation = new_direction.angle()
 
 func _on_CollisionDetector_body_shape_entered(_body_id, _body, _body_shape, _local_shape):
+  # The collision is hit and should be gone after hitting the enemy or a wall or something
   self.visible = false
-  SpawnParticles()
+  
+  # If the item emits particles, emit on collision
+  if particle_emitter:
+    particle_emitter.SpawnParticles(self.global_position)
+  
+  # Destroy this item after the item has hit whatever
   self.queue_free()
 
-func SpawnParticles():
-  if particle_emitter:
-    particle_emitter.get_parent().remove_child(particle_emitter)
-    self.get_parent().add_child(particle_emitter)
-    
-    particle_emitter.set_global_position(self.global_position)
-    particle_emitter.emitting = true
-    yield(get_tree().create_timer(2.0), "timeout")
-    particle_emitter.queue_free()
+

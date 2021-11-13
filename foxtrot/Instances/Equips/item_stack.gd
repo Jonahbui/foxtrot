@@ -5,12 +5,10 @@ export var curr_stack_amt : int = 1
 export var isInfiniteUse  : bool = false
 
 func Use():
-  # Do not allow item usage if no player is using it.
-  # Probably should disable object processing until in use...
-  if player_inv == null: return
+  var success = _on_use()
   
   # Do not subtract from stack if infinite uses
-  if not isInfiniteUse:
+  if not isInfiniteUse && success:
     
     # Subtract usages left from item
     curr_stack_amt -= 1
@@ -18,7 +16,7 @@ func Use():
     # Inform UI to update current stack amount
     player_inv.RefreshInventoryForItemInUse()
     
-    # If no more projectiles left to shoot, delete this item
+    # If no more items left to use, delete this item
     if curr_stack_amt == 0:
       if player_inv.RemoveItem(self) == OK:
         self.queue_free()

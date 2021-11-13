@@ -60,9 +60,16 @@ func _init():
     printerr("[Player] Error. Failed to connect to signal on_level_loaded...")
 
 func _ready():
+  # Set the player name to indicate which save is being played
   self.charname = Save.save[Globals.PLAYER_NAME]
+  
+  # Update the UI
   RefreshStats()
+  
+  # Tell the game that the player has been loaded
   Signals.emit_signal("on_player_loaded", self)
+  
+  # Update the movement of the player to match whatever level they are in
   UpdateMovement()
 
 func _physics_process(delta: float) -> void:
@@ -147,7 +154,7 @@ func ResetPlayer():
 
 func TakeDamage(damage : int):
   health -= damage
-  
+  $AnimationPlayer.play("Damaged")
   RefreshHealth()
   if health <= 0:
     # Play death animation
@@ -163,6 +170,12 @@ func UpdateMovement():
   else:
     gravity  = 100.0
     speed    = Vector2( 200.0, 150.0 )
+    
+func Heal(health : int):
+  self.health += health
+  if self.health > maxHealth:
+    self.health = maxHealth
+  RefreshHealth()
 # --------------------------------------------------------------------------------------------------
 # Player UI Functions
 # --------------------------------------------------------------------------------------------------
@@ -191,6 +204,13 @@ func RestorePlayerData(data):
 func ToggleInform(state):
   # Display the inform panel
   $Inform.visible = state
+  
+  # Play damage animation (which will also disable collision so the player does not take any more
+  # damage and when it is re-enabled, if the player is still within contact with another collider, 
+  # they will continue to take more damage). 
 
 func _on_DamageDetector_body_entered(body):
   TakeDamage(body.damage)
+
+func _on_DamageDetector_area_entered(area):
+  TakeDamage(area.damage)

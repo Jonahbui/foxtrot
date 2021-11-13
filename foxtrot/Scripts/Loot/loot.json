@@ -4,7 +4,7 @@
     "seafloor" : {
       "table" : [
         10, 
-        10
+        3
       ],
       "item"  : [
         "res://Instances/Gameplay/Coin.tscn",
@@ -18,6 +18,15 @@
   "enemy" : {
 
     "piranha" : {
+      "table" : [
+        10
+      ],
+      "item"  : [
+        "res://Instances/Gameplay/Coin.tscn"
+      ],
+      "coin"  : [1, 10]
+    },
+    "pufferfish" : {
       "table" : [
         10
       ],
