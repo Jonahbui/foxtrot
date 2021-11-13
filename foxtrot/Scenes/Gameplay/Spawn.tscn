@@ -230,6 +230,8 @@ tile_data = PoolIntArray( 655381, 30, 0, 655382, 30, 0, 655383, 30, 0, 655384, 3
 position = Vector2( 32, 192 )
 
 [node name="ChangeLevelInteraction" parent="World/AquariumDoor" instance=ExtResource( 15 )]
+hardset_level = true
+level = "res://Scenes/Gameplay/Aquarium.tscn"
 
 [node name="CollisionShape2D" parent="World/AquariumDoor/ChangeLevelInteraction" index="0"]
 shape = SubResource( 5 )

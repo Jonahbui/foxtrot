@@ -1,4 +1,11 @@
-extends "res://Instances/Equips/item_stack.gd"
+extends "res://Instances/Equips/item.gd"
 
-var damageMultipler : int = 1
-var resistanceMultiplier : int = 1
+export var resistance : int = 1
+
+func Equip():
+  var player = Globals.Player()
+  player.AddDefense(self.id, resistance)
+  
+func Unequip():
+  var player = Globals.Player()
+  player.RemoveDefense(self.id, resistance)

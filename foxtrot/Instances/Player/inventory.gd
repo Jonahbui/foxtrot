@@ -137,6 +137,12 @@ func AddItem(item, slot_id):
   # Add item to the inventory
   inventory[slot_id] = item
 
+  # Equip the armor/accessory
+  if slot_id == ARMOR_SLOT_ID:
+    item.Equip()
+  elif slot_id > ARMOR_SLOT_ID:
+    item.Equip()
+
   # Update UI to reflect inventory update
   RefreshInventorySlot(slot_id)
 
@@ -394,7 +400,7 @@ func _on_slot_pressed(slot_num):
   print_debug("[Inventory] Slot #%d selected." % [slot_num])
   Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/bubbles_1.wav", 3)
   if selectedSlot1 == -1:
-    # Ignore first selections if the slot is null. Cannot select anything that 
+    # Ignore first selection if the slot is null. Cannot select anything that 
     # is null first. It is okay to select a second slot that is null, as long as
     # the first is not null.
     if inventory[slot_num] == null: return
@@ -426,7 +432,12 @@ func _on_slot_pressed(slot_num):
           ResetSelection()
           return
 
+        # After we reach here, only valid swap operations can be performed!
+
         # Swap the two items normally
+        ## Equip/unequip the armor/accessory
+        UpdateEquipmentOnSwap(inventory[selectedSlot1],inventory[selectedSlot2], selectedSlot1, selectedSlot2)
+        
         print_debug("Swapping from slot #%d (%s) to slot #%d(%s)..." % [selectedSlot1, inventory[selectedSlot1].get_name(), selectedSlot2, inventory[selectedSlot2].get_name()])      
         var temp = inventory[selectedSlot1]
         inventory[selectedSlot1] = inventory[selectedSlot2]
@@ -448,6 +459,11 @@ func _on_slot_pressed(slot_num):
           print_debug("Cannot swap from slot #%d (%s) to slot #%d. Invalid slots for items..." % [selectedSlot1, inventory[selectedSlot1].get_name(), selectedSlot2])      
           ResetSelection()
           return
+
+        # After we reach here, only valid swap operations can be performed!        
+        
+        # Equip/unequip the armor/accessory
+        UpdateEquipmentOnMove(inventory[selectedSlot1], selectedSlot1, selectedSlot2)
         
         print_debug("Swapping from slot #%d (%s) to slot #%d..." % [selectedSlot1, inventory[selectedSlot1].get_name(), selectedSlot2])      
         inventory[selectedSlot2] = inventory[selectedSlot1]
@@ -471,6 +487,24 @@ func _on_Inventory_mouse_exited():
 func GetItemInfo(item):
   return Equips.equips[item.id]
 
+func UpdateEquipmentOnMove(item_from, slot_from, slot_to):
+  # If swapping from the armor/accessory slots to the inventory, unequip the item
+  if slot_from >= ARMOR_SLOT_ID:
+    item_from.Unequip()
+
+  # If swapping from the inventory to the armor/accesory slots, equip the item
+  if slot_to >= ARMOR_SLOT_ID:
+    item_from.Equip()
+    
+func UpdateEquipmentOnSwap(item_from, item_to, slot_from, slot_to):
+  # If we are swapping an item to the armor/accessory slot, unequip the current armor/accessory and equip the new armor/accessory
+  if slot_to >= ARMOR_SLOT_ID:
+    item_from.Equip()
+    item_to.Unequip()
+    
+  elif slot_from >= ARMOR_SLOT_ID:
+    item_to.Equip()
+    item_from.Unequip()
 # --------------------------------------------------------------------------------------------------
 # Inventory Save Functions
 # --------------------------------------------------------------------------------------------------

@@ -8,14 +8,16 @@ func _init():
   if Signals.connect("on_defense_update", self, "UpdateDefenseUI") != OK:
     printerr("[Stats] Error. Failed to connect to signal on_defense_update...")
 
+func _ready():
+  UpdateMoneyUI()
+  UpdateDamageMultiplierUI()
+  UpdateDefenseUI()
+
 func UpdateMoneyUI():
-  var player = get_node("/root/Base/Player")
-  $PlayerInfoContainer/MoneyContainer/Label.text = "%d" % [player.money]
+  $PlayerInfoContainer/MoneyContainer/Label.text = "%d" % [Globals.Player().money]
 
 func UpdateDamageMultiplierUI():
-  var player = get_node("/root/Base/Player")
-  $PlayerInfoContainer/MoneyContainer/Label.text = "%d" % [player.damage_multiplier]
+  $PlayerInfoContainer/DamageMultiplierContainer/Label.text = "%0.2f" % [Globals.Player().damage_multiplier]
   
 func UpdateDefenseUI():
-  var player = get_node("/root/Base/Player")
-  $PlayerInfoContainer/MoneyContainer/Label.text = "%d" % [player.defense]
+  $PlayerInfoContainer/DefenseContainer/Label.text = "%d" % [Globals.Player().defense]

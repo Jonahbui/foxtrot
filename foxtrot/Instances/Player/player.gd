@@ -11,6 +11,7 @@ export var health : int = 100
 export var mana   : int = 100
 export var money  : int = 0
 var damage_multiplier = 1.0
+var defense_stats = {}
 var defense : int  = 0
 # --------------------------------------------------------------------------------------------------
 # Player Management Vars
@@ -153,6 +154,10 @@ func ResetPlayer():
   RefreshStats()
 
 func TakeDamage(damage : int):
+  damage -= defense
+  if damage < 0:
+    damage == 0
+    
   health -= damage
   $AnimationPlayer.play("Damaged")
   RefreshHealth()
@@ -176,28 +181,30 @@ func Heal(health : int):
   if self.health > maxHealth:
     self.health = maxHealth
   RefreshHealth()
-# --------------------------------------------------------------------------------------------------
-# Player UI Functions
-# --------------------------------------------------------------------------------------------------
-func RefreshHealth():
-  health_bar.value = health
-  health_label.text = "%d / %d" % [health_bar.value, maxHealth]
+
+func AddDefense(key, value):
+  # Allow for accessory stacking since the player can have 3 of the same equipment stacked
+  if defense_stats.has(key):
+    defense_stats[key] += value
+  else:
+    defense_stats[key] = value
+  UpdateDefense()
+
+func RemoveDefense(key, value):
+  # The player may have multiple accessories stack. Only subtract the original amount for one of them
+  defense_stats[key] -= value
   
-func RefreshMana():
-  pass
+  # If after the subtraction, the defense value for that key is 0, then all duplicate items have been
+  # unequipped also and we can discard the key
+  if defense_stats[key] == 0:
+    defense_stats.erase(key)
+  UpdateDefense()
   
-func RefreshStats():
-  RefreshHealth()
-  RefreshMana()
-# --------------------------------------------------------------------------------------------------
-# Player Save Functions
-# --------------------------------------------------------------------------------------------------
-func RestorePlayerData(data):
-  Globals.is_hardcore_mode = data[Globals.PLAYER_DIFFICULTY]
-  self.health = int(data[Globals.PLAYER_HEALTH])
-  self.mana   = int(data[Globals.PLAYER_MANA])
-  self.charname = data[Globals.PLAYER_NAME]
-  self.money = data[Globals.PLAYER_MONEY]
+func UpdateDefense():
+  defense = 0
+  for key in defense_stats:
+    defense += defense_stats[key] 
+  Signals.emit_signal("on_defense_update")
 # --------------------------------------------------------------------------------------------------
 # Dialogue Functions
 # --------------------------------------------------------------------------------------------------
@@ -214,3 +221,26 @@ func _on_DamageDetector_body_entered(body):
 
 func _on_DamageDetector_area_entered(area):
   TakeDamage(area.damage)
+# --------------------------------------------------------------------------------------------------
+# Save Functions
+# --------------------------------------------------------------------------------------------------
+func RestorePlayerData(data):
+  Globals.is_hardcore_mode = data[Globals.PLAYER_DIFFICULTY]
+  self.health = int(data[Globals.PLAYER_HEALTH])
+  self.mana   = int(data[Globals.PLAYER_MANA])
+  self.charname = data[Globals.PLAYER_NAME]
+  self.money = data[Globals.PLAYER_MONEY]
+# --------------------------------------------------------------------------------------------------
+# UI Functions
+# --------------------------------------------------------------------------------------------------
+func RefreshHealth():
+  health_bar.value = health
+  health_label.text = "%d / %d" % [health_bar.value, maxHealth]
+  
+func RefreshMana():
+  pass
+  
+func RefreshStats():
+  RefreshHealth()
+  RefreshMana()
+
