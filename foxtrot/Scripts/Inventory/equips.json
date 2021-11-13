@@ -1,25 +1,15 @@
 ﻿{
   "0"     :	{
-    "name"	   	: "Bubblenade",
-    "type"     	: "weapon",
-    "subtype"   : "stackable",
-    "price"	   	: 0,
-    "resource" 	: "res://Textures/Gameplay/Weapon/bubble_nade.png",
-    "instance" 	: "res://Instances/Equips/Weapon/Bubblenade.tscn",
-    "desc"		  : "Explode your enemies with the power of bubbles!",
-    "purchasable": true
-  },
-  "1"     :	{
     "name"	   	: "Driftwood",
     "type"     	: "weapon",
     "subtype"   : "nonstackable",
     "price"	   	: 0,
     "resource" 	: "res://Textures/Gameplay/Weapon/driftwood.png",
     "instance" 	: "res://Instances/Equips/Weapon/Driftwood.tscn",
-    "desc"		  : "Go get one of the shore. What are you doing buying one?",
+    "desc"		  : "Go get one off the shore. What are you doing buying one?",
     "purchasable": true
   },
-  "2"     :	{
+  "1"     :	{
     "name"	   	: "Fishing Rod",
     "type"     	: "weapon",
     "subtype"   : "nonstackable",
@@ -29,7 +19,27 @@
     "desc"		  : "The struggle between man and fish.",
     "purchasable": true
   },
+  "2"     :	{
+    "name"	   	: "Trident",
+    "type"     	: "weapon",
+    "subtype"   : "nonstackable",
+    "price"	   	: 0,
+    "resource" 	: "res://Textures/Gameplay/Weapon/trident.png",
+    "instance" 	: "res://Instances/Equips/Weapon/Trident.tscn",
+    "desc"		  : "Neptune is not gonna be happy.",
+    "purchasable": true
+  },
   "3"     :	{
+    "name"	   	: "Anchor",
+    "type"     	: "weapon",
+    "subtype"   : "nonstackable",
+    "price"	   	: 0,
+    "resource" 	: "res://Textures/Gameplay/Weapon/anchor.png",
+    "instance" 	: "res://Instances/Equips/Weapon/Anchor.tscn",
+    "desc"		  : "Kill the fishes by dragging them under.",
+    "purchasable": true
+  },
+  "128"     :	{
     "name"	   	: "Harpoon Gun",
     "type"     	: "weapon",
     "subtype"   : "nonstackable",
@@ -39,7 +49,26 @@
     "desc"		  : "Stab them all.",
     "purchasable": true
   },
-
+  "129"     :	{
+    "name"	   	: "Magma Launcher",
+    "type"     	: "weapon",
+    "subtype"   : "nonstackable",
+    "price"	   	: 0,
+    "resource" 	: "res://Textures/Gameplay/Weapon/magma_launcher.png",
+    "instance" 	: "res://Instances/Equips/Weapon/MagmaLauncher.tscn",
+    "desc"		  : "Harvest the power of the Earth.",
+    "purchasable": true
+  },
+  "256"     :	{
+    "name"	   	: "Bubblenade",
+    "type"     	: "weapon",
+    "subtype"   : "stackable",
+    "price"	   	: 0,
+    "resource" 	: "res://Textures/Gameplay/Weapon/bubble_nade.png",
+    "instance" 	: "res://Instances/Equips/Weapon/Bubblenade.tscn",
+    "desc"		  : "Explode your enemies with the power of bubbles!",
+    "purchasable": true
+  },
 
   "512"   : {
     "name"	   	: "Diver Suit",

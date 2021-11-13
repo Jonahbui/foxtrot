@@ -47,14 +47,14 @@ func _on_use():
   
   # Calculate the trajector of the projectile
   var direction = (get_global_mouse_position() - self.get_global_transform().get_origin()).normalized()
-  
+    
   # Need to make it work with controller
   # Vector2(Input.get_joy_axis(0, JOY_ANALOG_RX), Input.get_joy_axis(0, JOY_ANALOG_RY)).normalized()
   
   # Set the projectile direction to be in the direction the player's crosshair is relatively.
   # Set the projetile direction to be where the item is on the player
   instance.SetProjectileDirection(direction)
-  instance.set_global_position(self.global_position)
+  instance.set_global_position($Sprite/ProjectileSpawnpoint.global_position)
   player.get_parent().add_child(instance)
   
   # Return success

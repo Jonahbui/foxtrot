@@ -49,7 +49,7 @@ func InitializeStore():
     # Update the purchase frame to reflect the item
     var type = Equips.equips[equip_id].type
     
-    print("Adding %s %d" % [Equips.equips[equip_id].name, equip_id])
+    #print("Adding %s %d" % [Equips.equips[equip_id].name, equip_id])
     match type:
       Equips.Type.item:
         item_container.add_child(instance)
@@ -68,7 +68,7 @@ func InitializeStore():
   last_selects[1] = $Store/UI/TabContainer/Weapons/ScrollContainer/VBoxContainer.get_child(0).id
   last_selects[2] = $Store/UI/TabContainer/Armor/ScrollContainer/VBoxContainer.get_child(0).id
   last_selects[3] = $Store/UI/TabContainer/Accessories/ScrollContainer/VBoxContainer.get_child(0).id
-  print(last_selects)
+  #print(last_selects)
   # Set the first item the player sees to be the first item in the items panel
   UpdateSelectedItem(last_selects[0])
     

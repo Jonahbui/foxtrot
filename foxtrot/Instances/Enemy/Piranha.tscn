@@ -65,7 +65,7 @@ physics_process_parent = true
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 9 )
 animation = "swim"
-frame = 3
+frame = 5
 playing = true
 
 [node name="DamageDetector" type="Area2D" parent="."]

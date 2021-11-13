@@ -3,10 +3,10 @@
 [ext_resource path="res://Textures/Gameplay/Weapon/driftwood.png" type="Texture" id=2]
 [ext_resource path="res://Instances/Equips/Weapon/weapon.gd" type="Script" id=8]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 7.92381, 52.6585 )
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=7]
 length = 0.6
 loop = true
 tracks/0/type = "method"
@@ -54,7 +54,7 @@ tracks/2/keys = {
 "values": [ true, false, true ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=8]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
@@ -73,7 +73,7 @@ tracks/0/keys = {
 extents = Vector2( 10, 26.3445 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 52.7611, 65.7302 )
+extents = Vector2( 49.2149, 43.5236 )
 
 [node name="Driftwood" type="KinematicBody2D"]
 rotation = -0.523599
@@ -91,7 +91,7 @@ knockback = 300.0
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2( -0.148844, -26.2467 )
 scale = Vector2( 0.5, 0.5 )
-shape = SubResource( 1 )
+shape = SubResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 2, 3 )
@@ -99,8 +99,8 @@ texture = ExtResource( 2 )
 offset = Vector2( 0, -8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
-anims/attack = SubResource( 2 )
-anims/idle = SubResource( 3 )
+anims/attack = SubResource( 7 )
+anims/idle = SubResource( 8 )
 
 [node name="PickupDetector" type="Area2D" parent="."]
 position = Vector2( -8, 0 )
@@ -116,7 +116,7 @@ collision_layer = 256
 collision_mask = 0
 
 [node name="HitCollider" type="CollisionShape2D" parent="HitDetector"]
-position = Vector2( 26.3743, 10.8569 )
+position = Vector2( 27.0992, -2.701 )
 rotation = 0.371679
 scale = Vector2( 0.5, 0.5 )
 shape = SubResource( 5 )

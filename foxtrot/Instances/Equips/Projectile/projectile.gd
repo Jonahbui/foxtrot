@@ -1,12 +1,21 @@
 extends KinematicBody2D
 
+# How much damage the projectile does
 export(int) var damage = 0
+
+# How much knockback the projectile does (in terms of force)
 export(float) var knockback = 0
 
+# Gravity of the projectile
 export(float) var gravity = 3000.0
-export(float) var speed = 2000.0
-export(Vector2) var velocity = Vector2( 200.0, -400.0 )
 
+# The initial speed of the projectile
+export(float) var speed = 2000.0
+
+# The velocity of the projectile. Determined by its speed and direction
+var velocity = Vector2( 200.0, -400.0 )
+
+# Particle to emit on projectile collide
 onready var particle_emitter = get_node_or_null("Particles2D")
 
 func _ready():
