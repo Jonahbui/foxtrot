@@ -12,13 +12,11 @@ func _process_input(event):
     $Sprite/AnimationPlayer.play("attack")
 
 func _on_use():
-  # Do not allow item usage if no player is using it.
-  # Probably should disable object processing until in use...
-  if in_cooldown: return
-  
   if not Input.is_action_pressed("fire"):
     $Sprite/AnimationPlayer.play("idle")
-    return
+    return false
+    
+  if in_cooldown: return false
     
   in_cooldown = true
 

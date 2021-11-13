@@ -6,7 +6,8 @@
     "price"	   	: 0,
     "resource" 	: "res://Textures/Gameplay/Weapon/bubble_nade.png",
     "instance" 	: "res://Instances/Equips/Weapon/Bubblenade.tscn",
-    "desc"		  : "Explode your enemies with the power of bubbles!"
+    "desc"		  : "Explode your enemies with the power of bubbles!",
+    "purchasable": true
   },
   "1"     :	{
     "name"	   	: "Driftwood",
@@ -15,7 +16,8 @@
     "price"	   	: 0,
     "resource" 	: "res://Textures/Gameplay/Weapon/driftwood.png",
     "instance" 	: "res://Instances/Equips/Weapon/Driftwood.tscn",
-    "desc"		  : "Go get one of the shore. What are you doing buying one?"
+    "desc"		  : "Go get one of the shore. What are you doing buying one?",
+    "purchasable": true
   },
   "2"     :	{
     "name"	   	: "Fishing Rod",
@@ -24,7 +26,8 @@
     "price"	   	: 0,
     "resource" 	: "res://Textures/Gameplay/Weapon/fishing_rod.png",
     "instance" 	: "res://Instances/Equips/Weapon/FishingRod.tscn",
-    "desc"		  : "The struggle between man and fish."
+    "desc"		  : "The struggle between man and fish.",
+    "purchasable": true
   },
   "3"     :	{
     "name"	   	: "Harpoon Gun",
@@ -33,7 +36,8 @@
     "price"	   	: 0,
     "resource" 	: "res://Textures/Gameplay/Weapon/harpoon_gun.png",
     "instance" 	: "res://Instances/Equips/Weapon/HarpoonGun.tscn",
-    "desc"		  : "Stab them all."
+    "desc"		  : "Stab them all.",
+    "purchasable": true
   },
 
 
@@ -44,7 +48,8 @@
     "price"	   	: 0,
     "resource" 	: "res://Textures/Gameplay/Armor/diver_suit.png",
     "instance" 	: "res://Instances/Equips/Armor/DiverSuit.tscn",
-    "desc"		  : "Dive to the low depths of the ocean!"
+    "desc"		  : "Dive to the low depths of the ocean!",
+    "purchasable": true
 	},
 	
 
@@ -55,7 +60,8 @@
     "price"	   	: 0,
     "resource" 	: "res://Textures/Gameplay/Accessory/white_shell.png",
     "instance" 	: "res://Instances/Equips/Accessory/WhiteShell.tscn",
-    "desc"		  : "Harness the power of the ocean!"
+    "desc"		  : "Harness the power of the ocean!",
+    "purchasable": true
 	},
 
 
@@ -66,6 +72,7 @@
     "price"	   	: 0,
     "resource" 	: "res://Textures/Gameplay/Item/blood_bag.png",
     "instance" 	: "res://Instances/Equips/Item/BloodBag.tscn",
-    "desc"		  : "If you're bleeding, just put more blood back in ya. It's that simple! IANAD"
+    "desc"		  : "If you're bleeding, just put more blood back in ya. It's that simple! IANAD",
+    "purchasable": true
 	}
 }

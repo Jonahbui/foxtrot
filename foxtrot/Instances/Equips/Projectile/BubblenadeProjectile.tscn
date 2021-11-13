@@ -36,7 +36,7 @@ shape = SubResource( 1 )
 "PlayerProjectileHitbox",
 ]]
 collision_layer = 32
-collision_mask = 5
+collision_mask = 133
 
 [node name="Detector" type="CollisionShape2D" parent="CollisionDetector"]
 shape = SubResource( 2 )

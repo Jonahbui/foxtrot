@@ -25,8 +25,14 @@ func SetProjectileDirection(new_direction : Vector2):
   self.rotation = new_direction.angle()
 
 func _on_CollisionDetector_body_shape_entered(_body_id, _body, _body_shape, _local_shape):
+  # The collision is hit and should be gone after hitting the enemy or a wall or something
   self.visible = false
-  particle_emitter.SpawnParticles(self.global_position)
+  
+  # If the item emits particles, emit on collision
+  if particle_emitter:
+    particle_emitter.SpawnParticles(self.global_position)
+  
+  # Destroy this item after the item has hit whatever
   self.queue_free()
 
 

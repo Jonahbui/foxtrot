@@ -27,11 +27,9 @@ texture = ExtResource( 1 )
 position = Vector2( 0.45331, 0.127604 )
 shape = SubResource( 1 )
 
-[node name="CollisionDetector" type="Area2D" parent="." groups=[
-"PlayerProjectileHitbox",
-]]
+[node name="CollisionDetector" type="Area2D" parent="."]
 collision_layer = 32
-collision_mask = 4
+collision_mask = 133
 
 [node name="Detector" type="CollisionShape2D" parent="CollisionDetector"]
 position = Vector2( 0.23666, 0.183968 )

@@ -24,13 +24,13 @@ func _draw():
   update()
   
 func _on_use():
-  # Do not allow usage if the item is in cooldown
-  if in_cooldown: return false
-  
   # If the item is not being used, set its animation to idle
   if not Input.is_action_pressed("fire"):
     $Sprite/AnimationPlayer.play("idle")
     return false
+    
+  # Do not allow usage if the item is in cooldown
+  if in_cooldown: return false
   
   # If the item is automatic, apply a cooldown to it
   if is_automatic:

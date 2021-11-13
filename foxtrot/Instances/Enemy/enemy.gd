@@ -58,11 +58,5 @@ func TakeDamage(body):
     
     self.queue_free()
 
-func _on_DamageDetector_body_entered(body):
-  TakeDamage(body)
-
-
-func _on_DamageDetector_area_shape_entered(area_id, area, area_shape, local_shape):
-  # Apparently this signal disregards the masks set, so need another way to identify the area
-  if area.is_in_group(Globals.GROUP_PLAYER_WEAPON_HITBOX) || area.is_in_group(Globals.GROUP_PLAYER_PROJECTILE_HITBOX):
-    TakeDamage(area.get_parent())
+func _on_DamageDetector_area_entered(area):
+  TakeDamage(area.get_parent())
