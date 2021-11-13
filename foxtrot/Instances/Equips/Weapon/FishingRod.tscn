@@ -94,7 +94,6 @@ scale = Vector2( 0.5, 0.5 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-rotation = 2.0944
 scale = Vector2( 2, 3 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -8 )
@@ -124,6 +123,7 @@ position = Vector2( 38.641, 13.0718 )
 rotation = 0.371679
 scale = Vector2( 0.5, 0.5 )
 shape = SubResource( 5 )
+disabled = true
 
 [connection signal="body_entered" from="PickupDetector" to="." method="_on_PickupDetector_body_entered"]
 [connection signal="body_exited" from="PickupDetector" to="." method="_on_PickupDetector_body_exited"]
