@@ -23,9 +23,6 @@ func Use():
       else:
         printerr("[ItemStack] Error. Failed to remove item from player inventory...")
 
-func _on_use():
-  return true
-
 func AddToStack(amount):
   # Add amount to stack 
   curr_stack_amt += amount

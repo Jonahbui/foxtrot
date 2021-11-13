@@ -65,7 +65,10 @@ func Use():
   # Purpose   : The action the item takes if the player uses it
   # Param(s)  : N/A
   # Return(s) : N/A
-  pass
+  _on_use()
+  
+func _on_use():
+  return true
   
 func Pickup():
   # Purpose   : Used to let the player pick up the item and place it in the player inventory

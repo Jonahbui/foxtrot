@@ -7,6 +7,7 @@
 extents = Vector2( 24, 40 )
 
 [node name="DialogueInteraction" instance=ExtResource( 2 )]
+collision_layer = 16
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" parent="." index="0"]
