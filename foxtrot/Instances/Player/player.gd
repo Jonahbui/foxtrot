@@ -60,9 +60,16 @@ func _init():
     printerr("[Player] Error. Failed to connect to signal on_level_loaded...")
 
 func _ready():
+  # Set the player name to indicate which save is being played
   self.charname = Save.save[Globals.PLAYER_NAME]
+  
+  # Update the UI
   RefreshStats()
+  
+  # Tell the game that the player has been loaded
   Signals.emit_signal("on_player_loaded", self)
+  
+  # Update the movement of the player to match whatever level they are in
   UpdateMovement()
 
 func _physics_process(delta: float) -> void:
@@ -163,6 +170,12 @@ func UpdateMovement():
   else:
     gravity  = 100.0
     speed    = Vector2( 200.0, 150.0 )
+    
+func Heal(health : int):
+  self.health += health
+  if self.health > maxHealth:
+    self.health = maxHealth
+  RefreshHealth()
 # --------------------------------------------------------------------------------------------------
 # Player UI Functions
 # --------------------------------------------------------------------------------------------------

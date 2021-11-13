@@ -26,15 +26,7 @@ func SetProjectileDirection(new_direction : Vector2):
 
 func _on_CollisionDetector_body_shape_entered(_body_id, _body, _body_shape, _local_shape):
   self.visible = false
-  SpawnParticles()
+  particle_emitter.SpawnParticles(self.global_position)
   self.queue_free()
 
-func SpawnParticles():
-  if particle_emitter:
-    particle_emitter.get_parent().remove_child(particle_emitter)
-    self.get_parent().add_child(particle_emitter)
-    
-    particle_emitter.set_global_position(self.global_position)
-    particle_emitter.emitting = true
-    yield(get_tree().create_timer(2.0), "timeout")
-    particle_emitter.queue_free()
+
