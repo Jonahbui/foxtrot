@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Scenes/PauseMenu/PauseMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Gameplay/base.gd" type="Script" id=2]
@@ -9,8 +9,46 @@
 [ext_resource path="res://Instances/LocalAudio.gd" type="Script" id=7]
 [ext_resource path="res://Textures/submarine_dialogue_theme.tres" type="Theme" id=8]
 [ext_resource path="res://Audio/SoundEffects/text_update.wav" type="AudioStream" id=9]
+[ext_resource path="res://Textures/UI/Panel/panel_map.png" type="Texture" id=10]
+[ext_resource path="res://Textures/UI/Map/grid.png" type="Texture" id=11]
+[ext_resource path="res://Textures/UI/Map/ocean_map.png" type="Texture" id=12]
+[ext_resource path="res://Textures/map_theme.tres" type="Theme" id=13]
+[ext_resource path="res://Textures/UI/Panel/soda_panel.png" type="Texture" id=14]
+[ext_resource path="res://Scripts/Map/map.gd" type="Script" id=15]
+[ext_resource path="res://Textures/UI/Button/button_disabled.tres" type="StyleBox" id=16]
+[ext_resource path="res://Textures/UI/Button/button_hover.tres" type="StyleBox" id=17]
+[ext_resource path="res://Textures/UI/Button/button_pressed.tres" type="StyleBox" id=18]
+[ext_resource path="res://Textures/UI/Button/button_normal.tres" type="StyleBox" id=19]
+[ext_resource path="res://Scripts/Map/map_point.gd" type="Script" id=20]
+[ext_resource path="res://Textures/UI/Map/button_map.tres" type="Theme" id=22]
 
 [sub_resource type="ButtonGroup" id=1]
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 10 )
+region_rect = Rect2( 0, 0, 64, 64 )
+margin_left = 32.0
+margin_right = 35.0
+margin_top = 4.0
+margin_bottom = 5.0
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 14 )
+region_rect = Rect2( 0, 0, 16, 16 )
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 10 )
+region_rect = Rect2( 0, 0, 64, 64 )
+margin_left = 15.0
+margin_right = 42.0
+margin_top = 6.0
+margin_bottom = 6.0
 
 [node name="Base" type="Node2D"]
 script = ExtResource( 2 )
@@ -264,6 +302,192 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 
+[node name="Map" type="CanvasLayer" parent="."]
+layer = 2
+script = ExtResource( 15 )
+button_map_select_theme = "res://Textures/UI/Map/button_map_select.tres"
+
+[node name="PanelContainer" type="PanelContainer" parent="Map"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_top = 32.0
+margin_right = -32.0
+margin_bottom = -32.0
+theme = ExtResource( 13 )
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="Map/PanelContainer"]
+margin_left = 32.0
+margin_top = 4.0
+margin_right = 541.0
+margin_bottom = 291.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="OceanMap" type="TextureRect" parent="Map/PanelContainer/Panel"]
+margin_right = 509.0
+margin_bottom = 287.0
+texture = ExtResource( 12 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Line2D" type="Line2D" parent="Map/PanelContainer/Panel/OceanMap"]
+points = PoolVector2Array( 16, 12, 56, 36, 96, 68, 128, 108, 160, 140, 232, 148, 320, 140 )
+width = 2.0
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="MapPoints" type="Control" parent="Map/PanelContainer/Panel/OceanMap"]
+margin_right = 40.0
+margin_bottom = 40.0
+theme = ExtResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MapPoint1" type="Button" parent="Map/PanelContainer/Panel/OceanMap/MapPoints"]
+margin_left = 8.0
+margin_top = 4.0
+margin_right = 28.0
+margin_bottom = 24.0
+script = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+level = "res://Scenes/Gameplay/Spawn.tscn"
+level_name = "Spawn"
+next = [ NodePath("../MapPoint2") ]
+
+[node name="MapPoint2" type="Button" parent="Map/PanelContainer/Panel/OceanMap/MapPoints"]
+margin_left = 48.0
+margin_top = 28.0
+margin_right = 68.0
+margin_bottom = 48.0
+script = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+level = "res://Scenes/Gameplay/Seafloor.tscn"
+level_name = "Seafloor"
+next = [ NodePath("../MapPoint1") ]
+prev = [ NodePath("../MapPoint3") ]
+
+[node name="MapPoint3" type="Button" parent="Map/PanelContainer/Panel/OceanMap/MapPoints"]
+margin_left = 88.0
+margin_top = 60.0
+margin_right = 108.0
+margin_bottom = 80.0
+script = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+level_name = "Atlantis"
+prev = [ NodePath("../MapPoint2") ]
+
+[node name="MapPoint4" type="Button" parent="Map/PanelContainer/Panel/OceanMap/MapPoints"]
+margin_left = 120.0
+margin_top = 100.0
+margin_right = 140.0
+margin_bottom = 120.0
+script = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MapPoint5" type="Button" parent="Map/PanelContainer/Panel/OceanMap/MapPoints"]
+margin_left = 152.0
+margin_top = 132.0
+margin_right = 172.0
+margin_bottom = 152.0
+script = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MapPoint6" type="Button" parent="Map/PanelContainer/Panel/OceanMap/MapPoints"]
+margin_left = 224.0
+margin_top = 140.0
+margin_right = 244.0
+margin_bottom = 160.0
+script = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MapPoint7" type="Button" parent="Map/PanelContainer/Panel/OceanMap/MapPoints"]
+margin_left = 312.0
+margin_top = 132.0
+margin_right = 332.0
+margin_bottom = 152.0
+script = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DiveButton" type="Button" parent="Map/PanelContainer/Panel"]
+margin_left = 400.0
+margin_top = 252.0
+margin_right = 496.0
+margin_bottom = 279.0
+custom_styles/hover = ExtResource( 17 )
+custom_styles/pressed = ExtResource( 18 )
+custom_styles/disabled = ExtResource( 16 )
+custom_styles/normal = ExtResource( 19 )
+text = "dive"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButton" type="Button" parent="Map/PanelContainer/Panel"]
+margin_left = 400.0
+margin_top = 4.0
+margin_right = 496.0
+margin_bottom = 31.0
+custom_styles/hover = ExtResource( 17 )
+custom_styles/pressed = ExtResource( 18 )
+custom_styles/disabled = ExtResource( 16 )
+custom_styles/normal = ExtResource( 19 )
+text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InfoPanel" type="Panel" parent="Map/PanelContainer/Panel"]
+margin_left = 8.0
+margin_top = 252.0
+margin_right = 256.0
+margin_bottom = 276.0
+custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelLabel" type="Label" parent="Map/PanelContainer/Panel/InfoPanel"]
+margin_left = 8.0
+margin_right = 176.0
+margin_bottom = 23.0
+text = "Default"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Grid" type="TextureRect" parent="Map/PanelContainer"]
+self_modulate = Color( 1, 1, 1, 0.0627451 )
+margin_left = 32.0
+margin_top = 4.0
+margin_right = 541.0
+margin_bottom = 291.0
+mouse_filter = 2
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 2
+
 [connection signal="button_down" from="DialogueSystem/DialogueBox/Options/Button0" to="Audio" method="_on_button_down"]
 [connection signal="button_up" from="DialogueSystem/DialogueBox/Options/Button0" to="Audio" method="_on_button_up"]
 [connection signal="pressed" from="DialogueSystem/DialogueBox/Options/Button0" to="DialogueSystem" method="OnOptionSelect" binds= [ 0 ]]
@@ -304,6 +528,22 @@ anchor_bottom = 1.0
 [connection signal="button_up" from="PauseMenu/SettingsMenu/UI/Reset" to="Audio" method="_on_button_up"]
 [connection signal="button_down" from="PauseMenu/SettingsMenu/UI/BackButton" to="Audio" method="_on_button_down"]
 [connection signal="button_up" from="PauseMenu/SettingsMenu/UI/BackButton" to="Audio" method="_on_button_up"]
+[connection signal="_on_level_select" from="Map/PanelContainer/Panel/OceanMap/MapPoints/MapPoint1" to="Map" method="_on_map_point_select"]
+[connection signal="pressed" from="Map/PanelContainer/Panel/OceanMap/MapPoints/MapPoint1" to="Map/PanelContainer/Panel/OceanMap/MapPoints/MapPoint1" method="_on_map_point_pressed"]
+[connection signal="_on_level_select" from="Map/PanelContainer/Panel/OceanMap/MapPoints/MapPoint2" to="Map" method="_on_map_point_select"]
+[connection signal="pressed" from="Map/PanelContainer/Panel/OceanMap/MapPoints/MapPoint2" to="Map/PanelContainer/Panel/OceanMap/MapPoints/MapPoint2" method="_on_map_point_pressed"]
+[connection signal="_on_level_select" from="Map/PanelContainer/Panel/OceanMap/MapPoints/MapPoint3" to="Map" method="_on_map_point_select"]
+[connection signal="pressed" from="Map/PanelContainer/Panel/OceanMap/MapPoints/MapPoint3" to="Map/PanelContainer/Panel/OceanMap/MapPoints/MapPoint3" method="_on_map_point_pressed"]
+[connection signal="_on_level_select" from="Map/PanelContainer/Panel/OceanMap/MapPoints/MapPoint4" to="Map" method="_on_map_point_select"]
+[connection signal="pressed" from="Map/PanelContainer/Panel/OceanMap/MapPoints/MapPoint4" to="Map/PanelContainer/Panel/OceanMap/MapPoints/MapPoint4" method="_on_map_point_pressed"]
+[connection signal="_on_level_select" from="Map/PanelContainer/Panel/OceanMap/MapPoints/MapPoint5" to="Map" method="_on_map_point_select"]
+[connection signal="pressed" from="Map/PanelContainer/Panel/OceanMap/MapPoints/MapPoint5" to="Map/PanelContainer/Panel/OceanMap/MapPoints/MapPoint5" method="_on_map_point_pressed"]
+[connection signal="_on_level_select" from="Map/PanelContainer/Panel/OceanMap/MapPoints/MapPoint6" to="Map" method="_on_map_point_select"]
+[connection signal="pressed" from="Map/PanelContainer/Panel/OceanMap/MapPoints/MapPoint6" to="Map/PanelContainer/Panel/OceanMap/MapPoints/MapPoint6" method="_on_map_point_pressed"]
+[connection signal="_on_level_select" from="Map/PanelContainer/Panel/OceanMap/MapPoints/MapPoint7" to="Map" method="_on_map_point_select"]
+[connection signal="pressed" from="Map/PanelContainer/Panel/OceanMap/MapPoints/MapPoint7" to="Map/PanelContainer/Panel/OceanMap/MapPoints/MapPoint7" method="_on_map_point_pressed"]
+[connection signal="pressed" from="Map/PanelContainer/Panel/DiveButton" to="Map" method="_on_DiveButton_pressed"]
+[connection signal="pressed" from="Map/PanelContainer/Panel/BackButton" to="Map" method="_on_BackButton_pressed"]
 
 [editable path="PauseMenu"]
 [editable path="PauseMenu/SettingsMenu"]

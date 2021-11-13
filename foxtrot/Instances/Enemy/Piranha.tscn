@@ -65,13 +65,13 @@ physics_process_parent = true
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 9 )
 animation = "swim"
-frame = 5
+frame = 1
 playing = true
 
 [node name="DamageDetector" type="Area2D" parent="."]
 z_index = 1
 z_as_relative = false
-collision_layer = 4
+collision_layer = 0
 collision_mask = 288
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageDetector"]

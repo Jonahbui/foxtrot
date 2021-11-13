@@ -3,10 +3,10 @@
 [ext_resource path="res://Textures/Gameplay/Weapon/driftwood.png" type="Texture" id=2]
 [ext_resource path="res://Instances/Equips/Weapon/weapon.gd" type="Script" id=8]
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.92381, 52.6585 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=2]
 length = 0.6
 loop = true
 tracks/0/type = "method"
@@ -54,7 +54,7 @@ tracks/2/keys = {
 "values": [ true, false, true ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=3]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
@@ -83,7 +83,7 @@ script = ExtResource( 8 )
 __meta__ = {
 "_edit_lock_": true
 }
-id = 1
+id = 0
 attack_sound = "res://Audio/SoundEffects/whack_2.wav"
 damage = 5
 knockback = 300.0
@@ -91,7 +91,7 @@ knockback = 300.0
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2( -0.148844, -26.2467 )
 scale = Vector2( 0.5, 0.5 )
-shape = SubResource( 6 )
+shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 2, 3 )
@@ -99,8 +99,8 @@ texture = ExtResource( 2 )
 offset = Vector2( 0, -8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
-anims/attack = SubResource( 7 )
-anims/idle = SubResource( 8 )
+anims/attack = SubResource( 2 )
+anims/idle = SubResource( 3 )
 
 [node name="PickupDetector" type="Area2D" parent="."]
 position = Vector2( -8, 0 )

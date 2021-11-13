@@ -154,7 +154,7 @@ func ResetPlayer():
 
 func TakeDamage(damage : int):
   health -= damage
-  
+  $AnimationPlayer.play("Damaged")
   RefreshHealth()
   if health <= 0:
     # Play death animation
@@ -204,6 +204,13 @@ func RestorePlayerData(data):
 func ToggleInform(state):
   # Display the inform panel
   $Inform.visible = state
+  
+  # Play damage animation (which will also disable collision so the player does not take any more
+  # damage and when it is re-enabled, if the player is still within contact with another collider, 
+  # they will continue to take more damage). 
 
 func _on_DamageDetector_body_entered(body):
   TakeDamage(body.damage)
+
+func _on_DamageDetector_area_entered(area):
+  TakeDamage(area.damage)

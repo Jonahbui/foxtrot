@@ -37,14 +37,14 @@ func _physics_process(delta):
    # velocity.x *= -1.0
   #velocity.y = move_and_slide(velocity,Vector2.UP).y
   
-func TakeDamage(body):
+func TakeDamage(area):
   # Deal damage
-  health -= body.damage
-  print_debug("[%s] Current health = %d. Damage taken = %d." % [body.get_name(), health, body.damage])
+  health -= area.damage
+  print_debug("[%s] Current health = %d. Damage taken = %d." % [area.get_name(), health, area.damage])
   
   # Deal knockback
-  var direction = (self.get_global_transform().get_origin() - body.get_global_transform().get_origin()).normalized()
-  knockback_velocity = direction * body.knockback
+  var direction = (self.get_global_transform().get_origin() - area.get_global_transform().get_origin()).normalized()
+  knockback_velocity = direction * area.knockback
   
   # Case of death
   if health <= 0:

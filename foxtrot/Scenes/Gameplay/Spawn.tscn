@@ -84,7 +84,6 @@ script = SubResource( 1 )
 level = "res://Scenes/Gameplay/Seafloor.tscn"
 
 [node name="ChangeLevelInteraction" parent="Background Objects/yellow_submarine" instance=ExtResource( 15 )]
-level = "res://Scenes/Gameplay/Seafloor.tscn"
 
 [node name="CollisionShape2D" parent="Background Objects/yellow_submarine/ChangeLevelInteraction" index="0"]
 shape = SubResource( 2 )
@@ -231,7 +230,6 @@ tile_data = PoolIntArray( 655381, 30, 0, 655382, 30, 0, 655383, 30, 0, 655384, 3
 position = Vector2( 32, 192 )
 
 [node name="ChangeLevelInteraction" parent="World/AquariumDoor" instance=ExtResource( 15 )]
-level = "res://Scenes/Gameplay/Aquarium.tscn"
 
 [node name="CollisionShape2D" parent="World/AquariumDoor/ChangeLevelInteraction" index="0"]
 shape = SubResource( 5 )

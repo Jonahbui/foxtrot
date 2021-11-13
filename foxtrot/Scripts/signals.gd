@@ -1,6 +1,27 @@
 extends Node
 
 #--------------------------------------------------------------------------------------------------
+# Audio System Signals
+#--------------------------------------------------------------------------------------------------
+# Inform the game to play the clip in the music source
+signal on_play_audio(clip, source)
+#--------------------------------------------------------------------------------------------------
+# Base Signals
+#--------------------------------------------------------------------------------------------------
+# Inform the game when a level change request is sent
+signal on_change_base_level(level, location)
+
+# Signals that the base game has been fully loaded
+signal on_base_game_loaded()
+#--------------------------------------------------------------------------------------------------
+# Dialogue System Signals
+#--------------------------------------------------------------------------------------------------
+# Inform the dialogue system that a dialogue has started
+signal on_dialogue_trigger(dialogue_id)
+
+# Inform the dialogue system that a dialogue has ended
+signal on_dialogue_exited()
+#--------------------------------------------------------------------------------------------------
 # Inventory System Signals
 #--------------------------------------------------------------------------------------------------
 # Inform the world that an `item` is to be dropped at `position`
@@ -15,30 +36,14 @@ signal on_inventory_add_item_stack(item, amount)
 # Inform the game that the player has died
 signal on_player_death()
 #--------------------------------------------------------------------------------------------------
-# Audio System Signals
+# Map Signals
 #--------------------------------------------------------------------------------------------------
-# Inform the game to play the clip in the music source
-signal on_play_audio(clip, source)
-#--------------------------------------------------------------------------------------------------
-# Base Signals
-#--------------------------------------------------------------------------------------------------
-# Inform the game when a level change request is sent
-signal on_change_base_level(level, location)
-
-# Signals that the base game has been fully loaded
-signal on_base_game_loaded()
+# Inform the game to open the map
+signal on_map_trigger()
 #--------------------------------------------------------------------------------------------------
 # Level Signals
 #--------------------------------------------------------------------------------------------------
 signal on_level_loaded()
-#--------------------------------------------------------------------------------------------------
-# Dialogue System Signals
-#--------------------------------------------------------------------------------------------------
-# Inform the dialogue system that a dialogue has started
-signal on_dialogue_trigger(dialogue_id)
-
-# Inform the dialogue system that a dialogue has ended
-signal on_dialogue_exited()
 #--------------------------------------------------------------------------------------------------
 # Player/ Interaction Signals
 #--------------------------------------------------------------------------------------------------
