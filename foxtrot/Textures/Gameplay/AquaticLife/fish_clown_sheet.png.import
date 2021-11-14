@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/turtle_sheet.png-92575904289065cc27444db6fbb123bb.stex"
+path="res://.import/fish_clown_sheet.png-b783102c945e91d8617f29b31e73e811.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Gameplay/Fish/turtle_sheet.png"
-dest_files=[ "res://.import/turtle_sheet.png-92575904289065cc27444db6fbb123bb.stex" ]
+source_file="res://Textures/Gameplay/AquaticLife/fish_clown_sheet.png"
+dest_files=[ "res://.import/fish_clown_sheet.png-b783102c945e91d8617f29b31e73e811.stex" ]
 
 [params]
 
