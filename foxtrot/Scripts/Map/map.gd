@@ -97,6 +97,7 @@ func OpenMap():
   ToggleMap(true, true)
   
 func Resurface():
+  if current_map_point: current_map_point.set_theme(null)
   current_map_point = map_points.get_child(0)
   _on_map_point_select(current_map_point)
   _on_DiveButton_pressed()
