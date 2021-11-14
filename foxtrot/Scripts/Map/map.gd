@@ -26,6 +26,9 @@ func _ready():
     
   if Signals.connect("on_map_trigger", self, "OpenMap") != OK:
     printerr("[Map] Error. Could not connect to signal on_map_trigger...")
+    
+  if Signals.connect("on_map_resurface", self, "Resurface") != OK:
+    printerr("[Map] Error. Could not connect to signal on_map_resurface...")
 
 func ToggleMap(forceState=false, state=false):
   if forceState:
@@ -40,14 +43,18 @@ func _on_DiveButton_pressed():
   # Hide the map when the level is being loaded
   ToggleMap(true, false)
   
-  # Change the played map point to the current map point
-  played_map_point = current_map_point
-  UpdateAccessiblePoints()
+  # Ignore the player spamming the resurface button
+  # No reason to keep loading spawn if the player is in spawn
+  if played_map_point == current_map_point && played_map_point.level == Globals.LPATH_SPAWN:
+    return
   
   # Change the level
-  if current_map_point.level != Globals.LPATH_SPAWN:
-    Signals.emit_signal("on_change_base_level", current_map_point.level, current_map_point.level_location)
-
+  played_map_point = current_map_point
+  Signals.emit_signal("on_change_base_level", current_map_point.level, current_map_point.level_location)
+  
+  # Change the played map point to the current map point
+  UpdateAccessiblePoints()
+  
 func _on_map_point_select(map_point):
   UpdateAccessiblePoints()
     
@@ -80,11 +87,16 @@ func Reset():
   if played_map_point: played_map_point.set_theme(null)
   
   # Set the default current_map_point to spawn
-  current_map_point = map_points.get_child(0)
-  played_map_point = current_map_point
-  played_map_point.set_theme(button_map_select_theme)
-  level_label.text = played_map_point.level_name
+  played_map_point = map_points.get_child(0)
+  current_map_point = map_points.get_child(1)
+  current_map_point.set_theme(button_map_select_theme)
+  level_label.text = current_map_point.level_name
   UpdateAccessiblePoints()
   
 func OpenMap():
   ToggleMap(true, true)
+  
+func Resurface():
+  current_map_point = map_points.get_child(0)
+  _on_map_point_select(current_map_point)
+  _on_DiveButton_pressed()

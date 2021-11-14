@@ -27,15 +27,15 @@ func _physics_process(delta):
       $AnimatedSprite.scale.x = -1
     
     direction = (player.position - position).normalized()
-    move_and_slide(direction * runSpeed + knockback_velocity)
+    Move()
   
+  # After the enemy has taken knockback, decrease the knockback velocity until there is no
+  # knockback anymore to prevent them from flying off infinitely away
   if knockback_velocity != Vector2.ZERO:
     knockback_velocity = knockback_velocity.linear_interpolate(Vector2.ZERO, delta)
-  #velocity.y += gravity * delta
-  #velocity.y = move_and_slide(velocity,Vector2.UP).y
-  #if is_on_wall():
-   # velocity.x *= -1.0
-  #velocity.y = move_and_slide(velocity,Vector2.UP).y
+
+func Move():
+  move_and_slide(direction * runSpeed + knockback_velocity)
   
 func TakeDamage(area):
   # Deal damage
@@ -49,14 +49,18 @@ func TakeDamage(area):
   # Case of death
   if health <= 0:
     # Play death animation and other crap here
-    
-    # Drop the item
-    var loot = Loot.GenerateLoot(Loot.table[Loot.LOOT_ENEMY][loot_string])
-    self.get_node_or_null("/root/Base/Level/Items/").add_child(loot)
-    loot.SetProcess(Globals.ItemProcess.Dynamic, null)
-    loot.set_global_position(self.get_global_transform().get_origin())
-    
-    self.queue_free()
+    self.visible = false
+    call_deferred("KillEnemy")
 
 func _on_DamageDetector_area_entered(area):
   TakeDamage(area.get_parent())
+
+func KillEnemy():
+  # Drop the item
+  var loot = Loot.GenerateLoot(Loot.table[Loot.LOOT_ENEMY][loot_string])
+  
+  # You cannot add new Area2Ds to a scene during a call of another Area2Ds on_area_entered(). Using call_deferred() solves the problem. 
+  self.get_node_or_null("/root/Base/Level/Items/").add_child(loot)
+  loot.SetProcess(Globals.ItemProcess.Dynamic, null)
+  loot.set_global_position(self.get_global_transform().get_origin())
+  self.queue_free()

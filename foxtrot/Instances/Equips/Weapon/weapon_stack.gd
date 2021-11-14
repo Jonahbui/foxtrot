@@ -1,4 +1,5 @@
-extends "res://Instances/Equips/item_stack.gd"
+extends ItemStack
+class_name WeaponStack
 
 export var damage : int = 0
 

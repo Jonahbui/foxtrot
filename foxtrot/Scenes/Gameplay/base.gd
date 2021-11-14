@@ -33,7 +33,6 @@ func _ready():
   
   if Signals.connect("on_play_audio", self, "PlayAudio") != OK:
     printerr("[Base] Error. Failed to connect to signal on_play_audio...")
-    
 
   if Signals.connect("on_change_base_level", self, "LoadLevel") != OK:
     printerr("[Base] Error. Failed to connect to signal on_change_base_level...")

@@ -9,10 +9,35 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Armor",
+"class": "Accessory",
+"language": "GDScript",
+"path": "res://Instances/Equips/Accessory/accessory.gd"
+}, {
+"base": "Item",
+"class": "Armor",
+"language": "GDScript",
+"path": "res://Instances/Equips/Armor/armor.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Enemy",
 "language": "GDScript",
 "path": "res://Instances/Enemy/enemy.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Item",
+"language": "GDScript",
+"path": "res://Instances/Equips/item.gd"
+}, {
+"base": "Item",
+"class": "ItemStack",
+"language": "GDScript",
+"path": "res://Instances/Equips/item_stack.gd"
+}, {
+"base": "ItemStack",
+"class": "ProjectileStack",
+"language": "GDScript",
+"path": "res://Instances/Equips/Weapon/projectile_stack.gd"
 }, {
 "base": "Resource",
 "class": "RMS2D_Material",
@@ -118,9 +143,24 @@ _global_script_classes=[ {
 "class": "SS2D_VertexProperties",
 "language": "GDScript",
 "path": "res://addons/rmsmartshape/vertex_properties.gd"
+}, {
+"base": "Item",
+"class": "Weapon",
+"language": "GDScript",
+"path": "res://Instances/Equips/Weapon/weapon.gd"
+}, {
+"base": "ItemStack",
+"class": "WeaponStack",
+"language": "GDScript",
+"path": "res://Instances/Equips/Weapon/weapon_stack.gd"
 } ]
 _global_script_class_icons={
+"Accessory": "",
+"Armor": "",
 "Enemy": "",
+"Item": "",
+"ItemStack": "",
+"ProjectileStack": "",
 "RMS2D_Material": "",
 "RMS2D_VertexProperties": "",
 "RMS2D_VertexPropertiesArray": "",
@@ -141,7 +181,9 @@ _global_script_class_icons={
 "SS2D_Shape_Closed": "res://addons/rmsmartshape/assets/closed_shape.png",
 "SS2D_Shape_Open": "res://addons/rmsmartshape/assets/open_shape.png",
 "SS2D_Strings": "",
-"SS2D_VertexProperties": ""
+"SS2D_VertexProperties": "",
+"Weapon": "",
+"WeaponStack": ""
 }
 
 [application]

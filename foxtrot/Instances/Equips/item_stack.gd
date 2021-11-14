@@ -1,4 +1,5 @@
-extends "res://Instances/Equips/item.gd"
+extends Item
+class_name ItemStack
 
 export var max_stack_amt  : int = 64
 export var curr_stack_amt : int = 1

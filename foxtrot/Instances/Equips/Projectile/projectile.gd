@@ -18,10 +18,6 @@ var velocity = Vector2( 200.0, -400.0 )
 # Particle to emit on projectile collide
 onready var particle_emitter = get_node_or_null("Particles2D")
 
-func _ready():
-  yield(get_tree().create_timer(8.0), "timeout")
-  queue_free()
-
 func _physics_process(delta):
   velocity.y += gravity * delta
   velocity = move_and_slide( velocity, Vector2.UP )

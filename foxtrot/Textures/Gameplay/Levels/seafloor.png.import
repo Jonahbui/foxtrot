@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tab_panel.png-9bd96f23aecf1c35f4d9d894f36c55fd.stex"
+path="res://.import/seafloor.png-1df546ba1addc6d324c02e2547e42691.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/UI/Slider/tab_panel.png"
-dest_files=[ "res://.import/tab_panel.png-9bd96f23aecf1c35f4d9d894f36c55fd.stex" ]
+source_file="res://Textures/Gameplay/Levels/seafloor.png"
+dest_files=[ "res://.import/seafloor.png-1df546ba1addc6d324c02e2547e42691.stex" ]
 
 [params]
 
@@ -30,5 +30,5 @@ process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

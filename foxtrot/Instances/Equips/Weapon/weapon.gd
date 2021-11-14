@@ -1,4 +1,5 @@
-extends "res://Instances/Equips/item.gd"
+extends Item
+class_name Weapon
 
 export(String, FILE) var attack_sound
 

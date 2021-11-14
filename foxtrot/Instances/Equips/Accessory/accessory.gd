@@ -1,1 +1,2 @@
-extends "res://Instances/Equips/Armor/armor.gd"
+extends Armor
+class_name Accessory

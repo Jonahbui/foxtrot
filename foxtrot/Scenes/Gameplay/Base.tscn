@@ -457,6 +457,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ResurfaceButton" type="Button" parent="Map/PanelContainer/Panel"]
+margin_left = 208.0
+margin_top = 4.0
+margin_right = 304.0
+margin_bottom = 31.0
+custom_styles/hover = ExtResource( 17 )
+custom_styles/pressed = ExtResource( 18 )
+custom_styles/disabled = ExtResource( 16 )
+custom_styles/normal = ExtResource( 19 )
+text = "Resurface"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="InfoPanel" type="Panel" parent="Map/PanelContainer/Panel"]
 margin_left = 8.0
 margin_top = 252.0
@@ -544,6 +558,7 @@ stretch_mode = 2
 [connection signal="pressed" from="Map/PanelContainer/Panel/OceanMap/MapPoints/MapPoint7" to="Map/PanelContainer/Panel/OceanMap/MapPoints/MapPoint7" method="_on_map_point_pressed"]
 [connection signal="pressed" from="Map/PanelContainer/Panel/DiveButton" to="Map" method="_on_DiveButton_pressed"]
 [connection signal="pressed" from="Map/PanelContainer/Panel/BackButton" to="Map" method="_on_BackButton_pressed"]
+[connection signal="pressed" from="Map/PanelContainer/Panel/ResurfaceButton" to="Map" method="Resurface"]
 
 [editable path="PauseMenu"]
 [editable path="PauseMenu/SettingsMenu"]

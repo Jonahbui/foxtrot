@@ -1,4 +1,4 @@
-extends "res://Instances/Equips/item_stack.gd"
+extends ItemStack
 
 export var healing_amount : int = 10
 

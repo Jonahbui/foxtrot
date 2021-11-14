@@ -1,4 +1,5 @@
-extends "res://Instances/Equips/item.gd"
+extends Item
+class_name Armor
 
 export var resistance : int = 1
 

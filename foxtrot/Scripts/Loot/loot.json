@@ -40,6 +40,17 @@
         "res://Instances/Gameplay/WhiteSeashell.tscn"
       ],
       "coin"  : [1, 10]
+    },
+    "snake" : {
+      "table" : [
+        10,
+        1
+      ],
+      "item"  : [
+        "res://Instances/Gameplay/Coin.tscn",
+        "res://Instances/Gameplay/WhiteSeashell.tscn"
+      ],
+      "coin"  : [1, 10]
     }
     
   }

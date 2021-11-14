@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Textures/Gameplay/Spawn/spawn_tiles.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Gameplay/spawn.gd" type="Script" id=2]
@@ -16,7 +16,6 @@
 [ext_resource path="res://Instances/Equips/Weapon/Driftwood.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Node/ChangeLevelInteraction.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Audio/Music/spawn1.wav" type="AudioStream" id=16]
-[ext_resource path="res://Instances/Gameplay/WhiteSeashell.tscn" type="PackedScene" id=17]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends \"res://Node/interaction.gd\"
@@ -241,9 +240,6 @@ shape = SubResource( 5 )
 position = Vector2( 256, 320 )
 override_process = true
 process = 2
-
-[node name="Seashell" parent="World" instance=ExtResource( 17 )]
-position = Vector2( 160, 288 )
 
 [editable path="Background Objects/yellow_submarine/ChangeLevelInteraction"]
 [editable path="World/AquariumDoor/ChangeLevelInteraction"]

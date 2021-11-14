@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name Item
 
 var player_inv : Node = null
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/panel-export.png-d9a24dc08517ef0af07d9f06f64ede0e.stex"
+path="res://.import/background3.png-b065d55e5d93e2333aada745277abfbc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/UI/Panel/panel-export.png"
-dest_files=[ "res://.import/panel-export.png-d9a24dc08517ef0af07d9f06f64ede0e.stex" ]
+source_file="res://Textures/Gameplay/Levels/Seafloor/background3.png"
+dest_files=[ "res://.import/background3.png-b065d55e5d93e2333aada745277abfbc.stex" ]
 
 [params]
 
