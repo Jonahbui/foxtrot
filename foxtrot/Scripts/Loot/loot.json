@@ -4,11 +4,13 @@
     "seafloor" : {
       "table" : [
         10, 
-        3
+        3,
+        1
       ],
       "item"  : [
         "res://Instances/Gameplay/Coin.tscn",
-        "res://Instances/Equips/Weapon/Driftwood.tscn"
+        "res://Instances/Equips/Weapon/Driftwood.tscn",
+        "res://Instances/Gameplay/WhiteSeashell.tscn"
       ],
       "coin"  : [1, 10]
     }
@@ -19,19 +21,23 @@
 
     "piranha" : {
       "table" : [
-        10
+        10,
+        1
       ],
       "item"  : [
-        "res://Instances/Gameplay/Coin.tscn"
+        "res://Instances/Gameplay/Coin.tscn",
+        "res://Instances/Gameplay/WhiteSeashell.tscn"
       ],
       "coin"  : [1, 10]
     },
     "pufferfish" : {
       "table" : [
-        10
+        10,
+        1
       ],
       "item"  : [
-        "res://Instances/Gameplay/Coin.tscn"
+        "res://Instances/Gameplay/Coin.tscn",
+        "res://Instances/Gameplay/WhiteSeashell.tscn"
       ],
       "coin"  : [1, 10]
     }

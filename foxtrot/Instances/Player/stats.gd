@@ -7,6 +7,8 @@ func _init():
     printerr("[Stats] Error. Failed to connect to signal on_damage_update...")
   if Signals.connect("on_defense_update", self, "UpdateDefenseUI") != OK:
     printerr("[Stats] Error. Failed to connect to signal on_defense_update...")
+  if Signals.connect("on_seashell_update", self, "UpdateSeashell") != OK:
+    printerr("[Stats] Error. Failed to connect to signal on_seashell_update...")
 
 func _ready():
   UpdateMoneyUI()
@@ -21,3 +23,13 @@ func UpdateDamageMultiplierUI():
   
 func UpdateDefenseUI():
   $PlayerInfoContainer/DefenseContainer/Label.text = "%d" % [Globals.Player().defense]
+
+func UpdateSeashell():
+  var player = Globals.Player()
+  
+  $ShellContainer/WhiteSeashellContainer/Label.text  = "%d" % [player.seashells[0]]
+  $ShellContainer/GreenSeashellContainer/Label.text  = "%d" % [player.seashells[1]]
+  $ShellContainer/BlueSeashellContainer/Label.text   = "%d" % [player.seashells[2]]
+  $ShellContainer/PurpleSeashellContainer/Label.text = "%d" % [player.seashells[3]]
+  $ShellContainer/YellowSeashellContainer/Label.text = "%d" % [player.seashells[4]]
+  $ShellContainer/PinkSeashellContainer/Label.text   = "%d" % [player.seashells[5]]

@@ -58,6 +58,9 @@ signal on_damage_update()
 
 # Send this signal to signify the player's defense has changed
 signal on_defense_update()
+
+# Send this signal to signify that the player's seashell collection has updated
+signal on_seashell_update()
 #--------------------------------------------------------------------------------------------------
 # Save System Signals
 #--------------------------------------------------------------------------------------------------

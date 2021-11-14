@@ -10,6 +10,7 @@ export var maxHealth : int = 100
 export var health : int = 100
 export var mana   : int = 100
 export var money  : int = 0
+export var seashells = { 0 : 0, 1 : 0, 2 : 0, 3 : 0, 4 : 0, 5 : 0 }
 var damage_multiplier = 1.0
 var defense_stats = {}
 var defense : int  = 0
@@ -205,6 +206,16 @@ func UpdateDefense():
   for key in defense_stats:
     defense += defense_stats[key] 
   Signals.emit_signal("on_defense_update")
+  
+func AddSeashells(key, amount):
+  seashells[key] += 1
+  Signals.emit_signal("on_seashell_update")
+  
+func HasSeashells(key, amount):
+  return false if seashells[key] - amount < 0 else true
+  
+func RemoveSeashells(key, amount):
+  seashells[key] -= amount
 # --------------------------------------------------------------------------------------------------
 # Dialogue Functions
 # --------------------------------------------------------------------------------------------------
@@ -243,4 +254,3 @@ func RefreshMana():
 func RefreshStats():
   RefreshHealth()
   RefreshMana()
-
