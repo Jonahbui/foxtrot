@@ -82,7 +82,7 @@ func _physics_process(delta: float) -> void:
   #   screen) and the user lets go of the JUMP key (detected using
   #   is_action_just_released()), we want to stop the jump and
   #   start falling again.
-  var isJumpInterrupted : = Input.is_action_just_released("jump") and velocity.y < 0.0
+  var isJumpInterrupted : = Input.is_action_just_released("jump") and velocity.y == 0.0
   
   #   When LEFT and RIGHT are from the
   #   keyboard, direction.x = 1 (moving right),
@@ -93,10 +93,16 @@ func _physics_process(delta: float) -> void:
 
   # "direction.y" is 1 when the player is falling.
   # direction.y is -1 when the player has just started a JUMP.
-  direction = Vector2(
-    Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-    -1 if Input.is_action_just_pressed("jump") and is_on_floor() else 1
-   )
+  if Globals.is_in_spawn:
+    direction = Vector2(
+      Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
+      -1 if Input.is_action_just_pressed("jump") and is_on_floor() else 1
+    )
+  else:
+    direction = Vector2(
+      Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
+      -1 if Input.is_action_just_pressed("jump") else 1
+    )
   
   # Whichever way we going along the X axis, our speed is that
   #   direction times speed.x
@@ -121,7 +127,7 @@ func _physics_process(delta: float) -> void:
     #   frame.  "gravity" is units per second per second.
     #   Multiplying the two gives us the amount that our falling
     #   speed has increased since the last frame so we add it in.
-    if Input.is_action_pressed("fall") :
+    if Input.is_action_pressed("fall") and velocity.y < 300.0  :
       velocity.y += gravity * delta + 20
     else :
       velocity.y += gravity * delta
