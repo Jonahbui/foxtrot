@@ -127,7 +127,7 @@ func _physics_process(delta: float) -> void:
     #   frame.  "gravity" is units per second per second.
     #   Multiplying the two gives us the amount that our falling
     #   speed has increased since the last frame so we add it in.
-    if Input.is_action_pressed("fall") :
+    if Input.is_action_pressed("fall") and velocity.y < 300.0  :
       velocity.y += gravity * delta + 20
     else :
       velocity.y += gravity * delta
