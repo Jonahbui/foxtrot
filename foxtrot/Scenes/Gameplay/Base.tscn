@@ -386,6 +386,7 @@ script = ExtResource( 20 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+level = "res://Scenes/Gameplay/Atlantis.tscn"
 level_name = "Atlantis"
 prev = [ NodePath("../MapPoint2") ]
 
