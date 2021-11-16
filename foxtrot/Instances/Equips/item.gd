@@ -55,7 +55,7 @@ func _process_input(event):
 func _ready():
   if override_process:
     SetProcess(process, null)
-
+    
 func _physics_process(delta: float) -> void:
   if Globals.pause_flags != 0: return
   
@@ -85,6 +85,7 @@ func SetProcess(item_process : int, player_inv):
     # Dynamic is used for the item when it is in the world
     Globals.ItemProcess.Dynamic:
       self.player_inv = null
+      SetShader(true)
       SetState(ItemState.Idle)
       # Enable visibility so the player can see the item
       # Disable processing so it cannot be used since it is not equipped
@@ -95,6 +96,7 @@ func SetProcess(item_process : int, player_inv):
     # Hidden is used when the item is in the player inventory but not active
     Globals.ItemProcess.Hidden:
       self.player_inv = player_inv
+      SetShader(false)      
       # Enable visibility so the player can see the item
       # Disable processing so it cannot be used since it is not equipped
       # Disable physics so that it does not interact with gravity
@@ -104,6 +106,7 @@ func SetProcess(item_process : int, player_inv):
     # Active is used when the item is un the player inventory and is currently being used
     Globals.ItemProcess.Active:
       self.player_inv = player_inv
+      SetShader(false)      
       # Enable visibility so the player can see the item
       # Enable processing so the player can use the item
       # Disable physics so that it does not interact with gravity
@@ -113,6 +116,7 @@ func SetProcess(item_process : int, player_inv):
     # Static is used when the item is in the world but should not move from its location at all
     Globals.ItemProcess.Static:
       self.player_inv = null
+      SetShader(true)      
       SetState(ItemState.Idle)
       # Enable visibility so the player can see the item
       # Disable processing so it cannot be used since it is not equipped
@@ -179,3 +183,24 @@ func AnimationStop():
   # Param(s)  : N/A
   # Return(s) : N/A
   pass
+
+func SetShader(state):
+  var material = GetMaterial()
+  if state:
+    material.set_shader_param("precision", 0.02)
+  else:
+    material.set_shader_param("precision", 0.0)
+
+func GetMaterial():
+  # Some textures use an AtlasTexture to display the item and the textures are cropped tightly for
+  # each frame of the item. So the outline shader cannot work properly since it may use pixels from
+  # outside the desired region of the item AtlasTexture or does not have enough space. As a result
+  # we have separate sprite on those items called Sprite2. This sprite holds a single frame of the
+  # item in an idle state and has the outline.
+  var node = get_node_or_null("Sprite2")
+  if not node:
+    node = get_node_or_null("Sprite")
+  else:
+    node.visible = true
+  return node.material
+  

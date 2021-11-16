@@ -538,8 +538,6 @@ stretch_mode = 2
 [connection signal="button_up" from="PauseMenu/SettingsMenu/UI/TabContainer/Audio/AudioVbox/UserInterfaceVolume/UserInterfaceSlider/UserInterfaceCheckbox" to="Audio" method="_on_button_up"]
 [connection signal="button_down" from="PauseMenu/SettingsMenu/UI/TabContainer/Graphics/GraphicsVbox/Fullscreen/FullscreenCheckBox" to="Audio" method="_on_button_down"]
 [connection signal="button_up" from="PauseMenu/SettingsMenu/UI/TabContainer/Graphics/GraphicsVbox/Fullscreen/FullscreenCheckBox" to="Audio" method="_on_button_up"]
-[connection signal="button_down" from="PauseMenu/SettingsMenu/UI/Reset" to="Audio" method="_on_button_down"]
-[connection signal="button_up" from="PauseMenu/SettingsMenu/UI/Reset" to="Audio" method="_on_button_up"]
 [connection signal="button_down" from="PauseMenu/SettingsMenu/UI/BackButton" to="Audio" method="_on_button_down"]
 [connection signal="button_up" from="PauseMenu/SettingsMenu/UI/BackButton" to="Audio" method="_on_button_up"]
 [connection signal="_on_level_select" from="Map/PanelContainer/Panel/OceanMap/MapPoints/MapPoint1" to="Map" method="_on_map_point_select"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Textures/UI/Panel/panel.tres" type="StyleBox" id=1]
 [ext_resource path="res://Textures/SplashScreen/solid_white.png" type="Texture" id=2]
@@ -8,8 +8,10 @@
 [ext_resource path="res://Textures/UI/Button/button_disabled.tres" type="StyleBox" id=6]
 [ext_resource path="res://Textures/UI/Button/button_hover.tres" type="StyleBox" id=7]
 [ext_resource path="res://Textures/UI/Button/button_pressed.tres" type="StyleBox" id=8]
-[ext_resource path="res://Textures/UI/Button/input_normal.png" type="Texture" id=9]
+[ext_resource path="res://Textures/UI/Button/button_normal.png" type="Texture" id=9]
 [ext_resource path="res://Textures/UI/Button/input_icon_reset_normal.png" type="Texture" id=10]
+[ext_resource path="res://Fonts/ThaleahFat_TTF.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://Textures/Gameplay/player.png" type="Texture" id=12]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 9 )
@@ -19,13 +21,18 @@ margin_right = 24.0
 margin_top = 8.0
 margin_bottom = 8.0
 
+[sub_resource type="DynamicFont" id=2]
+outline_size = 1
+outline_color = Color( 0.301961, 0.192157, 0.168627, 1 )
+font_data = ExtResource( 11 )
+
 [node name="CharacterCreation" type="Node2D"]
 script = ExtResource( 3 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Background" type="TextureRect" parent="UI"]
-self_modulate = Color( 0.0941176, 0.47451, 0.623529, 1 )
+self_modulate = Color( 0.0588235, 0.337255, 0.584314, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 2 )
@@ -33,6 +40,11 @@ expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Sprite" type="Sprite" parent="UI"]
+position = Vector2( 320, 176 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 12 )
 
 [node name="StartButton" type="Button" parent="UI"]
 anchor_left = 1.0
@@ -158,6 +170,22 @@ context_menu_enabled = false
 clear_button_enabled = true
 right_icon = ExtResource( 10 )
 placeholder_text = "Name here"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WarningLabel" type="Label" parent="UI"]
+visible = false
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = -32.0
+margin_right = 160.0
+margin_bottom = -17.0
+rect_scale = Vector2( 1.5, 1.5 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.886275, 0.258824, 0.258824, 1 )
+text = "Name must be entered!"
 __meta__ = {
 "_edit_use_anchors_": false
 }

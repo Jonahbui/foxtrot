@@ -1,8 +1,4 @@
-[gd_scene load_steps=6 format=2]
-
-[ext_resource path="res://Instances/Equips/Template.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Textures/Gameplay/Accessory/white_shell.png" type="Texture" id=2]
-[ext_resource path="res://Instances/Equips/Accessory/accessory.gd" type="Script" id=3]
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
 
 [sub_resource type="Shader" id=5]
 code = "shader_type canvas_item;
@@ -89,7 +85,7 @@ void fragment()
 	COLOR = final_color; 
 }"
 
-[sub_resource type="ShaderMaterial" id=6]
+[resource]
 shader = SubResource( 5 )
 shader_param/intensity = 50
 shader_param/precision = 0.02
@@ -98,10 +94,3 @@ shader_param/outline_color = Color( 0.541176, 0.698039, 0.819608, 1 )
 shader_param/outline_color_2 = Color( 0.0509804, 0.447059, 0.764706, 1 )
 shader_param/use_outline_uv = true
 shader_param/useTexture = false
-
-[node name="WhiteShell" instance=ExtResource( 1 )]
-script = ExtResource( 3 )
-
-[node name="Sprite" parent="." index="0"]
-material = SubResource( 6 )
-texture = ExtResource( 2 )

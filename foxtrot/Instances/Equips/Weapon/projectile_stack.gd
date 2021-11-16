@@ -61,5 +61,8 @@ func _on_use():
   # Return success
   return true
 
+func ResetCooldown():
+  .ResetCooldown()
+
 # Note to self: instantiating an instance is not enough. You must also set a
 # parent for it or else it won't appear in the scene.

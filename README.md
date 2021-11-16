@@ -38,6 +38,7 @@ Fonts:
 Shaders:
 	- Godrays: 
 		- https://godotshaders.com/shader/god-rays/
+		- https://godotshaders.com/shader/colorful-outline/
 		
 Plugins:
 	- https://github.com/SirRamEsq/SmartShape2D/blob/master/addons/rmsmartshape/documentation/Install.md

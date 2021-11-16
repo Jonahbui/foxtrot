@@ -283,7 +283,6 @@ shape = SubResource( 5 )
 [node name="Driftwood" parent="World" instance=ExtResource( 14 )]
 position = Vector2( 256, 320 )
 override_process = true
-process = 2
 
 [editable path="Background Objects/yellow_submarine/ChangeLevelInteraction"]
 [editable path="World/AquariumDoor/ChangeLevelInteraction"]

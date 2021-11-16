@@ -801,7 +801,6 @@ anims/MainToLoad = SubResource( 13 )
 [connection signal="button_up" from="SettingsMenu/UI/TabContainer/Audio/AudioVbox/UserInterfaceVolume/UserInterfaceSlider/UserInterfaceCheckbox" to="Audio" method="_on_button_up"]
 [connection signal="button_down" from="SettingsMenu/UI/TabContainer/Graphics/GraphicsVbox/Fullscreen/FullscreenCheckBox" to="Audio" method="_on_button_down"]
 [connection signal="button_up" from="SettingsMenu/UI/TabContainer/Graphics/GraphicsVbox/Fullscreen/FullscreenCheckBox" to="Audio" method="_on_button_up"]
-[connection signal="button_down" from="SettingsMenu/UI/Reset" to="Audio" method="_on_button_down"]
 [connection signal="button_down" from="SettingsMenu/UI/BackButton" to="Audio" method="_on_button_down"]
 [connection signal="button_up" from="SettingsMenu/UI/BackButton" to="Audio" method="_on_button_up"]
 [connection signal="pressed" from="SettingsMenu/UI/BackButton" to="." method="_on_SettingsBackButton_pressed"]

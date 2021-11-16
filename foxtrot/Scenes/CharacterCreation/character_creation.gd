@@ -7,6 +7,8 @@ func _on_ConfirmButton_pressed():
   # Do not allow the game to proceed if player did not provide a good name
   if $UI/NameInput.text.length() <= 0:
     printerr("[Character Creation] Error. Name needed...")
+    $UI/WarningLabel.visible = true
+    $UI/PopupMenu.hide()
     return
   
   # Ensure that save name is unique
