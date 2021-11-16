@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Textures/UI/Slider/slider_grabber.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/SettingsMenu/settings_menu.gd" type="Script" id=2]
@@ -48,16 +48,18 @@ expand_margin_right = 7.0
 
 [sub_resource type="StyleBoxTexture" id=7]
 
+[sub_resource type="StyleBoxTexture" id=11]
+
 [sub_resource type="DynamicFont" id=8]
-font_data = ExtResource( 3 )
-
-[sub_resource type="ButtonGroup" id=9]
-
-[sub_resource type="DynamicFont" id=10]
 size = 32
 outline_size = 2
 outline_color = Color( 0.552941, 0.462745, 0.156863, 1 )
 font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=9]
+font_data = ExtResource( 3 )
+
+[sub_resource type="ButtonGroup" id=10]
 
 [node name="SettingsMenu" type="CanvasLayer"]
 layer = 4
@@ -75,7 +77,6 @@ uiToggle = NodePath("UI/TabContainer/Audio/AudioVbox/UserInterfaceVolume/UserInt
 fullscreenCheckbox = NodePath("UI/TabContainer/Graphics/GraphicsVbox/Fullscreen/FullscreenCheckBox")
 
 [node name="UI" type="Control" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 48.0
@@ -390,6 +391,752 @@ margin_right = 56.0
 margin_bottom = 21.401
 custom_icons/checked = ExtResource( 6 )
 custom_icons/unchecked = ExtResource( 5 )
+custom_styles/normal = SubResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Reset" type="Button" parent="UI/TabContainer/Audio"]
+anchor_left = 0.971
+anchor_top = 0.939
+anchor_right = 0.971
+anchor_bottom = 0.939
+margin_left = -67.964
+margin_top = -15.081
+margin_right = 54.0359
+margin_bottom = 26.919
+rect_scale = Vector2( 0.75, 0.75 )
+custom_styles/hover = ExtResource( 14 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/disabled = ExtResource( 12 )
+custom_styles/normal = ExtResource( 11 )
+custom_fonts/font = SubResource( 8 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Reset"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Controls" type="Tabs" parent="UI/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 30.0
+margin_top = 55.0
+margin_right = -30.0
+margin_bottom = -30.0
+tab_align = 0
+tab_close_display_policy = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/TabContainer/Controls"]
+anchor_left = -0.029
+anchor_top = -0.084
+anchor_right = -0.029
+anchor_bottom = -0.084
+margin_left = 0.0360003
+margin_top = 0.0360012
+margin_right = 512.036
+margin_bottom = 176.036
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/TabContainer/Controls/ScrollContainer"]
+margin_right = 498.0
+margin_bottom = 767.0
+
+[node name="Movement" type="Label" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer"]
+margin_right = 498.0
+margin_bottom = 21.0
+rect_min_size = Vector2( 250, 21 )
+text = "Movement"
+align = 1
+valign = 1
+
+[node name="ControlContainer16" type="HBoxContainer" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer"]
+margin_top = 25.0
+margin_right = 498.0
+margin_bottom = 52.0
+
+[node name="Label" type="Label" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer16"]
+margin_top = 3.0
+margin_right = 250.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 250, 21 )
+text = "strafe Up"
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer16"]
+margin_left = 254.0
+margin_right = 404.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 150, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer16"]
+margin_left = 408.0
+margin_right = 498.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 90, 21 )
+text = "W"
+
+[node name="ControlContainer18" type="HBoxContainer" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer"]
+margin_top = 56.0
+margin_right = 498.0
+margin_bottom = 83.0
+
+[node name="Label" type="Label" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer18"]
+margin_top = 3.0
+margin_right = 250.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 250, 21 )
+text = "Strafe left"
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer18"]
+margin_left = 254.0
+margin_right = 404.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 150, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer18"]
+margin_left = 408.0
+margin_right = 498.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 90, 21 )
+text = "a"
+
+[node name="ControlContainer17" type="HBoxContainer" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer"]
+margin_top = 87.0
+margin_right = 498.0
+margin_bottom = 114.0
+
+[node name="Label" type="Label" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer17"]
+margin_top = 3.0
+margin_right = 250.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 250, 21 )
+text = "strafe down"
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer17"]
+margin_left = 254.0
+margin_right = 404.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 150, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer17"]
+margin_left = 408.0
+margin_right = 498.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 90, 21 )
+text = "s"
+
+[node name="ControlContainer19" type="HBoxContainer" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer"]
+margin_top = 118.0
+margin_right = 498.0
+margin_bottom = 145.0
+
+[node name="Label" type="Label" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer19"]
+margin_top = 3.0
+margin_right = 250.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 250, 21 )
+text = "Strafe Right"
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer19"]
+margin_left = 254.0
+margin_right = 404.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 150, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer19"]
+margin_left = 408.0
+margin_right = 498.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 90, 21 )
+text = "d"
+
+[node name="ControlContainer20" type="HBoxContainer" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer"]
+margin_top = 149.0
+margin_right = 498.0
+margin_bottom = 176.0
+
+[node name="Label" type="Label" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer20"]
+margin_top = 3.0
+margin_right = 250.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 250, 21 )
+text = "FAll"
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer20"]
+margin_left = 254.0
+margin_right = 404.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 150, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer20"]
+margin_left = 408.0
+margin_right = 498.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 90, 21 )
+text = "d"
+
+[node name="ControlContainer22" type="HBoxContainer" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer"]
+margin_top = 180.0
+margin_right = 498.0
+margin_bottom = 207.0
+
+[node name="Label" type="Label" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer22"]
+margin_top = 3.0
+margin_right = 250.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 250, 21 )
+text = "jump"
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer22"]
+margin_left = 254.0
+margin_right = 404.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 150, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer22"]
+margin_left = 408.0
+margin_right = 498.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 90, 21 )
+text = "w"
+
+[node name="VSeparator2" type="VSeparator" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer"]
+margin_top = 211.0
+margin_right = 498.0
+margin_bottom = 214.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Gameplay" type="Label" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer"]
+margin_top = 218.0
+margin_right = 498.0
+margin_bottom = 239.0
+rect_min_size = Vector2( 250, 21 )
+text = "Gameplay"
+align = 1
+valign = 1
+
+[node name="ControlContainer" type="HBoxContainer" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer"]
+margin_top = 243.0
+margin_right = 498.0
+margin_bottom = 270.0
+
+[node name="Label" type="Label" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer"]
+margin_top = 3.0
+margin_right = 250.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 250, 21 )
+text = "Attack"
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer"]
+margin_left = 254.0
+margin_right = 404.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 150, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer"]
+margin_left = 408.0
+margin_right = 498.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 90, 21 )
+text = "LMB"
+
+[node name="ControlContainer12" type="HBoxContainer" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer"]
+margin_top = 274.0
+margin_right = 498.0
+margin_bottom = 301.0
+
+[node name="Label" type="Label" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer12"]
+margin_top = 3.0
+margin_right = 250.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 250, 21 )
+text = "Interact"
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer12"]
+margin_left = 254.0
+margin_right = 404.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 150, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer12"]
+margin_left = 408.0
+margin_right = 498.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 90, 21 )
+text = "e"
+
+[node name="ControlContainer21" type="HBoxContainer" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer"]
+margin_top = 305.0
+margin_right = 498.0
+margin_bottom = 332.0
+
+[node name="Label" type="Label" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer21"]
+margin_top = 3.0
+margin_right = 250.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 250, 21 )
+text = "Drop"
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer21"]
+margin_left = 254.0
+margin_right = 404.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 150, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer21"]
+margin_left = 408.0
+margin_right = 498.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 90, 21 )
+text = "q"
+
+[node name="ControlContainer13" type="HBoxContainer" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer"]
+margin_top = 336.0
+margin_right = 498.0
+margin_bottom = 363.0
+
+[node name="Label" type="Label" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer13"]
+margin_top = 3.0
+margin_right = 250.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 250, 21 )
+text = "TOggle Inventory"
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer13"]
+margin_left = 254.0
+margin_right = 404.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 150, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer13"]
+margin_left = 408.0
+margin_right = 498.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 90, 21 )
+text = "tab"
+
+[node name="VSeparator" type="VSeparator" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer"]
+margin_top = 367.0
+margin_right = 498.0
+margin_bottom = 370.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Inventory" type="Label" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer"]
+margin_top = 374.0
+margin_right = 498.0
+margin_bottom = 395.0
+rect_min_size = Vector2( 250, 21 )
+text = "Inventory"
+align = 1
+valign = 1
+
+[node name="ControlContainer2" type="HBoxContainer" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer"]
+margin_top = 399.0
+margin_right = 498.0
+margin_bottom = 426.0
+
+[node name="Label" type="Label" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer2"]
+margin_top = 3.0
+margin_right = 250.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 250, 21 )
+text = "Previous slot"
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer2"]
+margin_left = 254.0
+margin_right = 404.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 150, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer2"]
+margin_left = 408.0
+margin_right = 498.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 90, 21 )
+text = "scroll +"
+
+[node name="ControlContainer14" type="HBoxContainer" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer"]
+margin_top = 430.0
+margin_right = 498.0
+margin_bottom = 457.0
+
+[node name="Label" type="Label" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer14"]
+margin_top = 3.0
+margin_right = 250.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 250, 21 )
+text = "Next slot"
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer14"]
+margin_left = 254.0
+margin_right = 404.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 150, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer14"]
+margin_left = 408.0
+margin_right = 498.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 90, 21 )
+text = "scroll -"
+
+[node name="ControlContainer15" type="HBoxContainer" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer"]
+margin_top = 461.0
+margin_right = 498.0
+margin_bottom = 488.0
+
+[node name="Label" type="Label" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer15"]
+margin_top = 3.0
+margin_right = 250.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 250, 21 )
+text = "Hotkey 1"
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer15"]
+margin_left = 254.0
+margin_right = 404.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 150, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer15"]
+margin_left = 408.0
+margin_right = 498.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 90, 21 )
+text = "1"
+
+[node name="ControlContainer3" type="HBoxContainer" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer"]
+margin_top = 492.0
+margin_right = 498.0
+margin_bottom = 519.0
+
+[node name="Label" type="Label" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer3"]
+margin_top = 3.0
+margin_right = 250.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 250, 21 )
+text = "Hotkey 2"
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer3"]
+margin_left = 254.0
+margin_right = 404.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 150, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer3"]
+margin_left = 408.0
+margin_right = 498.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 90, 21 )
+text = "2"
+
+[node name="ControlContainer4" type="HBoxContainer" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer"]
+margin_top = 523.0
+margin_right = 498.0
+margin_bottom = 550.0
+
+[node name="Label" type="Label" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer4"]
+margin_top = 3.0
+margin_right = 250.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 250, 21 )
+text = "Hotkey 3"
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer4"]
+margin_left = 254.0
+margin_right = 404.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 150, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer4"]
+margin_left = 408.0
+margin_right = 498.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 90, 21 )
+text = "3"
+
+[node name="ControlContainer5" type="HBoxContainer" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer"]
+margin_top = 554.0
+margin_right = 498.0
+margin_bottom = 581.0
+
+[node name="Label" type="Label" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer5"]
+margin_top = 3.0
+margin_right = 250.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 250, 21 )
+text = "Hotkey 4"
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer5"]
+margin_left = 254.0
+margin_right = 404.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 150, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer5"]
+margin_left = 408.0
+margin_right = 498.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 90, 21 )
+text = "4"
+
+[node name="ControlContainer6" type="HBoxContainer" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer"]
+margin_top = 585.0
+margin_right = 498.0
+margin_bottom = 612.0
+
+[node name="Label" type="Label" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer6"]
+margin_top = 3.0
+margin_right = 250.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 250, 21 )
+text = "Hotkey 5"
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer6"]
+margin_left = 254.0
+margin_right = 404.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 150, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer6"]
+margin_left = 408.0
+margin_right = 498.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 90, 21 )
+text = "5"
+
+[node name="ControlContainer7" type="HBoxContainer" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer"]
+margin_top = 616.0
+margin_right = 498.0
+margin_bottom = 643.0
+
+[node name="Label" type="Label" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer7"]
+margin_top = 3.0
+margin_right = 250.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 250, 21 )
+text = "Hotkey 6"
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer7"]
+margin_left = 254.0
+margin_right = 404.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 150, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer7"]
+margin_left = 408.0
+margin_right = 498.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 90, 21 )
+text = "6"
+
+[node name="ControlContainer8" type="HBoxContainer" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer"]
+margin_top = 647.0
+margin_right = 498.0
+margin_bottom = 674.0
+
+[node name="Label" type="Label" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer8"]
+margin_top = 3.0
+margin_right = 250.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 250, 21 )
+text = "Hotkey 7"
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer8"]
+margin_left = 254.0
+margin_right = 404.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 150, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer8"]
+margin_left = 408.0
+margin_right = 498.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 90, 21 )
+text = "7"
+
+[node name="ControlContainer9" type="HBoxContainer" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer"]
+margin_top = 678.0
+margin_right = 498.0
+margin_bottom = 705.0
+
+[node name="Label" type="Label" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer9"]
+margin_top = 3.0
+margin_right = 250.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 250, 21 )
+text = "Hotkey 8"
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer9"]
+margin_left = 254.0
+margin_right = 404.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 150, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer9"]
+margin_left = 408.0
+margin_right = 498.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 90, 21 )
+text = "9"
+
+[node name="ControlContainer10" type="HBoxContainer" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer"]
+margin_top = 709.0
+margin_right = 498.0
+margin_bottom = 736.0
+
+[node name="Label" type="Label" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer10"]
+margin_top = 3.0
+margin_right = 250.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 250, 21 )
+text = "Hotkey 9"
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer10"]
+margin_left = 254.0
+margin_right = 404.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 150, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer10"]
+margin_left = 408.0
+margin_right = 498.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 90, 21 )
+text = "1"
+
+[node name="ControlContainer11" type="HBoxContainer" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer"]
+margin_top = 740.0
+margin_right = 498.0
+margin_bottom = 767.0
+
+[node name="Label" type="Label" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer11"]
+margin_top = 3.0
+margin_right = 250.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 250, 21 )
+text = "Hotkey 0"
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer11"]
+margin_left = 254.0
+margin_right = 404.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 150, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer/ControlContainer11"]
+margin_left = 408.0
+margin_right = 498.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 90, 21 )
+text = "0"
+
+[node name="Button" type="Button" parent="UI/TabContainer/Controls"]
+anchor_left = -0.029
+anchor_top = -0.084
+anchor_right = -0.029
+anchor_bottom = -0.084
+margin_left = 408.036
+margin_top = 184.036
+margin_right = 512.036
+margin_bottom = 208.036
+rect_min_size = Vector2( 100, 21 )
+text = "RESET"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -431,7 +1178,7 @@ __meta__ = {
 }
 
 [node name="GraphicsLabel" type="Label" parent="UI/TabContainer/Graphics/GraphicsVbox"]
-margin_right = 176.0
+margin_right = 175.0
 margin_bottom = 30.0
 custom_fonts/font = SubResource( 1 )
 text = "Graphics"
@@ -456,8 +1203,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 88.0
 margin_bottom = 6.0
-custom_fonts/font = SubResource( 8 )
-group = SubResource( 9 )
+custom_fonts/font = SubResource( 9 )
+group = SubResource( 10 )
 text = "Graphics"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -482,7 +1229,7 @@ margin_left = -0.445435
 margin_top = 0.445435
 margin_right = 102.555
 margin_bottom = 6.44543
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
 text = "Resolution"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -490,7 +1237,7 @@ __meta__ = {
 
 [node name="Fullscreen" type="Label" parent="UI/TabContainer/Graphics/GraphicsVbox"]
 margin_top = 35.0
-margin_right = 176.0
+margin_right = 175.0
 margin_bottom = 50.0
 custom_fonts/font = SubResource( 2 )
 text = "FullSCreen"
@@ -514,17 +1261,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="UI" type="Tabs" parent="UI/TabContainer"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 30.0
-margin_top = 55.0
-margin_right = -30.0
-margin_bottom = -30.0
-tab_align = 0
-tab_close_display_policy = 2
-
 [node name="Stats" type="Tabs" parent="UI/TabContainer"]
 visible = false
 anchor_right = 1.0
@@ -536,7 +1272,7 @@ margin_bottom = -30.0
 tab_align = 0
 tab_close_display_policy = 2
 
-[node name="Achievements" type="Tabs" parent="UI/TabContainer"]
+[node name="Achievement" type="Tabs" parent="UI/TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -547,42 +1283,21 @@ margin_bottom = -30.0
 tab_align = 0
 tab_close_display_policy = 2
 
-[node name="Reset" type="Button" parent="UI"]
-anchor_left = 0.971
-anchor_top = 0.939
-anchor_right = 0.971
-anchor_bottom = 0.939
-margin_left = -96.224
-margin_top = -39.896
-margin_right = 25.7759
-margin_bottom = 2.104
-rect_scale = Vector2( 0.75, 0.75 )
-custom_styles/hover = ExtResource( 14 )
-custom_styles/pressed = ExtResource( 10 )
-custom_styles/disabled = ExtResource( 12 )
-custom_styles/normal = ExtResource( 11 )
-custom_fonts/font = SubResource( 10 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "Reset"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="BackButton" type="Button" parent="UI"]
-anchor_left = 0.971
-anchor_top = 0.121
-anchor_right = 0.971
-anchor_bottom = 0.121
-margin_left = -40.224
-margin_top = 16.056
-margin_right = 1.776
-margin_bottom = 58.056
+anchor_left = 1.0
+anchor_top = 0.091
+anchor_right = 1.0
+anchor_bottom = 0.091
+margin_left = 8.0
+margin_top = -24.024
+margin_right = 50.0
+margin_bottom = 17.976
 rect_scale = Vector2( 0.75, 0.75 )
 custom_styles/hover = ExtResource( 14 )
 custom_styles/pressed = ExtResource( 10 )
 custom_styles/disabled = ExtResource( 12 )
 custom_styles/normal = ExtResource( 11 )
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 8 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 icon = ExtResource( 4 )
 expand_icon = true
@@ -600,5 +1315,5 @@ __meta__ = {
 [connection signal="toggled" from="UI/TabContainer/Audio/AudioVbox/AmbienceVolume/AmbienceSlider/AmbienceCheckbox" to="." method="_on_AmbienceCheckbox_toggled"]
 [connection signal="value_changed" from="UI/TabContainer/Audio/AudioVbox/UserInterfaceVolume/UserInterfaceSlider" to="." method="_on_UserInterfaceSlider_value_changed"]
 [connection signal="toggled" from="UI/TabContainer/Audio/AudioVbox/UserInterfaceVolume/UserInterfaceSlider/UserInterfaceCheckbox" to="." method="_on_UserInterfaceCheckbox_toggled"]
+[connection signal="pressed" from="UI/TabContainer/Audio/Reset" to="." method="_on_Reset_pressed"]
 [connection signal="toggled" from="UI/TabContainer/Graphics/GraphicsVbox/Fullscreen/FullscreenCheckBox" to="." method="_on_FullScreenCheckBox_toggled"]
-[connection signal="pressed" from="UI/Reset" to="." method="_on_Reset_pressed"]
