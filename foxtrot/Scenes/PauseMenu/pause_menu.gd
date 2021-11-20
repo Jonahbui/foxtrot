@@ -13,7 +13,15 @@ func _input(event):
   if event.is_action_released("ui_cancel"):
     # Toggle the pause menu depending on the pause state of the game
     var result_state = Globals.ToggleFlag(Globals.FLAG_PAUSED)
-    $UI.visible = result_state
+    
+    if result_state:
+      $UI.visible = true
+      $AnimationPlayer.play("open")
+    else:
+      $AnimationPlayer.play("close")
+      while $AnimationPlayer.is_playing():
+        yield(get_tree(), "idle_frame")
+      $UI.visible = false      
     
     # Only show the save button if the player is in the spawn. Update when pause UI updates.
     if Globals.is_in_spawn:
@@ -36,7 +44,11 @@ func _on_SaveButton_pressed():
 func _on_SettingsButton_pressed():
   # Hide the pause menu and show the settings menu
   $UI.hide()
-  $SettingsMenu/UI.show()  
+  $AnimationPlayer.play("close")
+  while $AnimationPlayer.is_playing():
+    yield(get_tree(), "idle_frame")
+  $SettingsMenu/UI.show()
+  $SettingsMenu/AnimationPlayer.play("open")
 
 func _on_MainMenuButton_pressed():
   # If going back to the main menu, the game shuold not be paused since it is not running
@@ -50,8 +62,12 @@ func _on_ExitButton_pressed():
   get_tree().quit()
 
 func _on_SettingsBackButton_pressed():
+  $SettingsMenu/AnimationPlayer.play("close")
+  while $SettingsMenu/AnimationPlayer.is_playing():
+    yield(get_tree(), "idle_frame")
   $UI.show()
   $SettingsMenu/UI.hide()
+  $AnimationPlayer.play("open")
 
 func TriggerSaveMessage(state):
   $UI/SaveStateLabel.visible = true

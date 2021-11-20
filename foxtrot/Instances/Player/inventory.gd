@@ -51,6 +51,7 @@ var inventory = {}
 # --------------------------------------------------------------------------------------------------
 func _input(event):
   if Globals.IsFlagSet(Globals.FLAG_DEV_OPEN): return
+  elif Globals.IsFlagSet(Globals.FLAG_PAUSED): return
   
   # Cycles through the hotbar
   if event.is_action_pressed("ui_hotbar_forward"):
@@ -93,8 +94,17 @@ func _input(event):
   # Opens the inventory
   elif event.is_action_pressed("ui_inventory"):
     var ui = $UI/Inventory
-    ui.visible = !ui.visible
-    Globals.SetFlag(Globals.FLAG_INVENTORY, ui.visible)
+    var new_state = !ui.visible
+    
+    if new_state:
+      ui.visible = true
+      $AnimationPlayer.play("open")
+    else:
+      $AnimationPlayer.play("close")
+      while $AnimationPlayer.is_playing():
+        yield(get_tree(), "idle_frame")
+      ui.visible = false
+    Globals.SetFlag(Globals.FLAG_INVENTORY, new_state)
 
 func _init():
   if Signals.connect("on_inventory_add_item", self, "AppendItem") != OK:

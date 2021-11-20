@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Textures/UI/Slider/slider_grabber.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/SettingsMenu/settings_menu.gd" type="Script" id=2]
@@ -79,6 +79,62 @@ font_data = ExtResource( 3 )
 
 [sub_resource type="ButtonGroup" id=13]
 
+[sub_resource type="Animation" id=15]
+resource_name = "close"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("UI:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 48, 48 ), Vector2( 48, 560 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("UI/Panel:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 0.560784 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "open"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("UI:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 48, 560 ), Vector2( 48, 48 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("UI/Panel:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.560784 ) ]
+}
+
 [node name="SettingsMenu" type="CanvasLayer"]
 layer = 4
 script = ExtResource( 2 )
@@ -113,7 +169,7 @@ anchor_left = -0.088
 anchor_top = -0.152
 anchor_right = 1.088
 anchor_bottom = 1.182
-margin_left = -0.127995
+margin_left = -0.127998
 margin_top = -7.872
 margin_right = 0.127991
 margin_bottom = -0.0480042
@@ -1324,6 +1380,10 @@ expand_icon = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/close = SubResource( 15 )
+anims/open = SubResource( 14 )
 
 [connection signal="value_changed" from="UI/TabContainer/Audio/AudioVbox/MasterVolume/MasterSlider" to="." method="_on_MasterSlider_value_changed"]
 [connection signal="toggled" from="UI/TabContainer/Audio/AudioVbox/MasterVolume/MasterSlider/MasterCheckbox" to="." method="_on_MasterCheckbox_toggled"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Fonts/thaelahfat_pure_16x.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Textures/UI/Panel/panel_submarine2.tres" type="StyleBox" id=2]
@@ -19,6 +19,158 @@
 [ext_resource path="res://Textures/UI/Panel/panel_submarine3.tres" type="StyleBox" id=17]
 [ext_resource path="res://Instances/Player/stats.gd" type="Script" id=18]
 [ext_resource path="res://Textures/UI/Slot/slot_submarine.tres" type="Theme" id=19]
+
+[sub_resource type="Animation" id=2]
+resource_name = "close"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("UI/Inventory/Panels/InventoryPanel:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 302, 53 ), Vector2( 814, 53 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("UI/Inventory/SlotGridContainer:rect_position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 304, 56 ), Vector2( 816, 56 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("UI/Inventory/Panels/PlayerPanel:rect_position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 16, 56 ), Vector2( -496, 56 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("UI/Inventory/Stats:rect_position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -512, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("UI/Inventory/ArmorContainer:rect_position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 24, 64 ), Vector2( -488, 64 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("UI/Inventory/PlayerPanel:rect_position")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 64, 64 ), Vector2( -448, 64 ) ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "open"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("UI/Inventory/Panels/InventoryPanel:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 814, 53 ), Vector2( 302, 53 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("UI/Inventory/SlotGridContainer:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 816, 56 ), Vector2( 304, 56 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("UI/Inventory/Panels/PlayerPanel:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -496, 56 ), Vector2( 16, 56 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("UI/Inventory/Stats:rect_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -512, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("UI/Inventory/ArmorContainer:rect_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -488, 64 ), Vector2( 24, 64 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("UI/Inventory/PlayerPanel:rect_position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -448, 64 ), Vector2( 64, 64 ) ]
+}
 
 [node name="Inventory" type="Control"]
 anchor_right = 1.0
@@ -81,9 +233,9 @@ __meta__ = {
 }
 
 [node name="PlayerPanel" type="Panel" parent="UI/Inventory/Panels"]
-margin_left = 16.0
+margin_left = -496.0
 margin_top = 56.0
-margin_right = 256.0
+margin_right = -256.0
 margin_bottom = 344.0
 mouse_filter = 2
 custom_styles/panel = ExtResource( 17 )
@@ -95,21 +247,20 @@ __meta__ = {
 [node name="InventoryPanel" type="Panel" parent="UI/Inventory/Panels"]
 anchor_left = 0.975
 anchor_right = 0.975
-margin_left = -322.0
+margin_left = 190.0
 margin_top = 53.0
-margin_right = 2.00006
+margin_right = 514.002
 margin_bottom = 187.0
 rect_scale = Vector2( 0.987, 0.957 )
 rect_pivot_offset = Vector2( 168, 72 )
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="ArmorContainer" type="VBoxContainer" parent="UI/Inventory"]
-margin_left = 24.0
+margin_left = -488.0
 margin_top = 64.0
-margin_right = 56.0
+margin_right = -456.0
 margin_bottom = 192.0
 rect_min_size = Vector2( 32, 0 )
 custom_constants/separation = 0
@@ -403,9 +554,9 @@ __meta__ = {
 [node name="SlotGridContainer" type="GridContainer" parent="UI/Inventory"]
 anchor_left = 0.975
 anchor_right = 0.975
-margin_left = -320.0
+margin_left = 192.0
 margin_top = 56.0
-margin_right = 6.10352e-05
+margin_right = 512.0
 margin_bottom = 184.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -2644,7 +2795,8 @@ __meta__ = {
 }
 
 [node name="Stats" type="Control" parent="UI/Inventory"]
-margin_right = 256.0
+margin_left = -512.0
+margin_right = -256.0
 margin_bottom = 360.0
 mouse_filter = 2
 script = ExtResource( 18 )
@@ -2928,10 +3080,10 @@ margin_bottom = 15.0
 text = "0%"
 valign = 2
 
-[node name="Panel" type="Panel" parent="UI/Inventory"]
-margin_left = 64.0
+[node name="PlayerPanel" type="Panel" parent="UI/Inventory"]
+margin_left = -448.0
 margin_top = 64.0
-margin_right = 248.0
+margin_right = -264.0
 margin_bottom = 192.0
 custom_styles/panel = ExtResource( 2 )
 __meta__ = {
@@ -3674,6 +3826,10 @@ __meta__ = {
 }
 
 [node name="InventoryStash" type="Node2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/close = SubResource( 2 )
+anims/open = SubResource( 1 )
 
 [connection signal="mouse_entered" from="UI/HotbarPanel" to="." method="_on_Inventory_mouse_entered"]
 [connection signal="mouse_exited" from="UI/HotbarPanel" to="." method="_on_Inventory_mouse_exited"]

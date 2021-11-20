@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://Instances/LocalAudio.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/MainMenu/main_menu.gd" type="Script" id=2]
@@ -7,9 +7,8 @@
 [ext_resource path="res://Fonts/ThaleahFat_TTF.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Scenes/SettingsMenu/settings_menu.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Fonts/thaelahfat_pure_16x.tres" type="DynamicFont" id=7]
-[ext_resource path="res://Textures/UI/Button/button_bubble_unstretched_hover.tres" type="StyleBox" id=8]
-[ext_resource path="res://Textures/UI/Button/button_disabled.png" type="Texture" id=9]
-[ext_resource path="res://Textures/UI/Button/button_bubble_unstretched_pressed.tres" type="StyleBox" id=10]
+[ext_resource path="res://Textures/Gameplay/Store/spotlight512.png" type="Texture" id=8]
+[ext_resource path="res://Shaders/godrays.gdshader" type="Shader" id=9]
 [ext_resource path="res://Textures/UI/Button/button_disabled.tres" type="StyleBox" id=11]
 [ext_resource path="res://Textures/UI/Panel/panel.tres" type="StyleBox" id=12]
 [ext_resource path="res://Textures/UI/Button/button_hover.tres" type="StyleBox" id=13]
@@ -37,7 +36,6 @@
 [ext_resource path="res://Textures/Gameplay/Spawn/beach_chair.png" type="Texture" id=35]
 [ext_resource path="res://Textures/UI/MainMenu/aquarium_sign.png" type="Texture" id=36]
 [ext_resource path="res://Textures/UI/MainMenu/aquarium_text.png" type="Texture" id=37]
-[ext_resource path="res://Textures/UI/Button/button_bubble_unstretched_normal.tres" type="StyleBox" id=38]
 [ext_resource path="res://Textures/UI/Button/button_bubble_stretched_hover.tres" type="StyleBox" id=39]
 
 [sub_resource type="StyleBoxTexture" id=1]
@@ -61,29 +59,38 @@ font_data = ExtResource( 5 )
 
 [sub_resource type="StyleBoxTexture" id=6]
 
-[sub_resource type="StyleBoxTexture" id=7]
-texture = ExtResource( 9 )
-region_rect = Rect2( 0, 0, 32, 32 )
-margin_left = 4.0
-margin_right = 4.0
-margin_top = 4.0
-margin_bottom = 4.0
-
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=7]
 size = 32
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 5 )
 
-[sub_resource type="ButtonGroup" id=9]
+[sub_resource type="ButtonGroup" id=8]
 
-[sub_resource type="Environment" id=10]
+[sub_resource type="Environment" id=9]
 
-[sub_resource type="StyleBoxTexture" id=11]
+[sub_resource type="StyleBoxTexture" id=10]
 texture = ExtResource( 22 )
 region_rect = Rect2( 0, 0, 32, 88 )
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="ShaderMaterial" id=13]
+render_priority = 2
+shader = ExtResource( 9 )
+shader_param/angle = 0.836
+shader_param/position = 0.188
+shader_param/spread = 0.277
+shader_param/cutoff = -0.239
+shader_param/falloff = 1.0
+shader_param/edge_fade = 0.197
+shader_param/speed = 1.0
+shader_param/ray1_density = 30.0
+shader_param/ray2_density = 25.0
+shader_param/ray2_intensity = 1.0
+shader_param/color = Color( 0.839844, 0.520776, 0.147629, 0.8 )
+shader_param/hdr = false
+shader_param/seed = 5.0
+
+[sub_resource type="Animation" id=11]
 resource_name = "IdleMain"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Camera2D:zoom")
@@ -98,7 +105,7 @@ tracks/0/keys = {
 "values": [ Vector2( 5, 5 ) ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=12]
 resource_name = "MainToLoad"
 length = 0.5
 tracks/0/type = "value"
@@ -112,6 +119,71 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 2, 2 ), Vector2( 0.4, 0.4 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "MenuLoaded"
+length = 1.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("MainMenu/UI/ButtonsVbox/NewGameButton:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -128, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MainMenu/UI/ButtonsVbox/LoadGameButton:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -128, 68 ), Vector2( 0, 68 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("MainMenu/UI/ButtonsVbox/SettingsButton:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -128, 136 ), Vector2( 0, 136 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("MainMenu/UI/ButtonsVbox/CreditsButton:rect_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -128, 204 ), Vector2( 0, 204 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("MainMenu/UI/ButtonsVbox/ExitButton:rect_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -128, 272 ), Vector2( 0, 272 ) ]
 }
 
 [node name="MainMenu" type="Node2D"]
@@ -248,11 +320,13 @@ margin_right = 48.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
 rect_pivot_offset = Vector2( -420.576, 40 )
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 10 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 14 )
 custom_styles/focus = SubResource( 6 )
-custom_styles/disabled = SubResource( 7 )
-custom_styles/normal = ExtResource( 38 )
+custom_styles/disabled = ExtResource( 11 )
+custom_styles/normal = ExtResource( 15 )
+align = 2
+expand_icon = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -266,7 +340,7 @@ margin_left = 16.5297
 margin_top = -16.0
 margin_right = 199.53
 margin_bottom = 14.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 7 )
 text = "New Game"
 valign = 1
 __meta__ = {
@@ -280,11 +354,11 @@ margin_right = 48.0
 margin_bottom = 116.0
 rect_min_size = Vector2( 48, 48 )
 rect_pivot_offset = Vector2( -420.576, 40 )
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 10 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 14 )
 custom_styles/focus = SubResource( 6 )
-custom_styles/disabled = SubResource( 7 )
-custom_styles/normal = ExtResource( 38 )
+custom_styles/disabled = ExtResource( 11 )
+custom_styles/normal = ExtResource( 15 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -298,7 +372,7 @@ margin_left = 16.5297
 margin_top = -16.0
 margin_right = 223.53
 margin_bottom = 14.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 7 )
 text = "Load Game"
 valign = 1
 __meta__ = {
@@ -312,11 +386,11 @@ margin_right = 48.0
 margin_bottom = 184.0
 rect_min_size = Vector2( 48, 48 )
 rect_pivot_offset = Vector2( -420.576, 40 )
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 10 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 14 )
 custom_styles/focus = SubResource( 6 )
-custom_styles/disabled = SubResource( 7 )
-custom_styles/normal = ExtResource( 38 )
+custom_styles/disabled = ExtResource( 11 )
+custom_styles/normal = ExtResource( 15 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -330,7 +404,7 @@ margin_left = 16.5297
 margin_top = -16.0
 margin_right = 187.53
 margin_bottom = 14.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 7 )
 text = "Settings"
 valign = 1
 __meta__ = {
@@ -344,11 +418,11 @@ margin_right = 48.0
 margin_bottom = 252.0
 rect_min_size = Vector2( 48, 48 )
 rect_pivot_offset = Vector2( -420.576, 40 )
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 10 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 14 )
 custom_styles/focus = SubResource( 6 )
-custom_styles/disabled = SubResource( 7 )
-custom_styles/normal = ExtResource( 38 )
+custom_styles/disabled = ExtResource( 11 )
+custom_styles/normal = ExtResource( 15 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -362,7 +436,7 @@ margin_left = 16.5297
 margin_top = -16.0
 margin_right = 166.53
 margin_bottom = 14.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 7 )
 text = "Credits	"
 valign = 1
 __meta__ = {
@@ -376,11 +450,11 @@ margin_right = 48.0
 margin_bottom = 320.0
 rect_min_size = Vector2( 48, 48 )
 rect_pivot_offset = Vector2( -420.576, 40 )
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 10 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 14 )
 custom_styles/focus = SubResource( 6 )
-custom_styles/disabled = SubResource( 7 )
-custom_styles/normal = ExtResource( 38 )
+custom_styles/disabled = ExtResource( 11 )
+custom_styles/normal = ExtResource( 15 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -394,7 +468,7 @@ margin_left = 17.0
 margin_top = -16.0
 margin_right = 95.0
 margin_bottom = 14.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 7 )
 text = "Exit"
 valign = 1
 __meta__ = {
@@ -485,10 +559,10 @@ visible = false
 [node name="SettingsMenu" parent="." instance=ExtResource( 6 )]
 
 [node name="OptionButton" parent="SettingsMenu/UI/TabContainer/Graphics/GraphicsVbox/Quality" index="0"]
-group = SubResource( 9 )
+group = SubResource( 8 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 10 )
+environment = SubResource( 9 )
 
 [node name="MainMenu Background UI" type="Control" parent="."]
 margin_right = 640.0
@@ -722,7 +796,7 @@ margin_top = 76.0
 margin_right = 416.0
 margin_bottom = 164.0
 rect_scale = Vector2( 2, 2 )
-custom_styles/panel = SubResource( 11 )
+custom_styles/panel = SubResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -750,14 +824,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Godrays" type="Sprite" parent="MainMenu Background UI"]
+material = SubResource( 13 )
+position = Vector2( 480, 72 )
+scale = Vector2( 3.60938, 1.85937 )
+z_index = 4
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 320, 180 )
 current = true
 zoom = Vector2( 2, 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/IdleMain = SubResource( 12 )
-anims/MainToLoad = SubResource( 13 )
+anims/IdleMain = SubResource( 11 )
+anims/MainToLoad = SubResource( 12 )
+anims/MenuLoaded = SubResource( 14 )
 
 [connection signal="button_down" from="LoadMenu/UI/BackButton" to="Audio" method="_on_button_down"]
 [connection signal="button_up" from="LoadMenu/UI/BackButton" to="Audio" method="_on_button_up"]

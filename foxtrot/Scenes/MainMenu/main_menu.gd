@@ -9,6 +9,8 @@ func _ready():
   # Load all the save files so that they may be displayed to the user
   CreateLoadPanels()
   
+  $AnimationPlayer.play("MenuLoaded")
+  
 func _on_NewGameButton_pressed():
   $MainMenu/UI/ModePopup.visible = true
   Save.reset_save()
@@ -29,6 +31,7 @@ func _on_LoadGameButton_pressed():
 # into the main menu scene.
 func _on_SettingsButton_pressed():
   $SettingsMenu/UI.show()
+  $SettingsMenu/AnimationPlayer.play("open")
   $Credits/UI.hide()
 
 func _on_ExitButton_pressed():
@@ -42,6 +45,9 @@ func _on_CreditsButton_pressed():
   $Credits/UI.show()
 
 func _on_SettingsBackButton_pressed():
+  $SettingsMenu/AnimationPlayer.play("close")
+  while $SettingsMenu/AnimationPlayer.is_playing():
+    yield(get_tree(), "idle_frame")
   $MainMenu/UI.show()
   $SettingsMenu/UI.hide()
   $Credits/UI.hide()

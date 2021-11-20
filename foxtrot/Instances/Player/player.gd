@@ -227,8 +227,15 @@ func RemoveSeashells(key, amount):
 # --------------------------------------------------------------------------------------------------
 func ToggleInform(state):
   # Display the inform panel
-  $Inform.visible = state
-  
+  if state:
+    $Inform.visible = true
+    $InformPlayer.play("open")
+  else:
+    $InformPlayer.play("close")
+    while $InformPlayer.is_playing():
+      yield(get_tree(), "idle_frame")
+    $Inform.visible = false
+    
   # Play damage animation (which will also disable collision so the player does not take any more
   # damage and when it is re-enabled, if the player is still within contact with another collider, 
   # they will continue to take more damage). 

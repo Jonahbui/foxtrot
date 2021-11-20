@@ -193,7 +193,15 @@ func GetNextHistoryCmd(forward=true):
   cmdline.caret_position = cmdline.text.length()
 
 func ToggleLoadingScreen(state):
-  $LoadingScreen/LoadingScreen.visible = state
+  if state:
+    $LoadingScreen/LoadingScreen.visible = true
+    $LoadingScreen/AnimationPlayer.play("open")
+  else:
+    $LoadingScreen/AnimationPlayer.play("close")
+    while $LoadingScreen/AnimationPlayer.is_playing():
+      yield(get_tree(), "idle_frame")
+    $LoadingScreen/LoadingScreen.visible = false
+  
 
 func _on_CmdLine_text_changed(new_text):
   var old_pos = cmdline.caret_position

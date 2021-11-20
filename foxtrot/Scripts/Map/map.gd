@@ -31,10 +31,20 @@ func _ready():
     printerr("[Map] Error. Could not connect to signal on_map_resurface...")
 
 func ToggleMap(forceState=false, state=false):
+  var new_state = !$PanelContainer.visible
   if forceState:
-    $PanelContainer.visible = state
+    new_state = state
+
+    
+  if new_state:
+    $PanelContainer.visible = true
+    $AnimationPlayer.play("open")
   else:
-    $PanelContainer.visible = !$PanelContainer.visible
+    $AnimationPlayer.play("close")
+    while $AnimationPlayer.is_playing():
+      yield(get_tree(), "idle_frame")
+    $PanelContainer.visible = false
+    
 
 func _on_BackButton_pressed():
   ToggleMap(true, false)

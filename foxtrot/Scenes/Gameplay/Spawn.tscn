@@ -35,6 +35,7 @@ extents = Vector2( 25.3333, 14.6667 )
 extents = Vector2( 10, 368 )
 
 [sub_resource type="ShaderMaterial" id=4]
+render_priority = 2
 shader = ExtResource( 3 )
 shader_param/angle = 0.836
 shader_param/position = 0.188
@@ -123,21 +124,18 @@ position = Vector2( 316.061, 290.847 )
 material = SubResource( 4 )
 position = Vector2( 480, 72 )
 scale = Vector2( 3.60938, 1.85937 )
-z_index = 3
+z_index = 4
 texture = ExtResource( 5 )
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="CanvasModulate" type="CanvasModulate" parent="Lighting"]
-visible = false
-color = Color( 0.996078, 0.992157, 0.992157, 1 )
 
 [node name="Light2D" type="Light2D" parent="Lighting"]
 light_mask = 2
 position = Vector2( 992, 64 )
 rotation = 0.495241
 scale = Vector2( 5.1875, 4.54492 )
+z_index = 4
 texture = ExtResource( 5 )
 color = Color( 0.729412, 0.188235, 0.188235, 1 )
 energy = 1.26
