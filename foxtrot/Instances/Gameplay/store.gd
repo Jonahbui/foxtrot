@@ -81,15 +81,19 @@ func _on_Interaction_body_exited(_body):
 # Store UI Functions
 # --------------------------------------------------------------------------------------------------
 func ToggleStore(forceState=false, state=false):
-  if forceState:
-    $Store/UI.visible = state
-  else:
-    $Store/UI.visible = !$Store/UI.visible
+  var new_state = state if forceState else !$Store/UI.visible
     
-  if $Store/UI.visible:
+  if new_state:
+    $Store/UI.visible = true
+    $AnimationPlayer.play("open")
     Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/cash_register.mp3", 1)
   else:
     Signals.emit_signal("on_interaction_changed", false)
+    $AnimationPlayer.play("close")
+    while $AnimationPlayer.is_playing():
+      yield(get_tree(), "idle_frame")
+    $Store/UI.visible = false
+    
   
   # Set playser as interacting or not
   Globals.SetFlag(Globals.FLAG_INTERACTING, $Store/UI.visible)

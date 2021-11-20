@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Textures/Gameplay/Store/cash_register.png" type="Texture" id=1]
 [ext_resource path="res://Node/Interaction.tscn" type="PackedScene" id=2]
@@ -18,7 +18,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 96, 8 )
 
-[sub_resource type="StyleBoxTexture" id=6]
+[sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 11 )
 region_rect = Rect2( 0, 0, 32, 32 )
 margin_left = 5.0
@@ -26,22 +26,54 @@ margin_right = 5.0
 margin_top = 5.0
 margin_bottom = 5.0
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 outline_size = 1
 outline_color = Color( 0.47451, 0.34902, 0.0509804, 1 )
 font_data = ExtResource( 13 )
 
-[sub_resource type="StyleBoxTexture" id=3]
+[sub_resource type="StyleBoxTexture" id=4]
 texture = ExtResource( 5 )
 region_rect = Rect2( 0, 0, 16, 16 )
 
-[sub_resource type="StyleBoxTexture" id=4]
+[sub_resource type="StyleBoxTexture" id=5]
 texture = ExtResource( 4 )
 region_rect = Rect2( 0, 0, 16, 16 )
 
-[sub_resource type="StyleBoxTexture" id=5]
+[sub_resource type="StyleBoxTexture" id=6]
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="Animation" id=8]
+resource_name = "close"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Store/UI:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 16, 16 ), Vector2( -496, 16 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "open"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Store/UI:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -496, 16 ), Vector2( 16, 16 ) ]
+}
 
 [node name="Store Front" type="Sprite"]
 self_modulate = Color( 2, 2, 2, 1 )
@@ -69,9 +101,9 @@ layer = 2
 
 [node name="UI" type="Panel" parent="Store"]
 self_modulate = Color( 1, 0.870588, 0.392157, 0 )
-margin_left = 16.0
+margin_left = -496.0
 margin_top = 16.0
-margin_right = 320.0
+margin_right = -192.0
 margin_bottom = 344.0
 theme = ExtResource( 7 )
 __meta__ = {
@@ -121,10 +153,10 @@ rect_clip_content = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 2.0
-margin_top = 29.0
-margin_right = -2.0
-margin_bottom = -2.0
+margin_left = 30.0
+margin_top = 55.0
+margin_right = -30.0
+margin_bottom = -30.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Store/UI/TabContainer/Weapons"]
 anchor_left = -0.057
@@ -149,10 +181,10 @@ rect_clip_content = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 2.0
-margin_top = 29.0
-margin_right = -2.0
-margin_bottom = -2.0
+margin_left = 30.0
+margin_top = 55.0
+margin_right = -30.0
+margin_bottom = -30.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Store/UI/TabContainer/Armor"]
 anchor_left = -0.057
@@ -177,10 +209,10 @@ rect_clip_content = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 2.0
-margin_top = 29.0
-margin_right = -2.0
-margin_bottom = -2.0
+margin_left = 30.0
+margin_top = 55.0
+margin_right = -30.0
+margin_bottom = -30.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Store/UI/TabContainer/Accessories"]
 anchor_left = -0.057
@@ -224,7 +256,7 @@ margin_left = 0.095993
 margin_top = -0.00700378
 margin_right = 0.0639954
 margin_bottom = 0.00498962
-custom_styles/panel = SubResource( 6 )
+custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -240,7 +272,7 @@ margin_top = -0.0260162
 margin_right = 97.128
 margin_bottom = 104.024
 rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Description here"
 autowrap = true
 __meta__ = {
@@ -303,9 +335,9 @@ __meta__ = {
 margin_left = 277.0
 margin_right = 304.0
 margin_bottom = 27.0
-custom_styles/hover = SubResource( 3 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/normal = SubResource( 5 )
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/normal = SubResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -315,6 +347,10 @@ position = Vector2( -1, 1 )
 scale = Vector2( 5.7, 2.3 )
 process_parent = true
 physics_process_parent = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/close = SubResource( 8 )
+anims/open = SubResource( 7 )
 
 [connection signal="body_entered" from="Interaction" to="." method="_on_Interaction_body_entered"]
 [connection signal="body_exited" from="Interaction" to="." method="_on_Interaction_body_exited"]
