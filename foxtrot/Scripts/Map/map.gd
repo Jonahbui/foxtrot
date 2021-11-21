@@ -29,12 +29,25 @@ func _ready():
     
   if Signals.connect("on_map_resurface", self, "Resurface") != OK:
     printerr("[Map] Error. Could not connect to signal on_map_resurface...")
+    
+  if Signals.connect("on_level_loaded", self, "DisplayLocation") != OK:
+    printerr("[Map] Error. Could not connect to signal on_change_base_level...")    
+
+
+func DisplayLocation():
+  $LocationPanel.visible = true
+  $LocationPanel/Label.text = played_map_point.level_name
+  $AnimationPlayer.play("location_panel_open")
+  yield(get_tree().create_timer(2), "timeout")
+  $AnimationPlayer.play("location_panel_close")
+  while $AnimationPlayer.is_playing():
+    yield(get_tree(), "idle_frame")
+  $LocationPanel.visible = false  
 
 func ToggleMap(forceState=false, state=false):
   var new_state = !$PanelContainer.visible
   if forceState:
     new_state = state
-
     
   if new_state:
     $PanelContainer.visible = true

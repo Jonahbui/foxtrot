@@ -46,6 +46,7 @@ signal on_map_resurface()
 #--------------------------------------------------------------------------------------------------
 # Level Signals
 #--------------------------------------------------------------------------------------------------
+# Emitted when a gameplay level has changed (gameplay means not main menu, character creation...)
 signal on_level_loaded()
 #--------------------------------------------------------------------------------------------------
 # Player/ Interaction Signals

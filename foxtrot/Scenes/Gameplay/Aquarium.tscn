@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=83 format=2]
 
 [ext_resource path="res://Instances/Gameplay/Store.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Textures/Gameplay/AquaticLife/turtle_sheet.png" type="Texture" id=2]
@@ -18,6 +18,9 @@
 [ext_resource path="res://Textures/Gameplay/Store/store_door.png" type="Texture" id=16]
 [ext_resource path="res://Textures/Gameplay/Store/wanted_poster_ian.png" type="Texture" id=17]
 [ext_resource path="res://Textures/Gameplay/Store/aquatic_background.png" type="Texture" id=18]
+[ext_resource path="res://Textures/Gameplay/AquaticLife/salmon_sheet.png" type="Texture" id=19]
+[ext_resource path="res://Textures/Gameplay/Levels/seaweed_sheet.png" type="Texture" id=20]
+[ext_resource path="res://Textures/Gameplay/Levels/rock.png" type="Texture" id=21]
 [ext_resource path="res://Node/DialogueInteraction.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Node/ChangeLevelInteraction.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Node/dialogue_interaction.gd" type="Script" id=27]
@@ -46,6 +49,54 @@ shader_param/seed = 5.0
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 33.7769, 32 )
+
+[sub_resource type="AtlasTexture" id=46]
+atlas = ExtResource( 20 )
+region = Rect2( 0, 0, 16, 11 )
+
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 20 )
+region = Rect2( 16, 0, 16, 11 )
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = ExtResource( 20 )
+region = Rect2( 32, 0, 16, 11 )
+
+[sub_resource type="AtlasTexture" id=49]
+atlas = ExtResource( 20 )
+region = Rect2( 48, 0, 16, 11 )
+
+[sub_resource type="AtlasTexture" id=50]
+atlas = ExtResource( 20 )
+region = Rect2( 64, 0, 16, 11 )
+
+[sub_resource type="AtlasTexture" id=51]
+atlas = ExtResource( 20 )
+region = Rect2( 80, 0, 16, 11 )
+
+[sub_resource type="AtlasTexture" id=52]
+atlas = ExtResource( 20 )
+region = Rect2( 96, 0, 16, 11 )
+
+[sub_resource type="AtlasTexture" id=53]
+atlas = ExtResource( 20 )
+region = Rect2( 112, 0, 16, 11 )
+
+[sub_resource type="AtlasTexture" id=54]
+atlas = ExtResource( 20 )
+region = Rect2( 128, 0, 16, 11 )
+
+[sub_resource type="AtlasTexture" id=55]
+atlas = ExtResource( 20 )
+region = Rect2( 144, 0, 16, 11 )
+
+[sub_resource type="SpriteFrames" id=56]
+animations = [ {
+"frames": [ SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 11 )
@@ -114,6 +165,108 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ Vector2( 2, 2 ), Vector2( -2, 2 ) ]
+}
+
+[sub_resource type="Animation" id=45]
+resource_name = "swim"
+length = 40.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 21, 40 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1161.05, 228.642 ), Vector2( 117.11, 228.642 ), Vector2( 1161.05, 228.642 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 21 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 2, 2 ), Vector2( -2, 2 ) ]
+}
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 19 )
+region = Rect2( 0, 0, 16, 7 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 19 )
+region = Rect2( 16, 0, 16, 7 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 19 )
+region = Rect2( 32, 0, 16, 7 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 19 )
+region = Rect2( 48, 0, 16, 7 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 19 )
+region = Rect2( 64, 0, 16, 7 )
+
+[sub_resource type="AtlasTexture" id=38]
+atlas = ExtResource( 19 )
+region = Rect2( 80, 0, 16, 7 )
+
+[sub_resource type="AtlasTexture" id=39]
+atlas = ExtResource( 19 )
+region = Rect2( 96, 0, 16, 7 )
+
+[sub_resource type="AtlasTexture" id=40]
+atlas = ExtResource( 19 )
+region = Rect2( 112, 0, 16, 7 )
+
+[sub_resource type="AtlasTexture" id=41]
+atlas = ExtResource( 19 )
+region = Rect2( 128, 0, 16, 7 )
+
+[sub_resource type="SpriteFrames" id=42]
+animations = [ {
+"frames": [ SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="Animation" id=44]
+resource_name = "swim"
+length = 40.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 20, 40 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 148.163, 258.255 ), Vector2( 1131.71, 257.796 ), Vector2( 148.163, 258.255 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 20, 40 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 2, 2 ), Vector2( -2, 2 ), Vector2( 2, 2 ) ]
 }
 
 [sub_resource type="AtlasTexture" id=14]
@@ -243,13 +396,25 @@ tracks/1/keys = {
 "values": [ Vector2( 0.5, 0.5 ), Vector2( -0.5, 0.5 ) ]
 }
 
+[sub_resource type="Environment" id=32]
+background_mode = 4
+glow_enabled = true
+glow_levels/1 = true
+glow_levels/2 = true
+glow_levels/4 = true
+glow_levels/5 = false
+glow_intensity = 0.27
+glow_strength = 1.45
+glow_hdr_threshold = 0.02
+glow_bicubic_upscale = true
+
 [node name="Level" type="Node2D"]
 script = ExtResource( 28 )
 
 [node name="Lighting" type="Node2D" parent="."]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="Lighting"]
-color = Color( 0.215686, 0.34902, 0.631373, 1 )
+color = Color( 0.141176, 0.207843, 0.34902, 1 )
 
 [node name="Light2D2" type="Light2D" parent="Lighting"]
 position = Vector2( 1759.11, 156.636 )
@@ -362,24 +527,6 @@ position = Vector2( -103.894, 275.986 )
 [node name="UI" parent="Sprites/Store Front/Store" index="0"]
 visible = false
 
-[node name="Weapons" parent="Sprites/Store Front/Store/UI/TabContainer" index="1"]
-margin_left = 30.0
-margin_top = 55.0
-margin_right = -30.0
-margin_bottom = -30.0
-
-[node name="Armor" parent="Sprites/Store Front/Store/UI/TabContainer" index="2"]
-margin_left = 30.0
-margin_top = 55.0
-margin_right = -30.0
-margin_bottom = -30.0
-
-[node name="Accessories" parent="Sprites/Store Front/Store/UI/TabContainer" index="3"]
-margin_left = 30.0
-margin_top = 55.0
-margin_right = -30.0
-margin_bottom = -30.0
-
 [node name="World" type="Node2D" parent="."]
 
 [node name="Midground (Level)" type="TileMap" parent="World"]
@@ -406,24 +553,125 @@ motion_mirroring = Vector2( 1280, 0 )
 position = Vector2( 624, 184 )
 texture = ExtResource( 18 )
 
+[node name="Seaweed" type="AnimatedSprite" parent="World/AquaticLife/ParallaxLayer/SandBackground"]
+position = Vector2( -438.321, 84.8406 )
+frames = SubResource( 56 )
+frame = 5
+playing = true
+
+[node name="Seaweed2" type="AnimatedSprite" parent="World/AquaticLife/ParallaxLayer/SandBackground"]
+position = Vector2( -237.321, 101.841 )
+frames = SubResource( 56 )
+frame = 4
+playing = true
+
+[node name="Seaweed3" type="AnimatedSprite" parent="World/AquaticLife/ParallaxLayer/SandBackground"]
+position = Vector2( -26.8212, 90.8406 )
+frames = SubResource( 56 )
+frame = 4
+playing = true
+
+[node name="Seaweed4" type="AnimatedSprite" parent="World/AquaticLife/ParallaxLayer/SandBackground"]
+position = Vector2( 30.6788, 120.341 )
+frames = SubResource( 56 )
+frame = 3
+playing = true
+
+[node name="Seaweed5" type="AnimatedSprite" parent="World/AquaticLife/ParallaxLayer/SandBackground"]
+position = Vector2( 239.679, 120.841 )
+frames = SubResource( 56 )
+frame = 3
+playing = true
+
+[node name="Seaweed6" type="AnimatedSprite" parent="World/AquaticLife/ParallaxLayer/SandBackground"]
+position = Vector2( 401.179, 99.8406 )
+frames = SubResource( 56 )
+frame = 3
+playing = true
+
+[node name="Seaweed7" type="AnimatedSprite" parent="World/AquaticLife/ParallaxLayer/SandBackground"]
+position = Vector2( 496.179, 119.341 )
+frames = SubResource( 56 )
+frame = 2
+playing = true
+
+[node name="Seaweed8" type="AnimatedSprite" parent="World/AquaticLife/ParallaxLayer/SandBackground"]
+position = Vector2( 298.179, 98.8406 )
+frames = SubResource( 56 )
+frame = 1
+playing = true
+
+[node name="Seaweed9" type="AnimatedSprite" parent="World/AquaticLife/ParallaxLayer/SandBackground"]
+position = Vector2( -318.628, 84.6792 )
+frames = SubResource( 56 )
+playing = true
+
+[node name="Seaweed10" type="AnimatedSprite" parent="World/AquaticLife/ParallaxLayer/SandBackground"]
+position = Vector2( -387.602, 122.734 )
+frames = SubResource( 56 )
+frame = 9
+playing = true
+
+[node name="Rock" type="Sprite" parent="World/AquaticLife/ParallaxLayer/SandBackground"]
+position = Vector2( -32.0579, 91.8682 )
+texture = ExtResource( 21 )
+
+[node name="Rock2" type="Sprite" parent="World/AquaticLife/ParallaxLayer/SandBackground"]
+position = Vector2( -425.891, 118.082 )
+scale = Vector2( 2.74004, 1.40369 )
+texture = ExtResource( 21 )
+
+[node name="Rock3" type="Sprite" parent="World/AquaticLife/ParallaxLayer/SandBackground"]
+position = Vector2( 310.7, 87.0923 )
+scale = Vector2( 1.58124, 3.48951 )
+texture = ExtResource( 21 )
+
+[node name="Rock4" type="Sprite" parent="World/AquaticLife/ParallaxLayer/SandBackground"]
+position = Vector2( 422.209, 109.341 )
+scale = Vector2( 1.41569, 1.90031 )
+texture = ExtResource( 21 )
+
 [node name="Clownfish" type="AnimatedSprite" parent="World/AquaticLife/ParallaxLayer"]
-position = Vector2( 1149.18, 208.642 )
+position = Vector2( 1140.06, 208.642 )
 scale = Vector2( 2, 2 )
 z_index = 1
 frames = SubResource( 12 )
-frame = 7
+frame = 1
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="World/AquaticLife/ParallaxLayer/Clownfish"]
 autoplay = "swim"
 anims/swim = SubResource( 13 )
 
+[node name="Clownfish2" type="AnimatedSprite" parent="World/AquaticLife/ParallaxLayer"]
+position = Vector2( 489.837, 228.642 )
+scale = Vector2( -2, 2 )
+z_index = 1
+frames = SubResource( 12 )
+playing = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="World/AquaticLife/ParallaxLayer/Clownfish2"]
+autoplay = "swim"
+anims/swim = SubResource( 45 )
+
+[node name="Salmon" type="AnimatedSprite" parent="World/AquaticLife/ParallaxLayer"]
+position = Vector2( 768.799, 257.965 )
+scale = Vector2( 2, 2 )
+z_index = 1
+frames = SubResource( 42 )
+frame = 3
+playing = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="World/AquaticLife/ParallaxLayer/Salmon"]
+autoplay = "swim"
+anims/swim = SubResource( 44 )
+
 [node name="Turtle" type="AnimatedSprite" parent="World/AquaticLife/ParallaxLayer"]
-position = Vector2( 506.695, 241.004 )
-scale = Vector2( -1, 1 )
+position = Vector2( 772.482, 211.007 )
 z_index = 1
 frames = SubResource( 17 )
 animation = "swimming"
+frame = 1
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="World/AquaticLife/ParallaxLayer/Turtle"]
@@ -480,7 +728,6 @@ z_index = -2
 z_as_relative = false
 frames = ExtResource( 6 )
 animation = "blinking"
-frame = 1
 playing = true
 flip_h = true
 
@@ -494,10 +741,10 @@ position = Vector2( -192, 0 )
 shape = SubResource( 20 )
 
 [node name="Frog" type="AnimatedSprite" parent="Entities"]
-position = Vector2( 872.661, 312.122 )
-scale = Vector2( -0.5, 0.5 )
+position = Vector2( 1051.64, 312.122 )
+scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 30 )
-frame = 1
+frame = 5
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Entities/Frog"]
@@ -511,6 +758,9 @@ stream = ExtResource( 4 )
 volume_db = 1.0
 autoplay = true
 bus = "Music"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 32 )
 
 [connection signal="body_entered" from="Sprites/Store Entrance/DoorDetector" to="Sprites/Store Entrance" method="_on_DoorDetector_body_entered"]
 [connection signal="body_exited" from="Sprites/Store Entrance/DoorDetector" to="Sprites/Store Entrance" method="_on_DoorDetector_body_exited"]

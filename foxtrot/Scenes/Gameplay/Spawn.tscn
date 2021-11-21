@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Textures/Gameplay/Spawn/spawn_tiles.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Gameplay/spawn.gd" type="Script" id=2]
@@ -12,12 +12,13 @@
 [ext_resource path="res://Textures/Gameplay/Spawn/sandcastle.png" type="Texture" id=10]
 [ext_resource path="res://Audio/SoundEffects/seagulls_ocean_ambience.wav" type="AudioStream" id=11]
 [ext_resource path="res://Textures/Gameplay/Spawn/beach_chair.png" type="Texture" id=12]
-[ext_resource path="res://Textures/Gameplay/Spawn/beach_towel.png" type="Texture" id=13]
+[ext_resource path="res://Textures/Gameplay/Levels/seaweed_sheet.png" type="Texture" id=13]
 [ext_resource path="res://Instances/Equips/Weapon/Driftwood.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Node/ChangeLevelInteraction.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Audio/Music/spawn1.wav" type="AudioStream" id=16]
 [ext_resource path="res://Textures/UI/MainMenu/aquarium_sign.png" type="Texture" id=17]
 [ext_resource path="res://Textures/UI/MainMenu/aquarium_text.png" type="Texture" id=18]
+[ext_resource path="res://Textures/Gameplay/Levels/rock.png" type="Texture" id=19]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends \"res://Node/interaction.gd\"
@@ -30,6 +31,54 @@ func Use():
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 25.3333, 14.6667 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 13 )
+region = Rect2( 0, 0, 16, 11 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 13 )
+region = Rect2( 16, 0, 16, 11 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 13 )
+region = Rect2( 32, 0, 16, 11 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 13 )
+region = Rect2( 48, 0, 16, 11 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 13 )
+region = Rect2( 64, 0, 16, 11 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 13 )
+region = Rect2( 80, 0, 16, 11 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 13 )
+region = Rect2( 96, 0, 16, 11 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 13 )
+region = Rect2( 112, 0, 16, 11 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 13 )
+region = Rect2( 128, 0, 16, 11 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 13 )
+region = Rect2( 144, 0, 16, 11 )
+
+[sub_resource type="SpriteFrames" id=17]
+animations = [ {
+"frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 10, 368 )
@@ -53,6 +102,21 @@ shader_param/seed = 5.0
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 32, 64 )
+
+[sub_resource type="Environment" id=6]
+background_mode = 4
+fog_color = Color( 0, 0, 0, 1 )
+dof_blur_far_distance = 0.01
+dof_blur_far_transition = 10.39
+dof_blur_far_amount = 1.0
+glow_enabled = true
+glow_levels/1 = true
+glow_levels/4 = true
+glow_levels/5 = false
+glow_levels/7 = true
+glow_intensity = 1.93
+glow_bloom = 0.09
+glow_bicubic_upscale = true
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 2 )
@@ -81,7 +145,7 @@ texture = ExtResource( 8 )
 self_modulate = Color( 1.1, 1.1, 1.1, 1 )
 position = Vector2( 664, 288 )
 scale = Vector2( 6, 6 )
-z_index = -1
+z_index = -2
 texture = ExtResource( 9 )
 script = SubResource( 1 )
 level = "res://Scenes/Gameplay/Seafloor.tscn"
@@ -91,16 +155,119 @@ level = "res://Scenes/Gameplay/Seafloor.tscn"
 [node name="CollisionShape2D" parent="Background Objects/yellow_submarine/ChangeLevelInteraction" index="0"]
 shape = SubResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="Background Objects"]
+[node name="Sign" type="Sprite" parent="Background Objects"]
 position = Vector2( -16, 112 )
 z_index = 2
 texture = ExtResource( 18 )
 
-[node name="Sprite2" type="Sprite" parent="Background Objects"]
+[node name="SignLogo" type="Sprite" parent="Background Objects"]
 position = Vector2( -80, 136 )
 rotation = -1.52654
 z_index = 2
 texture = ExtResource( 17 )
+
+[node name="sandcastle" type="Sprite" parent="Background Objects"]
+position = Vector2( 16, 304 )
+texture = ExtResource( 10 )
+
+[node name="Seaweed" type="AnimatedSprite" parent="Background Objects"]
+position = Vector2( 728, 368 )
+scale = Vector2( 3, 3 )
+frames = SubResource( 17 )
+frame = 8
+playing = true
+offset = Vector2( -10.6667, 10.6667 )
+
+[node name="Rock" type="Sprite" parent="Background Objects/Seaweed"]
+position = Vector2( 2.66667, 8 )
+texture = ExtResource( 19 )
+
+[node name="Seaweed2" type="AnimatedSprite" parent="Background Objects"]
+position = Vector2( 768, 368 )
+scale = Vector2( 3, 3 )
+frames = SubResource( 17 )
+frame = 9
+playing = true
+offset = Vector2( -10.6667, 10.6667 )
+
+[node name="Seaweed3" type="AnimatedSprite" parent="Background Objects"]
+position = Vector2( 808, 368 )
+scale = Vector2( 3, 3 )
+frames = SubResource( 17 )
+frame = 8
+playing = true
+offset = Vector2( -10.6667, 10.6667 )
+
+[node name="Seaweed4" type="AnimatedSprite" parent="Background Objects"]
+position = Vector2( 856, 368 )
+scale = Vector2( 3, 3 )
+frames = SubResource( 17 )
+frame = 3
+playing = true
+offset = Vector2( -10.6667, 10.6667 )
+
+[node name="Seaweed5" type="AnimatedSprite" parent="Background Objects"]
+position = Vector2( 936, 368 )
+scale = Vector2( 3, 3 )
+frames = SubResource( 17 )
+frame = 6
+playing = true
+offset = Vector2( -10.6667, 10.6667 )
+
+[node name="Seaweed6" type="AnimatedSprite" parent="Background Objects"]
+position = Vector2( 896, 368 )
+scale = Vector2( 3, 3 )
+frames = SubResource( 17 )
+frame = 4
+playing = true
+offset = Vector2( -10.6667, 10.6667 )
+
+[node name="Seaweed7" type="AnimatedSprite" parent="Background Objects"]
+position = Vector2( 976, 368 )
+scale = Vector2( 3, 3 )
+frames = SubResource( 17 )
+playing = true
+offset = Vector2( -10.6667, 10.6667 )
+
+[node name="Seaweed8" type="AnimatedSprite" parent="Background Objects"]
+position = Vector2( 1024, 368 )
+scale = Vector2( 3, 3 )
+frames = SubResource( 17 )
+frame = 5
+playing = true
+offset = Vector2( -10.6667, 10.6667 )
+
+[node name="Seaweed9" type="AnimatedSprite" parent="Background Objects"]
+position = Vector2( 1072, 368 )
+scale = Vector2( 3, 3 )
+frames = SubResource( 17 )
+frame = 4
+playing = true
+offset = Vector2( -10.6667, 10.6667 )
+
+[node name="Seaweed10" type="AnimatedSprite" parent="Background Objects"]
+position = Vector2( 1112, 368 )
+scale = Vector2( 3, 3 )
+frames = SubResource( 17 )
+frame = 4
+playing = true
+offset = Vector2( -10.6667, 10.6667 )
+
+[node name="Seaweed11" type="AnimatedSprite" parent="Background Objects"]
+position = Vector2( 1160, 368 )
+scale = Vector2( 3, 3 )
+frames = SubResource( 17 )
+frame = 3
+playing = true
+offset = Vector2( -10.6667, 10.6667 )
+
+[node name="Seaweed12" type="AnimatedSprite" parent="Background Objects"]
+position = Vector2( 1200, 368 )
+scale = Vector2( 3, 3 )
+frames = SubResource( 17 )
+frame = 3
+playing = true
+offset = Vector2( -10.6667, 10.6667 )
 
 [node name="Control Boundaries" type="Node" parent="."]
 
@@ -124,7 +291,6 @@ position = Vector2( 316.061, 290.847 )
 material = SubResource( 4 )
 position = Vector2( 480, 72 )
 scale = Vector2( 3.60938, 1.85937 )
-z_index = 4
 texture = ExtResource( 5 )
 __meta__ = {
 "_edit_lock_": true
@@ -186,27 +352,6 @@ __meta__ = {
 light_mask = 2
 position = Vector2( 608, 240 )
 texture = ExtResource( 4 )
-
-[node name="sandcastle" type="Sprite" parent="ParallaxBackground/SandParallax"]
-position = Vector2( 128, 256 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 10 )
-
-[node name="beach_towel" type="Sprite" parent="ParallaxBackground/SandParallax"]
-self_modulate = Color( 0.427451, 0.729412, 1, 1 )
-position = Vector2( 154.145, 280.035 )
-rotation = -0.52961
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 13 )
-offset = Vector2( -2.90451, -2.31821 )
-
-[node name="beach_towel2" type="Sprite" parent="ParallaxBackground/SandParallax"]
-self_modulate = Color( 0.462745, 0.898039, 0.654902, 1 )
-position = Vector2( 154.145, 272.035 )
-rotation = -0.601348
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 13 )
-offset = Vector2( -2.90451, -2.31821 )
 
 [node name="Spawnpoint" type="Node2D" parent="."]
 position = Vector2( 320, 264 )
@@ -281,6 +426,13 @@ shape = SubResource( 5 )
 [node name="Driftwood" parent="World" instance=ExtResource( 14 )]
 position = Vector2( 256, 320 )
 override_process = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 6 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+position = Vector2( 1071, 400 )
+scale = Vector2( 15.9, 2.4 )
 
 [editable path="Background Objects/yellow_submarine/ChangeLevelInteraction"]
 [editable path="World/AquariumDoor/ChangeLevelInteraction"]
