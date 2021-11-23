@@ -300,9 +300,9 @@ func EraseInventory():
   
   for i in range(0, SLOT_COUNT):
     if inventory[i] != null:
+      var temp = inventory[i]
       DropItemFromSlot(i)
-      RemoveItemFromSlot(i)
-      inventory[i].queue_free()
+      temp.queue_free()
       inventory[i] = null
   RefreshInventorySlots()
 

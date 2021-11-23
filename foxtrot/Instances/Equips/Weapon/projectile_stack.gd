@@ -72,7 +72,8 @@ func ResetCooldown():
   .ResetCooldown()
 
 func AnimationStop():
-  $Sprite/AnimationPlayer.play("idle")
+  if get_node_or_null("Sprite/AnimationPlayer"):
+    $Sprite/AnimationPlayer.play("idle")
 
 # Note to self: instantiating an instance is not enough. You must also set a
 # parent for it or else it won't appear in the scene.
