@@ -164,7 +164,8 @@ func SpawnDamageText(damage, pos):
   var instance = damage_text.instance()
   self.add_child(instance)
   
-  # Add variance to location in which text spawns
+  # Add variance to location in which text spawns (sometimes text overlap and is not obvious that
+  # that the entity has taken more damage than it really has).
   var rng = RandomNumberGenerator.new()
   rng.randomize()
   var max_offset = 5
