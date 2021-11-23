@@ -159,9 +159,17 @@ func SpawnDamageText(damage, pos):
   # - damage  : the amount of damage dealt
   # - pos     : the global position to spawn the text
   # Return(s) : N/A
+  
+  
   var instance = damage_text.instance()
   self.add_child(instance)
-  instance.Init(damage, pos)
+  
+  # Add variance to location in which text spawns
+  var rng = RandomNumberGenerator.new()
+  rng.randomize()
+  var max_offset = 5
+  var rand_global_pos = pos + Vector2(rng.randf_range(-max_offset, max_offset), rng.randf_range(-max_offset, max_offset))
+  instance.Init(damage, rand_global_pos)
 
 func ToggleLoadingScreen(state):
   # Purpose   : Turns off or on the loading screen
