@@ -33,16 +33,18 @@ func _ready():
   if Signals.connect("on_level_loaded", self, "DisplayLocation") != OK:
     printerr("[Map] Error. Could not connect to signal on_change_base_level...")    
 
-
 func DisplayLocation():
   $LocationPanel.visible = true
   $LocationPanel/Label.text = played_map_point.level_name
   $AnimationPlayer.play("location_panel_open")
+  Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/paper_crumble.wav", 1)
   yield(get_tree().create_timer(2), "timeout")
   $AnimationPlayer.play("location_panel_close")
+  Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/paper_folded.wav", 1)  
   while $AnimationPlayer.is_playing():
     yield(get_tree(), "idle_frame")
   $LocationPanel.visible = false  
+
 
 func ToggleMap(forceState=false, state=false):
   var new_state = !$PanelContainer.visible
@@ -50,9 +52,11 @@ func ToggleMap(forceState=false, state=false):
     new_state = state
     
   if new_state:
+    Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/paper_crumble.wav", 3)
     $PanelContainer.visible = true
     $AnimationPlayer.play("open")
   else:
+    Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/paper_folded.wav", 3)    
     $AnimationPlayer.play("close")
     while $AnimationPlayer.is_playing():
       yield(get_tree(), "idle_frame")

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/paper_folded.wav-61fe1073e489de047aeaf4fb049d07bb.sample"
+
+[deps]
+
+source_file="res://Audio/SoundEffects/paper_folded.wav"
+dest_files=[ "res://.import/paper_folded.wav-61fe1073e489de047aeaf4fb049d07bb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

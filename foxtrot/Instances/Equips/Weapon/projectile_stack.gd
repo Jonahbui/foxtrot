@@ -6,6 +6,7 @@ export(int) var damage = 1
 # Automatic weapons are expected to have an AnimationPlayer that triggers the Use function
 export(bool) var is_automatic = false
 
+export(String, FILE) var projectile_sound
 export(String, FILE) var projectile
 
 func _ready():
@@ -52,17 +53,24 @@ func _on_use():
   # Need to make it work with controller
   # Vector2(Input.get_joy_axis(0, JOY_ANALOG_RX), Input.get_joy_axis(0, JOY_ANALOG_RY)).normalized()
   
+  # Play sound queue
+  Signals.emit_signal("on_play_audio", projectile_sound, 1)
+  
   # Set the projectile direction to be in the direction the player's crosshair is relatively.
   # Set the projetile direction to be where the item is on the player
   instance.SetProjectileDirection(direction)
   instance.set_global_position($Sprite/ProjectileSpawnpoint.global_position)
   player.get_parent().add_child(instance)
   
+  
   # Return success
   return true
 
 func ResetCooldown():
   .ResetCooldown()
+
+func AnimationStop():
+  $Sprite/AnimationPlayer.play("idle")
 
 # Note to self: instantiating an instance is not enough. You must also set a
 # parent for it or else it won't appear in the scene.

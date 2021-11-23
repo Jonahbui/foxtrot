@@ -38,6 +38,12 @@ func Move():
   move_and_slide(direction * runSpeed + knockback_velocity)
   
 func TakeDamage(area):
+  Signals.emit_signal("on_damage_taken", area.damage, self.global_position)
+  
+  # Play damage animation to show that enemy has been hurt
+  $AnimationPlayer.play("damaged")
+  Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/damage.wav", 1)
+  
   # Deal damage
   health -= area.damage
   print_debug("[%s] Current health = %d. Damage taken = %d." % [area.get_name(), health, area.damage])

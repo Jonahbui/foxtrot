@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/character_customization.wav-873721ce8cd2a4c1db1ea66003122dfc.sample"
+
+[deps]
+
+source_file="res://Audio/Music/character_customization.wav"
+dest_files=[ "res://.import/character_customization.wav-873721ce8cd2a4c1db1ea66003122dfc.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -53,6 +53,8 @@ func _process_input(event):
     Use()
 
 func _ready():
+  InitShader()
+  
   if override_process:
     SetProcess(process, null)
     
@@ -76,6 +78,7 @@ func Pickup():
   # Param(s)  : N/A
   # Return(s) : N/A
   Signals.emit_signal("on_inventory_add_item", self)
+  Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/coin_collect.wav", 1)
   
 func SetProcess(item_process : int, player_inv):
   # Purpose   : Controls what the item script processes
@@ -102,6 +105,7 @@ func SetProcess(item_process : int, player_inv):
       # Disable physics so that it does not interact with gravity
       # Disable input so that the player cannot use the item
       Helper.SetActive(self, false, false, false, false)
+      AnimationStop()
       
     # Active is used when the item is un the player inventory and is currently being used
     Globals.ItemProcess.Active:
@@ -186,10 +190,13 @@ func AnimationStop():
 
 func SetShader(state):
   var material = GetMaterial()
+  var node = get_node_or_null("Sprite2")
   if state:
     material.set_shader_param("precision", 0.02)
+    if node: node.visible = true
   else:
     material.set_shader_param("precision", 0.0)
+    if node: node.visible = false    
 
 func GetMaterial():
   # Some textures use an AtlasTexture to display the item and the textures are cropped tightly for
@@ -204,3 +211,5 @@ func GetMaterial():
     node.visible = true
   return node.material
   
+func InitShader():
+  GetMaterial().resource_local_to_scene = true

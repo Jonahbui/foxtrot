@@ -9,21 +9,28 @@ func PlayAudio(clip, source):
   if audio:
     match source:
       0:
-        $MusicStream.stream = audio    
+        $MusicStream.stream = audio
         $MusicStream.play()
       1:
-        $SFXStream.stream = audio    
+        $SFXStream.stream = audio
         $SFXStream.play()
       2:
-        $AmbienceStream.stream = audio    
+        $AmbienceStream.stream = audio
         $AmbienceStream.play()
       3:
-        $UIStream.stream = audio    
+        $UIStream.stream = audio
         $UIStream.play()
+      _:
+        pass
   else:
     printerr("[Base] Error. Could not play \"%s\"" % [clip])
 
-
+func KillAudio():
+  $MusicStream.stop()
+  $SFXStream.stop()
+  $AmbienceStream.stop()
+  $UIStream.stop()
+  
 func _on_button_down():
   PlayAudio(button_down, 3)
 

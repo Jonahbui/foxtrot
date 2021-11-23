@@ -50,8 +50,7 @@ var inventory = {}
 # Godot Functions
 # --------------------------------------------------------------------------------------------------
 func _input(event):
-  if Globals.IsFlagSet(Globals.FLAG_DEV_OPEN): return
-  elif Globals.IsFlagSet(Globals.FLAG_PAUSED): return
+  if Globals.IsFlagSet(Globals.FLAG_DEV_OPEN) || Globals.IsFlagSet(Globals.FLAG_PAUSED) || Globals.IsFlagSet(Globals.FLAG_DEAD): return
   
   # Cycles through the hotbar
   if event.is_action_pressed("ui_hotbar_forward"):
@@ -93,18 +92,7 @@ func _input(event):
   
   # Opens the inventory
   elif event.is_action_pressed("ui_inventory"):
-    var ui = $UI/Inventory
-    var new_state = !ui.visible
-    
-    if new_state:
-      ui.visible = true
-      $AnimationPlayer.play("open")
-    else:
-      $AnimationPlayer.play("close")
-      while $AnimationPlayer.is_playing():
-        yield(get_tree(), "idle_frame")
-      ui.visible = false
-    Globals.SetFlag(Globals.FLAG_INVENTORY, new_state)
+    ToggleInventory()
 
 func _init():
   if Signals.connect("on_inventory_add_item", self, "AppendItem") != OK:
@@ -229,6 +217,7 @@ func DropCurrentItem():
 
 func DropItem(item):
   item.SetProcess(Globals.ItemProcess.Dynamic, self)
+  UpdateEquipmentOnDrop(item)
   Signals.emit_signal("on_item_drop", item, self.get_parent().get_global_position())
 
 func DropItemFromSlot(slot_id):
@@ -245,6 +234,14 @@ func DropSelectedItem():
     selectedSlot2 = -1
   else:
     print_debug("[Inventory] Error. No item to drop...")
+
+func EraseInventory():
+  for i in range(0, SLOT_COUNT):
+    if inventory[i] != null:
+      RemoveItemFromSlot(i)
+      inventory[i].queue_free()
+      inventory[i] = null
+  RefreshInventorySlots()
 
 func FindEmptySlot():
   # The last few slots are dedicated for armors/accessories and should not be searched
@@ -351,7 +348,7 @@ func GetNextSlot(moveForward=true):
 func IsSelectedHotbar(slot_num):
   return slot_num == curr_slot_id
 
-func RefreshInventorySlots(refreshSlots):
+func RefreshInventorySlots(refreshSlots=null):
   # Expects an array
   # Loop through all the slots and update their textures
   if refreshSlots == null:
@@ -389,6 +386,8 @@ func RefreshInventorySlot(slot_num : int):
     # disable/enable the item in that slot
     if IsSelectedHotbar(slot_num):
       item.SetProcess(Globals.ItemProcess.Active, self)
+    else:
+      item.SetProcess(Globals.ItemProcess.Hidden, self)
     
   # If the inventory is null, set texture to null
   else:
@@ -400,11 +399,22 @@ func RefreshInventoryForItemInUse():
   RefreshInventorySlot(curr_slot_id)
 
 func ToggleInventory(forceState=false, state=false):
+  Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/whoosh.wav", 3)
+  var ui = $UI/Inventory
+  var new_state = !ui.visible
+  
   if forceState:
     $UI/Inventory.visible = state
+  
+  if new_state:
+    ui.visible = true
+    $AnimationPlayer.play("open")
   else:
-    $UI/Inventory.visible = !$UI/Inventory.visible
-  Globals.SetFlag(Globals.FLAG_INVENTORY, $UI/Inventory.visible)
+    $AnimationPlayer.play("close")
+    while $AnimationPlayer.is_playing():
+      yield(get_tree(), "idle_frame")
+    ui.visible = false
+  Globals.SetFlag(Globals.FLAG_INVENTORY, new_state)
 
 func _on_slot_pressed(slot_num):
   print_debug("[Inventory] Slot #%d selected." % [slot_num])
@@ -515,6 +525,10 @@ func UpdateEquipmentOnSwap(item_from, item_to, slot_from, slot_to):
   elif slot_from >= ARMOR_SLOT_ID:
     item_to.Equip()
     item_from.Unequip()
+    
+func UpdateEquipmentOnDrop(item):
+  if Equips.equips[item.id].type == Equips.Type.armor:
+    item.Unequip()
 # --------------------------------------------------------------------------------------------------
 # Inventory Save Functions
 # --------------------------------------------------------------------------------------------------
@@ -528,7 +542,7 @@ func RestoreInventoryData(items):
     RestoreItem(items[key], slot_id)
   
   # Refresh inventory to reflect restoration
-  RefreshInventorySlots(null)
+  RefreshInventorySlots()
 
 func InventoryToJSON():
   var dict = {}

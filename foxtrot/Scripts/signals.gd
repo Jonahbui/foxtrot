@@ -13,6 +13,10 @@ signal on_change_base_level(level, location)
 
 # Signals that the base game has been fully loaded
 signal on_base_game_loaded()
+
+# Signal to the base game that damage has been taken by some entity
+signal on_damage_taken(amount, position)
+
 #--------------------------------------------------------------------------------------------------
 # Dialogue System Signals
 #--------------------------------------------------------------------------------------------------

@@ -6,8 +6,10 @@ func _on_StartButton_pressed():
 func _on_ConfirmButton_pressed():
   # Do not allow the game to proceed if player did not provide a good name
   if $UI/NameInput.text.length() <= 0:
+    $Audio.PlayAudio("res://Audio/SoundEffects/error.wav", 1)
     printerr("[Character Creation] Error. Name needed...")
     $UI/WarningLabel.visible = true
+    $UI/WarningLabel.text = "Must enter name!"    
     $UI/PopupMenu.hide()
     return
   
@@ -17,6 +19,8 @@ func _on_ConfirmButton_pressed():
     # Save files have a *.save extension preceded by the character name. Need to split the string 
     # and get the name.
     if save.split(".")[0] == $UI/NameInput.text.to_lower():
+      $Audio.PlayAudio("res://Audio/SoundEffects/error.wav", 1)
+      $UI/WarningLabel.text = "Name must be unique!"    
       printerr("[Character Creation] Error. Name is not unique...")
       return
   

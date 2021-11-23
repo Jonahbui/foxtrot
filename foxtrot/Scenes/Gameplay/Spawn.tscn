@@ -32,58 +32,58 @@ func Use():
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 25.3333, 14.6667 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 13 )
 region = Rect2( 0, 0, 16, 11 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 13 )
 region = Rect2( 16, 0, 16, 11 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 13 )
 region = Rect2( 32, 0, 16, 11 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 13 )
 region = Rect2( 48, 0, 16, 11 )
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 13 )
 region = Rect2( 64, 0, 16, 11 )
 
-[sub_resource type="AtlasTexture" id=12]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 13 )
 region = Rect2( 80, 0, 16, 11 )
 
-[sub_resource type="AtlasTexture" id=13]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 13 )
 region = Rect2( 96, 0, 16, 11 )
 
-[sub_resource type="AtlasTexture" id=14]
+[sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 13 )
 region = Rect2( 112, 0, 16, 11 )
 
-[sub_resource type="AtlasTexture" id=15]
+[sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 13 )
 region = Rect2( 128, 0, 16, 11 )
 
-[sub_resource type="AtlasTexture" id=16]
+[sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 13 )
 region = Rect2( 144, 0, 16, 11 )
 
-[sub_resource type="SpriteFrames" id=17]
+[sub_resource type="SpriteFrames" id=13]
 animations = [ {
-"frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
 "loop": true,
 "name": "default",
 "speed": 10.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 10, 368 )
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=15]
 render_priority = 2
 shader = ExtResource( 3 )
 shader_param/angle = 0.836
@@ -100,10 +100,10 @@ shader_param/color = Color( 0.839844, 0.520776, 0.147629, 0.8 )
 shader_param/hdr = false
 shader_param/seed = 5.0
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=16]
 extents = Vector2( 32, 64 )
 
-[sub_resource type="Environment" id=6]
+[sub_resource type="Environment" id=17]
 background_mode = 4
 fog_color = Color( 0, 0, 0, 1 )
 dof_blur_far_distance = 0.01
@@ -114,7 +114,7 @@ glow_levels/1 = true
 glow_levels/4 = true
 glow_levels/5 = false
 glow_levels/7 = true
-glow_intensity = 1.93
+glow_intensity = 1.16
 glow_bloom = 0.09
 glow_bicubic_upscale = true
 
@@ -173,8 +173,8 @@ texture = ExtResource( 10 )
 [node name="Seaweed" type="AnimatedSprite" parent="Background Objects"]
 position = Vector2( 728, 368 )
 scale = Vector2( 3, 3 )
-frames = SubResource( 17 )
-frame = 8
+frames = SubResource( 13 )
+frame = 1
 playing = true
 offset = Vector2( -10.6667, 10.6667 )
 
@@ -185,87 +185,88 @@ texture = ExtResource( 19 )
 [node name="Seaweed2" type="AnimatedSprite" parent="Background Objects"]
 position = Vector2( 768, 368 )
 scale = Vector2( 3, 3 )
-frames = SubResource( 17 )
-frame = 9
+frames = SubResource( 13 )
+frame = 2
 playing = true
 offset = Vector2( -10.6667, 10.6667 )
 
 [node name="Seaweed3" type="AnimatedSprite" parent="Background Objects"]
 position = Vector2( 808, 368 )
 scale = Vector2( 3, 3 )
-frames = SubResource( 17 )
-frame = 8
+frames = SubResource( 13 )
+frame = 1
 playing = true
 offset = Vector2( -10.6667, 10.6667 )
 
 [node name="Seaweed4" type="AnimatedSprite" parent="Background Objects"]
 position = Vector2( 856, 368 )
 scale = Vector2( 3, 3 )
-frames = SubResource( 17 )
-frame = 3
+frames = SubResource( 13 )
+frame = 6
 playing = true
 offset = Vector2( -10.6667, 10.6667 )
 
 [node name="Seaweed5" type="AnimatedSprite" parent="Background Objects"]
 position = Vector2( 936, 368 )
 scale = Vector2( 3, 3 )
-frames = SubResource( 17 )
-frame = 6
+frames = SubResource( 13 )
+frame = 9
 playing = true
 offset = Vector2( -10.6667, 10.6667 )
 
 [node name="Seaweed6" type="AnimatedSprite" parent="Background Objects"]
 position = Vector2( 896, 368 )
 scale = Vector2( 3, 3 )
-frames = SubResource( 17 )
-frame = 4
+frames = SubResource( 13 )
+frame = 7
 playing = true
 offset = Vector2( -10.6667, 10.6667 )
 
 [node name="Seaweed7" type="AnimatedSprite" parent="Background Objects"]
 position = Vector2( 976, 368 )
 scale = Vector2( 3, 3 )
-frames = SubResource( 17 )
+frames = SubResource( 13 )
+frame = 3
 playing = true
 offset = Vector2( -10.6667, 10.6667 )
 
 [node name="Seaweed8" type="AnimatedSprite" parent="Background Objects"]
 position = Vector2( 1024, 368 )
 scale = Vector2( 3, 3 )
-frames = SubResource( 17 )
-frame = 5
+frames = SubResource( 13 )
+frame = 8
 playing = true
 offset = Vector2( -10.6667, 10.6667 )
 
 [node name="Seaweed9" type="AnimatedSprite" parent="Background Objects"]
 position = Vector2( 1072, 368 )
 scale = Vector2( 3, 3 )
-frames = SubResource( 17 )
-frame = 4
+frames = SubResource( 13 )
+frame = 7
 playing = true
 offset = Vector2( -10.6667, 10.6667 )
 
 [node name="Seaweed10" type="AnimatedSprite" parent="Background Objects"]
 position = Vector2( 1112, 368 )
 scale = Vector2( 3, 3 )
-frames = SubResource( 17 )
-frame = 4
+frames = SubResource( 13 )
+frame = 7
 playing = true
 offset = Vector2( -10.6667, 10.6667 )
 
 [node name="Seaweed11" type="AnimatedSprite" parent="Background Objects"]
 position = Vector2( 1160, 368 )
 scale = Vector2( 3, 3 )
-frames = SubResource( 17 )
-frame = 3
+frames = SubResource( 13 )
+frame = 6
 playing = true
 offset = Vector2( -10.6667, 10.6667 )
 
 [node name="Seaweed12" type="AnimatedSprite" parent="Background Objects"]
 position = Vector2( 1200, 368 )
 scale = Vector2( 3, 3 )
-frames = SubResource( 17 )
-frame = 3
+frames = SubResource( 13 )
+frame = 6
 playing = true
 offset = Vector2( -10.6667, 10.6667 )
 
@@ -277,7 +278,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Control Boundaries/StaticBody2D"]
 position = Vector2( 904, 240 )
-shape = SubResource( 3 )
+shape = SubResource( 14 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -288,7 +289,7 @@ position = Vector2( 316.061, 290.847 )
 [node name="Lighting" type="Node2D" parent="."]
 
 [node name="Godrays" type="Sprite" parent="Lighting"]
-material = SubResource( 4 )
+material = SubResource( 15 )
 position = Vector2( 480, 72 )
 scale = Vector2( 3.60938, 1.85937 )
 texture = ExtResource( 5 )
@@ -417,18 +418,19 @@ tile_data = PoolIntArray( 393215, 36, 0, 589823, 18, 0, 655359, 21, 0 )
 position = Vector2( 32, 192 )
 
 [node name="ChangeLevelInteraction" parent="World/AquariumDoor" instance=ExtResource( 15 )]
+on_interact_sound = "res://Audio/SoundEffects/door_open.wav"
 hardset_level = true
 level = "res://Scenes/Gameplay/Aquarium.tscn"
 
 [node name="CollisionShape2D" parent="World/AquariumDoor/ChangeLevelInteraction" index="0"]
-shape = SubResource( 5 )
+shape = SubResource( 16 )
 
 [node name="Driftwood" parent="World" instance=ExtResource( 14 )]
 position = Vector2( 256, 320 )
 override_process = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 6 )
+environment = SubResource( 17 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 position = Vector2( 1071, 400 )

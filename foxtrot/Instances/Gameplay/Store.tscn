@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Textures/Gameplay/Store/cash_register.png" type="Texture" id=1]
 [ext_resource path="res://Node/Interaction.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Textures/UI/Button/button_hover.tres" type="StyleBox" id=12]
 [ext_resource path="res://Fonts/ThaleahFat_TTF.ttf" type="DynamicFontData" id=13]
 [ext_resource path="res://Instances/Gameplay/store.gd" type="Script" id=14]
+[ext_resource path="res://Instances/LocalAudio.gd" type="Script" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 96, 8 )
@@ -43,7 +44,7 @@ region_rect = Rect2( 0, 0, 16, 16 )
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 16, 16 )
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 resource_name = "close"
 length = 0.2
 tracks/0/type = "value"
@@ -59,8 +60,7 @@ tracks/0/keys = {
 "values": [ Vector2( 16, 16 ), Vector2( -496, 16 ) ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "open"
+[sub_resource type="Animation" id=8]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Store/UI:rect_position")
@@ -86,7 +86,26 @@ weapon_container = NodePath("Store/UI/TabContainer/Weapons/ScrollContainer/VBoxC
 armor_container = NodePath("Store/UI/TabContainer/Armor/ScrollContainer/VBoxContainer")
 accessory_container = NodePath("Store/UI/TabContainer/Accessories/ScrollContainer/VBoxContainer")
 
+[node name="Audio" type="Node" parent="."]
+script = ExtResource( 15 )
+button_down = "res://Audio/SoundEffects/button_down1.mp3"
+button_up = "res://Audio/SoundEffects/button_up1.mp3"
+
+[node name="MusicStream" type="AudioStreamPlayer" parent="Audio"]
+autoplay = true
+bus = "Music"
+
+[node name="SFXStream" type="AudioStreamPlayer" parent="Audio"]
+bus = "SFX"
+
+[node name="AmbienceStream" type="AudioStreamPlayer" parent="Audio"]
+bus = "Ambience"
+
+[node name="UIStream" type="AudioStreamPlayer" parent="Audio"]
+bus = "UI"
+
 [node name="Interaction" parent="." instance=ExtResource( 2 )]
+on_interact_sound = "res://Audio/SoundEffects/cash_register.wav"
 
 [node name="CountertopCollider" type="StaticBody2D" parent="."]
 
@@ -349,12 +368,17 @@ process_parent = true
 physics_process_parent = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/close = SubResource( 8 )
-anims/open = SubResource( 7 )
+anims/close = SubResource( 7 )
+anims/open = SubResource( 8 )
 
 [connection signal="body_entered" from="Interaction" to="." method="_on_Interaction_body_entered"]
 [connection signal="body_exited" from="Interaction" to="." method="_on_Interaction_body_exited"]
 [connection signal="interaction_triggered" from="Interaction" to="." method="ToggleStore"]
+[connection signal="tab_changed" from="Store/UI/TabContainer" to="Audio" method="_on_tab_clicked"]
 [connection signal="tab_selected" from="Store/UI/TabContainer" to="." method="_on_TabContainer_tab_selected"]
+[connection signal="button_down" from="Store/UI/InfoPanel/PurchaseButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="Store/UI/InfoPanel/PurchaseButton" to="Audio" method="_on_button_up"]
 [connection signal="pressed" from="Store/UI/InfoPanel/PurchaseButton" to="." method="_on_PurchaseButton_pressed"]
+[connection signal="button_down" from="Store/UI/CloseStoreButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="Store/UI/CloseStoreButton" to="Audio" method="_on_button_up"]
 [connection signal="pressed" from="Store/UI/CloseStoreButton" to="." method="_on_CloseStoreButton_pressed"]

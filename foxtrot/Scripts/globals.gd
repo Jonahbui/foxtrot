@@ -70,6 +70,7 @@ const FLAG_DEV_OPEN = 1
 const FLAG_PAUSED = 2
 const FLAG_INTERACTING = 4
 const FLAG_INVENTORY = 8
+const FLAG_DEAD = 16
 
 # This variable is used to determine whether the game should is in a certain
 # state of pause. If it is not paused at all, then the value of this variable

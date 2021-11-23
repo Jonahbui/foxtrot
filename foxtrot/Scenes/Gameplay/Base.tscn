@@ -25,9 +25,9 @@
 [ext_resource path="res://Textures/UI/Map/locantion_single_panel.png" type="Texture" id=23]
 [ext_resource path="res://Fonts/thaelahfat_pure_16x.tres" type="DynamicFont" id=24]
 
-[sub_resource type="ButtonGroup" id=35]
+[sub_resource type="ButtonGroup" id=1]
 
-[sub_resource type="Animation" id=36]
+[sub_resource type="Animation" id=2]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("UI/Panel:self_modulate")
@@ -66,7 +66,7 @@ tracks/2/keys = {
 "values": [ Vector2( 11.3387, 317.937 ), Vector2( 11.339, 367.937 ) ]
 }
 
-[sub_resource type="Animation" id=37]
+[sub_resource type="Animation" id=3]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("UI/Panel:self_modulate")
@@ -105,11 +105,11 @@ tracks/2/keys = {
 "values": [ Vector2( 11.339, 367.937 ), Vector2( 11.3387, 317.937 ) ]
 }
 
-[sub_resource type="DynamicFont" id=38]
+[sub_resource type="DynamicFont" id=4]
 use_mipmaps = true
 font_data = ExtResource( 21 )
 
-[sub_resource type="Animation" id=39]
+[sub_resource type="Animation" id=5]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("LoadingScreen:modulate")
@@ -124,7 +124,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=40]
+[sub_resource type="Animation" id=6]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("LoadingScreen:modulate")
@@ -139,7 +139,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=41]
+[sub_resource type="Animation" id=7]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("LoadingScreen:modulate")
@@ -154,7 +154,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=45]
+[sub_resource type="Animation" id=8]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("PanelContainer:rect_position")
@@ -169,7 +169,7 @@ tracks/0/keys = {
 "values": [ Vector2( 32, 32 ), Vector2( 32, 544 ) ]
 }
 
-[sub_resource type="Animation" id=49]
+[sub_resource type="Animation" id=9]
 resource_name = "location_panel_close"
 tracks/0/type = "value"
 tracks/0/path = NodePath("LocationPanel:rect_position")
@@ -184,7 +184,7 @@ tracks/0/keys = {
 "values": [ Vector2( 8, 312 ), Vector2( -248, 312 ) ]
 }
 
-[sub_resource type="Animation" id=48]
+[sub_resource type="Animation" id=10]
 resource_name = "location_panel_open"
 tracks/0/type = "value"
 tracks/0/path = NodePath("LocationPanel:rect_position")
@@ -199,7 +199,7 @@ tracks/0/keys = {
 "values": [ Vector2( -248, 312 ), Vector2( 8, 312 ) ]
 }
 
-[sub_resource type="Animation" id=46]
+[sub_resource type="Animation" id=11]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("PanelContainer:rect_position")
@@ -214,7 +214,7 @@ tracks/0/keys = {
 "values": [ Vector2( 32, 544 ), Vector2( 32, 32 ) ]
 }
 
-[sub_resource type="StyleBoxTexture" id=42]
+[sub_resource type="StyleBoxTexture" id=12]
 texture = ExtResource( 10 )
 region_rect = Rect2( 0, 0, 64, 64 )
 margin_left = 32.0
@@ -224,7 +224,7 @@ margin_bottom = 5.0
 expand_margin_top = 10.0
 expand_margin_bottom = 10.0
 
-[sub_resource type="StyleBoxTexture" id=43]
+[sub_resource type="StyleBoxTexture" id=13]
 texture = ExtResource( 14 )
 region_rect = Rect2( 0, 0, 16, 16 )
 expand_margin_left = 4.0
@@ -232,7 +232,7 @@ expand_margin_right = 4.0
 expand_margin_top = 4.0
 expand_margin_bottom = 4.0
 
-[sub_resource type="StyleBoxTexture" id=44]
+[sub_resource type="StyleBoxTexture" id=14]
 texture = ExtResource( 10 )
 region_rect = Rect2( 0, 0, 64, 64 )
 margin_left = 15.0
@@ -240,7 +240,7 @@ margin_right = 42.0
 margin_top = 6.0
 margin_bottom = 6.0
 
-[sub_resource type="StyleBoxTexture" id=47]
+[sub_resource type="StyleBoxTexture" id=15]
 texture = ExtResource( 23 )
 region_rect = Rect2( 0, 0, 96, 32 )
 margin_left = 2.0
@@ -254,6 +254,7 @@ script = ExtResource( 2 )
 dev_console = NodePath("UI/DevConsole")
 cmdline = NodePath("UI/DevConsole/CmdLine")
 logs = NodePath("UI/DevConsole/Log")
+damage_text = "res://Instances/UI/DamageText.tscn"
 
 [node name="Audio" type="Node" parent="."]
 script = ExtResource( 7 )
@@ -474,6 +475,81 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="GameOver" type="Control" parent="UI"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="UI/GameOver"]
+self_modulate = Color( 1, 1, 1, 0.513726 )
+anchor_right = 16.0
+anchor_bottom = 9.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/GameOver/Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -95.9999
+margin_top = -36.0
+margin_right = -55.9999
+margin_bottom = -21.0
+rect_scale = Vector2( 5, 5 )
+custom_fonts/font = ExtResource( 24 )
+text = "LMAO"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="UI/GameOver/Panel"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -96.0
+margin_top = -24.0
+margin_right = -8.0
+margin_bottom = -9.0
+custom_fonts/font = ExtResource( 24 )
+text = "Reseting..."
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RestartButton" type="Button" parent="UI/GameOver"]
+anchor_left = 8.2
+anchor_top = 4.6
+anchor_right = 8.2
+anchor_bottom = 4.6
+margin_left = -32.0
+margin_top = 48.0
+margin_right = 34.0
+margin_bottom = 75.0
+theme = ExtResource( 8 )
+text = "Restart"
+
+[node name="QuitButton" type="Button" parent="UI/GameOver"]
+anchor_left = 8.2
+anchor_top = 4.6
+anchor_right = 8.2
+anchor_bottom = 4.6
+margin_left = -32.0
+margin_top = 88.0
+margin_right = 34.0
+margin_bottom = 115.0
+theme = ExtResource( 8 )
+text = "Quit"
+
 [node name="PauseMenu" parent="." instance=ExtResource( 1 )]
 
 [node name="Panel" type="Panel" parent="PauseMenu/UI" index="0"]
@@ -492,11 +568,11 @@ margin_left = -620.0
 margin_right = -650.0
 
 [node name="OptionButton" parent="PauseMenu/SettingsMenu/UI/TabContainer/Graphics/GraphicsVbox/Quality" index="0"]
-group = SubResource( 35 )
+group = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PauseMenu"]
-anims/close = SubResource( 36 )
-anims/open = SubResource( 37 )
+anims/close = SubResource( 2 )
+anims/open = SubResource( 3 )
 
 [node name="LoadingScreen" type="CanvasLayer" parent="."]
 layer = 3
@@ -527,16 +603,16 @@ margin_top = -51.96
 margin_right = -124.0
 margin_bottom = -36.96
 rect_scale = Vector2( 3, 3 )
-custom_fonts/font = SubResource( 38 )
+custom_fonts/font = SubResource( 4 )
 text = "Loading..."
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="LoadingScreen"]
-anims/close = SubResource( 39 )
-anims/idle_close = SubResource( 40 )
-anims/open = SubResource( 41 )
+anims/close = SubResource( 5 )
+anims/idle_close = SubResource( 6 )
+anims/open = SubResource( 7 )
 next/open = "idle_close"
 
 [node name="Map" type="CanvasLayer" parent="."]
@@ -545,10 +621,10 @@ script = ExtResource( 15 )
 button_map_select_theme = "res://Textures/UI/Map/button_map_select.tres"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Map"]
-anims/close = SubResource( 45 )
-anims/location_panel_close = SubResource( 49 )
-anims/location_panel_open = SubResource( 48 )
-anims/open = SubResource( 46 )
+anims/close = SubResource( 8 )
+anims/location_panel_close = SubResource( 9 )
+anims/location_panel_open = SubResource( 10 )
+anims/open = SubResource( 11 )
 
 [node name="PanelContainer" type="PanelContainer" parent="Map"]
 visible = false
@@ -559,7 +635,7 @@ margin_top = 32.0
 margin_right = -32.0
 margin_bottom = -31.9998
 theme = ExtResource( 13 )
-custom_styles/panel = SubResource( 42 )
+custom_styles/panel = SubResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -569,7 +645,7 @@ margin_left = 32.0
 margin_top = 4.0
 margin_right = 541.0
 margin_bottom = 291.0
-custom_styles/panel = SubResource( 43 )
+custom_styles/panel = SubResource( 13 )
 
 [node name="OceanMap" type="TextureRect" parent="Map/PanelContainer/Panel"]
 margin_right = 509.0
@@ -720,7 +796,7 @@ margin_left = 8.0
 margin_top = 252.0
 margin_right = 256.0
 margin_bottom = 276.0
-custom_styles/panel = SubResource( 44 )
+custom_styles/panel = SubResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -753,7 +829,7 @@ margin_left = -248.0
 margin_top = -2928.0
 margin_right = -40.0
 margin_bottom = -2888.0
-custom_styles/panel = SubResource( 47 )
+custom_styles/panel = SubResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -787,6 +863,12 @@ __meta__ = {
 [connection signal="pressed" from="DialogueSystem/DialogueBox/Options/Button3" to="DialogueSystem" method="OnOptionSelect" binds= [ 3 ]]
 [connection signal="text_changed" from="UI/DevConsole/CmdLine" to="." method="_on_CmdLine_text_changed"]
 [connection signal="text_entered" from="UI/DevConsole/CmdLine" to="." method="_on_CmdLine_text_entered"]
+[connection signal="button_down" from="UI/GameOver/RestartButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="UI/GameOver/RestartButton" to="Audio" method="_on_button_up"]
+[connection signal="pressed" from="UI/GameOver/RestartButton" to="." method="Restart"]
+[connection signal="button_down" from="UI/GameOver/QuitButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="UI/GameOver/QuitButton" to="Audio" method="_on_button_up"]
+[connection signal="pressed" from="UI/GameOver/QuitButton" to="." method="Quit"]
 [connection signal="button_down" from="PauseMenu/UI/Background/ButtonVbox/ResumeButton" to="Audio" method="_on_button_down"]
 [connection signal="button_up" from="PauseMenu/UI/Background/ButtonVbox/ResumeButton" to="Audio" method="_on_button_up"]
 [connection signal="button_down" from="PauseMenu/UI/Background/ButtonVbox/SaveButton" to="Audio" method="_on_button_down"]
@@ -825,8 +907,14 @@ __meta__ = {
 [connection signal="pressed" from="Map/PanelContainer/Panel/OceanMap/MapPoints/MapPoint6" to="Map/PanelContainer/Panel/OceanMap/MapPoints/MapPoint6" method="_on_map_point_pressed"]
 [connection signal="_on_level_select" from="Map/PanelContainer/Panel/OceanMap/MapPoints/MapPoint7" to="Map" method="_on_map_point_select"]
 [connection signal="pressed" from="Map/PanelContainer/Panel/OceanMap/MapPoints/MapPoint7" to="Map/PanelContainer/Panel/OceanMap/MapPoints/MapPoint7" method="_on_map_point_pressed"]
+[connection signal="button_down" from="Map/PanelContainer/Panel/DiveButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="Map/PanelContainer/Panel/DiveButton" to="Audio" method="_on_button_up"]
 [connection signal="pressed" from="Map/PanelContainer/Panel/DiveButton" to="Map" method="_on_DiveButton_pressed"]
+[connection signal="button_down" from="Map/PanelContainer/Panel/BackButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="Map/PanelContainer/Panel/BackButton" to="Audio" method="_on_button_up"]
 [connection signal="pressed" from="Map/PanelContainer/Panel/BackButton" to="Map" method="_on_BackButton_pressed"]
+[connection signal="button_down" from="Map/PanelContainer/Panel/ResurfaceButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="Map/PanelContainer/Panel/ResurfaceButton" to="Audio" method="_on_button_up"]
 [connection signal="pressed" from="Map/PanelContainer/Panel/ResurfaceButton" to="Map" method="Resurface"]
 
 [editable path="PauseMenu"]

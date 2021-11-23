@@ -8,7 +8,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14.5714, 2.42868 )
 
-[sub_resource type="Shader" id=5]
+[sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
 render_mode unshaded;
 
@@ -93,8 +93,8 @@ void fragment()
 	COLOR = final_color; 
 }"
 
-[sub_resource type="ShaderMaterial" id=12]
-shader = SubResource( 5 )
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
 shader_param/intensity = 50
 shader_param/precision = 0.02
 shader_param/flipColors = true
@@ -103,11 +103,11 @@ shader_param/outline_color_2 = Color( 0.0509804, 0.447059, 0.764706, 1 )
 shader_param/use_outline_uv = true
 shader_param/useTexture = false
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 22, 13 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=5]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:texture")
 tracks/0/interp = 1
@@ -118,26 +118,26 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ SubResource( 2 ) ]
+"values": [ SubResource( 4 ) ]
 }
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 3 )
-region = Rect2( 44, 0, 22, 13 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 3 )
-region = Rect2( 66, 0, 22, 13 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 3 )
-region = Rect2( 88, 0, 22, 13 )
+region = Rect2( 44, 0, 22, 13 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 3 )
+region = Rect2( 66, 0, 22, 13 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 3 )
+region = Rect2( 88, 0, 22, 13 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 3 )
 region = Rect2( 110, 0, 22, 13 )
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=10]
 length = 0.5
 loop = true
 tracks/0/type = "value"
@@ -150,7 +150,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ ExtResource( 8 ), SubResource( 4 ), SubResource( 11 ), SubResource( 6 ), ExtResource( 8 ), SubResource( 7 ) ]
+"values": [ ExtResource( 8 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), ExtResource( 8 ), SubResource( 9 ) ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath("..")
@@ -170,7 +170,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="CircleShape2D" id=9]
+[sub_resource type="CircleShape2D" id=11]
 radius = 14.3362
 
 [node name="HarpoonGun" type="KinematicBody2D"]
@@ -184,6 +184,7 @@ id = 3
 max_stack_amt = 1
 isInfiniteUse = true
 is_automatic = true
+projectile_sound = "res://Audio/SoundEffects/projectile_shoot.wav"
 projectile = "res://Instances/Equips/Projectile/MagmaProjectile.tscn"
 
 [node name="Collider" type="CollisionShape2D" parent="."]
@@ -192,7 +193,7 @@ shape = SubResource( 1 )
 
 [node name="Sprite2" type="Sprite" parent="."]
 visible = false
-material = SubResource( 12 )
+material = SubResource( 3 )
 position = Vector2( 8.09375, -0.0625 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )
@@ -200,15 +201,15 @@ texture = ExtResource( 4 )
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -8, 0 )
 scale = Vector2( 2, 2 )
-texture = SubResource( 2 )
+texture = SubResource( 4 )
 offset = Vector2( 8, 0 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
-anims/idle = SubResource( 3 )
-anims/reload = SubResource( 8 )
+anims/idle = SubResource( 5 )
+anims/reload = SubResource( 10 )
 
 [node name="ProjectileSpawnpoint" type="Node2D" parent="Sprite"]
 position = Vector2( 16.886, -3.14411 )
@@ -223,7 +224,7 @@ __meta__ = {
 
 [node name="PickupCollider" type="CollisionShape2D" parent="PickupDetector"]
 position = Vector2( 8, 0 )
-shape = SubResource( 9 )
+shape = SubResource( 11 )
 __meta__ = {
 "_edit_lock_": true
 }

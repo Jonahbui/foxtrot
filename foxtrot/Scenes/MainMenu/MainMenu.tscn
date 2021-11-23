@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://Instances/LocalAudio.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/MainMenu/main_menu.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Fonts/thaelahfat_pure_16x.tres" type="DynamicFont" id=7]
 [ext_resource path="res://Textures/Gameplay/Store/spotlight512.png" type="Texture" id=8]
 [ext_resource path="res://Shaders/godrays.gdshader" type="Shader" id=9]
+[ext_resource path="res://Audio/Music/main_menu.mp3" type="AudioStream" id=10]
 [ext_resource path="res://Textures/UI/Button/button_disabled.tres" type="StyleBox" id=11]
 [ext_resource path="res://Textures/UI/Panel/panel.tres" type="StyleBox" id=12]
 [ext_resource path="res://Textures/UI/Button/button_hover.tres" type="StyleBox" id=13]
@@ -73,7 +74,7 @@ font_data = ExtResource( 5 )
 texture = ExtResource( 22 )
 region_rect = Rect2( 0, 0, 32, 88 )
 
-[sub_resource type="ShaderMaterial" id=13]
+[sub_resource type="ShaderMaterial" id=11]
 render_priority = 2
 shader = ExtResource( 9 )
 shader_param/angle = 0.836
@@ -90,8 +91,7 @@ shader_param/color = Color( 0.839844, 0.520776, 0.147629, 0.8 )
 shader_param/hdr = false
 shader_param/seed = 5.0
 
-[sub_resource type="Animation" id=11]
-resource_name = "IdleMain"
+[sub_resource type="Animation" id=12]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Camera2D:zoom")
 tracks/0/interp = 1
@@ -105,8 +105,7 @@ tracks/0/keys = {
 "values": [ Vector2( 5, 5 ) ]
 }
 
-[sub_resource type="Animation" id=12]
-resource_name = "MainToLoad"
+[sub_resource type="Animation" id=13]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Camera2D:zoom")
@@ -199,9 +198,13 @@ button_down = "res://Audio/SoundEffects/button_down1.mp3"
 button_up = "res://Audio/SoundEffects/button_up1.mp3"
 
 [node name="MusicStream" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 10 )
+volume_db = -1.405
 autoplay = true
+bus = "Music"
 
 [node name="SFXStream" type="AudioStreamPlayer" parent="Audio"]
+bus = "SFX"
 
 [node name="AmbienceStream" type="AudioStreamPlayer" parent="Audio"]
 bus = "Ambience"
@@ -825,7 +828,7 @@ __meta__ = {
 }
 
 [node name="Godrays" type="Sprite" parent="MainMenu Background UI"]
-material = SubResource( 13 )
+material = SubResource( 11 )
 position = Vector2( 480, 72 )
 scale = Vector2( 3.60938, 1.85937 )
 z_index = 4
@@ -840,8 +843,8 @@ current = true
 zoom = Vector2( 2, 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/IdleMain = SubResource( 11 )
-anims/MainToLoad = SubResource( 12 )
+anims/IdleMain = SubResource( 12 )
+anims/MainToLoad = SubResource( 13 )
 anims/MenuLoaded = SubResource( 14 )
 
 [connection signal="button_down" from="LoadMenu/UI/BackButton" to="Audio" method="_on_button_down"]

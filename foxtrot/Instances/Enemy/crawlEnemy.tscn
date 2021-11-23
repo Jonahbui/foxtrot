@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Instances/Enemy/crawl_enemy.gd" type="Script" id=1]
 
@@ -6,6 +6,9 @@
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 14.0215, 8.5208 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "damaged"
 
 [node name="CrawlEnemy" type="KinematicBody2D"]
 collision_layer = 4
@@ -23,7 +26,6 @@ physics_process_parent = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 visible = false
-animation = "swim"
 playing = true
 
 [node name="DamageDetector" type="Area2D" parent="."]
@@ -34,3 +36,6 @@ collision_mask = 288
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageDetector"]
 shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/damaged = SubResource( 3 )

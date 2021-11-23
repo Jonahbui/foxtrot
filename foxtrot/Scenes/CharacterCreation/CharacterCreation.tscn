@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Textures/UI/Panel/panel.tres" type="StyleBox" id=1]
 [ext_resource path="res://Textures/SplashScreen/solid_white.png" type="Texture" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://Textures/UI/Button/input_icon_reset_normal.png" type="Texture" id=10]
 [ext_resource path="res://Fonts/ThaleahFat_TTF.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://Textures/Gameplay/player.png" type="Texture" id=12]
+[ext_resource path="res://Instances/LocalAudio.gd" type="Script" id=13]
+[ext_resource path="res://Audio/Music/character_customization.wav" type="AudioStream" id=14]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 9 )
@@ -28,6 +30,33 @@ font_data = ExtResource( 11 )
 
 [node name="CharacterCreation" type="Node2D"]
 script = ExtResource( 3 )
+
+[node name="LocalAudio" type="Node2D" parent="."]
+
+[node name="Music" type="AudioStreamPlayer2D" parent="LocalAudio"]
+position = Vector2( 320, 192 )
+stream = ExtResource( 14 )
+volume_db = 0.9
+autoplay = true
+bus = "Music"
+
+[node name="Audio" type="Node" parent="."]
+script = ExtResource( 13 )
+button_down = "res://Audio/SoundEffects/button_down1.mp3"
+button_up = "res://Audio/SoundEffects/button_up1.mp3"
+
+[node name="MusicStream" type="AudioStreamPlayer" parent="Audio"]
+autoplay = true
+bus = "Music"
+
+[node name="SFXStream" type="AudioStreamPlayer" parent="Audio"]
+bus = "SFX"
+
+[node name="AmbienceStream" type="AudioStreamPlayer" parent="Audio"]
+bus = "Ambience"
+
+[node name="UIStream" type="AudioStreamPlayer" parent="Audio"]
+bus = "UI"
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -190,7 +219,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[connection signal="button_down" from="UI/StartButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="UI/StartButton" to="Audio" method="_on_button_up"]
 [connection signal="pressed" from="UI/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="button_down" from="UI/BackButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="UI/BackButton" to="Audio" method="_on_button_up"]
 [connection signal="pressed" from="UI/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="button_down" from="UI/PopupMenu/HBoxContainer/ConfirmButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="UI/PopupMenu/HBoxContainer/ConfirmButton" to="Audio" method="_on_button_up"]
 [connection signal="pressed" from="UI/PopupMenu/HBoxContainer/ConfirmButton" to="." method="_on_ConfirmButton_pressed"]
+[connection signal="button_down" from="UI/PopupMenu/HBoxContainer/CancelButton" to="Audio" method="_on_button_down"]
+[connection signal="button_up" from="UI/PopupMenu/HBoxContainer/CancelButton" to="Audio" method="_on_button_up"]
 [connection signal="pressed" from="UI/PopupMenu/HBoxContainer/CancelButton" to="." method="_on_CancelButton_pressed"]

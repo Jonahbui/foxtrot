@@ -3,6 +3,9 @@ extends Particles2D
 var duration : float = 2.0
 
 func SpawnParticles(position):
+  # Emit particle sounds
+  $AudioStreamPlayer2D.play()
+    
   var level_node = self.get_tree().get_root().get_node_or_null("/root/Base/Level")
   self.get_parent().remove_child(self)
   level_node.add_child(self)

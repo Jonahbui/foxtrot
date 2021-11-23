@@ -42,6 +42,10 @@ func InitializeStore():
     instance.get_node("ItemPrice").text = "$ %s" % [Equips.equips[equip_id].price]
     instance.get_node("Item").texture = texture
     
+    # Add sound to buttons
+    instance.connect("button_down", $Audio, "_on_button_down")
+    instance.connect("button_up", $Audio, "_on_button_up")
+    
     # Attach signal to button, so that we can update the UI
     instance.id = equip_id
     instance.connect("_on_item_click", self, "UpdateSelectedItem")
@@ -86,7 +90,6 @@ func ToggleStore(forceState=false, state=false):
   if new_state:
     $Store/UI.visible = true
     $AnimationPlayer.play("open")
-    Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/cash_register.mp3", 1)
   else:
     Signals.emit_signal("on_interaction_changed", false)
     $AnimationPlayer.play("close")

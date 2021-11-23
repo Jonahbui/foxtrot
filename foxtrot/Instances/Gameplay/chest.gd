@@ -13,7 +13,7 @@ func Open():
   self.play("opening")
   
   # Add noise
-  
+  Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/chest_open.wav", 1)
   # Do not let the player open the chest again.
   is_chest_opened = true
   

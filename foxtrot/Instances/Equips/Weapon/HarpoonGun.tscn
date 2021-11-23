@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Animation/HarpoonGun/harpoon_gun_reload_1.tres" type="Texture" id=1]
 [ext_resource path="res://Instances/Equips/Weapon/projectile_stack.gd" type="Script" id=2]
@@ -7,11 +7,12 @@
 [ext_resource path="res://Animation/HarpoonGun/harpoon_gun_reload_5.tres" type="Texture" id=5]
 [ext_resource path="res://Animation/HarpoonGun/harpoon_gun_reload_3.tres" type="Texture" id=6]
 [ext_resource path="res://Animation/HarpoonGun/harpoon_gun_reload_6.tres" type="Texture" id=7]
+[ext_resource path="res://Textures/Gameplay/Weapon/harpoon_gun.png" type="Texture" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14.5714, 2.42868 )
 
-[sub_resource type="Shader" id=5]
+[sub_resource type="Shader" id=7]
 code = "shader_type canvas_item;
 render_mode unshaded;
 
@@ -96,9 +97,9 @@ void fragment()
 	COLOR = final_color; 
 }"
 
-[sub_resource type="ShaderMaterial" id=6]
-shader = SubResource( 5 )
-shader_param/intensity = 12
+[sub_resource type="ShaderMaterial" id=8]
+shader = SubResource( 7 )
+shader_param/intensity = 50
 shader_param/precision = 0.02
 shader_param/flipColors = true
 shader_param/outline_color = Color( 0.541176, 0.698039, 0.819608, 1 )
@@ -106,8 +107,7 @@ shader_param/outline_color_2 = Color( 0.0509804, 0.447059, 0.764706, 1 )
 shader_param/use_outline_uv = true
 shader_param/useTexture = false
 
-[sub_resource type="Animation" id=2]
-resource_name = "idle"
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:texture")
 tracks/0/interp = 1
@@ -121,7 +121,7 @@ tracks/0/keys = {
 "values": [ ExtResource( 7 ) ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=5]
 length = 0.5
 loop = true
 tracks/0/type = "value"
@@ -154,7 +154,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=6]
 radius = 14.3362
 
 [node name="HarpoonGun" type="KinematicBody2D"]
@@ -168,25 +168,31 @@ id = 3
 max_stack_amt = 1
 isInfiniteUse = true
 is_automatic = true
+projectile_sound = "res://Audio/SoundEffects/projectile_shoot.wav"
 projectile = "res://Instances/Equips/Projectile/HarpoonProjectile.tscn"
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2( 7.04372, -2.03773 )
 shape = SubResource( 1 )
 
+[node name="Sprite2" type="Sprite" parent="."]
+material = SubResource( 8 )
+position = Vector2( 7.96732, -2.00226 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 8 )
+
 [node name="Sprite" type="Sprite" parent="."]
-material = SubResource( 6 )
 position = Vector2( -8, 0 )
 scale = Vector2( 2, 2 )
-texture = ExtResource( 1 )
+texture = ExtResource( 7 )
 offset = Vector2( 8, 0 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
-anims/idle = SubResource( 2 )
-anims/reload = SubResource( 3 )
+anims/idle = SubResource( 4 )
+anims/reload = SubResource( 5 )
 
 [node name="ProjectileSpawnpoint" type="Node2D" parent="Sprite"]
 position = Vector2( 11.0164, -1.4638 )
@@ -201,7 +207,7 @@ __meta__ = {
 
 [node name="PickupCollider" type="CollisionShape2D" parent="PickupDetector"]
 position = Vector2( 8, 0 )
-shape = SubResource( 4 )
+shape = SubResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }

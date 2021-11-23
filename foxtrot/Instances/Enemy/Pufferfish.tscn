@@ -1,9 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Textures/Gameplay/Enemy/Pufferfish/pufferfish_sheet_swimming.png" type="Texture" id=1]
 [ext_resource path="res://Instances/Enemy/enemy.gd" type="Script" id=2]
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 12.843, 6.69411 )
 
 [sub_resource type="AtlasTexture" id=2]
@@ -22,7 +22,7 @@ region = Rect2( 64, 0, 32, 32 )
 atlas = ExtResource( 1 )
 region = Rect2( 96, 0, 32, 32 )
 
-[sub_resource type="SpriteFrames" id=7]
+[sub_resource type="SpriteFrames" id=6]
 animations = [ {
 "frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
 "loop": true,
@@ -30,8 +30,23 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 14.0215, 8.5208 )
+
+[sub_resource type="Animation" id=8]
+resource_name = "damaged"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="Pufferfish" type="KinematicBody2D"]
 scale = Vector2( 3, 3 )
@@ -42,7 +57,7 @@ health = 10
 loot_string = "pufferfish"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 6 )
+shape = SubResource( 1 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 position = Vector2( -2.38419e-07, 0 )
@@ -51,9 +66,9 @@ process_parent = true
 physics_process_parent = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 7 )
+frames = SubResource( 6 )
 animation = "swim"
-frame = 1
+frame = 2
 playing = true
 
 [node name="DamageDetector" type="Area2D" parent="."]
@@ -63,6 +78,9 @@ collision_layer = 0
 collision_mask = 288
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageDetector"]
-shape = SubResource( 8 )
+shape = SubResource( 7 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/damaged = SubResource( 8 )
 
 [connection signal="area_entered" from="DamageDetector" to="." method="_on_DamageDetector_area_entered"]

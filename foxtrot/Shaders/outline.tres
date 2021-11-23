@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=2]
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id=7]
 code = "shader_type canvas_item;
 render_mode unshaded;
 
@@ -86,7 +86,7 @@ void fragment()
 }"
 
 [resource]
-shader = SubResource( 1 )
+shader = SubResource( 7 )
 shader_param/intensity = 50
 shader_param/precision = 0.02
 shader_param/flipColors = true

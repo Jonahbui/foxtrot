@@ -9,6 +9,11 @@ export(NodePath) var dev_console
 export(NodePath) var cmdline
 export(NodePath) var logs
 
+export(String, FILE) var damage_text
+
+# --------------------------------------------------------------------------------------------------
+# Godot Functions
+# --------------------------------------------------------------------------------------------------
 func _input(event):
   if event.is_action_released("ui_dev"):
     ToggleDevConsole()
@@ -28,6 +33,8 @@ func _ready():
   cmdline = self.get_node(cmdline)
   logs = self.get_node(logs)
   
+  damage_text = load(damage_text)
+  
   if Signals.connect("on_player_death", self, "OnDeath") != OK:
     printerr("[Base] Error. Failed to connect to signal on_player_death...")
   
@@ -36,16 +43,12 @@ func _ready():
 
   if Signals.connect("on_change_base_level", self, "LoadLevel") != OK:
     printerr("[Base] Error. Failed to connect to signal on_change_base_level...")
-    
-func ToggleDevConsole():
-  # Set the current visibility to the opposite of the current visibility
-  dev_console.visible = !dev_console.visible
-  
-  # Inform the game of the new state, so other scripts pause accordingly
-  Globals.SetFlag(Globals.FLAG_DEV_OPEN, dev_console.visible)
-  if dev_console.visible:
-    cmdline.grab_focus()
-  
+
+  if Signals.connect("on_damage_taken", self, "SpawnDamageText") != OK:
+    printerr("[Base] Error. Failed to connect to signal on_change_base_level...")
+# --------------------------------------------------------------------------------------------------
+# Audio Functions
+# --------------------------------------------------------------------------------------------------
 func PlayAudio(clip, source):
   var audio = load(clip)
   
@@ -63,9 +66,14 @@ func PlayAudio(clip, source):
       3:
         $Audio/UIStream.stream = audio    
         $Audio/UIStream.play()
+      _:
+        pass
   else:
     printerr("[Base] Error. Could not play \"%s\"" % [clip])
 
+# --------------------------------------------------------------------------------------------------
+# Base Scene Functions
+# --------------------------------------------------------------------------------------------------
 func LoadLevel(path, location=""):
   ToggleLoadingScreen(true)
   
@@ -105,20 +113,52 @@ func LoadLevel(path, location=""):
   yield(get_tree().create_timer(time_in_seconds), "timeout")
   
   ToggleLoadingScreen(false)  
+    
+func OnDeath():
+  $Audio.KillAudio()
+  $UI/GameOver.visible = true
+  Signals.emit_signal("on_play_audio", "res://Audio/Music/death_song.mp3", 0)
+
+func Restart():
+  $Audio.KillAudio()
+  $UI/GameOver.visible = false
+  LoadLevel(Globals.LPATH_SPAWN)
+  $Player.ResetPlayer()
   
-func _on_CmdLine_text_entered(new_text):
-  # Do some preprocessing to avoid errors when parsing
-  new_text = new_text.strip_edges()
-  
-  # Reset command line for next user input
-  cmdline.text = ""
-  
-  # Display last user input
-  logs.text += "\n> %s" % [new_text] if history.size() > 0 else "> %s" % [new_text]
-  var line_count = logs.get_line_count()
-  logs.cursor_set_line(line_count)
-  ProcessCmd(new_text)
-  
+func Quit():
+  get_tree().quit()
+
+func SpawnDamageText(damage, pos):
+  var instance = damage_text.instance()
+  self.add_child(instance)
+  instance.Init(damage, pos)
+
+func ToggleLoadingScreen(state):
+  if state:
+    $LoadingScreen/LoadingScreen.visible = true
+    $LoadingScreen/AnimationPlayer.play("open")
+  else:
+    $LoadingScreen/AnimationPlayer.play("close")
+    while $LoadingScreen/AnimationPlayer.is_playing():
+      yield(get_tree(), "idle_frame")
+    $LoadingScreen/LoadingScreen.visible = false
+# --------------------------------------------------------------------------------------------------
+# Dev Console Functions
+# --------------------------------------------------------------------------------------------------
+func GetNextHistoryCmd(forward=true):
+  if history.size() > 0:
+    history_index = (history_index + 1) if(forward) else (history_index  - 1)
+    
+    if history_index < 0:
+      history_index = 0
+      cmdline.text = ""
+    elif history_index >= history.size():
+      history_index = history.size() - 1
+    else:
+      cmdline.text = history[history_index]
+    
+  cmdline.caret_position = cmdline.text.length()
+
 func ProcessCmd(cmd):
   UpdateHistory(cmd)
   
@@ -153,6 +193,8 @@ func ProcessCmd(cmd):
           var valid : bool = File.new().file_exists(parse[1])
           valid = parse[1] in Globals.LEVEL_PATH && valid
           if valid : LoadLevel(parse[1])
+        "damage":
+          $Player.TakeDamage(int(parse[1]))
         _:
           logs.text += "\nCould not find command or not enough params provided..."
     3:
@@ -173,49 +215,36 @@ func ProcessCmd(cmd):
         _:
           logs.text += "\nCould not find command or not enough params provided..."
 
+func ToggleDevConsole():
+  # Set the current visibility to the opposite of the current visibility
+  dev_console.visible = !dev_console.visible
+  
+  # Inform the game of the new state, so other scripts pause accordingly
+  Globals.SetFlag(Globals.FLAG_DEV_OPEN, dev_console.visible)
+  if dev_console.visible:
+    cmdline.grab_focus()
+
 func UpdateHistory(cmd):
   if(history.size() > 10):
     history.pop_back()
   history.push_front(cmd)
 
-func GetNextHistoryCmd(forward=true):
-  if history.size() > 0:
-    history_index = (history_index + 1) if(forward) else (history_index  - 1)
-    
-    if history_index < 0:
-      history_index = 0
-      cmdline.text = ""
-    elif history_index >= history.size():
-      history_index = history.size() - 1
-    else:
-      cmdline.text = history[history_index]
-    
-  cmdline.caret_position = cmdline.text.length()
-
-func ToggleLoadingScreen(state):
-  if state:
-    $LoadingScreen/LoadingScreen.visible = true
-    $LoadingScreen/AnimationPlayer.play("open")
-  else:
-    $LoadingScreen/AnimationPlayer.play("close")
-    while $LoadingScreen/AnimationPlayer.is_playing():
-      yield(get_tree(), "idle_frame")
-    $LoadingScreen/LoadingScreen.visible = false
+func _on_CmdLine_text_entered(new_text):
+  # Do some preprocessing to avoid errors when parsing
+  new_text = new_text.strip_edges()
   
-
+  # Reset command line for next user input
+  cmdline.text = ""
+  
+  # Display last user input
+  logs.text += "\n> %s" % [new_text] if history.size() > 0 else "> %s" % [new_text]
+  var line_count = logs.get_line_count()
+  logs.cursor_set_line(line_count)
+  ProcessCmd(new_text)
+  
 func _on_CmdLine_text_changed(new_text):
   var old_pos = cmdline.caret_position
   # Do not allow '`' to be used as input
   new_text = new_text.replace('`', '')
   cmdline.text = new_text
   cmdline.caret_position = old_pos
-
-func OnDeath():
-  if Globals.is_hardcore_mode:
-    # Go back to main menu
-    Helper.ChangeLevel(Globals.SPATH_MAIN_MENU)
-    # Restart game
-  else:
-    # Go back to spawn 
-    LoadLevel(Globals.LPATH_SPAWN)
-    $Player.ResetPlayer()

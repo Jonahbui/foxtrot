@@ -11,6 +11,7 @@ func _ready():
 
 func _input(event):
   if event.is_action_released("ui_cancel"):
+    Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/whoosh.wav", 3)
     # Toggle the pause menu depending on the pause state of the game
     var result_state = Globals.ToggleFlag(Globals.FLAG_PAUSED)
     

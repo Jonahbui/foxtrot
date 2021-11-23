@@ -50,96 +50,95 @@ shader_param/seed = 5.0
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 33.7769, 32 )
 
-[sub_resource type="AtlasTexture" id=46]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 20 )
 region = Rect2( 0, 0, 16, 11 )
 
-[sub_resource type="AtlasTexture" id=47]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 20 )
 region = Rect2( 16, 0, 16, 11 )
 
-[sub_resource type="AtlasTexture" id=48]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 20 )
 region = Rect2( 32, 0, 16, 11 )
 
-[sub_resource type="AtlasTexture" id=49]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 20 )
 region = Rect2( 48, 0, 16, 11 )
 
-[sub_resource type="AtlasTexture" id=50]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 20 )
 region = Rect2( 64, 0, 16, 11 )
 
-[sub_resource type="AtlasTexture" id=51]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 20 )
 region = Rect2( 80, 0, 16, 11 )
 
-[sub_resource type="AtlasTexture" id=52]
+[sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 20 )
 region = Rect2( 96, 0, 16, 11 )
 
-[sub_resource type="AtlasTexture" id=53]
+[sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 20 )
 region = Rect2( 112, 0, 16, 11 )
 
-[sub_resource type="AtlasTexture" id=54]
+[sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 20 )
 region = Rect2( 128, 0, 16, 11 )
 
-[sub_resource type="AtlasTexture" id=55]
+[sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 20 )
 region = Rect2( 144, 0, 16, 11 )
 
-[sub_resource type="SpriteFrames" id=56]
+[sub_resource type="SpriteFrames" id=14]
 animations = [ {
-"frames": [ SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ) ],
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
 "loop": true,
 "name": "default",
 "speed": 10.0
 } ]
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 11 )
 region = Rect2( 0, 0, 8, 8 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 11 )
 region = Rect2( 8, 0, 8, 8 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 11 )
 region = Rect2( 16, 0, 8, 8 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 11 )
 region = Rect2( 24, 0, 8, 8 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 11 )
 region = Rect2( 32, 0, 8, 8 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=20]
 atlas = ExtResource( 11 )
 region = Rect2( 40, 0, 8, 8 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=21]
 atlas = ExtResource( 11 )
 region = Rect2( 48, 0, 8, 8 )
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=22]
 atlas = ExtResource( 11 )
 region = Rect2( 56, 0, 8, 8 )
 
-[sub_resource type="SpriteFrames" id=12]
+[sub_resource type="SpriteFrames" id=23]
 animations = [ {
-"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
+"frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ],
 "loop": true,
 "name": "default",
 "speed": 10.0
 } ]
 
-[sub_resource type="Animation" id=13]
-resource_name = "swim"
+[sub_resource type="Animation" id=24]
 length = 40.0
 loop = true
 tracks/0/type = "value"
@@ -167,7 +166,7 @@ tracks/1/keys = {
 "values": [ Vector2( 2, 2 ), Vector2( -2, 2 ) ]
 }
 
-[sub_resource type="Animation" id=45]
+[sub_resource type="Animation" id=25]
 resource_name = "swim"
 length = 40.0
 loop = true
@@ -196,51 +195,51 @@ tracks/1/keys = {
 "values": [ Vector2( 2, 2 ), Vector2( -2, 2 ) ]
 }
 
-[sub_resource type="AtlasTexture" id=33]
+[sub_resource type="AtlasTexture" id=26]
 atlas = ExtResource( 19 )
 region = Rect2( 0, 0, 16, 7 )
 
-[sub_resource type="AtlasTexture" id=34]
+[sub_resource type="AtlasTexture" id=27]
 atlas = ExtResource( 19 )
 region = Rect2( 16, 0, 16, 7 )
 
-[sub_resource type="AtlasTexture" id=35]
+[sub_resource type="AtlasTexture" id=28]
 atlas = ExtResource( 19 )
 region = Rect2( 32, 0, 16, 7 )
 
-[sub_resource type="AtlasTexture" id=36]
+[sub_resource type="AtlasTexture" id=29]
 atlas = ExtResource( 19 )
 region = Rect2( 48, 0, 16, 7 )
 
-[sub_resource type="AtlasTexture" id=37]
+[sub_resource type="AtlasTexture" id=30]
 atlas = ExtResource( 19 )
 region = Rect2( 64, 0, 16, 7 )
 
-[sub_resource type="AtlasTexture" id=38]
+[sub_resource type="AtlasTexture" id=31]
 atlas = ExtResource( 19 )
 region = Rect2( 80, 0, 16, 7 )
 
-[sub_resource type="AtlasTexture" id=39]
+[sub_resource type="AtlasTexture" id=32]
 atlas = ExtResource( 19 )
 region = Rect2( 96, 0, 16, 7 )
 
-[sub_resource type="AtlasTexture" id=40]
+[sub_resource type="AtlasTexture" id=33]
 atlas = ExtResource( 19 )
 region = Rect2( 112, 0, 16, 7 )
 
-[sub_resource type="AtlasTexture" id=41]
+[sub_resource type="AtlasTexture" id=34]
 atlas = ExtResource( 19 )
 region = Rect2( 128, 0, 16, 7 )
 
-[sub_resource type="SpriteFrames" id=42]
+[sub_resource type="SpriteFrames" id=35]
 animations = [ {
-"frames": [ SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ) ],
+"frames": [ SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ) ],
 "loop": true,
 "name": "default",
 "speed": 10.0
 } ]
 
-[sub_resource type="Animation" id=44]
+[sub_resource type="Animation" id=36]
 resource_name = "swim"
 length = 40.0
 loop = true
@@ -269,27 +268,27 @@ tracks/1/keys = {
 "values": [ Vector2( 2, 2 ), Vector2( -2, 2 ), Vector2( 2, 2 ) ]
 }
 
-[sub_resource type="AtlasTexture" id=14]
+[sub_resource type="AtlasTexture" id=37]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=15]
+[sub_resource type="AtlasTexture" id=38]
 atlas = ExtResource( 2 )
 region = Rect2( 32, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=16]
+[sub_resource type="AtlasTexture" id=39]
 atlas = ExtResource( 2 )
 region = Rect2( 64, 0, 32, 32 )
 
-[sub_resource type="SpriteFrames" id=17]
+[sub_resource type="SpriteFrames" id=40]
 animations = [ {
-"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
+"frames": [ SubResource( 37 ), SubResource( 38 ), SubResource( 39 ) ],
 "loop": true,
 "name": "swimming",
 "speed": 3.0
 } ]
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=41]
 length = 60.0
 loop = true
 tracks/0/type = "value"
@@ -317,58 +316,57 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( -1, 1 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=19]
+[sub_resource type="RectangleShape2D" id=42]
 extents = Vector2( 32, 40 )
 
-[sub_resource type="RectangleShape2D" id=20]
+[sub_resource type="RectangleShape2D" id=43]
 extents = Vector2( 32, 40 )
 
-[sub_resource type="AtlasTexture" id=21]
+[sub_resource type="AtlasTexture" id=44]
 atlas = ExtResource( 12 )
 region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=22]
+[sub_resource type="AtlasTexture" id=45]
 atlas = ExtResource( 12 )
 region = Rect2( 32, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=23]
+[sub_resource type="AtlasTexture" id=46]
 atlas = ExtResource( 12 )
 region = Rect2( 64, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=24]
+[sub_resource type="AtlasTexture" id=47]
 atlas = ExtResource( 12 )
 region = Rect2( 96, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=25]
+[sub_resource type="AtlasTexture" id=48]
 atlas = ExtResource( 12 )
 region = Rect2( 128, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=26]
+[sub_resource type="AtlasTexture" id=49]
 atlas = ExtResource( 12 )
 region = Rect2( 160, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=27]
+[sub_resource type="AtlasTexture" id=50]
 atlas = ExtResource( 12 )
 region = Rect2( 192, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=28]
+[sub_resource type="AtlasTexture" id=51]
 atlas = ExtResource( 12 )
 region = Rect2( 224, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=29]
+[sub_resource type="AtlasTexture" id=52]
 atlas = ExtResource( 12 )
 region = Rect2( 256, 0, 32, 32 )
 
-[sub_resource type="SpriteFrames" id=30]
+[sub_resource type="SpriteFrames" id=53]
 animations = [ {
-"frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
+"frames": [ SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ) ],
 "loop": true,
 "name": "default",
 "speed": 20.0
 } ]
 
-[sub_resource type="Animation" id=31]
-resource_name = "swim"
+[sub_resource type="Animation" id=54]
 length = 40.0
 loop = true
 tracks/0/type = "value"
@@ -396,7 +394,7 @@ tracks/1/keys = {
 "values": [ Vector2( 0.5, 0.5 ), Vector2( -0.5, 0.5 ) ]
 }
 
-[sub_resource type="Environment" id=32]
+[sub_resource type="Environment" id=55]
 background_mode = 4
 glow_enabled = true
 glow_levels/1 = true
@@ -484,9 +482,9 @@ __meta__ = {
 [node name="Store Entrance" type="Sprite" parent="Sprites"]
 position = Vector2( 1224, 272 )
 scale = Vector2( 3, 3 )
-z_index = 1
 texture = ExtResource( 16 )
 script = ExtResource( 29 )
+on_interact_sound = "res://Audio/SoundEffects/door_open.wav"
 
 [node name="DoorDetector" type="Area2D" parent="Sprites/Store Entrance"]
 position = Vector2( -616, -144 )
@@ -497,8 +495,10 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprites/Store Entrance/DoorDetector"]
 position = Vector2( 1232, 288 )
 shape = SubResource( 3 )
+disabled = true
 
 [node name="ChangeLevelInteraction" parent="Sprites/Store Entrance" instance=ExtResource( 25 )]
+on_interact_sound = "res://Audio/SoundEffects/door_open.wav"
 hardset_level = true
 level = "res://Scenes/Gameplay/Spawn.tscn"
 level_location = "AquariumDoor"
@@ -555,61 +555,60 @@ texture = ExtResource( 18 )
 
 [node name="Seaweed" type="AnimatedSprite" parent="World/AquaticLife/ParallaxLayer/SandBackground"]
 position = Vector2( -438.321, 84.8406 )
-frames = SubResource( 56 )
-frame = 5
+frames = SubResource( 14 )
+frame = 1
 playing = true
 
 [node name="Seaweed2" type="AnimatedSprite" parent="World/AquaticLife/ParallaxLayer/SandBackground"]
 position = Vector2( -237.321, 101.841 )
-frames = SubResource( 56 )
-frame = 4
+frames = SubResource( 14 )
 playing = true
 
 [node name="Seaweed3" type="AnimatedSprite" parent="World/AquaticLife/ParallaxLayer/SandBackground"]
 position = Vector2( -26.8212, 90.8406 )
-frames = SubResource( 56 )
-frame = 4
+frames = SubResource( 14 )
 playing = true
 
 [node name="Seaweed4" type="AnimatedSprite" parent="World/AquaticLife/ParallaxLayer/SandBackground"]
 position = Vector2( 30.6788, 120.341 )
-frames = SubResource( 56 )
-frame = 3
+frames = SubResource( 14 )
+frame = 9
 playing = true
 
 [node name="Seaweed5" type="AnimatedSprite" parent="World/AquaticLife/ParallaxLayer/SandBackground"]
 position = Vector2( 239.679, 120.841 )
-frames = SubResource( 56 )
-frame = 3
+frames = SubResource( 14 )
+frame = 9
 playing = true
 
 [node name="Seaweed6" type="AnimatedSprite" parent="World/AquaticLife/ParallaxLayer/SandBackground"]
 position = Vector2( 401.179, 99.8406 )
-frames = SubResource( 56 )
-frame = 3
+frames = SubResource( 14 )
+frame = 9
 playing = true
 
 [node name="Seaweed7" type="AnimatedSprite" parent="World/AquaticLife/ParallaxLayer/SandBackground"]
 position = Vector2( 496.179, 119.341 )
-frames = SubResource( 56 )
-frame = 2
+frames = SubResource( 14 )
+frame = 8
 playing = true
 
 [node name="Seaweed8" type="AnimatedSprite" parent="World/AquaticLife/ParallaxLayer/SandBackground"]
 position = Vector2( 298.179, 98.8406 )
-frames = SubResource( 56 )
-frame = 1
+frames = SubResource( 14 )
+frame = 7
 playing = true
 
 [node name="Seaweed9" type="AnimatedSprite" parent="World/AquaticLife/ParallaxLayer/SandBackground"]
 position = Vector2( -318.628, 84.6792 )
-frames = SubResource( 56 )
+frames = SubResource( 14 )
+frame = 6
 playing = true
 
 [node name="Seaweed10" type="AnimatedSprite" parent="World/AquaticLife/ParallaxLayer/SandBackground"]
 position = Vector2( -387.602, 122.734 )
-frames = SubResource( 56 )
-frame = 9
+frames = SubResource( 14 )
+frame = 5
 playing = true
 
 [node name="Rock" type="Sprite" parent="World/AquaticLife/ParallaxLayer/SandBackground"]
@@ -635,48 +634,49 @@ texture = ExtResource( 21 )
 position = Vector2( 1140.06, 208.642 )
 scale = Vector2( 2, 2 )
 z_index = 1
-frames = SubResource( 12 )
-frame = 1
+frames = SubResource( 23 )
+frame = 7
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="World/AquaticLife/ParallaxLayer/Clownfish"]
 autoplay = "swim"
-anims/swim = SubResource( 13 )
+anims/swim = SubResource( 24 )
 
 [node name="Clownfish2" type="AnimatedSprite" parent="World/AquaticLife/ParallaxLayer"]
 position = Vector2( 489.837, 228.642 )
 scale = Vector2( -2, 2 )
 z_index = 1
-frames = SubResource( 12 )
+frames = SubResource( 23 )
+frame = 6
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="World/AquaticLife/ParallaxLayer/Clownfish2"]
 autoplay = "swim"
-anims/swim = SubResource( 45 )
+anims/swim = SubResource( 25 )
 
 [node name="Salmon" type="AnimatedSprite" parent="World/AquaticLife/ParallaxLayer"]
 position = Vector2( 768.799, 257.965 )
 scale = Vector2( 2, 2 )
 z_index = 1
-frames = SubResource( 42 )
-frame = 3
+frames = SubResource( 35 )
+frame = 4
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="World/AquaticLife/ParallaxLayer/Salmon"]
 autoplay = "swim"
-anims/swim = SubResource( 44 )
+anims/swim = SubResource( 36 )
 
 [node name="Turtle" type="AnimatedSprite" parent="World/AquaticLife/ParallaxLayer"]
 position = Vector2( 772.482, 211.007 )
 z_index = 1
-frames = SubResource( 17 )
+frames = SubResource( 40 )
 animation = "swimming"
-frame = 1
+frame = 2
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="World/AquaticLife/ParallaxLayer/Turtle"]
 autoplay = "Swimming"
-anims/Swimming = SubResource( 18 )
+anims/Swimming = SubResource( 41 )
 
 [node name="Bow" type="Sprite" parent="World/AquaticLife/ParallaxLayer/Turtle"]
 position = Vector2( -11.1364, -3.07224 )
@@ -719,7 +719,7 @@ dialogue = "sir_diver1"
 dialogue = "sir_diver1"
 
 [node name="CollisionShape2D" parent="Entities/Sir Diver/DialogueInteraction" index="0"]
-shape = SubResource( 19 )
+shape = SubResource( 42 )
 
 [node name="Sean" type="AnimatedSprite" parent="Entities"]
 position = Vector2( 492.69, 287.049 )
@@ -738,18 +738,18 @@ dialogue = "sean_intro1"
 
 [node name="CollisionShape2D" parent="Entities/Sean/DialogueInteraction" index="0"]
 position = Vector2( -192, 0 )
-shape = SubResource( 20 )
+shape = SubResource( 43 )
 
 [node name="Frog" type="AnimatedSprite" parent="Entities"]
 position = Vector2( 1051.64, 312.122 )
 scale = Vector2( 0.5, 0.5 )
-frames = SubResource( 30 )
-frame = 5
+frames = SubResource( 53 )
+frame = 1
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Entities/Frog"]
 autoplay = "swim"
-anims/swim = SubResource( 31 )
+anims/swim = SubResource( 54 )
 
 [node name="LocalAudio" type="Node2D" parent="."]
 
@@ -760,7 +760,7 @@ autoplay = true
 bus = "Music"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 32 )
+environment = SubResource( 55 )
 
 [connection signal="body_entered" from="Sprites/Store Entrance/DoorDetector" to="Sprites/Store Entrance" method="_on_DoorDetector_body_entered"]
 [connection signal="body_exited" from="Sprites/Store Entrance/DoorDetector" to="Sprites/Store Entrance" method="_on_DoorDetector_body_exited"]

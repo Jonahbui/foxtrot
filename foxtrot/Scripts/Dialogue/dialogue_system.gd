@@ -144,7 +144,8 @@ func OnNextDialogue():
 func PrintDialogueAtSpeed(text):
   var text_length = len(text)
   var label = $DialogueBox/Log
-  $DialogueBox/Tween.interpolate_property(label, "percent_visible", 0.0, 1.0, text_length * dialogue_text_speed, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+  var speed = text_length * dialogue_text_speed
+  $DialogueBox/Tween.interpolate_property(label, "percent_visible", 0.0, 1.0, speed, Tween.TRANS_LINEAR, Tween.EASE_OUT)
   $DialogueBox/Tween.start()
   $DialogueBox/AudioStreamPlayer.playing = true
   yield($DialogueBox/Tween, "tween_all_completed")

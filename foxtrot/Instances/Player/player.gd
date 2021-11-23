@@ -19,9 +19,8 @@ var defense : int  = 0
 # --------------------------------------------------------------------------------------------------
 var direction : = Vector2(1,0)
 
-# Forward is defined to be right
+# Forward is defined to be facing towards the right
 var forward : bool = true
-
 # --------------------------------------------------------------------------------------------------
 # References
 # --------------------------------------------------------------------------------------------------
@@ -46,14 +45,14 @@ var velocity : = Vector2.ZERO
 # Godot Functions
 # --------------------------------------------------------------------------------------------------
 func _input(event):
-  if Globals.pause_flags != 0 : return
+  if Globals.pause_flags != 0: return
   
   if event is InputEventMouseMotion:
     var player_orienatation = get_global_mouse_position().x - self.global_position.x
     if player_orienatation > 0:
-      $Sprite.scale.x = 1
+      $AnimatedSprite.scale.x = 1
     else:
-      $Sprite.scale.x = -1
+      $AnimatedSprite.scale.x = -1
 
 func _init():
   if Signals.connect("on_interaction_changed", self, "ToggleInform") != OK:
@@ -76,7 +75,7 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
   # If the dev console is open then do not move.
-  if Globals.pause_flags != 0 : return
+  if Globals.pause_flags != 0: return
   # If the player is in the middle of a jump (the Y velocity is
   #   less than zero, indicating the player is moving UP on the
   #   screen) and the user lets go of the JUMP key (detected using
@@ -103,6 +102,9 @@ func _physics_process(delta: float) -> void:
       Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
       -1 if Input.is_action_just_pressed("jump") else 1
     )
+  
+  if Input.is_action_just_pressed("jump"):
+    Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/jump.ogg", 1)
   
   # Whichever way we going along the X axis, our speed is that
   #   direction times speed.x
@@ -148,31 +150,57 @@ func _physics_process(delta: float) -> void:
   #   our version of velocity so we don't, e.g., keep trying to
   #   move DOWN on the screen after we've hit the floor.
   velocity = move_and_slide( velocity, Vector2.UP )
+  
+  if velocity.y < 0:
+    $AnimatedSprite.play("jumping")
+  elif direction.x != 0:
+    $AnimatedSprite.play("running")
+  else:
+    $AnimatedSprite.play("idle")
 # --------------------------------------------------------------------------------------------------
 # Player Functions
 # --------------------------------------------------------------------------------------------------
 func ResetPlayer():
+  Globals.SetFlag(Globals.FLAG_DEAD, false)
+  
   health = maxHealth
   health_bar.value = health
   health_label.text = "%d / %d" % [health, maxHealth]
   
-  # Reset stamina/magic as well
+  $AnimationPlayer.play("idle")
+  
+  # Implement: Reset stamina/magic as well
   
   RefreshStats()
 
 func TakeDamage(damage : int):
+  Signals.emit_signal("on_damage_taken", damage, self.global_position)
   damage -= defense
   if damage < 0:
     damage == 0
-    
+  
   health -= damage
-  $AnimationPlayer.play("Damaged")
+  $AnimationPlayer.play("damaged")
+  
+  Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/damage.wav", 1)
+  
   RefreshHealth()
   if health <= 0:
-    # Play death animation
+    # Audio queue of death
+    Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/death.wav", 1)
     
-    # Disable player
+    # Pause part of the game by setting the death flag
+    Globals.SetFlag(Globals.FLAG_DEAD, true)
     
+    # Play an animation to show the player's death
+    $AnimationPlayer.play("death")    
+    yield(get_tree().create_timer(2), "timeout")
+    
+    # If the player is on hardcore difficulty, they will lose all items on death
+    if Globals.is_hardcore_mode:
+      $AnimatedSprite/Inventory.EraseInventory()
+    
+    # Signal to the game that the player has died to set up the death scene
     Signals.emit_signal("on_player_death")
 
 func UpdateMovement():

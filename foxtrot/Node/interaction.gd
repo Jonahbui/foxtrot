@@ -2,6 +2,8 @@
 # set for the interaction bit.
 extends Node
 
+export(String, FILE) var on_interact_sound
+
 # A bool used to determine whether or not the player is allowed to interact with this script.
 var canInteract : bool = false
 
@@ -13,11 +15,13 @@ func _input(event):
     Use()
   
 func Use():
+  Signals.emit_signal("on_play_audio", on_interact_sound, 1)
+  
   # After the player has interacted with the entity associated with this script, toggle off the 
   # player's inform box
   Signals.emit_signal("on_interaction_changed", false)
   self.emit_signal("interaction_triggered")
-  
+
 func _on_InteractionCollider_body_entered(_body):
   # If the player is in the body of the interactable entity, the player may interact with it
   canInteract = true
