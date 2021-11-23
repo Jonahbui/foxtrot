@@ -58,24 +58,37 @@ func _on_CreditsBackButton_pressed():
   $Credits/UI.hide()
 
 func _on_HardcoreButton_pressed():
+  # Purpose   : Enables hardcore mode
+  # Param(s)  : N/A
+  # Return(s) : N/A
   Globals.is_hardcore_mode = true
   StartNewGame()
 
 func _on_CasualButton_pressed():
+  # Purpose   : Enables casual mode
+  # Param(s)  : N/A
+  # Return(s) : N/A
   Globals.is_hardcore_mode = false
   StartNewGame()
   
 func _on_BackButton_pressed():
+  # Purpose   : Shows the main UI. Hides everything else. Meant to be used while in load menu
+  # Param(s)  : N/A
+  # Return(s) : N/A
   $LoadMenu/UI.hide()
   $SettingsMenu/UI.hide()
   $Credits/UI.hide()
   
+  # Transition from load menu to main menu
   $AnimationPlayer.play_backwards("MainToLoad")
   while $AnimationPlayer.is_playing():
     yield(get_tree().create_timer(0.5), "timeout")
   $MainMenu/UI.show()
 
 func StartNewGame():
+  # Purpose   : Creates a new game
+  # Param(s)  : N/A
+  # Return(s) : N/A
   Globals.is_game_playing = true
   Globals.is_new_game = true
   if get_tree().change_scene(Globals.SPATH_CHARACTER_CREATION) != OK:
@@ -84,13 +97,19 @@ func StartNewGame():
 #--------------------------------------------------------------------------------------------------
 # Load Game Functions
 #--------------------------------------------------------------------------------------------------
+# Button resource path to populate save files with
 export(String, FILE) var load_panel
+
+# Different styles for load button
 export(StyleBoxTexture) var sodacan_red
 export(StyleBoxTexture) var sodacan_blue
 export(StyleBoxTexture) var sodacan_green
 
 
 func CreateLoadPanels():
+  # Purpose   : Creates all the save files the player can click on as buttons in the load menu
+  # Param(s)  : N/A
+  # Return(s) : N/A
   var saves = Save.list_saves()
   load_panel = load(load_panel)
   var rotate_i = 0
@@ -119,6 +138,11 @@ func CreateLoadPanels():
     $LoadMenu/UI/NinePatchRect/ScrollContainer/VBoxContainer.add_child(instance)
 
 func LoadFile(name):
+  # Purpose   : Load the given save file and start the game
+  # Param(s)  :
+  # - name    : the name of the file to load
+  # Return(s) : N/A
+  
   # Ensure the game is not a new game. If the game is a new game, then the save system will not load
   # the player data.
   Globals.is_new_game = false

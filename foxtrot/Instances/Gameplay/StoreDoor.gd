@@ -1,5 +1,7 @@
 extends "res://Node/interaction.gd"
 
+# Deprecated. Remove
+
 func Use():
   Signals.emit_signal("on_change_base_level", Globals.LPATH_SPAWN)
 

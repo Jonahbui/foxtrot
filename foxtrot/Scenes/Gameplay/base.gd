@@ -1,7 +1,9 @@
 extends Node2D
 
+# The current level the player is on
 var current_level = null
 
+# Dev console vars
 var history = []
 var history_index = -1
 
@@ -9,6 +11,7 @@ export(NodePath) var dev_console
 export(NodePath) var cmdline
 export(NodePath) var logs
 
+# The node to instantiate when an entity takes damage
 export(String, FILE) var damage_text
 
 # --------------------------------------------------------------------------------------------------
@@ -35,21 +38,30 @@ func _ready():
   
   damage_text = load(damage_text)
   
+  # Sets the game up after the player has died
   if Signals.connect("on_player_death", self, "OnDeath") != OK:
     printerr("[Base] Error. Failed to connect to signal on_player_death...")
   
+  # Plays audio from random sources
   if Signals.connect("on_play_audio", self, "PlayAudio") != OK:
     printerr("[Base] Error. Failed to connect to signal on_play_audio...")
 
+  # Loads the selected gameplay level
   if Signals.connect("on_change_base_level", self, "LoadLevel") != OK:
     printerr("[Base] Error. Failed to connect to signal on_change_base_level...")
-
+  
+  # Generates damage text
   if Signals.connect("on_damage_taken", self, "SpawnDamageText") != OK:
     printerr("[Base] Error. Failed to connect to signal on_change_base_level...")
 # --------------------------------------------------------------------------------------------------
 # Audio Functions
 # --------------------------------------------------------------------------------------------------
 func PlayAudio(clip, source):
+  # Purpose   : Plays sounds
+  # Param(s)  : 
+  # - clip    : the absolute project path of the clip to play
+  # - source  : the desired audio source in which to play the clip (0-3
+  # Return(s) : N/A
   var audio = load(clip)
   
   if audio:
@@ -75,6 +87,11 @@ func PlayAudio(clip, source):
 # Base Scene Functions
 # --------------------------------------------------------------------------------------------------
 func LoadLevel(path, location=""):
+  # Purpose   : Loads a gameplay level
+  # Param(s)  : 
+  # - path    : the filepath to the level's tscn file
+  # - location: string of the spawnpoint to place the player
+  # Return(s) : N/A
   ToggleLoadingScreen(true)
   
   # Give transition period
@@ -105,7 +122,6 @@ func LoadLevel(path, location=""):
   else:
     printerr("[Base] The location could not be located in Spawnpoint/%s..." % [location])
 
-    
   # After the level is loaded, reenable the player
   Helper.SetActive($Player, true, true, true, true)
   
@@ -115,25 +131,43 @@ func LoadLevel(path, location=""):
   ToggleLoadingScreen(false)  
     
 func OnDeath():
+  # Purpose   : Sets up the game after the player has died
+  # Param(s)  : N/A
+  # Return(s) : N/A
   $Audio.KillAudio()
   $UI/GameOver.visible = true
   Signals.emit_signal("on_play_audio", "res://Audio/Music/death_song.mp3", 0)
 
 func Restart():
+  # Purpose   : Restarts the game at spawn after the player died
+  # Param(s)  : N/A
+  # Return(s) : N/A
   $Audio.KillAudio()
   $UI/GameOver.visible = false
   LoadLevel(Globals.LPATH_SPAWN)
   $Player.ResetPlayer()
   
 func Quit():
+  # Purpose   : Quits the game
+  # Param(s)  : N/A
+  # Return(s) : N/A
   get_tree().quit()
 
 func SpawnDamageText(damage, pos):
+  # Purpose   : Instantiates text representing how much damage was dealt
+  # Param(s)  :
+  # - damage  : the amount of damage dealt
+  # - pos     : the global position to spawn the text
+  # Return(s) : N/A
   var instance = damage_text.instance()
   self.add_child(instance)
   instance.Init(damage, pos)
 
 func ToggleLoadingScreen(state):
+  # Purpose   : Turns off or on the loading screen
+  # Param(s)  :
+  # - state   : the state to set the loading screen
+  # Return(s) : N/A
   if state:
     $LoadingScreen/LoadingScreen.visible = true
     $LoadingScreen/AnimationPlayer.play("open")
@@ -146,6 +180,10 @@ func ToggleLoadingScreen(state):
 # Dev Console Functions
 # --------------------------------------------------------------------------------------------------
 func GetNextHistoryCmd(forward=true):
+  # Purpose   : Populates the cmd line with the next history cmd
+  # Param(s)  :
+  # - forward : Gets the next history command if true, else gets the previous
+  # Return(s) : N/A
   if history.size() > 0:
     history_index = (history_index + 1) if(forward) else (history_index  - 1)
     
@@ -160,6 +198,10 @@ func GetNextHistoryCmd(forward=true):
   cmdline.caret_position = cmdline.text.length()
 
 func ProcessCmd(cmd):
+  # Purpose   : Executes the commmand passed in if valid
+  # Param(s)  :
+  # - cmd     : A string representing the command
+  # Return(s) : N/A
   UpdateHistory(cmd)
   
   # Reset history index so the user searches through the front again
@@ -216,6 +258,10 @@ func ProcessCmd(cmd):
           logs.text += "\nCould not find command or not enough params provided..."
 
 func ToggleDevConsole():
+  # Purpose   : Toggles on or off the deve console based off its current state
+  # Param(s)  : N/A
+  # Return(s) : N/A
+
   # Set the current visibility to the opposite of the current visibility
   dev_console.visible = !dev_console.visible
   
@@ -225,11 +271,20 @@ func ToggleDevConsole():
     cmdline.grab_focus()
 
 func UpdateHistory(cmd):
+  # Purpose   : Adds a command to the history
+  # Param(s)  :
+  # - cmd     : The command to add to the history
+  # Return(s) : N/A
+  
   if(history.size() > 10):
     history.pop_back()
   history.push_front(cmd)
 
 func _on_CmdLine_text_entered(new_text):
+  # Purpose   : Ensures the text entered is proper, issues the command entered, and logs it
+  # Param(s)  : N/A
+  # Return(s) : N/A
+  
   # Do some preprocessing to avoid errors when parsing
   new_text = new_text.strip_edges()
   
@@ -243,6 +298,10 @@ func _on_CmdLine_text_entered(new_text):
   ProcessCmd(new_text)
   
 func _on_CmdLine_text_changed(new_text):
+  # Purpose   : Ensures certain characters are removed from input
+  # Param(s)  : N/A
+  # Return(s) : N/A
+  
   var old_pos = cmdline.caret_position
   # Do not allow '`' to be used as input
   new_text = new_text.replace('`', '')

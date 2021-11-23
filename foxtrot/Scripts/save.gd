@@ -11,14 +11,20 @@ func _enter_tree():
 func _init():
   create_save_dir()
   
+  # Restore the player when the player is loaded
   if Signals.connect("on_player_loaded", self, "init_player") != OK:
     printerr("[Save] Error. Failed to connect to signal on_player_loaded...")
+    
+  # Restore the player's inventory when it is loaded
   if Signals.connect("on_inventory_loaded", self, "init_inventory") != OK:
     printerr("[Save] Error. Failed to connect to signal on_inventory_loaded...")
+    
+  # Initalize the game when the game is completely loaded
   if Signals.connect("on_base_game_loaded", self, "init_game") != OK:
     printerr("[Save] Error. Failed to connect tosignal on_base_game_loaded...")
 
 func _ready():
+  # Create a default save file when the game starts
   save = empty_save_data()
   
 func _exit_tree():
@@ -34,6 +40,11 @@ const FILENAME_CONFIG_DEFAULT = "config.json"
 var config = null
 
 func create_config(default=false):
+  # Purpose   : Creates a config dictionary
+  # Param(s)  :
+  # - default : whether to create a config with default values
+  # Return(s) : N/A
+  
   # To add new elements to config, add here below. Define constants in globals:
   var new_config = {
     Globals.VOLUME_MASTER           : config[Globals.VOLUME_MASTER] if not default else 0.0,
@@ -52,6 +63,10 @@ func create_config(default=false):
   return new_config
 
 func save_config():
+  # Purpose   : Saves the current config to a file
+  # Param(s)  : N/A
+  # Return(s) : N/A
+  
   # Create a new file to read using the given filename
   var file = File.new()
   file.open("user://%s" % [FILENAME_CONFIG_DEFAULT], File.WRITE)
@@ -62,6 +77,10 @@ func save_config():
   file.close()
 
 func load_config():
+  # Purpose   : Loads the  config file
+  # Param(s)  : N/A
+  # Return(s) : the config dictionary
+  
   # Check for file existance before reading
   var file = File.new()
   if not file.file_exists("user://%s" % [FILENAME_CONFIG_DEFAULT]): return null
@@ -102,6 +121,10 @@ var inventory = null
 
 # Use player null to create default player save dictionary
 func create_save_data(reset_save=false):
+  # Purpose   : Create a dictionary to store the player's state
+  # Param(s)  : N/A
+  # Return(s) : the dictionary representing the player's state
+  
   var data = {
     Globals.PLAYER_DIFFICULTY : Globals.is_game_playing,
     Globals.PLAYER_INVENTORY  : inventory.InventoryToJSON() if not reset_save else {},
@@ -113,9 +136,17 @@ func create_save_data(reset_save=false):
   return data
 
 func reset_save():
+  # Purpose   : Creates a default player save file and sets it as the current file
+  # Param(s)  : N/A
+  # Return(s) : N/A
+  
   save = empty_save_data()
 
 func empty_save_data():
+  # Purpose   : Creates a default player save file
+  # Param(s)  : N/A
+  # Return(s) : the player dictionary data
+  
   var data = {
     Globals.PLAYER_DIFFICULTY : false,
     Globals.PLAYER_INVENTORY  : {},
@@ -127,6 +158,10 @@ func empty_save_data():
   return data
 
 func save_file():
+  # Purpose   : Writes the current save to a file
+  # Param(s)  : N/A
+  # Return(s) : N/A
+  
   # Generate the data to store in a file
   var data = create_save_data()
     
@@ -144,6 +179,11 @@ func save_file():
   file.close()
   
 func load_file(filename):
+  # Purpose   : Load the player save given a filename
+  # Param(s)  :
+  # - filename: the player's filename to load
+  # Return(s) : the player dictionary
+  
   # Check for file existance before reading
   var file = File.new()
   if not file.file_exists("user://saves/%s" % [filename]): 
@@ -189,6 +229,10 @@ func list_saves():
   return save_files
       
 func create_save_dir():
+  # Purpose   : Creates a save directory if not already present
+  # Param(s)  : N/A
+  # Return(s) : N/A
+  
   # Create a directory for save files if one is not present
   var dir = Directory.new()
   if dir.open("user://") == OK:
@@ -196,6 +240,10 @@ func create_save_dir():
       dir.make_dir("saves")  
 
 func init_player(player):
+  # Purpose   : Stores a reference to the player
+  # Param(s)  : N/A
+  # Return(s) : N/A
+  
   print_debug("[Save] Initializing player...")
   self.player = player
 
@@ -203,11 +251,19 @@ func init_player(player):
   
   
 func init_inventory(inventory):
+  # Purpose   : Stores a reference to the inventory
+  # Param(s)  : N/A
+  # Return(s) : N/A
+  
   print_debug("[Save] Initializing inventory...")  
   self.inventory = inventory
 
 func init_game():
-  # Restore the player inventory and player stats
+  # Purpose   : Restore the player inventory and player stats
+  # Param(s)  : N/A
+  # Return(s) : N/A
+
+  # Restore player
   if player == null:
     printerr("[Save] Error. Failed to restore player stats...")
   else:
@@ -218,6 +274,7 @@ func init_game():
       
     player.RefreshStats()
     
+  # Restore player inventory
   if inventory == null:
     printerr("[Save] Error. Failed to restore player inventory...")
   else:

@@ -7,7 +7,9 @@ func _ready():
   $AudioSource.stream.loop_mode = 0
   $AudioSource.play()
 
-# Loads the main menu
 func _on_Timer_timeout():
+  # Purpose   : Loads the main menu
+  # Param(s)  :
+  # Return(s) : N/A
   if get_tree().change_scene(Globals.SPATH_MAIN_MENU) != OK:
     printerr("[Base] Error in loading main menu from splash screen...")

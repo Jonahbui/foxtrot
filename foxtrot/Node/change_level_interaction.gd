@@ -1,7 +1,12 @@
 extends "res://Node/interaction.gd"
 
+# Used by the submarine to toggle on the map
 export(bool) var hardset_level = false
+
+# Level to load
 export(String, FILE) var level
+
+# Location in level to spawn into
 export(String) var level_location = ""
 
 func Use():

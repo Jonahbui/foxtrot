@@ -45,8 +45,10 @@ var velocity : = Vector2.ZERO
 # Godot Functions
 # --------------------------------------------------------------------------------------------------
 func _input(event):
+  # Dont allow player to do anything if game paused
   if Globals.pause_flags != 0: return
   
+  # Orientate the player so they are always looking in the direction their mouse is at
   if event is InputEventMouseMotion:
     var player_orienatation = get_global_mouse_position().x - self.global_position.x
     if player_orienatation > 0:
@@ -55,8 +57,11 @@ func _input(event):
       $AnimatedSprite.scale.x = -1
 
 func _init():
+  # Used to enable/disable the inform box when a player touches something they can interact with
   if Signals.connect("on_interaction_changed", self, "ToggleInform") != OK:
     printerr("[Player] Error. Failed to connect to signal on_interaction_changed...")
+    
+  # Updates the player movement if they are on land or in the ocean
   if Signals.connect("on_level_loaded", self, "UpdateMovement") != OK:
     printerr("[Player] Error. Failed to connect to signal on_level_loaded...")
 
@@ -161,6 +166,10 @@ func _physics_process(delta: float) -> void:
 # Player Functions
 # --------------------------------------------------------------------------------------------------
 func ResetPlayer():
+  # Purpose   : Resets the status of the player to a fresh new player
+  # Param(s)  : 
+  # Return(s) : N/A
+  
   Globals.SetFlag(Globals.FLAG_DEAD, false)
   
   health = maxHealth
@@ -174,6 +183,11 @@ func ResetPlayer():
   RefreshStats()
 
 func TakeDamage(damage : int):
+  # Purpose   : Makes the player take damage.
+  # Param(s)  : 
+  # - damage  : the amount of damage to take.
+  # Return(s) : N/A
+  
   Signals.emit_signal("on_damage_taken", damage, self.global_position)
   damage -= defense
   if damage < 0:
@@ -212,12 +226,24 @@ func UpdateMovement():
     speed    = Vector2( 200.0, 150.0 )
     
 func Heal(health : int):
+  # Purpose   : Resets the status of the player to a fresh new player
+  # Param(s)  : 
+  # - health  : the amount to heal for
+  # Return(s) : N/A
+  
   self.health += health
   if self.health > maxHealth:
     self.health = maxHealth
+    
   RefreshHealth()
 
 func AddDefense(key, value):
+  # Purpose   : Adds defense resistance to the player
+  # Param(s)  : 
+  # - key     : the ID of the item adding the resistance
+  # - value   : the value to add
+  # Return(s) : N/A
+  
   # Allow for accessory stacking since the player can have 3 of the same equipment stacked
   if defense_stats.has(key):
     defense_stats[key] += value
@@ -226,6 +252,12 @@ func AddDefense(key, value):
   UpdateDefense()
 
 func RemoveDefense(key, value):
+  # Purpose   : Remove defense resistance from the player
+  # Param(s)  : 
+  # - key     : the ID of the item adding the resistance
+  # - value   : the value to remove
+  # Return(s) : N/A
+  
   # The player may have multiple accessories stack. Only subtract the original amount for one of them
   defense_stats[key] -= value
   
@@ -236,25 +268,48 @@ func RemoveDefense(key, value):
   UpdateDefense()
   
 func UpdateDefense():
+
   defense = 0
   for key in defense_stats:
     defense += defense_stats[key] 
   Signals.emit_signal("on_defense_update")
   
 func AddSeashells(key, amount):
+  # Purpose   : Adds seashells to the player's storage
+  # Param(s)  :
+  # - key     : the ID of the seashell to add the given quantity
+  # - amount  : the qunatity to add
+  # Return(s) : N/A
+  
   seashells[key] += 1
   Signals.emit_signal("on_seashell_update")
   
 func HasSeashells(key, amount):
+  # Purpose   : Checks if the player has sufficient seashells
+  # Param(s)  :
+  # - key     : the ID of the seashell to check
+  # - amount  : the qunatity to check for
+  # Return(s) : true if the player has enough seashells, false if not
+  
   return false if seashells[key] - amount < 0 else true
   
 func RemoveSeashells(key, amount):
+  # Purpose   : Removes seashells from the player's storage
+  # Param(s)  :
+  # - key     : the ID of the seashell to remove from the given quantity
+  # - amount  : the qunatity to remove
+  # Return(s) : N/A
+  
   seashells[key] -= amount
 # --------------------------------------------------------------------------------------------------
 # Dialogue Functions
 # --------------------------------------------------------------------------------------------------
 func ToggleInform(state):
-  # Display the inform panel
+  # Purpose   : Display the inform panel
+  # Param(s)  :
+  # - state   : the visibility state of the panel
+  # Return(s) : N/A
+  
   if state:
     $Inform.visible = true
     $InformPlayer.play("open")
@@ -269,14 +324,27 @@ func ToggleInform(state):
   # they will continue to take more damage). 
 
 func _on_DamageDetector_body_entered(body):
+  # Purpose   : Detect when an enemy has touched the player
+  # Param(s)  : N/A
+  # Return(s) : N/A
+  
   TakeDamage(body.damage)
 
 func _on_DamageDetector_area_entered(area):
+  # Purpose   : Detect when an enemy has touched the player
+  # Param(s)  : N/A
+  # Return(s) : N/A
+  
   TakeDamage(area.damage)
 # --------------------------------------------------------------------------------------------------
 # Save Functions
 # --------------------------------------------------------------------------------------------------
 func RestorePlayerData(data):
+  # Purpose   : Restore palyer information
+  # Param(s)  :
+  # - data    : a dictionary holding the player's attribute values
+  # Return(s) : N/A
+  
   Globals.is_hardcore_mode = data[Globals.PLAYER_DIFFICULTY]
   self.health = int(data[Globals.PLAYER_HEALTH])
   self.mana   = int(data[Globals.PLAYER_MANA])
@@ -286,12 +354,23 @@ func RestorePlayerData(data):
 # UI Functions
 # --------------------------------------------------------------------------------------------------
 func RefreshHealth():
+  # Purpose   : Refresh the health UI for the player
+  # Param(s)  : N/A
+  # Return(s) : N/A
+  
   health_bar.value = health
   health_label.text = "%d / %d" % [health_bar.value, maxHealth]
   
 func RefreshMana():
+  # Purpose   : Refresh the mana UI for the player
+  # Param(s)  : N/A
+  # Return(s) : N/A
   pass
   
 func RefreshStats():
+  # Purpose   : Refresh all stats for the player
+  # Param(s)  : N/A
+  # Return(s) : N/A
+  
   RefreshHealth()
   RefreshMana()

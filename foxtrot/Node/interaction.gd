@@ -2,11 +2,13 @@
 # set for the interaction bit.
 extends Node
 
+# Sound to play when this is interacted with
 export(String, FILE) var on_interact_sound
 
 # A bool used to determine whether or not the player is allowed to interact with this script.
 var canInteract : bool = false
 
+# Signals that the current interaction has been used
 signal interaction_triggered()
 
 func _input(event):

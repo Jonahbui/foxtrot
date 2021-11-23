@@ -23,13 +23,17 @@ func _physics_process(delta):
   velocity = move_and_slide( velocity, Vector2.UP )
 
 func SetProjectileDirection(new_direction : Vector2):
+  # Purpose  : Set the direction in which to fire the projectile
   # Param(s) : direction is a normalized vector in which the projectile should move
-  # Purpose  : 
-  # Return(s):
+  # Return(s): N/A
   velocity = speed * new_direction
   self.rotation = new_direction.angle()
 
 func _on_CollisionDetector_body_shape_entered(_body_id, _body, _body_shape, _local_shape):
+  # Purpose   : Detects collision and destroys the projectile.
+  # Param(s)  : N/A
+  # Return(s) : N/A
+  
   # The collision is hit and should be gone after hitting the enemy or a wall or something
   self.visible = false
   
@@ -39,5 +43,3 @@ func _on_CollisionDetector_body_shape_entered(_body_id, _body, _body_shape, _loc
   
   # Destroy this item after the item has hit whatever
   self.queue_free()
-
-

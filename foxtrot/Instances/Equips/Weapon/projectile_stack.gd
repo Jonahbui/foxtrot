@@ -6,7 +6,10 @@ export(int) var damage = 1
 # Automatic weapons are expected to have an AnimationPlayer that triggers the Use function
 export(bool) var is_automatic = false
 
+# Sound to play when projectile launched
 export(String, FILE) var projectile_sound
+
+# The projetile to launch
 export(String, FILE) var projectile
 
 func _ready():
@@ -61,7 +64,6 @@ func _on_use():
   instance.SetProjectileDirection(direction)
   instance.set_global_position($Sprite/ProjectileSpawnpoint.global_position)
   player.get_parent().add_child(instance)
-  
   
   # Return success
   return true

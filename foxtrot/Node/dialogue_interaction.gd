@@ -1,5 +1,6 @@
 extends "res://Node/interaction.gd"
 
+# The dialogue id to play when interacted with
 export var dialogue = ""
 
 func _init():
@@ -13,4 +14,4 @@ func Use():
   Signals.emit_signal("on_dialogue_trigger", dialogue)
 
 func OnDialogueExit():
-  Signals.emit_signal("on_interaction_changed", true)  
+  Signals.emit_signal("on_interaction_changed", true)

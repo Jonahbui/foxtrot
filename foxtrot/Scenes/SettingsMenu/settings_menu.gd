@@ -30,6 +30,10 @@ func _ready():
   LoadConfigToSettings()
 
 func LoadConfigToSettings():
+  # Purpose   : 
+  # Param(s)  : N/A
+  # Return(s) : N/A
+  
   # Set the volume settings to the ones in the config file.
   masterSlider.value = Save.config[Globals.VOLUME_MASTER]
   musicSlider.value = Save.config[Globals.VOLUME_MUSIC]

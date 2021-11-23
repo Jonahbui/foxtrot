@@ -1,7 +1,9 @@
 extends CanvasLayer
 
+# Text file to read dialogue from
 const FILENAME_DIALOGUE_EN = "dialogue_en.json"
 
+# Constants to access dictionary
 const DIALOGUE_TEXT = "text"
 const DIALOGUE_NEXT = "next"
 const DIALOGUE_OPTIONS = "options"
@@ -9,6 +11,7 @@ const DIALOGUE_ACTOR = "actor"
 const DIALOGUE_ACTOR_NAME = "name"
 const DIALOGUE_ACTOR_SPRITE = "sprite"
 
+# How fast to display text
 var dialogue_text_speed = 0.2
 
 # Used to determine if the player is currently given a choice in the current dialogue
@@ -21,11 +24,16 @@ var dialogue = null
 var current_dialogue_id : String
 
 func _input(event):
+  # If the dialogue is active and the player is not presented with any options to choose from, then
+  # the 'dialogue_continue' action should just get the next available dialogue
   if $DialogueBox.visible && event.is_action_pressed("dialogue_continue") && !is_choosing_option:
     OnNextDialogue()
 
 func _init():
+  # Initialize the dialogue file
   ReadDialogue()
+  
+  # Opens up the dialogue to be interacted with
   if Signals.connect("on_dialogue_trigger", self, "SetDialogueBox") != OK:
     printerr("[Dialgoue] Error. Failed to connect to signal on_dialogue_trigger...")
 
@@ -34,6 +42,9 @@ func _init():
 # Dialogue Functions
 # --------------------------------------------------------------------------------------------------
 func ReadDialogue():
+  # Purpose   : Reads in the file that contains all the dialogue
+  # Param(s)  : 
+  # Return(s) : N/A
   print_debug("\n[Dialogue System] Loading dialogue...")
   # Check for file existance before reading
   var file = File.new()
@@ -59,6 +70,11 @@ func ReadDialogue():
   #print_debug("[Dialogue System] Dialogue: %s" % [dialogue])
 
 func ToggleDialogueBox(force_set=false, value=false):
+  # Purpose   : Turn on/off the dialogue UI
+  # Param(s)  :
+  # - forceState : set the visibility of the dialogue UI to state instead of toggling
+  # - state   : the bool value to set the dialogue UI visibility
+  # Return(s) : N/A
   if force_set:
     $DialogueBox.visible = value
   else :
@@ -67,6 +83,12 @@ func ToggleDialogueBox(force_set=false, value=false):
   Globals.SetFlag(Globals.FLAG_INTERACTING, $DialogueBox.visible)
 
 func SetDialogueBox(id):
+  # Purpose   : Set the dialogue to the current id
+  # Param(s)  :
+  # - id      : the ID of the dialogue to activate
+  # Return(s) : N/A
+  
+  # No more dialogue. Close
   if id == "":
     ToggleDialogueBox(true, false)
     Signals.emit_signal("on_dialogue_exited")
@@ -134,14 +156,24 @@ func SetDialogueBox(id):
     $DialogueBox/Options/Button3.visible  = false
     
 func OnOptionSelect(choice_id:int):
+  # Purpose   : Allows the user to select a dialogue option.
+  # Param(s)  :
+  # - choice_id : the ID of the selected choice (0-3)
+  # Return(s) : N/A
   var next_dialogue = dialogue[current_dialogue_id][DIALOGUE_OPTIONS][str(choice_id)][1]
   SetDialogueBox(next_dialogue)
 
 func OnNextDialogue():
+  # Purpose   : Get the next dialogue available.
+  # Param(s)  : N/A
+  # Return(s) : N/A
   var next_dialogue = dialogue[current_dialogue_id][DIALOGUE_NEXT]
   SetDialogueBox(next_dialogue)
 
 func PrintDialogueAtSpeed(text):
+  # Purpose   : Displays the dialgogue text in a scrolling manner
+  # Param(s)  : N/A
+  # Return(s) : N/A
   var text_length = len(text)
   var label = $DialogueBox/Log
   var speed = text_length * dialogue_text_speed

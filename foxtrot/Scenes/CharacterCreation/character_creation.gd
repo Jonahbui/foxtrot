@@ -4,6 +4,10 @@ func _on_StartButton_pressed():
   $UI/PopupMenu.popup()
 
 func _on_ConfirmButton_pressed():
+  # Purpose   : Starts the game but only if the player's character is setup correctly
+  # Param(s)  : N/A
+  # Return(s) : N/A
+  
   # Do not allow the game to proceed if player did not provide a good name
   if $UI/NameInput.text.length() <= 0:
     $Audio.PlayAudio("res://Audio/SoundEffects/error.wav", 1)

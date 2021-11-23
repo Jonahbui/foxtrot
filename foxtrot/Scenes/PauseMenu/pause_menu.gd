@@ -31,6 +31,10 @@ func _input(event):
       $UI/Background/ButtonVbox/SaveButton.visible = false
 
 func _on_ResumeButton_pressed():
+  # Purpose   : Unpauses the game
+  # Param(s)  : N/A
+  # Return(s) : N/A
+  
   # If resuming the game, unpause the game
   Globals.SetFlag(Globals.FLAG_PAUSED, false)
   
@@ -40,9 +44,16 @@ func _on_ResumeButton_pressed():
   $SettingsMenu/UI.hide()
 
 func _on_SaveButton_pressed():
+  # Purpose   : Save the current game's progress
+  # Param(s)  : N/A
+  # Return(s) : N/A
   Save.save_file()
 
 func _on_SettingsButton_pressed():
+  # Purpose   : Opens the settings menu
+  # Param(s)  : N/A
+  # Return(s) : N/A
+  
   # Hide the pause menu and show the settings menu
   $UI.hide()
   $AnimationPlayer.play("close")
@@ -52,6 +63,10 @@ func _on_SettingsButton_pressed():
   $SettingsMenu/AnimationPlayer.play("open")
 
 func _on_MainMenuButton_pressed():
+  # Purpose   : Loads the main menu
+  # Param(s)  : N/A
+  # Return(s) : N/A
+  
   # If going back to the main menu, the game shuold not be paused since it is not running
   Globals.SetFlag(Globals.FLAG_PAUSED, false)
   
@@ -60,6 +75,9 @@ func _on_MainMenuButton_pressed():
     printerr("[Scene] Error. Failed to change scenes...")
 
 func _on_ExitButton_pressed():
+  # Purpose   : Quits the game
+  # Param(s)  : N/A
+  # Return(s) : N/A
   get_tree().quit()
 
 func _on_SettingsBackButton_pressed():
@@ -71,6 +89,11 @@ func _on_SettingsBackButton_pressed():
   $AnimationPlayer.play("open")
 
 func TriggerSaveMessage(state):
+  # Purpose   : Shows a message stating the game has been saved
+  # Param(s)  :
+  # - state   : Status of whether the save was successful or not ( OK and etc... )
+  # Return(s) : N/A
+  
   $UI/SaveStateLabel.visible = true
   if state == OK:
     $UI/SaveStateLabel.modulate = Color.green

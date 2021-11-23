@@ -79,28 +79,34 @@ const FLAG_DEAD = 16
 var pause_flags : int = 0
 
 func SetFlag(flag, state):
+  # Purpose   : Sets a pause flag to the desired state
+  # Param(s)  :
+  # - flag    : the flag to set the state
+  # - state   : the bool state
+  # Return(s) : N/A
+  
   if state:
     pause_flags |= flag
   else:
     pause_flags &= (~flag)
 
 func IsFlagSet(flag):
+  # Purpose   : Checks if a given flag is set
+  # Param(s)  :
+  # - flag    : the flag to check
+  # Return(s) : true if flag set, false otherwise
+  
   return flag == (flag&pause_flags)
 
 func ToggleFlag(flag):
+  # Purpose  : Toggles the bit represented by 'flag' on pause_flag.
   # Param(s) :
   #   - flag: the flag you want to toggle
-  # Purpose  :
-  #   Toggles the bit represented by 'flag' on pause_flag.
-  # Return(s):
-  #   A bool representing the new state of the flag passed in.
+  # Return(s): A bool representing the new state of the flag passed in.
   
   var result = !IsFlagSet(flag)
   SetFlag(flag, result)
   return result
-
-const GROUP_PLAYER_WEAPON_HITBOX = "PlayerWeaponHitbox"
-const GROUP_PLAYER_PROJECTILE_HITBOX = "PlayerProjectileHitbox"
 
 enum ItemProcess{
   Dynamic,

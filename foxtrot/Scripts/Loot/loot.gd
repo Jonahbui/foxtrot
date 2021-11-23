@@ -15,10 +15,13 @@
 # There are 2 tables for loot. One for the enemies and one for the levels (mainly used by chests).
 extends Node
 
+# File path to the coins.
 const COIN_PATH = "res://Instances/Gameplay/Coin.tscn"
 
+# File containing the loot tables
 const FILENAME_LOOT = "loot.json"
 
+# Constants for dictionary lookups
 const LOOT_LEVEL  = "level"
 const LOOT_ENEMY  = "enemy"
 const LOOT_TABLE  = "table"
@@ -27,6 +30,7 @@ const LOOT_COIN   = "coin"
 const LOOT_SUM    = "sum"
 const LOOT_RANGE  = "range"
 
+# The loot table
 var table = null
 
 func _ready():
@@ -35,6 +39,10 @@ func _ready():
   CalculateLootTableMetadata(LOOT_ENEMY)
   
 func ReadLootTable():
+  # Purpose   : Read in the loot table file
+  # Param(s)  : N/A
+  # Return(s) : N/A
+  
   # Check for file existance before reading
   var file = File.new()
   if not file.file_exists("res://Scripts/Loot/%s" % [FILENAME_LOOT]): 
@@ -66,6 +74,12 @@ func CalculateLootTableMetadata(category):
       item.range.append(item.sum)
 
 func GenerateLoot(chosen_table):
+  # Purpose   : Allows the user to select a dialogue option.
+  # Param(s)  :
+  # - chosen_table : which probability table to generate loot from
+  # Return(s) : the item selected randomly from the table
+  
+  # Choose a random item
   var rng = RandomNumberGenerator.new()
   rng.randomize()
   var num = rng.randi_range(0, chosen_table.sum)

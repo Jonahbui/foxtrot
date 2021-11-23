@@ -24,29 +24,46 @@ func _ready():
   if Signals.connect("on_player_death", self, "Reset") != OK:
     printerr("[Map] Error. Could not connect to signal on_player_death...")
     
+  # Open the map when a submarine is accessed
   if Signals.connect("on_map_trigger", self, "OpenMap") != OK:
     printerr("[Map] Error. Could not connect to signal on_map_trigger...")
     
+  # 
   if Signals.connect("on_map_resurface", self, "Resurface") != OK:
     printerr("[Map] Error. Could not connect to signal on_map_resurface...")
-    
+  
+  # When a levle is loaded display the new location
   if Signals.connect("on_level_loaded", self, "DisplayLocation") != OK:
     printerr("[Map] Error. Could not connect to signal on_change_base_level...")    
 
 func DisplayLocation():
+  # Purpose   : Display panel to show the current location the player is in
+  # Param(s)  : N/A
+  # Return(s) : N/A
+  
+  # Make UI visible and update current location text
   $LocationPanel.visible = true
   $LocationPanel/Label.text = played_map_point.level_name
+  
   $AnimationPlayer.play("location_panel_open")
   Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/paper_crumble.wav", 1)
   yield(get_tree().create_timer(2), "timeout")
   $AnimationPlayer.play("location_panel_close")
   Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/paper_folded.wav", 1)  
+  
+  # Close UI after animation finishes
   while $AnimationPlayer.is_playing():
     yield(get_tree(), "idle_frame")
   $LocationPanel.visible = false  
 
 
 func ToggleMap(forceState=false, state=false):
+  # Purpose   : Turn on/off the map UI
+  # Param(s)  :
+  # - forceState : set the visibility of the map UI to state instead of toggling
+  # - state   : the bool value to set the map UI visibility
+  # Return(s) : N/A
+  
   var new_state = !$PanelContainer.visible
   if forceState:
     new_state = state
@@ -64,9 +81,17 @@ func ToggleMap(forceState=false, state=false):
     
 
 func _on_BackButton_pressed():
+  # Purpose   : Closes the map
+  # Param(s)  : N/A
+  # Return(s) : N/A
+  
   ToggleMap(true, false)
 
 func _on_DiveButton_pressed():
+  # Purpose   : Closes the map and launches the player into the selected level
+  # Param(s)  : N/A
+  # Return(s) : N/A
+  
   # Hide the map when the level is being loaded
   ToggleMap(true, false)
   
@@ -83,6 +108,10 @@ func _on_DiveButton_pressed():
   UpdateAccessiblePoints()
   
 func _on_map_point_select(map_point):
+  # Purpose   : Update the selected map point on the map
+  # Param(s)  : N/A
+  # Return(s) : N/A
+  
   UpdateAccessiblePoints()
     
   # Only allow the player to traverse up and down from the played map point. Prevent travelling
@@ -103,6 +132,10 @@ func _on_map_point_select(map_point):
     level_label.text = "Out of range..."
 
 func UpdateAccessiblePoints():
+  # Purpose   : Update the icosn of the map points the player can travel to
+  # Param(s)  : N/A
+  # Return(s) : N/A
+  
   for point in map_points.get_children():
     if not (point in played_map_point.next || point in played_map_point.prev || point == played_map_point):
       point.disabled = true
@@ -110,6 +143,10 @@ func UpdateAccessiblePoints():
       point.disabled = false 
 
 func Reset():
+  # Purpose   : Reset the map to the first map point (should be spawn)
+  # Param(s)  : N/A
+  # Return(s) : N/A
+  
   if current_map_point: current_map_point.set_theme(null)
   if played_map_point: played_map_point.set_theme(null)
   
@@ -121,9 +158,17 @@ func Reset():
   UpdateAccessiblePoints()
   
 func OpenMap():
+  # Purpose   : Opens the map
+  # Param(s)  : N/A
+  # Return(s) : N/A
+  
   ToggleMap(true, true)
   
 func Resurface():
+  # Purpose   : Resets map to spawn and loads the spawn scene.
+  # Param(s)  : N/A
+  # Return(s) : N/A
+  
   if current_map_point: current_map_point.set_theme(null)
   current_map_point = map_points.get_child(0)
   _on_map_point_select(current_map_point)

@@ -1,7 +1,9 @@
 extends Node
 
+# The file storing all equipment information
 const FILENAME_EQUIPS = "equips.json"
 
+# Constants for dictionary lookups
 const EQUIP_NAME      = "name"
 const EQUIP_TYPE      = "type"
 const EQUIP_SUBTYPE   = "subtype"
@@ -28,6 +30,10 @@ func _ready():
   ReadEquips()
   
 func ReadEquips():
+  # Purpose   : Read in the equipment available from file.
+  # Param(s)  : N/A
+  # Return(s) : N/A
+  
   # Check for file existance before reading
   var file = File.new()
   if not file.file_exists("res://Scripts/Inventory/%s" % [FILENAME_EQUIPS]): 
