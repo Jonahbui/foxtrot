@@ -19,6 +19,11 @@ var defense : int  = 0
 # --------------------------------------------------------------------------------------------------
 var direction : = Vector2(1,0)
 
+var dash_direction = Vector2(1,0)
+var can_dash = false
+var dashing = false 
+var dash_velocity = Vector2()
+
 # Forward is defined to be facing towards the right
 var forward : bool = true
 # --------------------------------------------------------------------------------------------------
@@ -81,6 +86,7 @@ func _ready():
 func _physics_process(delta: float) -> void:
   # If the dev console is open then do not move.
   if Globals.pause_flags != 0: return
+  
   # If the player is in the middle of a jump (the Y velocity is
   #   less than zero, indicating the player is moving UP on the
   #   screen) and the user lets go of the JUMP key (detected using
@@ -146,15 +152,14 @@ func _physics_process(delta: float) -> void:
   #   automatically so we will move just how much we are supposed
   #   to since the time of the last frame.
 
-  # move_and_slide() also takes into account collisions.  It will
-  #   detect if we have run into anything else (e.g., the ground)
-  #   and ensure that we don't overrun anything we shouldn't.
-  #   To inform us that happened, move_and_slide() returns a
-  #   possibly adjusted velocity indicating whether we were
-  #   stopped by a collision.  We use that updated info to change
-  #   our version of velocity so we don't, e.g., keep trying to
-  #   move DOWN on the screen after we've hit the floor.
-  velocity = move_and_slide( velocity, Vector2.UP )
+  # move_and_slide() also takes into account collisions.
+  dash()
+  
+  if dash_velocity != Vector2.ZERO:
+    dash_velocity = dash_velocity.linear_interpolate(Vector2.ZERO, delta*10)
+
+  # true parameter is for stopping on slopes
+  velocity = move_and_slide( velocity+dash_velocity, Vector2.UP, true)
   
   if velocity.y < 0:
     $AnimatedSprite.play("jumping")
@@ -216,7 +221,24 @@ func TakeDamage(damage : int):
     
     # Signal to the game that the player has died to set up the death scene
     Signals.emit_signal("on_player_death")
-
+    
+    
+func dash():
+  if is_on_floor():
+    can_dash = true
+    
+  if Input.is_action_pressed("move_right"):
+    dash_direction = Vector2(1,0)
+  if Input.is_action_pressed("move_left"):
+    dash_direction = Vector2(-1,0)
+    
+  if Input.is_action_just_pressed("ui_dash") and can_dash:
+    dash_velocity = dash_direction.normalized() * 1000
+    can_dash = false
+    dashing = true
+    yield(get_tree().create_timer(0.2), "timeout")
+    dashing = false
+    
 func UpdateMovement():
   if Globals.is_in_spawn:
     gravity  = 3000.0
@@ -224,7 +246,7 @@ func UpdateMovement():
   else:
     gravity  = 100.0
     speed    = Vector2( 200.0, 150.0 )
-    
+  
 func Heal(health : int):
   # Purpose   : Resets the status of the player to a fresh new player
   # Param(s)  : 
