@@ -22,7 +22,7 @@ var direction : = Vector2(1,0)
 var dash_direction = Vector2(1,0)
 var can_dash = false
 var dashing = false 
-var dash_velocity = Vector2()
+var dash_velocity = Vector2(0,0)
 
 # Forward is defined to be facing towards the right
 var forward : bool = true
@@ -235,9 +235,7 @@ func dash():
   if Input.is_action_just_pressed("ui_dash") and can_dash:
     dash_velocity = dash_direction.normalized() * 1000
     can_dash = false
-    dashing = true
-    yield(get_tree().create_timer(0.2), "timeout")
-    dashing = false
+    #yield(get_tree().create_timer(0.2), "timeout")
     
 func UpdateMovement():
   if Globals.is_in_spawn:
