@@ -8,12 +8,14 @@ export var gravity  : = 3000.0
 export var runSpeed = 50
 export var speed    : = Vector2 (150.0,1250.0)
 export var velocity : = Vector2.ZERO
+export var isProjectileActive : bool = false; 
 onready var player = get_node("/root/Base/Player")
 
 var direction = Vector2.ZERO
 var knockback_velocity = Vector2.ZERO
 
 export(String) var loot_string
+export(String, FILE) var projectile
 
 func _physics_process(delta):
   if Globals.pause_flags != 0 : return
@@ -21,10 +23,10 @@ func _physics_process(delta):
   if player:
     # Orientate enemy sprite to face the player
     var orienatation =  self.global_position.x - player.global_position.x
-    if orienatation > 0:
-      $AnimatedSprite.scale.x = 1
-    else:
-      $AnimatedSprite.scale.x = -1
+    #if orienatation > 0:
+     # $AnimatedSprite.scale.x = 1
+    #else:
+     # $AnimatedSprite.scale.x = -1
     
     direction = (player.position - position).normalized()
     Move()
