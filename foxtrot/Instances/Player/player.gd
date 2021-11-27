@@ -188,6 +188,8 @@ func TakeDamage(damage : int):
   # - damage  : the amount of damage to take.
   # Return(s) : N/A
   
+  $Camera2D.start_shake(0.75, 24)
+  
   Signals.emit_signal("on_damage_taken", damage, self.global_position)
   damage -= defense
   if damage < 0:

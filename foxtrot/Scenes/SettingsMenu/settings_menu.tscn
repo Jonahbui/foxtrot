@@ -79,7 +79,7 @@ font_data = ExtResource( 3 )
 
 [sub_resource type="ButtonGroup" id=13]
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=14]
 resource_name = "close"
 length = 0.2
 tracks/0/type = "value"
@@ -107,8 +107,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0.560784 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=14]
-resource_name = "open"
+[sub_resource type="Animation" id=15]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("UI:rect_position")
@@ -777,7 +776,7 @@ margin_left = 408.0
 margin_right = 498.0
 margin_bottom = 27.0
 rect_min_size = Vector2( 90, 21 )
-text = "e"
+text = "f"
 
 [node name="ControlContainer21" type="HBoxContainer" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer"]
 margin_top = 305.0
@@ -806,7 +805,7 @@ margin_left = 408.0
 margin_right = 498.0
 margin_bottom = 27.0
 rect_min_size = Vector2( 90, 21 )
-text = "q"
+text = "g"
 
 [node name="ControlContainer13" type="HBoxContainer" parent="UI/TabContainer/Controls/ScrollContainer/VBoxContainer"]
 margin_top = 336.0
@@ -1382,8 +1381,8 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/close = SubResource( 15 )
-anims/open = SubResource( 14 )
+anims/close = SubResource( 14 )
+anims/open = SubResource( 15 )
 
 [connection signal="value_changed" from="UI/TabContainer/Audio/AudioVbox/MasterVolume/MasterSlider" to="." method="_on_MasterSlider_value_changed"]
 [connection signal="toggled" from="UI/TabContainer/Audio/AudioVbox/MasterVolume/MasterSlider/MasterCheckbox" to="." method="_on_MasterCheckbox_toggled"]
