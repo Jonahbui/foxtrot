@@ -30,9 +30,13 @@ func _physics_process(delta):
     
     var vec_power = Vector2(shake_power, 0)
     var vec_rotation = Vector2(shake_rotation, 0)
-    shake_power = vec_power.move_toward(Vector2.ZERO, shake_fade_time * delta).x
-    shake_rotation = vec_rotation.move_toward(Vector2.ZERO, shake_fade_time * rotation_multiplier * delta).x
-    #self.position.move_toward()
     
-    #self.position = self.position.linear_interpolate()
+    if shake_power > 0:
+      shake_power -= shake_fade_time * delta
+      if shake_power < 0: shake_power = 0
+    
+    if shake_rotation > 0:
+      shake_rotation -= shake_fade_time * rotation_multiplier * delta
+      if shake_rotation < 0: shake_rotation = 0
+    
   self.rotation = shake_rotation*rng.randf_range(-0.1,0.1)
