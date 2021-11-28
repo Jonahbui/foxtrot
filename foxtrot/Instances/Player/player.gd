@@ -111,11 +111,15 @@ func _physics_process(delta: float) -> void:
   else:
     direction = Vector2(
       Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-      -1 if Input.is_action_just_pressed("jump") else 1
+      -1 if Input.is_action_just_pressed("jump") and velocity.y >= 0 else 1
     )
-  
-  if Input.is_action_just_pressed("jump"):
-    Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/jump.ogg", 1)
+    
+  if Globals.is_in_spawn:
+    if Input.is_action_just_pressed("jump") and is_on_floor():
+     Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/jump.ogg", 1)
+  else:
+    if Input.is_action_just_pressed("jump") and velocity.y>=0:
+     Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/jump.ogg", 1)
   
   # Whichever way we going along the X axis, our speed is that
   #   direction times speed.x
