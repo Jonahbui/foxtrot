@@ -20,7 +20,7 @@ var defense : int  = 0
 var direction : = Vector2(1,0)
 
 var dash_direction = Vector2(1,0)
-var can_dash = false
+var can_dash = true
 var dashing = false 
 var dash_velocity = Vector2(0,0)
 
@@ -114,7 +114,7 @@ func _physics_process(delta: float) -> void:
       -1 if Input.is_action_just_pressed("jump") else 1
     )
   
-  if Input.is_action_just_pressed("jump"):
+  if Input.is_action_just_pressed("jump") and is_on_floor():
     Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/jump.ogg", 1)
   
   # Whichever way we going along the X axis, our speed is that
@@ -158,7 +158,7 @@ func _physics_process(delta: float) -> void:
   if dash_velocity != Vector2.ZERO:
     dash_velocity = dash_velocity.linear_interpolate(Vector2.ZERO, delta*10)
 
-  # true parameter is for stopping on slopes
+  # "true" parameter is for stopping on slopes
   velocity = move_and_slide( velocity+dash_velocity, Vector2.UP, true)
   
   if velocity.y < 0:
@@ -224,8 +224,8 @@ func TakeDamage(damage : int):
     
     
 func dash():
-  if is_on_floor():
-    can_dash = true
+  #if is_on_floor():
+    #can_dash = true
     
   if Input.is_action_pressed("move_right"):
     dash_direction = Vector2(1,0)
@@ -234,9 +234,13 @@ func dash():
     
   if Input.is_action_just_pressed("ui_dash") and can_dash:
     dash_velocity = dash_direction.normalized() * 1000
+    dashing = true
     can_dash = false
-    #yield(get_tree().create_timer(0.2), "timeout")
+    yield(get_tree().create_timer(0.8), "timeout")
+    dashing = false
+    can_dash = true
     
+  
 func UpdateMovement():
   if Globals.is_in_spawn:
     gravity  = 3000.0
