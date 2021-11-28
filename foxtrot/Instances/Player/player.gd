@@ -21,7 +21,7 @@ var direction : = Vector2(1,0)
 
 var dash_direction = Vector2(1,0)
 var can_dash = true
-var dashing = false 
+var dashing = false
 var dash_velocity = Vector2(0,0)
 
 # Forward is defined to be facing towards the right
@@ -114,7 +114,7 @@ func _physics_process(delta: float) -> void:
       -1 if Input.is_action_just_pressed("jump") else 1
     )
   
-  if Input.is_action_just_pressed("jump") and is_on_floor():
+  if Input.is_action_just_pressed("jump"):
     Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/jump.ogg", 1)
   
   # Whichever way we going along the X axis, our speed is that
