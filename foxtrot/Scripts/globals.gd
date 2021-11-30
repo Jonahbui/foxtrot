@@ -20,6 +20,10 @@ const PLAYER_HEALTH       = "playerHealth"
 const PLAYER_MANA         = "playerMana"
 const PLAYER_MONEY        = "playerMoney"
 
+const COLOR_PRIMARY = "primary_color"
+const COLOR_SECONDARY = "secondary_color"
+const COLOR_BODY = "skin_color"
+
 const GRAPHICS_FULLSCREEN = 'fullscreen'
 
 # --------------------------------------------------------------------------------------------------
