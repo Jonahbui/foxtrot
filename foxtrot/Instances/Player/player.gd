@@ -337,7 +337,10 @@ func _on_DamageDetector_area_entered(area):
   # Param(s)  : N/A
   # Return(s) : N/A
   
-  TakeDamage(area.damage)
+  if "damage" in area:
+    TakeDamage(area.damage)
+  else:
+    TakeDamage(area.get_parent().damage)
 # --------------------------------------------------------------------------------------------------
 # Save Functions
 # --------------------------------------------------------------------------------------------------
