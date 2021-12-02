@@ -19,6 +19,11 @@ var defense : int  = 0
 # --------------------------------------------------------------------------------------------------
 var direction : = Vector2(1,0)
 
+var dash_direction = Vector2(1,0)
+var can_dash = true
+var dashing = false
+var dash_velocity = Vector2(0,0)
+
 # Forward is defined to be facing towards the right
 var forward : bool = true
 # --------------------------------------------------------------------------------------------------
@@ -81,6 +86,7 @@ func _ready():
 func _physics_process(delta: float) -> void:
   # If the dev console is open then do not move.
   if Globals.pause_flags != 0: return
+  
   # If the player is in the middle of a jump (the Y velocity is
   #   less than zero, indicating the player is moving UP on the
   #   screen) and the user lets go of the JUMP key (detected using
@@ -105,11 +111,15 @@ func _physics_process(delta: float) -> void:
   else:
     direction = Vector2(
       Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-      -1 if Input.is_action_just_pressed("jump") else 1
+      -1 if Input.is_action_just_pressed("jump") and velocity.y >= 0 else 1
     )
-  
-  if Input.is_action_just_pressed("jump"):
-    Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/jump.ogg", 1)
+    
+  if Globals.is_in_spawn:
+    if Input.is_action_just_pressed("jump") and is_on_floor():
+     Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/jump.ogg", 1)
+  else:
+    if Input.is_action_just_pressed("jump") and velocity.y>=0:
+     Signals.emit_signal("on_play_audio", "res://Audio/SoundEffects/jump.ogg", 1)
   
   # Whichever way we going along the X axis, our speed is that
   #   direction times speed.x
@@ -146,15 +156,14 @@ func _physics_process(delta: float) -> void:
   #   automatically so we will move just how much we are supposed
   #   to since the time of the last frame.
 
-  # move_and_slide() also takes into account collisions.  It will
-  #   detect if we have run into anything else (e.g., the ground)
-  #   and ensure that we don't overrun anything we shouldn't.
-  #   To inform us that happened, move_and_slide() returns a
-  #   possibly adjusted velocity indicating whether we were
-  #   stopped by a collision.  We use that updated info to change
-  #   our version of velocity so we don't, e.g., keep trying to
-  #   move DOWN on the screen after we've hit the floor.
-  velocity = move_and_slide( velocity, Vector2.UP )
+  # move_and_slide() also takes into account collisions.
+  dash()
+  
+  if dash_velocity != Vector2.ZERO:
+    dash_velocity = dash_velocity.linear_interpolate(Vector2.ZERO, delta*10)
+
+  # "true" parameter is for stopping on slopes
+  velocity = move_and_slide( velocity+dash_velocity, Vector2.UP, true)
   
   if velocity.y < 0:
     $AnimatedSprite.play("jumping")
@@ -188,6 +197,8 @@ func TakeDamage(damage : int):
   # - damage  : the amount of damage to take.
   # Return(s) : N/A
   
+  $Camera2D.start_shake(0.75, 24)
+  
   Signals.emit_signal("on_damage_taken", damage, self.global_position)
   damage -= defense
   if damage < 0:
@@ -216,7 +227,26 @@ func TakeDamage(damage : int):
     
     # Signal to the game that the player has died to set up the death scene
     Signals.emit_signal("on_player_death")
-
+    
+    
+func dash():
+  #if is_on_floor():
+    #can_dash = true
+    
+  if Input.is_action_pressed("move_right"):
+    dash_direction = Vector2(1,0)
+  if Input.is_action_pressed("move_left"):
+    dash_direction = Vector2(-1,0)
+    
+  if Input.is_action_just_pressed("ui_dash") and can_dash:
+    dash_velocity = dash_direction.normalized() * 1000
+    dashing = true
+    can_dash = false
+    yield(get_tree().create_timer(0.8), "timeout")
+    dashing = false
+    can_dash = true
+    
+  
 func UpdateMovement():
   if Globals.is_in_spawn:
     gravity  = 3000.0
@@ -224,7 +254,7 @@ func UpdateMovement():
   else:
     gravity  = 100.0
     speed    = Vector2( 200.0, 150.0 )
-    
+  
 func Heal(health : int):
   # Purpose   : Resets the status of the player to a fresh new player
   # Param(s)  : 
@@ -335,7 +365,10 @@ func _on_DamageDetector_area_entered(area):
   # Param(s)  : N/A
   # Return(s) : N/A
   
-  TakeDamage(area.damage)
+  if "damage" in area:
+    TakeDamage(area.damage)
+  else:
+    TakeDamage(area.get_parent().damage)
 # --------------------------------------------------------------------------------------------------
 # Save Functions
 # --------------------------------------------------------------------------------------------------

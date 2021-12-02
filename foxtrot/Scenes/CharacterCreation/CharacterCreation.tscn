@@ -11,7 +11,7 @@
 [ext_resource path="res://Textures/UI/Button/button_normal.png" type="Texture" id=9]
 [ext_resource path="res://Textures/UI/Button/input_icon_reset_normal.png" type="Texture" id=10]
 [ext_resource path="res://Fonts/ThaleahFat_TTF.ttf" type="DynamicFontData" id=11]
-[ext_resource path="res://Textures/Gameplay/player.png" type="Texture" id=12]
+[ext_resource path="res://Textures/Gameplay/Player/player_idle_sheet.png" type="Texture" id=12]
 [ext_resource path="res://Instances/LocalAudio.gd" type="Script" id=13]
 [ext_resource path="res://Audio/Music/character_customization.wav" type="AudioStream" id=14]
 
@@ -215,6 +215,16 @@ rect_scale = Vector2( 1.5, 1.5 )
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.886275, 0.258824, 0.258824, 1 )
 text = "Name must be entered!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorPicker" type="ColorPicker" parent="UI"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 316.0
+margin_bottom = 492.0
+rect_scale = Vector2( 0.7, 0.7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
