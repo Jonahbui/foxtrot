@@ -58,5 +58,4 @@ shape = SubResource( 4 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 
-[connection signal="area_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_area_entered"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]

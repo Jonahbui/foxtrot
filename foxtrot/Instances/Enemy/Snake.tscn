@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Textures/Gameplay/Enemy/Snake/snake_walk_sheet.png" type="Texture" id=1]
 [ext_resource path="res://Instances/Enemy/crawl_enemy.gd" type="Script" id=2]
@@ -49,8 +49,10 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 14.0215, 8.5208 )
 
-[sub_resource type="Animation" id=12]
-resource_name = "damaged"
+[sub_resource type="CircleShape2D" id=12]
+radius = 23.1241
+
+[sub_resource type="Animation" id=13]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
@@ -79,6 +81,7 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -8 )
 frames = SubResource( 10 )
+frame = 5
 playing = true
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
@@ -97,7 +100,18 @@ collision_mask = 288
 visible = false
 shape = SubResource( 11 )
 
+[node name="PlayerDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+position = Vector2( 2, 0 )
+shape = SubResource( 12 )
+
+[node name="ProjectileSpawnpoint" type="Node2D" parent="."]
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/damaged = SubResource( 12 )
+anims/damaged = SubResource( 13 )
 
 [connection signal="area_entered" from="DamageDetector" to="." method="_on_DamageDetector_area_entered"]
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]

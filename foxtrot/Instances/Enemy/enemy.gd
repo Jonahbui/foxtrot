@@ -1,15 +1,25 @@
 extends KinematicBody2D
 class_name Enemy
-#Variables for enemy 
+
+# Health of the enemy
 export var health : int = 100
+
+# Damage enemy inflicts when touching player
 export var damage : int = 10
+
+# Range where the enemy can see and shoot the player
 export var detectionRange : float = 25
+
 export var gravity  : = 3000.0
 export var runSpeed = 50
 export var speed    : = Vector2 (150.0,1250.0)
 export var velocity : = Vector2.ZERO
-onready var player = get_node("/root/Base/Player")
+var player = null
+
+# How often the enemy can shoot the projectile
 export var cooldown : float = 3.0
+
+# Current cooldown time of the enemy
 var current_cooldown : float = 0
 var isPlayerPresent : bool = false
 
@@ -17,11 +27,20 @@ var isPlayerPresent : bool = false
 var direction = Vector2.ZERO
 var knockback_velocity = Vector2.ZERO
 
+# Loot table to reference on death
 export(String) var loot_string
+
+# Projectile to spawn when shooting
 export(String, FILE) var projectile
+
+# Determines whether the enemy should shoot projectiles or not
 export var has_projectile : bool = false
 
 func _ready():
+  $PlayerDetector/CollisionShape2D.shape.radius = detectionRange
+  
+  player = Globals.Player()
+  
   if projectile == null: printerr("[ProjectileStack] Could not find projectile to spawn. Was it assigned?...")
   if has_projectile:
     projectile = load(projectile)
@@ -42,7 +61,7 @@ func _physics_process(delta):
     if current_cooldown > 0:
       current_cooldown -= delta
 
-    if isPlayerPresent && current_cooldown <=  0:
+    if has_projectile && isPlayerPresent && current_cooldown <=  0:
       Fire()
       current_cooldown = cooldown
   
@@ -94,11 +113,6 @@ func Fire():
   print("fire")
   # Return success
   return true
-  
-  
-func _on_PlayerDetector_area_entered(area: Area2D) -> void:
-  isPlayerPresent = true
-
 
 func _on_PlayerDetector_body_entered(body: Node) -> void:
   isPlayerPresent = true
