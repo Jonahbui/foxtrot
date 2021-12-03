@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Instances/Enemy/idle_enemy.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[sub_resource type="Animation" id=2]
+resource_name = "damaged"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 23.1241
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 8, 8 )
+
+[node name="KinematicBody2D" type="KinematicBody2D"]
+modulate = Color( 1, 0, 0, 1 )
+collision_layer = 4
+collision_mask = 129
+script = ExtResource( 2 )
+projectile = "res://Instances/Equips/Projectile/StingerProjectileEnemy.tscn"
+has_projectile = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/damaged = SubResource( 2 )
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+position = Vector2( 2, 0 )
+shape = SubResource( 3 )
+
+[node name="DamageDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 288
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageDetector"]
+shape = SubResource( 4 )
+
+[node name="ProjectileSpawnpoint" type="Node2D" parent="."]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]

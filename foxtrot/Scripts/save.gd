@@ -126,7 +126,7 @@ func create_save_data(reset_save=false):
   # Return(s) : the dictionary representing the player's state
   
   var data = {
-    Globals.PLAYER_DIFFICULTY : Globals.is_game_playing,
+    Globals.PLAYER_DIFFICULTY : Globals.is_hardcore_mode,
     Globals.PLAYER_INVENTORY  : inventory.InventoryToJSON() if not reset_save else {},
     Globals.PLAYER_NAME       : player.charname if not reset_save  else "default",
     Globals.PLAYER_HEALTH     : player.health if not reset_save  else 25,
