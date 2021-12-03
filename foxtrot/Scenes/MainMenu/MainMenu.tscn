@@ -868,7 +868,6 @@ anims/MenuLoaded = SubResource( 14 )
 [connection signal="button_up" from="MainMenu/UI/ButtonsVbox/ExitButton" to="Audio" method="_on_button_up"]
 [connection signal="pressed" from="MainMenu/UI/ButtonsVbox/ExitButton" to="." method="_on_ExitButton_pressed"]
 [connection signal="button_down" from="MainMenu/UI/ModePopup/Panel/HBoxContainer/HardcoreButton" to="Audio" method="_on_button_down"]
-[connection signal="button_up" from="MainMenu/UI/ModePopup/Panel/HBoxContainer/HardcoreButton" to="Audio" method="_on_button_up"]
 [connection signal="pressed" from="MainMenu/UI/ModePopup/Panel/HBoxContainer/HardcoreButton" to="." method="_on_HardcoreButton_pressed"]
 [connection signal="button_down" from="MainMenu/UI/ModePopup/Panel/HBoxContainer/CasualButton" to="Audio" method="_on_button_down"]
 [connection signal="button_up" from="MainMenu/UI/ModePopup/Panel/HBoxContainer/CasualButton" to="Audio" method="_on_button_up"]

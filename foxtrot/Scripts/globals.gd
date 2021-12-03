@@ -64,10 +64,18 @@ const LEVEL_PATH = [
 func Player():
   return self.get_tree().get_root().get_node_or_null("/root/Base/Player")
 var is_in_spawn           : bool = false
+var is_new_game           : bool = false 
 var is_game_playing       : bool = false
-var is_new_game           : bool = false
-var is_hardcore_mode      : bool = false
+var is_hardcore_mode      : bool = false setget set_hardcore, get_hardcore
 var is_in_water           : bool = false
+
+
+func set_hardcore(state):
+  is_hardcore_mode = state
+  Save.save[PLAYER_DIFFICULTY] = is_hardcore_mode
+
+func get_hardcore():
+  return is_hardcore_mode
 
 # Possible pause 'like' events that can occur
 const FLAG_DEV_OPEN = 1

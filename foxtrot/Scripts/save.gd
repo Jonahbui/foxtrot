@@ -111,7 +111,13 @@ const SAVE_ID = "id"
 const SAVE_CURR_STACK_AMT = "curr_stack_amt"
 
 # Holds the player information here
-var save = null
+var save = null setget set_save, get_save
+
+func set_save(data):
+  save = data
+  
+func get_save():
+  return save
 
 # Holds a reference to the player
 var player = null
@@ -148,7 +154,7 @@ func empty_save_data():
   # Return(s) : the player dictionary data
   
   var data = {
-    Globals.PLAYER_DIFFICULTY : false,
+    Globals.PLAYER_DIFFICULTY : Globals.is_hardcore_mode,
     Globals.PLAYER_INVENTORY  : {},
     Globals.PLAYER_NAME       : "default",
     Globals.PLAYER_HEALTH     : 25,
