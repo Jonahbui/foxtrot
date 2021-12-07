@@ -97,6 +97,7 @@ func TakeDamage(area):
 
 func _on_DamageDetector_area_entered(area):
   TakeDamage(area.get_parent())
+
 func Fire():
   # Get the enemy to calculate the projectiles physics
   
@@ -117,6 +118,9 @@ func Fire():
 func _on_PlayerDetector_body_entered(body: Node) -> void:
   isPlayerPresent = true
   
+func _on_PlayerDetector_body_exited(body):
+  pass # Replace with function body.
+
 func KillEnemy():
   # Drop the item
   var loot = Loot.GenerateLoot(Loot.table[Loot.LOOT_ENEMY][loot_string])

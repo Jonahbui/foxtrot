@@ -174,7 +174,7 @@ texture = ExtResource( 10 )
 position = Vector2( 728, 368 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 13 )
-frame = 1
+frame = 6
 playing = true
 offset = Vector2( -10.6667, 10.6667 )
 
@@ -186,7 +186,7 @@ texture = ExtResource( 19 )
 position = Vector2( 768, 368 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 13 )
-frame = 2
+frame = 7
 playing = true
 offset = Vector2( -10.6667, 10.6667 )
 
@@ -194,7 +194,7 @@ offset = Vector2( -10.6667, 10.6667 )
 position = Vector2( 808, 368 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 13 )
-frame = 1
+frame = 6
 playing = true
 offset = Vector2( -10.6667, 10.6667 )
 
@@ -202,7 +202,7 @@ offset = Vector2( -10.6667, 10.6667 )
 position = Vector2( 856, 368 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 13 )
-frame = 6
+frame = 1
 playing = true
 offset = Vector2( -10.6667, 10.6667 )
 
@@ -210,7 +210,7 @@ offset = Vector2( -10.6667, 10.6667 )
 position = Vector2( 936, 368 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 13 )
-frame = 9
+frame = 4
 playing = true
 offset = Vector2( -10.6667, 10.6667 )
 
@@ -218,7 +218,7 @@ offset = Vector2( -10.6667, 10.6667 )
 position = Vector2( 896, 368 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 13 )
-frame = 7
+frame = 2
 playing = true
 offset = Vector2( -10.6667, 10.6667 )
 
@@ -226,7 +226,7 @@ offset = Vector2( -10.6667, 10.6667 )
 position = Vector2( 976, 368 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 13 )
-frame = 3
+frame = 8
 playing = true
 offset = Vector2( -10.6667, 10.6667 )
 
@@ -234,7 +234,7 @@ offset = Vector2( -10.6667, 10.6667 )
 position = Vector2( 1024, 368 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 13 )
-frame = 8
+frame = 3
 playing = true
 offset = Vector2( -10.6667, 10.6667 )
 
@@ -242,7 +242,7 @@ offset = Vector2( -10.6667, 10.6667 )
 position = Vector2( 1072, 368 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 13 )
-frame = 7
+frame = 2
 playing = true
 offset = Vector2( -10.6667, 10.6667 )
 
@@ -250,7 +250,7 @@ offset = Vector2( -10.6667, 10.6667 )
 position = Vector2( 1112, 368 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 13 )
-frame = 7
+frame = 2
 playing = true
 offset = Vector2( -10.6667, 10.6667 )
 
@@ -258,7 +258,7 @@ offset = Vector2( -10.6667, 10.6667 )
 position = Vector2( 1160, 368 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 13 )
-frame = 6
+frame = 1
 playing = true
 offset = Vector2( -10.6667, 10.6667 )
 
@@ -266,7 +266,7 @@ offset = Vector2( -10.6667, 10.6667 )
 position = Vector2( 1200, 368 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 13 )
-frame = 6
+frame = 1
 playing = true
 offset = Vector2( -10.6667, 10.6667 )
 

@@ -1,17 +1,42 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Textures/Gameplay/Weapon/bubble_nade.png" type="Texture" id=1]
+[ext_resource path="res://Textures/Gameplay/Enemy/Pufferfish/pufferfish_spike.png" type="Texture" id=1]
 [ext_resource path="res://Instances/Equips/Projectile/projectile.gd" type="Script" id=2]
-[ext_resource path="res://Textures/Particles/bubbles.tres" type="Material" id=3]
-[ext_resource path="res://Textures/Particles/bubble.png" type="Texture" id=4]
+[ext_resource path="res://Textures/Particles/puncture.png" type="Texture" id=3]
 [ext_resource path="res://Instances/Equips/particles.gd" type="Script" id=5]
 [ext_resource path="res://Audio/SoundEffects/plop16.mp3" type="AudioStream" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 6.33294
+radius = 3.782
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 5.33333
+radius = 2.49126
+
+[sub_resource type="Curve" id=5]
+
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0.222222, 0.739773 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.339773 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+trail_size_modifier = SubResource( 4 )
+emission_shape = 1
+emission_sphere_radius = 5.4
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 68.07
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color = Color( 1, 0, 0, 1 )
+hue_variation = -1.0
+hue_variation_random = 0.04
+hue_variation_curve = SubResource( 6 )
 
 [node name="StingerProjectileEnemy" type="KinematicBody2D"]
 pause_mode = 2
@@ -24,7 +49,8 @@ damage = 30
 speed = 1500.0
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, 5.33333 )
+rotation = 3.14159
+scale = Vector2( 0.05, 0.0479167 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -5.33333 )
 
@@ -39,14 +65,12 @@ collision_mask = 131
 shape = SubResource( 2 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
-emitting = false
 lifetime = 2.0
-one_shot = true
 speed_scale = 1.25
 explosiveness = 1.0
 randomness = 1.0
-process_material = ExtResource( 3 )
-texture = ExtResource( 4 )
+process_material = SubResource( 7 )
+texture = ExtResource( 3 )
 script = ExtResource( 5 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Particles2D"]
