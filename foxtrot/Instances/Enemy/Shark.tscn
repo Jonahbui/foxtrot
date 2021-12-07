@@ -4,109 +4,109 @@
 [ext_resource path="res://Instances/Enemy/shark.gd" type="Script" id=2]
 [ext_resource path="res://Textures/Gameplay/Enemy/Shark/sharkBite.png" type="Texture" id=3]
 
-[sub_resource type="RectangleShape2D" id=33]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 45.3333, 6.69411 )
 
-[sub_resource type="AtlasTexture" id=23]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 128, 64 )
 
-[sub_resource type="AtlasTexture" id=24]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 3 )
 region = Rect2( 128, 0, 128, 64 )
 
-[sub_resource type="AtlasTexture" id=25]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 3 )
 region = Rect2( 256, 0, 128, 64 )
 
-[sub_resource type="AtlasTexture" id=26]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 3 )
 region = Rect2( 384, 0, 128, 64 )
 
-[sub_resource type="AtlasTexture" id=27]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 3 )
 region = Rect2( 512, 0, 128, 64 )
 
-[sub_resource type="AtlasTexture" id=28]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 3 )
 region = Rect2( 640, 0, 128, 64 )
 
-[sub_resource type="AtlasTexture" id=29]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 3 )
 region = Rect2( 768, 0, 128, 64 )
 
-[sub_resource type="AtlasTexture" id=30]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 3 )
 region = Rect2( 896, 0, 128, 64 )
 
-[sub_resource type="AtlasTexture" id=31]
+[sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 3 )
 region = Rect2( 1024, 0, 128, 64 )
 
-[sub_resource type="AtlasTexture" id=32]
+[sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 3 )
 region = Rect2( 1152, 0, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 128, 64 )
 
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 128, 64 )
+region = Rect2( 128, 0, 128, 64 )
 
 [sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 1 )
-region = Rect2( 128, 0, 128, 64 )
+region = Rect2( 256, 0, 128, 64 )
 
 [sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 1 )
-region = Rect2( 256, 0, 128, 64 )
+region = Rect2( 384, 0, 128, 64 )
 
 [sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 1 )
-region = Rect2( 384, 0, 128, 64 )
+region = Rect2( 512, 0, 128, 64 )
 
 [sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 1 )
-region = Rect2( 512, 0, 128, 64 )
+region = Rect2( 640, 0, 128, 64 )
 
 [sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 1 )
-region = Rect2( 640, 0, 128, 64 )
+region = Rect2( 768, 0, 128, 64 )
 
 [sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 1 )
-region = Rect2( 768, 0, 128, 64 )
+region = Rect2( 896, 0, 128, 64 )
 
 [sub_resource type="AtlasTexture" id=20]
 atlas = ExtResource( 1 )
-region = Rect2( 896, 0, 128, 64 )
+region = Rect2( 1024, 0, 128, 64 )
 
 [sub_resource type="AtlasTexture" id=21]
 atlas = ExtResource( 1 )
-region = Rect2( 1024, 0, 128, 64 )
-
-[sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 1 )
 region = Rect2( 1152, 0, 128, 64 )
 
-[sub_resource type="SpriteFrames" id=34]
+[sub_resource type="SpriteFrames" id=22]
 animations = [ {
-"frames": [ SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ) ],
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
 "loop": true,
 "name": "attack",
 "speed": 20.0
 }, {
-"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ],
+"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
 "loop": true,
 "name": "swim",
 "speed": 15.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=35]
+[sub_resource type="RectangleShape2D" id=23]
 extents = Vector2( 45.3333, 8.5208 )
 
-[sub_resource type="CircleShape2D" id=36]
+[sub_resource type="CircleShape2D" id=24]
 radius = 32.0
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=25]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
@@ -126,9 +126,10 @@ collision_layer = 4
 collision_mask = 129
 script = ExtResource( 2 )
 detectionRange = 50.0
+loot_string = "piranha"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 33 )
+shape = SubResource( 1 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 position = Vector2( -2.38419e-07, 0 )
@@ -139,9 +140,9 @@ physics_process_parent = true
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 2.66667, -5.96046e-08 )
 scale = Vector2( 0.291667, 0.270833 )
-frames = SubResource( 34 )
+frames = SubResource( 22 )
 animation = "swim"
-frame = 5
+frame = 7
 playing = true
 
 [node name="DamageDetector" type="Area2D" parent="."]
@@ -151,7 +152,7 @@ collision_layer = 0
 collision_mask = 288
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageDetector"]
-shape = SubResource( 35 )
+shape = SubResource( 23 )
 
 [node name="PlayerDetector" type="Area2D" parent="."]
 collision_layer = 0
@@ -159,12 +160,12 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
 position = Vector2( 2.66667, 0 )
-shape = SubResource( 36 )
+shape = SubResource( 24 )
 
 [node name="ProjectileSpawnpoint" type="Node2D" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/damaged = SubResource( 12 )
+anims/damaged = SubResource( 25 )
 
 [connection signal="area_entered" from="DamageDetector" to="." method="_on_DamageDetector_area_entered"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]

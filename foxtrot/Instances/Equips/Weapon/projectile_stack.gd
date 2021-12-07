@@ -22,11 +22,6 @@ func _process_input(event):
       $Sprite/AnimationPlayer.play("reload")
   else:
     ._process_input(event)
-
-func _draw():
-  draw_line(self.position, get_local_mouse_position(), Color.red)  
-  
-  update()
   
 func _on_use():
   # If the item is not being used, set its animation to idle
