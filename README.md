@@ -1,6 +1,6 @@
 # Project Foxtrot
 ## Description
-TBA
+A game developed for CSE 4392: Game Development at the University of Texas in Arlington. This game was made with Godot. It is a dungeon-looting run-and-gun set within an aquatic theme where the player must fight bosses ranging from Sharks to Neptune. 
 
 ## Installation
 To install development build, simply import project into Godot.
